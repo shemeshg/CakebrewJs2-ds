@@ -14,7 +14,6 @@ Window {
         id: systemPalette
     }
     color: systemPalette.window
-    property bool isError: false
 
     ColumnLayout {
         anchors.fill: parent
@@ -61,9 +60,6 @@ Window {
             Item {
                 Layout.fillWidth: true
             }
-            Label {
-                text: "://brew.sh"
-            }
         }
 
         states: [
@@ -109,31 +105,49 @@ Window {
                 color: systemPalette.text
             }
         }
-        Rectangle {
+        LoadingData {
             visible: stateGroup.state === "LoadingData"
-            Layout.fillWidth: true
-            Layout.preferredHeight: 5
-            color: isError ? "Dark red" : CoreSystemPalette.alternateBase
-        }
-
-        RowLayout {
-            visible: stateGroup.state === "LoadingData"
-            Label {
-                text: "Runing: shalom\nolam"
-                color: systemPalette.text
-            }
         }
 
         Item {
             Layout.fillHeight: true
         }
-        Button {
-            text: "Loading data"
-            onClicked: {
-                if (stateGroup.state === "Preview") {
-                    stateGroup.state = "LoadingData"
-                } else {
-                    stateGroup.state = "Preview"
+
+        GroupBox {
+            id: groupBox
+            Layout.fillWidth: true
+            RowLayout {
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                Button {
+                    text: "Refresh"
+                    onClicked: {
+                        console.log("asdasdasd")
+                        if (stateGroup.state === "Preview") {
+                            stateGroup.state = "LoadingData"
+                        } else {
+                            stateGroup.state = "Preview"
+                        }
+                    }
+                }
+                Button {
+                    text: "Upgrade all (1)"
+                }
+                Button {
+                    text: "Upgrade selected (0)"
+                }
+                Button {
+                    text: "Doctor"
+                }
+                Item {
+                    Layout.fillWidth: true
+                }
+                Button {
+                    text: "://brew.sh"
+                }
+                Button {
+                    text: "About"
                 }
             }
         }
