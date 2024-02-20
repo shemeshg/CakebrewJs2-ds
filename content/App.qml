@@ -17,10 +17,8 @@ Window {
         }
     }
 
-    SystemPalette {
-        id: systemPalette
-    }
-    color: systemPalette.window
+
+    color: Constants.systemPalette.window
 
     ColumnLayout {
         anchors.fill: parent

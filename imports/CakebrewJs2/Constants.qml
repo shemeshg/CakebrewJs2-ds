@@ -42,4 +42,6 @@ QtObject {
         onTriggered: s.state = "Preview"
         interval: 1000
     }
+
+    property SystemPalette systemPalette: SystemPalette {}
 }

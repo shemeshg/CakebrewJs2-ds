@@ -57,7 +57,7 @@ ColumnLayout {
         Label {
             id: label
             text: ""
-            color: systemPalette.text
+            color: Constants.systemPalette.text
         }
     }
     About {

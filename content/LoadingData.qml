@@ -8,13 +8,13 @@ ColumnLayout {
     Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 5
-        color: isError ? "Dark red" : CoreSystemPalette.alternateBase
+        color: isError ? "Dark red" : Constants.systemPalette.alternateBase
     }
 
     RowLayout {
         Label {
             text: "Runing: shalom\nolam"
-            color: systemPalette.text
+            color: Constants.systemPalette.text
         }
     }
     Item {
