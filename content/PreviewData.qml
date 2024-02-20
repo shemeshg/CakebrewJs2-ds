@@ -16,6 +16,10 @@ ColumnLayout {
                 target: label
                 text: "Home"
             }
+            PropertyChanges {
+                target: bottomBar
+                selectedPreview: "Home"
+            }
         },
         State {
             name: "Info"
@@ -23,6 +27,10 @@ ColumnLayout {
             PropertyChanges {
                 target: label
                 text: "Info"
+            }
+            PropertyChanges {
+                target: bottomBar
+                selectedPreview: "Info-cask"
             }
         },
         State {
@@ -48,6 +56,21 @@ ColumnLayout {
             id: label
             text: ""
             color: systemPalette.text
+        }
+    }
+    Item {
+        Layout.fillHeight: true
+    }
+
+    BottomBar {
+        id: bottomBar
+        onAboutClicked: {
+            stateGroup.state = "About"
+        }
+
+        onRefreshClicked: {
+            stateGroup.state = "LoadingData"
+            Constants.refreshData()
         }
     }
 }

@@ -34,35 +34,8 @@ Window {
             visible: stateGroup.state === "LoadingData"
         }
 
-        RowLayout {
-            id: aboutId
+        About {
             visible: stateGroup.state === "About"
-            ColumnLayout {
-                Button {
-                    text: "Back"
-                    onClicked: stateGroup.state = "Preview"
-                }
-
-                Label {
-                    text: "<H1>About text</h1><p>shalom</p>"
-                }
-            }
-        }
-
-        Item {
-            Layout.fillHeight: true
-        }
-
-        BottomBar {
-            visible: stateGroup.state === "Preview"
-            onAboutClicked: {
-                stateGroup.state = "About"
-            }
-
-            onRefreshClicked: {
-                stateGroup.state = "LoadingData"
-                Constants.refreshData()
-            }
         }
     }
 

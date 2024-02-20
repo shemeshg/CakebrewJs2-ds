@@ -17,4 +17,7 @@ ColumnLayout {
             color: systemPalette.text
         }
     }
+    Item {
+        Layout.fillHeight: true
+    }
 }

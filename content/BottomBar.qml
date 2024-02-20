@@ -8,25 +8,39 @@ GroupBox {
     Layout.fillWidth: true
     signal refreshClicked
     signal aboutClicked
+    property string selectedPreview: ""
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        Button {
-            text: "Refresh"
-            onClicked: {
-                refreshClicked()
+        RowLayout {
+            visible: selectedPreview === "Home"
+            Button {
+                text: "Refresh"
+                onClicked: {
+                    refreshClicked()
+                }
+            }
+            Button {
+                text: "Upgrade all (1)"
+            }
+            Button {
+                text: "Upgrade selected (0)"
+            }
+            Button {
+                text: "Doctor"
             }
         }
-        Button {
-            text: "Upgrade all (1)"
+        RowLayout {
+            visible: selectedPreview === "Info-cask"
+            Button {
+                text: "Uninstall"
+            }
+            Button {
+                text: "Uninstall zap"
+            }
         }
-        Button {
-            text: "Upgrade selected (0)"
-        }
-        Button {
-            text: "Doctor"
-        }
+
         Item {
             Layout.fillWidth: true
         }
