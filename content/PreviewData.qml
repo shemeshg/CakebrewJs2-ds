@@ -6,6 +6,7 @@ import QtQuick.Layouts
 ColumnLayout {
     HeaderToolbar {
         id: headerToolbarId
+        visible: !aboutId.visible
     }
 
     states: [
@@ -52,11 +53,16 @@ ColumnLayout {
     ]
 
     RowLayout {
+        visible: !aboutId.visible
         Label {
             id: label
             text: ""
             color: systemPalette.text
         }
+    }
+    About {
+        id: aboutId
+        visible: false
     }
     Item {
         Layout.fillHeight: true
@@ -64,8 +70,13 @@ ColumnLayout {
 
     BottomBar {
         id: bottomBar
+        onBackClicked: {
+            aboutId.visible = false
+        }
+
         onAboutClicked: {
-            stateGroup.state = "About"
+            aboutId.visible = true
+            bottomBar.selectedPreview = "back"
         }
 
         onRefreshClicked: {

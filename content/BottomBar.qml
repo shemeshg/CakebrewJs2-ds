@@ -8,7 +8,9 @@ GroupBox {
     Layout.fillWidth: true
     signal refreshClicked
     signal aboutClicked
+    signal backClicked
     property string selectedPreview: ""
+    property string lastSelectedPreview: ""
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -45,11 +47,22 @@ GroupBox {
             Layout.fillWidth: true
         }
         Button {
+            visible: selectedPreview === "back"
+            text: "Back"
+            onClicked: {
+                selectedPreview = lastSelectedPreview
+                backClicked()
+            }
+        }
+        Button {
+            visible: selectedPreview !== "back"
             text: "://brew.sh"
         }
         Button {
+            visible: selectedPreview !== "back"
             text: "About"
             onClicked: {
+                lastSelectedPreview = selectedPreview
                 aboutClicked()
             }
         }

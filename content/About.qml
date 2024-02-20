@@ -5,11 +5,6 @@ import QtQuick.Layouts
 
 RowLayout {
     ColumnLayout {
-        Button {
-            text: "Back"
-            onClicked: stateGroup.state = "Preview"
-        }
-
         Label {
             text: "<H1>About text</h1><p>shalom</p>"
         }

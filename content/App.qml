@@ -33,10 +33,6 @@ Window {
         LoadingData {
             visible: stateGroup.state === "LoadingData"
         }
-
-        About {
-            visible: stateGroup.state === "About"
-        }
     }
 
     StateGroup {
@@ -54,9 +50,6 @@ Window {
             },
             State {
                 name: "LoadingData"
-            },
-            State {
-                name: "About"
             }
         ]
     }
