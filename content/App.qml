@@ -10,6 +10,7 @@ Window {
     height: 800
     visible: true
     title: qsTr("Hello World")
+
     SystemPalette {
         id: systemPalette
     }
@@ -27,20 +28,43 @@ Window {
             visible: stateGroup.state === "LoadingData"
         }
 
+        RowLayout {
+            id: aboutId
+            visible: stateGroup.state === "About"
+            ColumnLayout {
+                Button {
+                    text: "Back"
+                    onClicked: stateGroup.state = "Preview"
+                }
+
+                Label {
+                    text: "<H1>About text</h1><p>shalom</p>"
+                }
+            }
+        }
+
         Item {
             Layout.fillHeight: true
         }
 
         BottomBar {
+            visible: stateGroup.state === "Preview"
+            onAboutClicked: {
+                stateGroup.state = "About"
+            }
+
             onRefreshClicked: {
-                console.log("asdasdasd")
-                if (stateGroup.state === "Preview") {
-                    stateGroup.state = "LoadingData"
-                } else {
-                    stateGroup.state = "Preview"
-                }
+                stateGroup.state = "LoadingData"
+                name1Timer.start()
             }
         }
+    }
+
+    property Timer name1Timer: Timer {
+        running: true
+        repeat: true
+        onTriggered: stateGroup.state = "Preview"
+        interval: 1000
     }
 
     StateGroup {
@@ -58,6 +82,9 @@ Window {
             },
             State {
                 name: "LoadingData"
+            },
+            State {
+                name: "About"
             }
         ]
     }

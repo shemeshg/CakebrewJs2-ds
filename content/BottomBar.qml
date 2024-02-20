@@ -7,6 +7,7 @@ GroupBox {
     id: bottomBarId
     Layout.fillWidth: true
     signal refreshClicked
+    signal aboutClicked
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -34,6 +35,9 @@ GroupBox {
         }
         Button {
             text: "About"
+            onClicked: {
+                aboutClicked()
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 ColumnLayout {
     property bool isError: false
+
     Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 5
