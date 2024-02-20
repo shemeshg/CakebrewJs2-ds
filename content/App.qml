@@ -17,7 +17,6 @@ Window {
         }
     }
 
-
     color: Constants.systemPalette.window
 
     ColumnLayout {
@@ -39,12 +38,6 @@ Window {
         states: [
             State {
                 name: "Preview"
-
-                PropertyChanges {
-                    target: rectangle
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                }
             },
             State {
                 name: "LoadingData"
