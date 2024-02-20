@@ -25,4 +25,17 @@ QtObject {
     property StudioApplication application: StudioApplication {
         fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
     }
+
+    property StateGroup s: any
+    function refreshData(stateGroup) {
+        s = stateGroup
+        refreshDataTimer.start()
+    }
+
+    property Timer refreshDataTimer: Timer {
+        running: true
+        repeat: true
+        onTriggered: s.state = "Preview"
+        interval: 1000
+    }
 }

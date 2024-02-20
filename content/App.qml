@@ -55,16 +55,9 @@ Window {
 
             onRefreshClicked: {
                 stateGroup.state = "LoadingData"
-                name1Timer.start()
+                Constants.refreshData(stateGroup)
             }
         }
-    }
-
-    property Timer name1Timer: Timer {
-        running: true
-        repeat: true
-        onTriggered: stateGroup.state = "Preview"
-        interval: 1000
     }
 
     StateGroup {
