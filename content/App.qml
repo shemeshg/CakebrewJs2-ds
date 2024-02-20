@@ -11,6 +11,12 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    Component.onCompleted: {
+        if (Constants.isDesigner) {
+            Constants.setDesignerParams(stateGroup)
+        }
+    }
+
     SystemPalette {
         id: systemPalette
     }
@@ -55,7 +61,7 @@ Window {
 
             onRefreshClicked: {
                 stateGroup.state = "LoadingData"
-                Constants.refreshData(stateGroup)
+                Constants.refreshData()
             }
         }
     }
