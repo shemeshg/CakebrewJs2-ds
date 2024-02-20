@@ -19,8 +19,5 @@ RowLayout {
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
         }
-        Item {
-            Layout.fillHeight: true
-        }
     }
 }

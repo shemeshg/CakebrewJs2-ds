@@ -4,9 +4,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 ColumnLayout {
+    id: previewData
     HeaderToolbar {
         id: headerToolbarId
-        visible: !aboutId.visible
+        visible: previewData.state !== "About"
     }
 
     states: [
@@ -49,34 +50,45 @@ ColumnLayout {
                 target: label
                 text: "Settings"
             }
+        },
+        State {
+            name: "About"
+            PropertyChanges {
+                target: bottomBar
+                selectedPreview: "back"
+            }
         }
     ]
 
-    RowLayout {
-        visible: !aboutId.visible
+    ColumnLayout {
+
         Label {
             id: label
             text: ""
             color: Constants.systemPalette.text
+            visible: previewData.state !== "Settings"
         }
-    }
-    About {
-        id: aboutId
-        visible: false
-    }
-    Item {
-        Layout.fillHeight: true
+        Settings {
+            visible: previewData.state === "Settings"
+        }
+
+        About {
+            visible: previewData.state === "About"
+        }
+        Item {
+            Layout.fillHeight: true
+        }
     }
 
     BottomBar {
         id: bottomBar
         onBackClicked: {
-            aboutId.visible = false
+            previewData.state = "Home"
+            headerToolbarId.btnHomeId.checked = true
         }
 
         onAboutClicked: {
-            aboutId.visible = true
-            bottomBar.selectedPreview = "back"
+            previewData.state = "About"
         }
 
         onRefreshClicked: {

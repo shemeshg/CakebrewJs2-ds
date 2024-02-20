@@ -10,7 +10,6 @@ GroupBox {
     signal aboutClicked
     signal backClicked
     property string selectedPreview: ""
-    property string lastSelectedPreview: ""
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -50,7 +49,6 @@ GroupBox {
             visible: selectedPreview === "back"
             text: "Back"
             onClicked: {
-                selectedPreview = lastSelectedPreview
                 backClicked()
             }
         }
@@ -62,7 +60,6 @@ GroupBox {
             visible: selectedPreview !== "back"
             text: "About"
             onClicked: {
-                lastSelectedPreview = selectedPreview
                 aboutClicked()
             }
         }
