@@ -9,7 +9,18 @@ RowLayout {
             text: `
             <h2>Credits</h2>
             <p>Icons made by Freepik from www.flaticon.com</p>
-            <p>https://github.com/shemeshg/cakebrewjs</p>
+            `
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+        }
+        HyperlinkBtn {
+            urlRef: "https://github.com/shemeshg/cakebrewjs"
+            urlText: "cakebrewjs 2.0"
+            onLinkActivated: Qt.openUrlExternally(link)
+            wrapMode: Text.WordWrap
+        }
+        Label {
+            text: `
             <h2>License</h2>
             <p>Copyright 2020 shemeshg</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
