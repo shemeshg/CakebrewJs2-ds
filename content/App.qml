@@ -19,53 +19,15 @@ Window {
         anchors.fill: parent
         anchors.margins: 10
 
-        RowLayout {
+        HeaderToolbar {
+            id: headerToolbarId
             visible: stateGroup.state === "Preview"
-            Item {
-                Layout.fillWidth: true
-            }
-
-            GroupBox {
-
-                RowLayout {
-                    Button {
-                        id: btnHomeId
-                        text: "Home"
-                        autoExclusive: true
-                        checkable: true
-                        checked: true
-                    }
-                    Button {
-                        id: btnInfoId
-                        text: "Info"
-                        autoExclusive: true
-                        checkable: true
-                    }
-                    Button {
-                        id: btnSearchId
-                        text: "Search"
-                        autoExclusive: true
-                        checkable: true
-                    }
-
-                    Button {
-                        id: btnSettingsId
-                        text: "Settings"
-                        autoExclusive: true
-                        checkable: true
-                    }
-                }
-            }
-
-            Item {
-                Layout.fillWidth: true
-            }
         }
 
         states: [
             State {
                 name: "Home"
-                when: btnHomeId.checked
+                when: headerToolbarId.btnHomeId.checked
                 PropertyChanges {
                     target: label
                     text: "Home"
@@ -73,7 +35,7 @@ Window {
             },
             State {
                 name: "Info"
-                when: btnInfoId.checked
+                when: headerToolbarId.btnInfoId.checked
                 PropertyChanges {
                     target: label
                     text: "Info"
@@ -81,7 +43,7 @@ Window {
             },
             State {
                 name: "Search"
-                when: btnSearchId.checked
+                when: headerToolbarId.btnSearchId.checked
                 PropertyChanges {
                     target: label
                     text: "Search"
@@ -89,7 +51,7 @@ Window {
             },
             State {
                 name: "Settings"
-                when: btnSettingsId.checked
+                when: headerToolbarId.btnSettingsId.checked
                 PropertyChanges {
                     target: label
                     text: "Settings"
