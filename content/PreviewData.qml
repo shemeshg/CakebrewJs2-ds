@@ -92,47 +92,13 @@ ColumnLayout {
                         headerText: "Cask"
                     }
 
-                    ColumnLayout {
-                        id: searchListItem
-                        RowLayout {
-
-                            Label {
-                                text: "•"
-                                color: Constants.systemPalette.text
-                            }
-                            Label {
-                                id: textStart
-                                text: "cakebrewjs ( "
-                                color: Constants.systemPalette.text
-                            }
-                            HyperlinkBtn {
-                                urlText: "cakebrewjs"
-                            }
-                            Label {
-                                text: " ) " + "1.4.4"
-                                color: Constants.systemPalette.text
-                            }
-                            Label {
-                                text: " installed"
-                                color: Constants.systemPalette.isDarkTheme ? "Light green" : "Dark green"
-                            }
-                            Label {
-                                text: " - "
-                                color: Constants.systemPalette.text
-                            }
-                            HyperlinkBtn {
-                                urlRef: "https://sourceforge.net/projects/cakebrewjs/"
-                                urlText: "https://sourceforge.net/projects/cakebrewjs/"
-                                onLinkActivated: Qt.openUrlExternally(link)
-                            }
-                        }
-                        RowLayout {
-                            Label {
-                                leftPadding: 20
-                                text: "GUI app for Homebrew"
-                                color: Constants.systemPalette.text
-                            }
-                        }
+                    SearchListItem {
+                        itemName: "Cakebrewjs"
+                        itemTag: "Cakebrewjs"
+                        itemVer: "2.0.0"
+                        itemIsInstalled: true
+                        itemUrl: "https://google.com"
+                        itemDesk: "Do things"
                     }
                 }
             }
