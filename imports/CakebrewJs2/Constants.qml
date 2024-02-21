@@ -58,9 +58,7 @@ QtObject {
         }
 
         colorGroup: SystemPalette.Active
-        onButtonTextChanged: {
-            isDarkTheme = !isDarkColor(systemPalette.text.toString())
-        }
-        property bool isDarkTheme: false
+
+        property bool isDarkTheme: !isDarkColor(systemPalette.text.toString())
     }
 }

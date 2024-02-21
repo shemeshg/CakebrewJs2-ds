@@ -86,22 +86,61 @@ ColumnLayout {
             }
             RowLayout {
                 ColumnLayout {
-                    Label {
-                        text: "<h1>Cask</h1>"
+
+                    ExtendableHeader {
+                        isExtended: true
+                        headerText: "Cask"
                     }
-                    Label {
-                        text: "- shalom"
-                        color: Constants.systemPalette.text
-                    }
-                    Label {
-                        text: "- Olam"
+
+                    ColumnLayout {
+                        id: searchListItem
+                        RowLayout {
+
+                            Label {
+                                text: "•"
+                                color: Constants.systemPalette.text
+                            }
+                            Label {
+                                id: textStart
+                                text: "cakebrewjs ( "
+                                color: Constants.systemPalette.text
+                            }
+                            HyperlinkBtn {
+                                urlText: "cakebrewjs"
+                            }
+                            Label {
+                                text: " ) " + "1.4.4"
+                                color: Constants.systemPalette.text
+                            }
+                            Label {
+                                text: " installed"
+                                color: Constants.systemPalette.isDarkTheme ? "Light green" : "Dark green"
+                            }
+                            Label {
+                                text: " - "
+                                color: Constants.systemPalette.text
+                            }
+                            HyperlinkBtn {
+                                urlRef: "https://sourceforge.net/projects/cakebrewjs/"
+                                urlText: "https://sourceforge.net/projects/cakebrewjs/"
+                                onLinkActivated: Qt.openUrlExternally(link)
+                            }
+                        }
+                        RowLayout {
+                            Label {
+                                leftPadding: 20
+                                text: "GUI app for Homebrew"
+                                color: Constants.systemPalette.text
+                            }
+                        }
                     }
                 }
             }
 
             RowLayout {
-                Label {
-                    text: "<h1>Formula</h1>"
+                ExtendableHeader {
+                    isExtended: false
+                    headerText: "Formula"
                 }
             }
         }
