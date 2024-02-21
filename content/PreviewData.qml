@@ -72,6 +72,40 @@ ColumnLayout {
             visible: previewData.state === "Settings"
         }
 
+        ColumnLayout {
+            id: search
+            visible: previewData.state === "Search"
+            RowLayout {
+                TextField {
+                    placeholderText: "Regex example /^r/"
+                    Layout.fillWidth: true
+                }
+                Button {
+                    text: "Search"
+                }
+            }
+            RowLayout {
+                ColumnLayout {
+                    Label {
+                        text: "<h1>Cask</h1>"
+                    }
+                    Label {
+                        text: "- shalom"
+                        color: Constants.systemPalette.text
+                    }
+                    Label {
+                        text: "- Olam"
+                    }
+                }
+            }
+
+            RowLayout {
+                Label {
+                    text: "<h1>Formula</h1>"
+                }
+            }
+        }
+
         About {
             visible: previewData.state === "About"
         }
