@@ -79,6 +79,10 @@ ColumnLayout {
         About {
             visible: previewData.state === "About"
         }
+        Info {
+            visible: previewData.state === "Info"
+        }
+
         Item {
             Layout.fillHeight: true
         }

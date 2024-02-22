@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtDesignStudio 4.4.0, 2024-02-21T23:35:31. -->
+<!-- Written by QtDesignStudio 4.4.0, 2024-02-22T20:37:51. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -97,7 +97,7 @@
     <value type="bool" key="QmlProjectManager.QmlRunConfiguration.UseMultiLanguage">true</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.X11Forwarding">/private/tmp/com.apple.launchd.Pf4HH87MB3/org.xquartz:0</value>
+    <value type="QString" key="RunConfiguration.X11Forwarding">/private/tmp/com.apple.launchd.x9IuZxYL8e/org.xquartz:0</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
