@@ -72,43 +72,8 @@ ColumnLayout {
             visible: previewData.state === "Settings"
         }
 
-        ColumnLayout {
-            id: search
+        Search {
             visible: previewData.state === "Search"
-            RowLayout {
-                TextField {
-                    placeholderText: "Regex example /^r/"
-                    Layout.fillWidth: true
-                }
-                Button {
-                    text: "Search"
-                }
-            }
-            RowLayout {
-                ColumnLayout {
-
-                    ExtendableHeader {
-                        isExtended: true
-                        headerText: "Cask"
-                    }
-
-                    SearchListItem {
-                        itemName: "Cakebrewjs"
-                        itemTag: "Cakebrewjs"
-                        itemVer: "2.0.0"
-                        itemIsInstalled: true
-                        itemUrl: "https://google.com"
-                        itemDesk: "Do things"
-                    }
-                }
-            }
-
-            RowLayout {
-                ExtendableHeader {
-                    isExtended: false
-                    headerText: "Formula"
-                }
-            }
         }
 
         About {
