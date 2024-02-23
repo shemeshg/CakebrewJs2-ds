@@ -6,41 +6,33 @@ import QtQuick.Layouts
 GridLayout {
     columns: 6
     Layout.margins: 20
+    signal clicked(idx: int)
+    id: homeFormulaGrid
+    property var headerList: [
+        "Name",
+        "Desk",
+        "Tap",
+        "Version",
+        "outdated",
+        "Leaf"
+    ]
 
+    property int sortedColIdx: -1
+    property int sortedColOrder: GridLayoutHeader.SortOrder.No
 
-    GridLayoutHeader {
-        id: name
-        headerText: "Name"
-        onClicked: {
-            if (name.sortOrder === GridLayoutHeader.SortOrder.Asc){
-                name.sortOrder = GridLayoutHeader.SortOrder.Dsc
-            } else if (sortOrder === GridLayoutHeader.SortOrder.Dsc){
-                name.sortOrder = GridLayoutHeader.SortOrder.No
-            } else {
-                name.sortOrder = GridLayoutHeader.SortOrder.Asc
+    Repeater {
+        model: headerList
+        delegate: GridLayoutHeader {
+            id: name
+            headerText: modelData
+            sortOrder: sortedColIdx === index ? sortedColOrder : GridLayoutHeader.SortOrder.No
+            onClicked: {
+                homeFormulaGrid.clicked(index)
             }
         }
     }
-    Label {
-        text: "<h4>Desk</h4>"
-        color : Constants.systemPalette.text
-    }
-    Label {
-        text: "<h4>Tap</h4>"
-        color : Constants.systemPalette.text
-    }
-    Label {
-        text: "<h4>Version</h4>"
-        color : Constants.systemPalette.text
-    }
-    Label {
-        text: "<h4>outdated</h4>"
-        color : Constants.systemPalette.text
-    }
-    Label {
-        text: "<h4>Leaf</h4>"
-        color : Constants.systemPalette.text
-    }
+
+
     Label {
         text: "libxext"
         color : Constants.systemPalette.text

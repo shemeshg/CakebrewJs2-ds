@@ -73,6 +73,20 @@ ColumnLayout {
     }
     HomeFormulaGrid {
         visible: formulaHeader.isExtended
+        onClicked: (idx)=>{
+            if (sortedColIdx !== idx){
+                sortedColOrder = GridLayoutHeader.SortOrder.No
+            }
+
+            sortedColIdx = idx;
+            if (sortedColOrder === GridLayoutHeader.SortOrder.Asc){
+                sortedColOrder = GridLayoutHeader.SortOrder.Dsc
+            } else if (sortedColOrder === GridLayoutHeader.SortOrder.Dsc){
+                sortedColOrder = GridLayoutHeader.SortOrder.No
+            } else {
+                sortedColOrder = GridLayoutHeader.SortOrder.Asc
+            }
+        }
     }
 
 
