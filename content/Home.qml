@@ -78,9 +78,18 @@ ColumnLayout {
         Layout.margins: 20
 
 
-        Label {
-            text: "<h4>Name</h4>"
-            color : Constants.systemPalette.text
+        GridLayoutHeader {
+            id: name
+            headerText: "Name"
+            onClicked: {
+                if (name.sortOrder === GridLayoutHeader.SortOrder.Asc){
+                    name.sortOrder = GridLayoutHeader.SortOrder.Dsc
+                } else if (sortOrder === GridLayoutHeader.SortOrder.Dsc){
+                    name.sortOrder = GridLayoutHeader.SortOrder.No
+                } else {
+                    name.sortOrder = GridLayoutHeader.SortOrder.Asc
+                }
+            }
         }
         Label {
             text: "<h4>Desk</h4>"
