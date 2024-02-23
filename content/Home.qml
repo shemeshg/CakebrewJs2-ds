@@ -73,7 +73,7 @@ ColumnLayout {
     }
     GridLayout {
 
-        columns: 7
+        columns: 6
         visible: formulaHeader.isExtended
         Layout.margins: 20
 
@@ -84,10 +84,6 @@ ColumnLayout {
         }
         Label {
             text: "<h4>Desk</h4>"
-            color : Constants.systemPalette.text
-        }
-        Label {
-            text: "<h4>Version</h4>"
             color : Constants.systemPalette.text
         }
         Label {
@@ -134,4 +130,69 @@ ColumnLayout {
         }
 
     }
+
+
+
+
+
+
+    ExtendableHeader {
+        id: servicesHeader
+        isExtended: true
+        headerText: "Services"
+    }
+    GridLayout {
+
+        columns: 5
+        visible: servicesHeader.isExtended
+        Layout.margins: 20
+
+
+        Label {
+            text: "<h4>Name</h4>"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "<h4>Status</h4>"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "<h4>User</h4>"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "<h4>Plist</h4>"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "<h4>Actions</h4>"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "unbound"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "none"
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: ""
+            color : Constants.systemPalette.text
+        }
+        Label {
+            text: "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist"
+            color : Constants.systemPalette.text
+            wrapMode: Text.WordWrap
+            Layout.fillWidth: true
+        }
+        Label {
+            text: ""
+            color : Constants.systemPalette.text
+        }
+    }
+
+
+
+
 }
