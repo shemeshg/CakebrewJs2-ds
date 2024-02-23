@@ -8,26 +8,9 @@ GridLayout {
     Layout.margins: 20
     signal clicked(idx: int)
     id: homeFormulaGrid
-    property var headerList: [
-        "Name",
-        "Desk",
-        "Tap",
-        "Version",
-        "outdated",
-        "Leaf"
-    ]
+    property var headerList: []
 
-    property var bodyList: [
-        {cellType: "text", cellText: "libxext", fillWidth: false},
-        {cellType: "text",
-            cellText: "X.Org: Library for common extensions to the X11 protocol",
-            fillWidth: true
-        },
-        {cellType: "text", cellText: "homebrew/tap", fillWidth: false},
-        {cellType: "text", cellText: "1.3.5", fillWidth: false},
-        {cellType: "checkbox", cellText: "1.3.6", fillWidth: false},
-        {cellType: "text", cellText: ".", fillWidth: false},
-    ]
+    property var bodyList: []
     property int sortedColIdx: -1
     property int sortedColOrder: GridLayoutHeader.SortOrder.No
 

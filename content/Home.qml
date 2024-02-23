@@ -71,7 +71,7 @@ ColumnLayout {
         isExtended: true
         headerText: "Formula"
     }
-    HomeFormulaGrid {
+    HomeGrid {
         visible: formulaHeader.isExtended
         onClicked: (idx)=>{
             if (sortedColIdx !== idx){
@@ -87,6 +87,29 @@ ColumnLayout {
                 sortedColOrder = GridLayoutHeader.SortOrder.Asc
             }
         }
+        headerList: [
+                "Name",
+                "Desk",
+                "Tap",
+                "Version",
+                "outdated",
+                "Leaf"
+            ]
+
+        bodyList: [
+               {cellType: "text", cellText: "libxext", fillWidth: false},
+               {cellType: "text",
+                   cellText: "X.Org: Library for common extensions to the X11 protocol",
+                   fillWidth: true
+               },
+               {cellType: "text", cellText: "homebrew/tap", fillWidth: false},
+               {cellType: "text", cellText: "1.3.5", fillWidth: false},
+               {cellType: "checkbox", cellText: "1.3.6", fillWidth: false},
+               {cellType: "text", cellText: ".", fillWidth: false},
+           ]
+
+        sortedColIdx: 4
+        sortedColOrder: GridLayoutHeader.SortOrder.Dsc
     }
 
 
