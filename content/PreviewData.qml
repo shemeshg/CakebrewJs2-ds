@@ -15,10 +15,6 @@ ColumnLayout {
             name: "Home"
             when: headerToolbarId.btnHomeId.checked
             PropertyChanges {
-                target: label
-                text: "Home"
-            }
-            PropertyChanges {
                 target: bottomBar
                 selectedPreview: "Home"
             }
@@ -27,10 +23,6 @@ ColumnLayout {
             name: "Info"
             when: headerToolbarId.btnInfoId.checked
             PropertyChanges {
-                target: label
-                text: "Info"
-            }
-            PropertyChanges {
                 target: bottomBar
                 selectedPreview: "Info-cask"
             }
@@ -38,18 +30,10 @@ ColumnLayout {
         State {
             name: "Search"
             when: headerToolbarId.btnSearchId.checked
-            PropertyChanges {
-                target: label
-                text: "Search"
-            }
         },
         State {
             name: "Settings"
             when: headerToolbarId.btnSettingsId.checked
-            PropertyChanges {
-                target: label
-                text: "Settings"
-            }
         },
         State {
             name: "About"
@@ -62,12 +46,6 @@ ColumnLayout {
 
     ColumnLayout {
 
-        Label {
-            id: label
-            text: ""
-            color: Constants.systemPalette.text
-            visible: previewData.state !== "Settings"
-        }
         Settings {
             visible: previewData.state === "Settings"
         }
@@ -81,6 +59,10 @@ ColumnLayout {
         }
         Info {
             visible: previewData.state === "Info"
+        }
+
+        Home {
+            visible: previewData.state === "Home"
         }
 
         Item {
