@@ -17,7 +17,7 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Home"
             Button {
-                text: "Refresh"
+                text: "Refresh (02-24 13:34)"
                 onClicked: {
                     refreshClicked()
                 }
