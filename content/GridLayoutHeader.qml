@@ -12,7 +12,7 @@ Label {
      }
     property  string headerText: ""
     property int sortOrder:  GridLayoutHeader.SortOrder.No
-    signal clicked
+    signal headerClicked
 
     function getOrderSymble(){
         if (sortOrder === GridLayoutHeader.SortOrder.Asc){
@@ -33,7 +33,7 @@ Label {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: ()=>{
-                       gridLayoutHeader.clicked()
+                       gridLayoutHeader.headerClicked()
                    }
     }
 }

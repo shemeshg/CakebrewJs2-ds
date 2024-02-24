@@ -6,7 +6,7 @@ import QtQuick.Layouts
 GridLayout {
     columns: headerList.length
     Layout.margins: 20
-    signal clicked(idx: int)
+    signal headerClicked(idx: int)
     id: homeFormulaGrid
     property var headerList: []
 
@@ -19,8 +19,8 @@ GridLayout {
         delegate: GridLayoutHeader {
             headerText: modelData
             sortOrder: sortedColIdx === index ? sortedColOrder : GridLayoutHeader.SortOrder.No
-            onClicked: {
-                homeFormulaGrid.clicked(index)
+            onHeaderClicked: {
+                homeFormulaGrid.headerClicked(index)
             }
         }
     }
