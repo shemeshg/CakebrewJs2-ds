@@ -7,6 +7,7 @@ GridLayout {
     columns: headerList.length
     Layout.margins: 20
     signal headerClicked(idx: int)
+    signal checkboxClicked(checked: bool, val: var )
     id: homeFormulaGrid
     property var headerList: []
 
@@ -66,6 +67,9 @@ GridLayout {
             CheckBox {
                 visible: modelData.cellType === "checkbox"
                 text: modelData.cellText
+                onClicked: ()=>{
+                               homeFormulaGrid.checkboxClicked(checked, modelData.onToggled)
+                           }
             }
             HyperlinkBtn {
                 visible: modelData.cellType === "linkBtn"

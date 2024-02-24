@@ -8,7 +8,9 @@ ColumnLayout {
     property string headerText: ""
     property bool isExtended: true
 
+    signal checkboxClicked(checked: bool, val: var )
     signal headerClicked(idx: int)
+
     property var headerList: []
     property var bodyList: []
     property int sortedColIdx: -1
@@ -42,5 +44,9 @@ ColumnLayout {
 
         sortedColIdx: collapseableGrid.sortedColIdx
         sortedColOrder: collapseableGrid.sortedColOrder
+
+        onCheckboxClicked: (c,v)=>{
+            collapseableGrid.checkboxClicked(c,v)
+                           }
     }
 }

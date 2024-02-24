@@ -7,8 +7,20 @@ ColumnLayout {
 
 
     CollapseableGrid {
+        property var selectedItems: []
+        onCheckboxClicked: (c,v)=>{
+                               if (c){
+                                   selectedItems.push(v)
+                                   selectedItems = [...selectedItems];
+                               } else {
+                                   selectedItems.splice(selectedItems.indexOf(v), 1);
+                                   selectedItems = [...selectedItems];
+                               }
+                           }
+         headerText: "Cask (" + selectedItems.length + ")"
+
         isExtended: true
-        headerText: "Cask"
+
 
         headerList: [
             "Token",
@@ -18,6 +30,9 @@ ColumnLayout {
             "outdated",
         ]
 
+
+
+
         bodyList: [
             {cellType: "linkBtn", cellText: "anaconda", fillWidth: false},
             {cellType: "text",
@@ -26,7 +41,7 @@ ColumnLayout {
             },
             {cellType: "text", cellText: "homebrew/tap", fillWidth: false},
             {cellType: "text", cellText: "1.3.5", fillWidth: false},
-            {cellType: "checkbox", cellText: "1.3.6", fillWidth: false},
+            {cellType: "checkbox", cellText: "1.3.6", fillWidth: false, onToggled: "anaconda"},
         ]
 
         sortedColIdx: 4
@@ -34,8 +49,19 @@ ColumnLayout {
     }
 
     CollapseableGrid {
+        property var selectedItems: []
+        onCheckboxClicked: (c,v)=>{
+                               if (c){
+                                   selectedItems.push(v)
+                                   selectedItems = [...selectedItems];
+                               } else {
+                                   selectedItems.splice(selectedItems.indexOf(v), 1);
+                                   selectedItems = [...selectedItems];
+                               }
+                           }
+         headerText: "Formula (" + selectedItems.length + ")"
+
         isExtended: true
-        headerText: "Formula"
 
         headerList: [
             "Name",
@@ -54,7 +80,7 @@ ColumnLayout {
             },
             {cellType: "text", cellText: "homebrew/tap", fillWidth: false},
             {cellType: "text", cellText: "1.3.5", fillWidth: false},
-            {cellType: "checkbox", cellText: "1.3.6", fillWidth: false},
+            {cellType: "checkbox", cellText: "1.3.6", fillWidth: false,onToggled: "linkBtn" },
             {cellType: "text", cellText: ".", fillWidth: false,
                 hoverText: "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>"},
         ]
