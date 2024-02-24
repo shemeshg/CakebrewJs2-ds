@@ -7,13 +7,13 @@ Label {
     property string urlRef: "_"
     property string urlText: "_"
     id: hyperlinkBtn
-    text: `
-    <a href="` + urlRef + `">` + urlText + `</a>
-    `
+    text: urlText
+    color: Constants.systemPalette.isDarkTheme ? "Light blue" : "Dark blue"
+
 
     MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
+        anchors.fill: parent        
         cursorShape: Qt.PointingHandCursor
+        onClicked: onLinkActivated(urlRef)
     }
 }

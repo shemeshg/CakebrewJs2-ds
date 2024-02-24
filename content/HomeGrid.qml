@@ -4,7 +4,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 GridLayout {
-    columns: 6
+    columns: headerList.length
     Layout.margins: 20
     signal clicked(idx: int)
     id: homeFormulaGrid
@@ -44,6 +44,10 @@ GridLayout {
             CheckBox {
                 visible: modelData.cellType === "checkbox"
                 text: modelData.cellText
+            }
+            HyperlinkBtn {
+                visible: modelData.cellType === "linkBtn"
+                urlText: modelData.cellText
             }
         }
     }
