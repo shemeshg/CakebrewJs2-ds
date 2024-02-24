@@ -36,9 +36,10 @@ ColumnLayout {
     Label {
         text: "Font size"
         color: Constants.systemPalette.text
+        id: lblFontSize
     }
     TextField {
-        text: "14"
+        text: lblFontSize.font.pointSize
         Layout.fillWidth: true
         onActiveFocusChanged: {
             if (activeFocus) {

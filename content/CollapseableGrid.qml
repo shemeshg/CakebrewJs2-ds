@@ -21,6 +21,18 @@ ColumnLayout {
         isExtended: collapseableGrid.isExtended
         headerText: collapseableGrid.headerText
     }
+    TextField {
+        id: filterByExp
+        visible: formulaHeader.isExtended
+        text: ""
+        Layout.fillWidth: true
+        placeholderText: "Filter"
+        onActiveFocusChanged: {
+            if (activeFocus) {
+                selectAll()
+            }
+        }
+    }
     HomeGrid {
         visible: formulaHeader.isExtended
         onHeaderClicked: (idx)=>{

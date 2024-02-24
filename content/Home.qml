@@ -7,17 +7,17 @@ ColumnLayout {
 
 
     CollapseableGrid {
-        property var selectedItems: []
+
         onCheckboxClicked: (c,v)=>{
                                if (c){
-                                   selectedItems.push(v)
-                                   selectedItems = [...selectedItems];
+                                   Constants.selectedCaskItems.push(v)
+                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems];
                                } else {
-                                   selectedItems.splice(selectedItems.indexOf(v), 1);
-                                   selectedItems = [...selectedItems];
+                                   Constants.selectedCaskItems.splice(Constants.selectedCaskItems.indexOf(v), 1);
+                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems];
                                }
                            }
-         headerText: "Cask (" + selectedItems.length + ")"
+         headerText: "Cask (" + Constants.selectedCaskItems.length + ")"
 
         isExtended: true
 
@@ -49,17 +49,17 @@ ColumnLayout {
     }
 
     CollapseableGrid {
-        property var selectedItems: []
+
         onCheckboxClicked: (c,v)=>{
                                if (c){
-                                   selectedItems.push(v)
-                                   selectedItems = [...selectedItems];
+                                   Constants.selectedFormulaItems.push(v)
+                                   Constants.selectedFormulaItems = [...Constants.selectedFormulaItems];
                                } else {
-                                   selectedItems.splice(selectedItems.indexOf(v), 1);
-                                   selectedItems = [...selectedItems];
+                                   Constants.selectedFormulaItems.splice(Constants.selectedFormulaItems.indexOf(v), 1);
+                                   Constants.selectedFormulaItems = [...Constants.selectedFormulaItems];
                                }
                            }
-         headerText: "Formula (" + selectedItems.length + ")"
+         headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
 
         isExtended: true
 

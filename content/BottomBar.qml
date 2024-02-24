@@ -20,13 +20,14 @@ GroupBox {
                 text: "Refresh (02-24 13:34)"
                 onClicked: {
                     refreshClicked()
-                }
+                }                
             }
             Button {
                 text: "Upgrade all (1)"
             }
             Button {
-                text: "Upgrade selected (0)"
+                text: "Upgrade selected (" + Number(Constants.selectedFormulaItems.length +
+                                             Constants.selectedCaskItems.length) + ")"
             }
             Button {
                 text: "Doctor"

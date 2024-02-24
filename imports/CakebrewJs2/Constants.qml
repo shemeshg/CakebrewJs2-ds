@@ -62,4 +62,7 @@ QtObject {
 
         property bool isDarkTheme: !isDarkColor(systemPalette.text.toString())
     }
+
+    property var selectedFormulaItems: []
+    property var selectedCaskItems: []
 }
