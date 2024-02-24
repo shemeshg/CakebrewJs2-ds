@@ -105,7 +105,8 @@ ColumnLayout {
                {cellType: "text", cellText: "homebrew/tap", fillWidth: false},
                {cellType: "text", cellText: "1.3.5", fillWidth: false},
                {cellType: "checkbox", cellText: "1.3.6", fillWidth: false},
-               {cellType: "text", cellText: ".", fillWidth: false},       
+               {cellType: "text", cellText: ".", fillWidth: false,
+               hoverText: "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>"},
            ]
 
         sortedColIdx: 4

@@ -33,6 +33,28 @@ GridLayout {
                 visible: !modelData.fillWidth && modelData.cellType === "text"
                 text: modelData.cellText
                 color : Constants.systemPalette.text
+                ToolTip {
+                        id: toolTip
+                        contentItem: Text {
+                            color: Constants.systemPalette.text
+
+                            text: toolTip.text
+                        }
+                        background: Rectangle {
+                            color: Constants.systemPalette.base
+                        }
+                    }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: modelData.hoverText ? Qt.PointingHandCursor : cursorShape
+                    hoverEnabled: true
+                    onHoveredChanged: {
+                        if (modelData.hoverText) {
+                            toolTip.show(modelData.hoverText, 3000)
+                        }
+                    }
+                }
             }
             Label {
                 text: modelData.cellText
