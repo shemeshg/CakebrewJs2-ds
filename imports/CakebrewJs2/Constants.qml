@@ -4,6 +4,7 @@ import QtQuick 6.5
 import QtQuick.Studio.Application
 import QtQuick.Controls
 
+
 QtObject {
     readonly property int width: 800
     readonly property int height: 400

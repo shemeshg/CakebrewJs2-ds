@@ -13,6 +13,8 @@ Project {
         directory: "imports"
     }
 
+
+
     JavaScriptFiles {
         directory: "content"
     }
@@ -20,6 +22,8 @@ Project {
     JavaScriptFiles {
         directory: "imports"
     }
+
+
 
     ImageFiles {
         directory: "content"
@@ -95,7 +99,7 @@ Project {
     qt6Project: true
 
     /* List of plugin directories passed to QML runtime */
-    importPaths: [ "imports", "asset_imports" ]
+    importPaths: [ "imports", "asset_imports","dummydata" ]
 
     /* Required for deployment */
     targetDirectory: "/opt/CakebrewJs2"

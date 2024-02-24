@@ -4,12 +4,17 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Dummydata
 
 Window {
     width: 1000
     height: 800
     visible: true
     title: qsTr("Hello World")
+
+    ModelData {
+
+    }
 
     Component.onCompleted: {
         if (Constants.isDesigner) {
@@ -30,6 +35,8 @@ Window {
         LoadingData {
             visible: stateGroup.state === "LoadingData"
         }
+
+
     }
 
     StateGroup {
