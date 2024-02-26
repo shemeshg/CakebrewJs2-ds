@@ -3,11 +3,6 @@ import QtQuick 6.5
 QtObject {
     property bool isDesigner: true
 
-    property StateGroup s: any
-    function setDesignerParams(stateGroup) {
-        s = stateGroup
-    }
-
     function asyncRefreshData(cb) {
         timerCb = cb
         refreshDataTimer.start()

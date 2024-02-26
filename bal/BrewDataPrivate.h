@@ -18,6 +18,7 @@ class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
     Q_PROPERTY(bool isDesigner READ isDesigner  CONSTANT )
+    Q_PROPERTY(QString lastUpdateDateStr READ lastUpdateDateStr WRITE setLastUpdateDateStr NOTIFY lastUpdateDateStrChanged )
     
     QML_ELEMENT
 public:
@@ -28,12 +29,26 @@ public:
     bool isDesigner() const{return m_isDesigner;} 
     
 
+    
+    QString lastUpdateDateStr() const{return m_lastUpdateDateStr;} 
+    
+void setLastUpdateDateStr(const QString &newLastUpdateDateStr)
+    {
+        if (m_lastUpdateDateStr == newLastUpdateDateStr)
+            return;
+        m_lastUpdateDateStr = newLastUpdateDateStr;
+        emit lastUpdateDateStrChanged();
+    }
+
+
 
 signals:
+    void lastUpdateDateStrChanged();
     
 
 private:
     bool m_isDesigner;
+    QString m_lastUpdateDateStr;
     
     void ctorClass();
 };

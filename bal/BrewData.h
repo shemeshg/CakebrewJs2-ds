@@ -17,7 +17,8 @@ public slots:
         makeAsync<bool>(callback, [=]() {
             bool success = refreshData();
             if (success) {
-                qDebug() << "setLast refresh date";
+                setLastUpdateDateStr("02-24 13:34");
+                qDebug() << "setLast refresh date";                
             }
             return success;
         });

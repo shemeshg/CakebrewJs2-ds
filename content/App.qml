@@ -4,21 +4,12 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Brew
 
 Window {
     width: 1000
     height: 800
     visible: true
     title: qsTr("Hello World")
-
-
-
-    Component.onCompleted: {
-        if (Constants.brewData.isDesigner) {
-            Constants.brewData.setDesignerParams(stateGroup)
-        }
-    }
 
     color: Constants.systemPalette.window
 
@@ -33,8 +24,6 @@ Window {
         LoadingData {
             visible: stateGroup.state === "LoadingData"
         }
-
-
     }
 
     StateGroup {
