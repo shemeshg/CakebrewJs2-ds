@@ -10,6 +10,16 @@ GroupBox {
     signal aboutClicked
     signal backClicked
     property string selectedPreview: ""
+
+    readonly property int upgradableItems: {
+        return Constants.brewData.formulaBodyList.filter(row => {
+                                                             return row.cellType === "checkbox"
+                                                         }).length
+                + Constants.brewData.caskBodyList.filter(row => {
+                                                             return row.cellType === "checkbox"
+                                                         }).length
+    }
+
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -20,14 +30,15 @@ GroupBox {
                 text: "Refresh (" + Constants.brewData.lastUpdateDateStr + ")"
                 onClicked: {
                     refreshClicked()
-                }                
+                }
             }
             Button {
-                text: "Upgrade all (" + Constants.brewData.upgradableItems + ")"
+                text: "Upgrade all (" + upgradableItems + ")"
             }
             Button {
-                text: "Upgrade selected (" + Number(Constants.selectedFormulaItems.length +
-                                             Constants.selectedCaskItems.length) + ")"
+                text: "Upgrade selected (" + Number(
+                          Constants.selectedFormulaItems.length
+                          + Constants.selectedCaskItems.length) + ")"
             }
             Button {
                 text: "Doctor"

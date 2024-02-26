@@ -105,14 +105,5 @@ QtObject {
             "filterString": "unbound"
         }]
 
-    readonly property int upgradableItems: {
-        return formulaBodyList.filter(row => {
-                                          return row.cellType === "checkbox"
-                                      }).length + caskBodyList.filter(row => {
-                                                                          return row.cellType
-                                                                          === "checkbox"
-                                                                      }).length
-    }
-
     readonly property string lastUpdateDateStr: "02-24 13:34"
 }
