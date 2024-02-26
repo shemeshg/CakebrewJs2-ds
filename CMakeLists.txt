@@ -21,11 +21,14 @@ qt_add_resources(CakebrewJs2App "configuration"
         qtquickcontrols2.conf
 )
 
+add_subdirectory(bal)
+
 target_link_libraries(CakebrewJs2App PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
+    Brew
 )
 
 set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
