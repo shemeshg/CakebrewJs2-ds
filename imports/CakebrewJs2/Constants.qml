@@ -27,22 +27,6 @@ QtObject {
         fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
     }
 
-    property bool isDesigner: true
-    property StateGroup s: any
-    function setDesignerParams(stateGroup) {
-        s = stateGroup
-    }
-
-    function refreshData() {
-        refreshDataTimer.start()
-    }
-
-    property Timer refreshDataTimer: Timer {
-        running: true
-        repeat: false
-        onTriggered: s.state = "Preview"
-        interval: 1000
-    }
 
     property SystemPalette systemPalette: SystemPalette {
         function isDarkColor(hex) {

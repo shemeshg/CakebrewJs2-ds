@@ -83,7 +83,7 @@ ColumnLayout {
 
         onRefreshClicked: {
             stateGroup.state = "LoadingData"
-            Constants.refreshData()
+            Constants.brewData.refreshData()
         }
     }
 }

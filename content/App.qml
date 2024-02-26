@@ -15,8 +15,8 @@ Window {
 
 
     Component.onCompleted: {
-        if (Constants.isDesigner) {
-            Constants.setDesignerParams(stateGroup)
+        if (Constants.brewData.isDesigner) {
+            Constants.brewData.setDesignerParams(stateGroup)
         }
     }
 
