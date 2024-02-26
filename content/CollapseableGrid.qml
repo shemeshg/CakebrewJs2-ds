@@ -34,7 +34,9 @@ ColumnLayout {
         }
     }
     HomeGrid {
+
         visible: formulaHeader.isExtended
+        filterString: filterByExp.text
         onHeaderClicked: (idx)=>{
                        if (sortedColIdx !== idx){
                            sortedColOrder = GridLayoutHeader.SortOrder.No

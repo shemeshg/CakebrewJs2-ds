@@ -14,6 +14,7 @@ GridLayout {
     property var bodyList: []
     property int sortedColIdx: -1
     property int sortedColOrder: GridLayoutHeader.SortOrder.No
+    property string  filterString: ""
 
     Repeater {
         model: headerList
@@ -31,7 +32,8 @@ GridLayout {
         model: bodyList
         delegate: RowLayout {
             Label {
-                visible: !modelData.fillWidth && modelData.cellType === "text"
+                visible: !modelData.fillWidth && modelData.cellType === "text" &&
+                          modelData.filterString.includes(filterString)
                 text: modelData.cellText
                 color : Constants.systemPalette.text
                 ToolTip {
@@ -59,20 +61,24 @@ GridLayout {
             }
             Label {
                 text: modelData.cellText
-                visible: modelData.fillWidth && modelData.cellType === "text"
+                visible: modelData.fillWidth &&
+                         modelData.cellType === "text" &&
+                         modelData.filterString.includes(filterString)
                 color : Constants.systemPalette.text
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
             CheckBox {
-                visible: modelData.cellType === "checkbox"
+                visible: modelData.cellType === "checkbox" &&
+                         modelData.filterString.includes(filterString)
                 text: modelData.cellText
                 onClicked: ()=>{
                                homeFormulaGrid.checkboxClicked(checked, modelData.onToggled)
                            }
             }
             HyperlinkBtn {
-                visible: modelData.cellType === "linkBtn"
+                visible: modelData.cellType === "linkBtn" &&
+                         modelData.filterString.includes(filterString)
                 urlText: modelData.cellText
             }
         }
