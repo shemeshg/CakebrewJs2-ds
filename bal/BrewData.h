@@ -1,44 +1,5 @@
 #pragma once
-
-#include <QObject>
-#include <QObjectComputedProperty>
-#include <QQmlEngine>
-#include "JsAsync.h"
-
-/*[[[cog
-import cog
-from BrewData import classBrewData
-
-
-cog.outl(classBrewData.getClassHeader(),
-        dedent=True, trimblanklines=True)
-
-]]] */
-class BrewDataPrivate : public JsAsync
-{
-    Q_OBJECT
-    Q_PROPERTY(bool isDesigner READ isDesigner  CONSTANT )
-    
-    QML_ELEMENT
-public:
-    BrewDataPrivate(QObject *parent = nullptr);
-
-    
-    
-    bool isDesigner() const{return m_isDesigner;} 
-    
-
-
-signals:
-    
-
-private:
-    bool m_isDesigner;
-    
-    void ctorClass();
-};
-
-//[[[end]]]
+#include "BrewDataPrivate.h"
 
 class BrewData : public BrewDataPrivate
 
@@ -49,4 +10,19 @@ public:
     explicit BrewData(QObject *parent = nullptr)
         : BrewDataPrivate{parent}
     {}
+
+public slots:
+    void asyncRefreshData(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            bool success = refreshData();
+            if (success) {
+                qDebug() << "setLast refresh date";
+            }
+            return success;
+        });
+    }
+
+private:
+    bool refreshData() { return true; }
 };

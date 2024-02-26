@@ -83,9 +83,9 @@ ColumnLayout {
 
         onRefreshClicked: {
             stateGroup.state = "LoadingData"
-            Constants.brewData.refreshData(() => {
-                                               stateGroup.state = "Preview"
-                                           })
+            Constants.brewData.asyncRefreshData(() => {
+                                                    stateGroup.state = "Preview"
+                                                })
         }
     }
 }

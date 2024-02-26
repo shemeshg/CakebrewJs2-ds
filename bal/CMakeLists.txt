@@ -10,6 +10,8 @@ qt6_add_qml_module(Brew
         SOURCES
             BrewData.h
             BrewData.cpp
+            BrewDataPrivate.h
+            BrewDataPrivate.cpp            
             JsAsync.h
             JsAsync.cpp
               )

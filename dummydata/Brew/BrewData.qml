@@ -8,7 +8,7 @@ QtObject {
         s = stateGroup
     }
 
-    function refreshData(cb) {
+    function asyncRefreshData(cb) {
         timerCb = cb
         refreshDataTimer.start()
     }
