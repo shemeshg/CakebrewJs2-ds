@@ -118,13 +118,14 @@ void set${field_name_initCap}(const ${field_type} ${ampr}new${field_name_initCap
 
 class PrptClass:
     class_name = ""
+    inhirit_from = "QObject"
     prptAry = []
     def __init__(self, class_name, prptAry):
         self.class_name = class_name
         self.prptAry = prptAry
 
     def getClassCpp(self):
-        contr_init = ["QObject(parent)"]
+        contr_init = [self.inhirit_from + "(parent)"]
         for row in self.prptAry:
             if row.is_new_in_contr:
                 contr_template = Template("""m_${field_name}(new ${field_name_type}(this))""")
@@ -139,12 +140,14 @@ class PrptClass:
 }
 """
         )
-        return t.substitute(class_name = self.class_name, contr_init_text=contr_init_text)
+        return t.substitute(class_name = self.class_name,
+            contr_init_text=contr_init_text,
+            inhirit_from = self.inhirit_from)
 
     def getClassHeader(self):
         t=Template(
 """
-class ${class_name} : public QObject
+class ${class_name} : public ${inhirit_from}
 {
     Q_OBJECT
     ${q_object_content}
@@ -167,7 +170,9 @@ private:
         return t.substitute(class_name = self.class_name, 
             q_object_content=self.get_q_object_content(), 
             public_content=self.get_public_content(),
-            signals_content=self.get_signals_content(), private_content=self.get_private_content())
+            signals_content=self.get_signals_content(),
+            private_content=self.get_private_content(),
+            inhirit_from = self.inhirit_from)
 
     def get_q_object_content(self):
         q_object_content = ""

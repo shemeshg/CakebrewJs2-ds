@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QObjectComputedProperty>
 #include <QQmlEngine>
+#include "JsAsync.h"
 
 /*[[[cog
 import cog
@@ -13,14 +14,14 @@ cog.outl(classBrewData.getClassHeader(),
         dedent=True, trimblanklines=True)
 
 ]]] */
-class BrewData : public QObject
+class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
     Q_PROPERTY(bool isDesigner READ isDesigner  CONSTANT )
     
     QML_ELEMENT
 public:
-    BrewData(QObject *parent = nullptr);
+    BrewDataPrivate(QObject *parent = nullptr);
 
     
     
@@ -39,3 +40,13 @@ private:
 
 //[[[end]]]
 
+class BrewData : public BrewDataPrivate
+
+{
+    Q_OBJECT
+    QML_ELEMENT
+public:
+    explicit BrewData(QObject *parent = nullptr)
+        : BrewDataPrivate{parent}
+    {}
+};

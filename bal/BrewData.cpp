@@ -10,15 +10,15 @@ cog.outl(classBrewData.getClassCpp(),
 
 
 ]]] */
- BrewData:: BrewData(QObject *parent)
-    : QObject(parent)
+ BrewDataPrivate:: BrewDataPrivate(QObject *parent)
+    : JsAsync(parent)
 {
     ctorClass();
 }
 
 //[[[end]]]
 
-
-void BrewData::ctorClass() {
-        m_isDesigner = false;
+void BrewDataPrivate::ctorClass()
+{
+    m_isDesigner = false;
 }
