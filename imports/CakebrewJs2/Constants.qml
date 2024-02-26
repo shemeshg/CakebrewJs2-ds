@@ -3,7 +3,7 @@ pragma Singleton
 import QtQuick 6.5
 import QtQuick.Studio.Application
 import QtQuick.Controls
-
+import Brew
 
 QtObject {
     readonly property int width: 800
@@ -65,4 +65,6 @@ QtObject {
 
     property var selectedFormulaItems: []
     property var selectedCaskItems: []
+
+    property BrewData brewData: BrewData {}
 }

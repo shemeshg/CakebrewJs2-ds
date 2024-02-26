@@ -4,7 +4,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Dummydata
+import Brew
 
 Window {
     width: 1000
@@ -12,9 +12,7 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    ModelData {
 
-    }
 
     Component.onCompleted: {
         if (Constants.isDesigner) {
