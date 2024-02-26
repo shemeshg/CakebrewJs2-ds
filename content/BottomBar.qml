@@ -17,13 +17,13 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Home"
             Button {
-                text: "Refresh (02-24 13:34)"
+                text: "Refresh (" + Constants.brewData.lastUpdateDateStr + ")"
                 onClicked: {
                     refreshClicked()
                 }                
             }
             Button {
-                text: "Upgrade all (1)"
+                text: "Upgrade all (" + Constants.brewData.upgradableItems + ")"
             }
             Button {
                 text: "Upgrade selected (" + Number(Constants.selectedFormulaItems.length +
