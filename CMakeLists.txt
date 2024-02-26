@@ -28,7 +28,7 @@ target_link_libraries(CakebrewJs2App PRIVATE
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
-    Brew
+    bal
 )
 
 set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
