@@ -1,6 +1,14 @@
 #pragma once
 #include "BrewDataPrivate.h"
 
+struct ProcessStatus
+{
+    bool isSuccess;
+    int exitCode;
+    QString stdOut;
+    QString stdErr;
+};
+
 class BrewData : public BrewDataPrivate
 
 {
@@ -160,8 +168,8 @@ private:
     QSettings settings{"shemeshg", "Cakebrewjs2"};
     bool refreshData()
     {
-        exec();
-        return true;
+        auto e = exec("/usr/local/bin/brew", {"-h"});
+        return e.isSuccess;
     }
 
     const QString getFindExecutable(const QString &exec) const
@@ -190,32 +198,27 @@ private:
         setBrewLocation(s_brewLocation);
     }
 
-    void exec()
+    ProcessStatus exec(const QString program, const QStringList arguments)
     {
-        QString program = "/usr/local/bin/brew";
-        QStringList arguments = {"asdfasdf"};
-
         QProcess pingProcess;
         pingProcess.start(program, {arguments});
         pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
 
-        QString output(pingProcess.readAllStandardOutput()),
-            err{pingProcess.readAllStandardError()};
+        QString stdOut(pingProcess.readAllStandardOutput()),
+            stdErr{pingProcess.readAllStandardError()};
         pingProcess.close();
 
-        //QProcess::NormalExit
+        ProcessStatus ps;
+        ps.isSuccess = true;
+
         if (pingProcess.exitStatus() != QProcess::NormalExit && pingProcess.exitCode() != 0) {
-            qDebug() << "ERROR HAPPPEND <";
+            ps.isSuccess = false;
         }
 
-        qDebug() << "exit status <";
-        qDebug() << pingProcess.exitStatus();
-        qDebug() << "exit code <";
-        qDebug() << pingProcess.exitCode();
-        qDebug() << "stdout <<";
-        qDebug() << output;
-        qDebug() << "err <<";
-        qDebug() << err;
-        return;
+        ps.exitCode = pingProcess.exitCode();
+        ps.stdErr = stdErr;
+        ps.stdOut = stdOut;
+
+        return ps;
     }
 };
