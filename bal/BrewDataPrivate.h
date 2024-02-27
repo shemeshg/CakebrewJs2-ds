@@ -21,6 +21,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVector<GridCell *> caskBodyList READ caskBodyList  NOTIFY caskBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> formulaBodyList READ formulaBodyList  NOTIFY formulaBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
+    Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     
     QML_ELEMENT
 public:
@@ -51,12 +52,25 @@ void setLastUpdateDateStr(const QString &newLastUpdateDateStr)
     QVector<GridCell *> &servicesBodyList() {return m_servicesBodyList;} 
     
 
+    
+    QString brewLocation() const{return m_brewLocation;} 
+    
+void setBrewLocation(const QString &newBrewLocation)
+    {
+        if (m_brewLocation == newBrewLocation)
+            return;
+        m_brewLocation = newBrewLocation;
+        emit brewLocationChanged();
+    }
+
+
 
 signals:
     void lastUpdateDateStrChanged();
     void caskBodyListChanged();
     void formulaBodyListChanged();
     void servicesBodyListChanged();
+    void brewLocationChanged();
     
 
 private:
@@ -64,6 +78,7 @@ private:
     QVector<GridCell *> m_caskBodyList;
     QVector<GridCell *> m_formulaBodyList;
     QVector<GridCell *> m_servicesBodyList;
+    QString m_brewLocation;
     
     void ctorClass();
 };

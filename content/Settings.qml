@@ -10,7 +10,7 @@ ColumnLayout {
         color: CoreSystemPalette.text
     }
     CoreTextField {
-        text: "/usr/local/bin/brew"
+        text: Constants.brewData.brewLocation
         Layout.fillWidth: true
         onActiveFocusChanged: {
             if (activeFocus) {

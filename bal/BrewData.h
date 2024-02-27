@@ -10,6 +10,8 @@ public:
     explicit BrewData(QObject *parent = nullptr)
         : BrewDataPrivate{parent}
     {
+        loadBrewLocation();
+
         QVector<GridCell *> *cask = &caskBodyList();
         GridCell *gc;
         gc = new GridCell();
@@ -148,6 +150,72 @@ public slots:
         });
     }
 
+    void saveBrewLocation(const QString s)
+    {
+        settings.setValue("brewLocation", s);
+        loadBrewLocation();
+    }
+
 private:
-    bool refreshData() { return true; }
+    QSettings settings{"shemeshg", "Cakebrewjs2"};
+    bool refreshData()
+    {
+        exec();
+        return true;
+    }
+
+    const QString getFindExecutable(const QString &exec) const
+    {
+        auto full_path = QStandardPaths::findExecutable(exec);
+        if (full_path.isEmpty()) {
+            full_path = QStandardPaths::findExecutable(exec,
+                                                       {"/usr/local/bin", "/opt/homebrew/bin"});
+        }
+
+        return full_path;
+    }
+
+    void loadBrewLocation()
+    {
+        QString s_brewLocation = settings.value("brewLocation", "").toString();
+        if (s_brewLocation.isEmpty()) {
+            s_brewLocation = getFindExecutable("brew");
+            settings.setValue("brewLocation", s_brewLocation);
+        }
+
+        QFileInfo check_file(s_brewLocation);
+        if (s_brewLocation.isEmpty() || !check_file.exists()) {
+            s_brewLocation = "";
+        }
+        setBrewLocation(s_brewLocation);
+    }
+
+    void exec()
+    {
+        QString program = "/usr/local/bin/brew";
+        QStringList arguments = {"asdfasdf"};
+
+        QProcess pingProcess;
+        pingProcess.start(program, {arguments});
+        pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
+
+        QString output(pingProcess.readAllStandardOutput()),
+            err{pingProcess.readAllStandardError()};
+        pingProcess.close();
+
+        //QProcess::NormalExit
+        if (pingProcess.exitStatus() != QProcess::NormalExit && pingProcess.exitCode() != 0) {
+            qDebug() << "ERROR HAPPPEND <";
+        }
+
+        qDebug() << "exit status <";
+        qDebug() << pingProcess.exitStatus();
+        qDebug() << "exit code <";
+        qDebug() << pingProcess.exitCode();
+        qDebug() << "stdout <<";
+        qDebug() << output;
+        qDebug() << "err <<";
+        qDebug() << err;
+        return;
+    }
 };

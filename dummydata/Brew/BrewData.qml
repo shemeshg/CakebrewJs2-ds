@@ -105,4 +105,6 @@ QtObject {
         }]
 
     readonly property string lastUpdateDateStr: "02-24 13:34"
+
+    readonly property string brewLocation: "/whatever/brew"
 }
