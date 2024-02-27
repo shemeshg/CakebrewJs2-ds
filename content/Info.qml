@@ -6,7 +6,7 @@ import Core
 
 ColumnLayout {        
     RowLayout {
-        ComboBox {
+        CoreComboBox {
             id: cmb
             model: ListModel {
                 ListElement {
@@ -17,7 +17,7 @@ ColumnLayout {
                 }
             }
         }
-        TextField {
+        CoreTextField {
             text: ""
             Layout.fillWidth: true
             onActiveFocusChanged: {
@@ -26,14 +26,14 @@ ColumnLayout {
                 }
             }
         }
-        Button {
+        CoreButton {
             text: "Home page"
         }
-        Button {
+        CoreButton {
             text: "Script"
         }
     }
-    TextArea {
+    CoreTextArea {
         selectionColor: CoreSystemPalette.highlight
         selectedTextColor: CoreSystemPalette.highlightedText
         placeholderTextColor: CoreSystemPalette.text

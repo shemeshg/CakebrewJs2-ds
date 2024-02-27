@@ -2,6 +2,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 GroupBox {
     id: bottomBarId
@@ -26,30 +27,30 @@ GroupBox {
 
         RowLayout {
             visible: selectedPreview === "Home"
-            Button {
+            CoreButton {
                 text: "Refresh (" + Constants.brewData.lastUpdateDateStr + ")"
                 onClicked: {
                     refreshClicked()
                 }
             }
-            Button {
+            CoreButton {
                 text: "Upgrade all (" + upgradableItems + ")"
             }
-            Button {
+            CoreButton {
                 text: "Upgrade selected (" + Number(
                           Constants.selectedFormulaItems.length
                           + Constants.selectedCaskItems.length) + ")"
             }
-            Button {
+            CoreButton {
                 text: "Doctor"
             }
         }
         RowLayout {
             visible: selectedPreview === "Info-cask"
-            Button {
+            CoreButton {
                 text: "Uninstall"
             }
-            Button {
+            CoreButton {
                 text: "Uninstall zap"
             }
         }
@@ -57,18 +58,18 @@ GroupBox {
         Item {
             Layout.fillWidth: true
         }
-        Button {
+        CoreButton {
             visible: selectedPreview === "back"
             text: "Back"
             onClicked: {
                 backClicked()
             }
         }
-        Button {
+        CoreButton {
             visible: selectedPreview !== "back"
             text: "://brew.sh"
         }
-        Button {
+        CoreButton {
             visible: selectedPreview !== "back"
             text: "About"
             onClicked: {

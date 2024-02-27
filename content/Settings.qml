@@ -9,7 +9,7 @@ ColumnLayout {
         text: "Brew location"
         color: CoreSystemPalette.text
     }
-    TextField {
+    CoreTextField {
         text: "/usr/local/bin/brew"
         Layout.fillWidth: true
         onActiveFocusChanged: {
@@ -22,7 +22,7 @@ ColumnLayout {
         text: "Terminal application"
         color: CoreSystemPalette.text
     }
-    ComboBox {
+    CoreComboBox {
         id: cmb
         Layout.fillWidth: true
         model: ListModel {
@@ -39,7 +39,7 @@ ColumnLayout {
         color: CoreSystemPalette.text
         id: lblFontSize
     }
-    TextField {
+    CoreTextField {
         text: lblFontSize.font.pointSize
         Layout.fillWidth: true
         onActiveFocusChanged: {
@@ -48,7 +48,7 @@ ColumnLayout {
             }
         }
     }
-    Switch {
+    CoreSwitch {
         text: "Refresh on startup"
     }
 }

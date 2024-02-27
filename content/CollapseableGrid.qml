@@ -2,6 +2,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 ColumnLayout {
     id: collapseableGrid
@@ -21,7 +22,7 @@ ColumnLayout {
         isExtended: collapseableGrid.isExtended
         headerText: collapseableGrid.headerText
     }
-    TextField {
+    CoreTextField {
         id: filterByExp
         visible: formulaHeader.isExtended
         text: ""

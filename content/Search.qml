@@ -2,17 +2,18 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 ColumnLayout {
     property var caskModel: []
     property var formullaModel: []
 
     RowLayout {
-        TextField {
+        CoreTextField {
             placeholderText: "Regex example /^r/"
             Layout.fillWidth: true
         }
-        Button {
+        CoreButton {
             text: "Search"
             onClicked: {
                 caskModel = ["a", "b"]

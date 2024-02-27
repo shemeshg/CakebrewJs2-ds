@@ -1,24 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 
-Button {
-    id: btn
-    property string hooverText: ""
+TextField {
 
-    CoreToolTip {
-        id: toolTip
-    }
-    HoverHandler {
-        id: hoverHandler
-        onHoveredChanged: {
-            if (!hovered)
-                toolTip.hide()
-        }
-    }
-
-    onHoveredChanged: {
-        if (hooverText) {
-            toolTip.show(hooverText, 3000)
+    text: CoreSystemPalette.text
+    onActiveFocusChanged: {
+        if (activeFocus) {
+            selectAll()
         }
     }
 
@@ -37,6 +25,5 @@ Button {
     palette.text : CoreSystemPalette.text
     palette.window : CoreSystemPalette.window
     palette.windowText : CoreSystemPalette.windowText
-
 
 }
