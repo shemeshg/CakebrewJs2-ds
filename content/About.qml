@@ -2,10 +2,11 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 RowLayout {
     ColumnLayout {
-        Label {
+        CoreLabel {
             text: `
             <h2>Credits</h2>
             <p>Icons made by Freepik from www.flaticon.com</p>
@@ -19,7 +20,7 @@ RowLayout {
             onLinkActivated: Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
         }
-        Label {
+        CoreLabel {
             text: `
             <h2>License</h2>
             <p>Copyright 2020 shemeshg</p>

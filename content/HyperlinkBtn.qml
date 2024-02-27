@@ -2,8 +2,9 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
-Label {
+CoreLabel {
     property string urlRef: "_"
     property string urlText: "_"
     id: hyperlinkBtn

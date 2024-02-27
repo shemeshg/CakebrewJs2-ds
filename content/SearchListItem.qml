@@ -2,6 +2,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 ColumnLayout {
     property string itemName: ""
@@ -13,11 +14,11 @@ ColumnLayout {
 
     RowLayout {
 
-        Label {
+        CoreLabel {
             text: "•"
             color: Constants.systemPalette.text
         }
-        Label {
+        CoreLabel {
             id: textStart
             text: itemName + " ( "
             color: Constants.systemPalette.text
@@ -25,16 +26,16 @@ ColumnLayout {
         HyperlinkBtn {
             urlText: itemTag
         }
-        Label {
+        CoreLabel {
             text: " ) " + itemVer
             color: Constants.systemPalette.text
         }
-        Label {
+        CoreLabel {
             visible: itemIsInstalled
             text: " installed"
             color: Constants.systemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
-        Label {
+        CoreLabel {
             text: " - "
             color: Constants.systemPalette.text
         }
@@ -45,7 +46,7 @@ ColumnLayout {
         }
     }
     RowLayout {
-        Label {
+        CoreLabel {
             leftPadding: 20
             text: itemDesk
             color: Constants.systemPalette.text

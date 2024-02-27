@@ -2,6 +2,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 GridLayout {
     columns: headerList.length
@@ -31,7 +32,7 @@ GridLayout {
     Repeater {
         model: bodyList
         delegate: RowLayout {
-            Label {
+            CoreLabel {
                 visible: !modelData.fillWidth && modelData.cellType === "text" &&
                           modelData.filterString.includes(filterString)
                 text: modelData.cellText
@@ -59,7 +60,7 @@ GridLayout {
                     }
                 }
             }
-            Label {
+            CoreLabel {
                 text: modelData.cellText
                 visible: modelData.fillWidth &&
                          modelData.cellType === "text" &&

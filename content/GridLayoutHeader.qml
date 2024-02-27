@@ -2,8 +2,9 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
-Label {
+CoreLabel {
     id: gridLayoutHeader
     enum SortOrder {
            No,

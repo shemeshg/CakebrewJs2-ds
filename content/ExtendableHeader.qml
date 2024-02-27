@@ -2,12 +2,13 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 RowLayout {
     property bool isExtended: true
     property string headerText: ""
 
-    Label {
+    CoreLabel {
         id: s1
         text: "<h1>" + "⏵ " + headerText + "</h1>"
         color: Constants.systemPalette.text
@@ -18,7 +19,7 @@ RowLayout {
             onClicked: isExtended = !isExtended
         }
     }
-    Label {
+    CoreLabel {
         text: "<h1>" + "⏷ " + headerText + "</h1>"
         color: Constants.systemPalette.text
         visible: isExtended

@@ -2,6 +2,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 ColumnLayout {        
     RowLayout {
@@ -53,7 +54,7 @@ install: 25 (30 days), 94 (90 days), 237 (365 days)
 4.0K	/Users/macos/Library/Preferences/com.electron.cakebrewjs.plist`
         Layout.fillWidth: true
     }
-    Label {
+    CoreLabel {
         text: "<h2>Formula used in</h2>"
     }
     Repeater {
@@ -67,7 +68,7 @@ install: 25 (30 days), 94 (90 days), 237 (365 days)
             itemDesk: "Do things"
         }
     }
-    Label {
+    CoreLabel {
         text: "<h2>Formula used by</h2>"
     }
     Repeater {
@@ -81,7 +82,7 @@ install: 25 (30 days), 94 (90 days), 237 (365 days)
             itemDesk: "Do things"
         }
     }
-    Label {
+    CoreLabel {
         text: "<h2>CaskRooom Folder 170M total</h2>"
     }
     HyperlinkBtn {

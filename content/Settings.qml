@@ -2,9 +2,10 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 ColumnLayout {
-    Label {
+    CoreLabel {
         text: "Brew location"
         color: Constants.systemPalette.text
     }
@@ -17,7 +18,7 @@ ColumnLayout {
             }
         }
     }
-    Label {
+    CoreLabel {
         text: "Terminal application"
         color: Constants.systemPalette.text
     }
@@ -33,7 +34,7 @@ ColumnLayout {
             }
         }
     }
-    Label {
+    CoreLabel {
         text: "Font size"
         color: Constants.systemPalette.text
         id: lblFontSize
