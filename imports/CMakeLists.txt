@@ -2,3 +2,4 @@
 ### Do not change
 
 add_subdirectory(CakebrewJs2)
+add_subdirectory(core)
