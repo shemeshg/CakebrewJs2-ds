@@ -1,2 +1,6 @@
 Module Core
+singleton CoreSystemPalette 1.0 CoreSystemPalette.qml
 CoreLabel 1.0 CoreLabel.qml
+CoreButton 1.0 CoreButton.qml
+CoreToolTip 1.0 CoreToolTip.qml
+

@@ -7,7 +7,7 @@ import Core
 ColumnLayout {
     CoreLabel {
         text: "Brew location"
-        color: Constants.systemPalette.text
+        color: CoreSystemPalette.text
     }
     TextField {
         text: "/usr/local/bin/brew"
@@ -20,7 +20,7 @@ ColumnLayout {
     }
     CoreLabel {
         text: "Terminal application"
-        color: Constants.systemPalette.text
+        color: CoreSystemPalette.text
     }
     ComboBox {
         id: cmb
@@ -36,7 +36,7 @@ ColumnLayout {
     }
     CoreLabel {
         text: "Font size"
-        color: Constants.systemPalette.text
+        color: CoreSystemPalette.text
         id: lblFontSize
     }
     TextField {

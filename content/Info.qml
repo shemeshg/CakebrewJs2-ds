@@ -34,9 +34,9 @@ ColumnLayout {
         }
     }
     TextArea {
-        selectionColor: Constants.systemPalette.highlight
-        selectedTextColor: Constants.systemPalette.highlightedText
-        placeholderTextColor: Constants.systemPalette.text
+        selectionColor: CoreSystemPalette.highlight
+        selectedTextColor: CoreSystemPalette.highlightedText
+        placeholderTextColor: CoreSystemPalette.text
         text:
 `==> cakebrewjs: 1.4.4
 https://sourceforge.net/projects/cakebrewjs/

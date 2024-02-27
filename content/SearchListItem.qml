@@ -16,28 +16,27 @@ ColumnLayout {
 
         CoreLabel {
             text: "•"
-            color: Constants.systemPalette.text
         }
         CoreLabel {
             id: textStart
             text: itemName + " ( "
-            color: Constants.systemPalette.text
+            color: CoreSystemPalette.text
         }
         HyperlinkBtn {
             urlText: itemTag
         }
         CoreLabel {
             text: " ) " + itemVer
-            color: Constants.systemPalette.text
+            color: CoreSystemPalette.text
         }
         CoreLabel {
             visible: itemIsInstalled
             text: " installed"
-            color: Constants.systemPalette.isDarkTheme ? "Light green" : "Dark green"
+            color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
         CoreLabel {
             text: " - "
-            color: Constants.systemPalette.text
+            color: CoreSystemPalette.text
         }
         HyperlinkBtn {
             urlRef: itemUrl
@@ -49,7 +48,7 @@ ColumnLayout {
         CoreLabel {
             leftPadding: 20
             text: itemDesk
-            color: Constants.systemPalette.text
+            color: CoreSystemPalette.text
         }
     }
 }

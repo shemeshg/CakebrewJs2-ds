@@ -11,7 +11,7 @@ RowLayout {
     CoreLabel {
         id: s1
         text: "<h1>" + "⏵ " + headerText + "</h1>"
-        color: Constants.systemPalette.text
+        color: CoreSystemPalette.text
         visible: !isExtended
         MouseArea {
             anchors.fill: parent
@@ -21,7 +21,7 @@ RowLayout {
     }
     CoreLabel {
         text: "<h1>" + "⏷ " + headerText + "</h1>"
-        color: Constants.systemPalette.text
+        color: CoreSystemPalette.text
         visible: isExtended
         MouseArea {
             anchors.fill: parent

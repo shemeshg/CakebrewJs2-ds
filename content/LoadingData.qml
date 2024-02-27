@@ -10,13 +10,13 @@ ColumnLayout {
     Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 5
-        color: isError ? "Dark red" : Constants.systemPalette.alternateBase
+        color: isError ? "Dark red" : CoreSystemPalette.alternateBase
     }
 
     RowLayout {
         CoreLabel {
             text: "Runing: shalom\nolam"
-            color: Constants.systemPalette.text
+            color: CoreSystemPalette.text
         }
     }
     Item {

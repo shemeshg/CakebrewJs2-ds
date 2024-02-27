@@ -9,7 +9,7 @@ CoreLabel {
     property string urlText: "_"
     id: hyperlinkBtn
     text: urlText
-    color: Constants.systemPalette.isDarkTheme ? "Light blue" : "Dark blue"
+    color: CoreSystemPalette.isDarkTheme ? "Light blue" : "Dark blue"
 
 
     MouseArea {

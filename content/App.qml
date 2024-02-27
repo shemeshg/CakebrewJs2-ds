@@ -4,7 +4,7 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-
+import Core
 
 Window {
     width: 1000
@@ -12,7 +12,8 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    color: Constants.systemPalette.window
+
+    color: CoreSystemPalette.window
 
     ColumnLayout {
         anchors.fill: parent

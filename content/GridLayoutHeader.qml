@@ -28,7 +28,7 @@ CoreLabel {
 
 
     text: "<h4>" + headerText + getOrderSymble()  + "</h4>"
-    color : Constants.systemPalette.text
+    color : CoreSystemPalette.text
     Layout.rightMargin:  20
     MouseArea {
         anchors.fill: parent

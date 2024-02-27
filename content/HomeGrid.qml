@@ -1,3 +1,4 @@
+
 import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
@@ -36,17 +37,9 @@ GridLayout {
                 visible: !modelData.fillWidth && modelData.cellType === "text" &&
                           modelData.filterString.includes(filterString)
                 text: modelData.cellText
-                color : Constants.systemPalette.text
-                ToolTip {
+                color : CoreSystemPalette.text
+                CoreToolTip {
                         id: toolTip
-                        contentItem: Text {
-                            color: Constants.systemPalette.text
-
-                            text: toolTip.text
-                        }
-                        background: Rectangle {
-                            color: Constants.systemPalette.base
-                        }
                     }
 
                 MouseArea {
@@ -65,7 +58,7 @@ GridLayout {
                 visible: modelData.fillWidth &&
                          modelData.cellType === "text" &&
                          modelData.filterString.includes(filterString)
-                color : Constants.systemPalette.text
+                color : CoreSystemPalette.text
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
