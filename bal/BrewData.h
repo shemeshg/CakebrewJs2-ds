@@ -96,6 +96,43 @@ public:
         gc->setFilterString("libxext");
         gc->setHoverText("<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>");
         formula->push_back(gc);
+
+        QVector<GridCell *> *services = &servicesBodyList();
+
+        gc = new GridCell();
+        gc->setCellType("text");
+        gc->setCellText("unbound");
+        gc->setFillWidth(false);
+        gc->setFilterString("unbound");
+        services->push_back(gc);
+
+        gc = new GridCell();
+        gc->setCellType("text");
+        gc->setCellText("none");
+        gc->setFillWidth(false);
+        gc->setFilterString("unbound");
+        services->push_back(gc);
+
+        gc = new GridCell();
+        gc->setCellType("text");
+        gc->setCellText("");
+        gc->setFillWidth(false);
+        gc->setFilterString("unbound");
+        services->push_back(gc);
+
+        gc = new GridCell();
+        gc->setCellType("text");
+        gc->setCellText("/usr/local/opt/unbound/homebrew.mxcl.unbound.plist");
+        gc->setFillWidth(true);
+        gc->setFilterString("unbound");
+        services->push_back(gc);
+
+        gc = new GridCell();
+        gc->setCellType("linkBtn");
+        gc->setCellText("stop");
+        gc->setFillWidth(false);
+        gc->setFilterString("unbound");
+        services->push_back(gc);
     }
 
 public slots:
