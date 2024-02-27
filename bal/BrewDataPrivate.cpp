@@ -19,7 +19,6 @@ cog.outl(classBrewDataPrivate.getClassCpp(),
 //[[[end]]]
 
 void BrewDataPrivate::ctorClass()
-{
-    m_isDesigner = false;
+{    
     m_lastUpdateDateStr = "never";
 }

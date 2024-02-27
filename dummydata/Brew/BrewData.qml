@@ -1,7 +1,6 @@
 import QtQuick 6.5
 
 QtObject {
-    property bool isDesigner: true
 
     function asyncRefreshData(cb) {
         timerCb = cb

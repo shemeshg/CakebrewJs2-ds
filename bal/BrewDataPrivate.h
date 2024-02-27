@@ -17,7 +17,6 @@ cog.outl(classBrewDataPrivate.getClassHeader(),
 class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
-    Q_PROPERTY(bool isDesigner READ isDesigner  CONSTANT )
     Q_PROPERTY(QString lastUpdateDateStr READ lastUpdateDateStr WRITE setLastUpdateDateStr NOTIFY lastUpdateDateStrChanged )
     Q_PROPERTY(QVector<GridCell *> caskBodyList READ caskBodyList  NOTIFY caskBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> formulaBodyList READ formulaBodyList  NOTIFY formulaBodyListChanged )
@@ -28,10 +27,6 @@ public:
     BrewDataPrivate(QObject *parent = nullptr);
 
     
-    
-    bool isDesigner() const{return m_isDesigner;} 
-    
-
     
     QString lastUpdateDateStr() const{return m_lastUpdateDateStr;} 
     
@@ -65,7 +60,6 @@ signals:
     
 
 private:
-    bool m_isDesigner;
     QString m_lastUpdateDateStr;
     QVector<GridCell *> m_caskBodyList;
     QVector<GridCell *> m_formulaBodyList;
