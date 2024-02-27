@@ -10,7 +10,7 @@ RowLayout {
 
     CoreLabel {
         id: s1
-        text: "<h1>" + "⏵ " + headerText + "</h1>"
+        text: "<h2>" + "⏵ " + headerText + "</h2>"
         color: CoreSystemPalette.text
         visible: !isExtended
         MouseArea {
@@ -20,7 +20,7 @@ RowLayout {
         }
     }
     CoreLabel {
-        text: "<h1>" + "⏷ " + headerText + "</h1>"
+        text: "<h2>" + "⏷ " + headerText + "</h2>"
         color: CoreSystemPalette.text
         visible: isExtended
         MouseArea {
