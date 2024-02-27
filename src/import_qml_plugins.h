@@ -7,5 +7,5 @@
 
 Q_IMPORT_QML_PLUGIN(contentPlugin)
 Q_IMPORT_QML_PLUGIN(CakebrewJs2Plugin)
-Q_IMPORT_QML_PLUGIN(corePlugin)
+Q_IMPORT_QML_PLUGIN(CorePlugin)
 

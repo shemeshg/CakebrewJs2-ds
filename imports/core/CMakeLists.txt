@@ -8,9 +8,9 @@ set_source_files_properties(CoreSystemPalette.qml
 
 
 
-qt_add_library(core STATIC)
-qt6_add_qml_module(core
-    URI "core"
+qt_add_library(Core STATIC)
+qt6_add_qml_module(Core
+    URI "Core"
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES

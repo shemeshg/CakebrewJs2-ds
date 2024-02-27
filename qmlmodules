@@ -17,6 +17,6 @@ add_subdirectory(asset_imports)
 target_link_libraries(CakebrewJs2App PRIVATE
     contentplugin
     CakebrewJs2plugin
-    coreplugin
+    Coreplugin
 
 )
