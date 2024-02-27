@@ -11,7 +11,9 @@ qt6_add_qml_module(bal
             BrewData.h
             BrewData.cpp
             BrewDataPrivate.h
-            BrewDataPrivate.cpp            
+            BrewDataPrivate.cpp  
+            GridCell.h 
+            GridCell.cpp          
             JsAsync.h
             JsAsync.cpp
               )

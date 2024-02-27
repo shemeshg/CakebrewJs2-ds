@@ -13,12 +13,13 @@ class Prpt:
     field_name_initCap = ""
     writable_declare_only = False
     readable_declare_only = False
+    is_getter_ref = False
     
     writable_declare_only_template = Template(
 """
 void set${field_name_initCap}(const ${field_type} ${ampr}new${field_name_initCap});
 """)
-    readable_declare_only_template = Template("""${field_type} ${field_name}() const;""")
+    readable_declare_only_template = Template("""${field_type} ${ref_str}${field_name}() ${const_str};""")
 
 
     writable_template = Template(
@@ -32,7 +33,7 @@ void set${field_name_initCap}(const ${field_type} ${ampr}new${field_name_initCap
     }
 """)
 
-    readable_template = Template("""${field_type} ${field_name}() const{return m_${field_name};}""")
+    readable_template = Template("""${field_type} ${ref_str}${field_name}() ${const_str}{return m_${field_name};}""")
 
     def __init__(self, field_type, field_name):
         self.field_type = field_type
@@ -82,11 +83,17 @@ void set${field_name_initCap}(const ${field_type} ${ampr}new${field_name_initCap
             writable_text = writable_template.substitute(field_type=self.field_type, field_name = self.field_name , 
                 field_name_initCap=self.field_name_initCap, ampr=ampr)
 
+        const_str = "const"
+        ref_str = ""
+        if self.is_getter_ref:
+            ref_str = "&"
+            const_str = ""
 
         readable_template = self.readable_template
         if self.readable_declare_only:
             readable_template = self.readable_declare_only_template        
-        readable_text = self.readable_template.substitute(field_type=self.field_type, field_name = self.field_name)
+        readable_text = self.readable_template.substitute(field_type=self.field_type, field_name = self.field_name,
+                const_str = const_str, ref_str = ref_str)
         t = Template(
 """
     ${bindable_txt}
@@ -96,7 +103,7 @@ void set${field_name_initCap}(const ${field_type} ${ampr}new${field_name_initCap
         )
         return t.substitute(field_type=self.field_type, field_name = self.field_name,
             writable_text=writable_text,bindable_txt=bindable_txt,
-            readable_text = readable_text)
+            readable_text = readable_text, const_str = const_str, ref_str = ref_str)
 
     def signals_h_file(self):
         if self.is_notify:
