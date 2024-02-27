@@ -54,7 +54,12 @@ GroupBox {
                 text: "Uninstall zap"
             }
         }
-
+        RowLayout {
+            visible: selectedPreview === "Settings"
+            CoreButton {
+                text: "Save Settings"
+            }
+        }
         Item {
             Layout.fillWidth: true
         }
@@ -66,11 +71,11 @@ GroupBox {
             }
         }
         CoreButton {
-            visible: selectedPreview !== "back"
+            visible: selectedPreview === "Home"
             text: "://brew.sh"
         }
         CoreButton {
-            visible: selectedPreview !== "back"
+            visible: selectedPreview === "Home"
             text: "About"
             onClicked: {
                 aboutClicked()

@@ -34,6 +34,10 @@ ColumnLayout {
         State {
             name: "Settings"
             when: headerToolbarId.btnSettingsId.checked
+            PropertyChanges {
+                target: bottomBar
+                selectedPreview: "Settings"
+            }
         },
         State {
             name: "About"
