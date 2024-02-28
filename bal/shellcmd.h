@@ -39,6 +39,10 @@ public:
         exec("chmod", {"+x", fFormulas.fileName()});
         auto formulas = exec(fFormulas.fileName(), {textSearch});
 
+        QFile dbg{"//Volumes/RAM_Disk_4G/k"};
+        dbg.open(QIODevice::WriteOnly | QIODevice::Text);
+        dbg.write(casks.stdOut.toUtf8());
+
         qDebug() << casks.stdOut;
     }
 

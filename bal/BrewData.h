@@ -164,7 +164,7 @@ private:
         ShellCmd sc;
         //sc.externalTerminalCmd();
         //auto e = sc.exec("/usr/local/bin/brew", {"-h"});
-        sc.getSearch("cakebrwejs");
+        sc.getSearch("cakebrew");
         return true;
     }
 
