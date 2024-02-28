@@ -17,6 +17,31 @@ class ShellCmd
 public:
     ShellCmd();
 
+    void getSearch(QString textSearch)
+    {
+        QTemporaryFile fCasks, fFormulas;
+
+        QString cmdCask = R"(#!/bin/sh
+/usr/local/bin/brew search --cask $1|head -50|xargs /usr/local/bin/brew info --cask --json=v2)";
+        if (fCasks.open()) {
+            fCasks.write(cmdCask.toUtf8());
+            fCasks.flush();
+        }
+        exec("chmod", {"+x", fCasks.fileName()});
+        auto casks = exec(fCasks.fileName(), {textSearch});
+
+        QString cmdFormulas = R"(#!/bin/sh
+/usr/local/bin/brew search --formula $1|head -50|xargs /usr/local/bin/brew info --formula --json=v2)";
+        if (fFormulas.open()) {
+            fFormulas.write(cmdFormulas.toUtf8());
+            fFormulas.flush();
+        }
+        exec("chmod", {"+x", fFormulas.fileName()});
+        auto formulas = exec(fFormulas.fileName(), {textSearch});
+
+        qDebug() << casks.stdOut;
+    }
+
     void externalTerminalCmd()
     {
         QString cmdToRun = "ls -l /Volumes/FAST/develop/cakebrewJs/src";
@@ -26,20 +51,21 @@ public:
         file.setAutoRemove(false);
         if (file.open()) {
             s = s.arg(file.fileName(), cmdToRun);
-            qDebug() << s;
             file.write(s.toUtf8());
             file.flush();
 
             exec("chmod", {"+x", file.fileName()});
             exec("open", {"-a", "Terminal", file.fileName()});
-
-            qDebug() << "Finished";
         }
     }
 
     ProcessStatus exec(const QString program, const QStringList arguments)
     {
         QProcess pingProcess;
+        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+        env.insert("HOMEBREW_NO_GITHUB_API", "1");
+        pingProcess.setProcessEnvironment(env);
+
         pingProcess.start(program, {arguments});
         pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
 

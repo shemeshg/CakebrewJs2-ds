@@ -162,9 +162,9 @@ private:
     bool refreshData()
     {
         ShellCmd sc;
-        sc.externalTerminalCmd();
+        //sc.externalTerminalCmd();
         //auto e = sc.exec("/usr/local/bin/brew", {"-h"});
-        //return e.isSuccess;
+        sc.getSearch("cakebrwejs");
         return true;
     }
 
