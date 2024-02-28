@@ -1,13 +1,6 @@
 #pragma once
 #include "BrewDataPrivate.h"
-
-struct ProcessStatus
-{
-    bool isSuccess;
-    int exitCode;
-    QString stdOut;
-    QString stdErr;
-};
+#include "shellcmd.h"
 
 class BrewData : public BrewDataPrivate
 
@@ -168,8 +161,11 @@ private:
     QSettings settings{"shemeshg", "Cakebrewjs2"};
     bool refreshData()
     {
-        auto e = exec("/usr/local/bin/brew", {"-h"});
-        return e.isSuccess;
+        ShellCmd sc;
+        sc.externalTerminalCmd();
+        //auto e = sc.exec("/usr/local/bin/brew", {"-h"});
+        //return e.isSuccess;
+        return true;
     }
 
     const QString getFindExecutable(const QString &exec) const
@@ -196,29 +192,5 @@ private:
             s_brewLocation = "";
         }
         setBrewLocation(s_brewLocation);
-    }
-
-    ProcessStatus exec(const QString program, const QStringList arguments)
-    {
-        QProcess pingProcess;
-        pingProcess.start(program, {arguments});
-        pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
-
-        QString stdOut(pingProcess.readAllStandardOutput()),
-            stdErr{pingProcess.readAllStandardError()};
-        pingProcess.close();
-
-        ProcessStatus ps;
-        ps.isSuccess = true;
-
-        if (pingProcess.exitStatus() != QProcess::NormalExit && pingProcess.exitCode() != 0) {
-            ps.isSuccess = false;
-        }
-
-        ps.exitCode = pingProcess.exitCode();
-        ps.stdErr = stdErr;
-        ps.stdOut = stdOut;
-
-        return ps;
     }
 };

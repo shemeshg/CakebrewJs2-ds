@@ -16,4 +16,5 @@ qt6_add_qml_module(bal
             GridCell.cpp          
             JsAsync.h
             JsAsync.cpp
+            shellcmd.h shellcmd.cpp
               )
