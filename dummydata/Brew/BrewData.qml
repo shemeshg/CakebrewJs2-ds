@@ -7,6 +7,76 @@ QtObject {
         refreshDataTimer.start()
     }
 
+    function asyncSearch(cb, textSearch, isCask){
+        if (isCask){return}
+        searchStatusCaskText = "Searching casks"
+        searchStatusCaskVisible = true
+
+        searchStatusFormulaText = "Searching formula"
+        searchStatusFormulaVisible = true
+
+        searchCaskRunning = true
+        searchFormulaRunning = true
+        timerCb = ()=>{
+
+            searchItemsCask = [
+                {token: "a",
+                    name: "Cakebrewjs",
+                    version: "2.0.0",
+                    homepage: "https://google.com",
+                    desc: "Do things",
+                    installed: true
+                },
+                {token: "b",
+                    name: "Cakebrewjs",
+                    version: "2.0.0",
+                    homepage: "https://google.com",
+                    desc: "Do things",
+                    installed: true
+                }
+            ]
+            searchStatusCaskText = ""
+            searchStatusCaskVisible = false
+
+            searchItemsFormula = [
+                {token: "d",
+                    name: "Cakebrewjs",
+                    version: "2.0.0",
+                    homepage: "https://google.com",
+                    desc: "Do things",
+                    installed: true
+                },
+                {token: "e",
+                    name: "Cakebrewjs",
+                    version: "2.0.0",
+                    homepage: "https://google.com",
+                    desc: "Do things",
+                    installed: true
+                }
+            ]
+            searchStatusFormulaText = ""
+            searchStatusFormulaVisible = false
+
+            searchCaskRunning = false
+            searchFormulaRunning = false
+            cb()
+        }
+
+        refreshDataTimer.start()
+    }
+
+    property var searchItemsCask: []
+    property var searchItemsFormula: []
+
+    property string searchStatusCaskText: ""
+    property string searchStatusFormulaText: ""
+
+    property bool searchStatusCaskVisible: false
+    property bool searchStatusFormulaVisible: false
+
+    property bool searchCaskRunning: false
+    property bool searchFormulaRunning: false
+
     property var timerCb: () => {}
     property Timer refreshDataTimer: Timer {
         running: true
@@ -14,6 +84,8 @@ QtObject {
         onTriggered: timerCb()
         interval: 1000
     }
+
+
 
     property var caskBodyList: [{
             "cellType": "linkBtn",

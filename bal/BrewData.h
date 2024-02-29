@@ -139,6 +139,21 @@ public:
     }
 
 public slots:
+    void asyncSearch(const QJSValue &callback, QString textSearch, bool isCask)
+    {
+        makeAsync<void>(callback, [=]() {
+            ShellCmd sc;
+            ProcessStatus s = sc.cmdSearch(textSearch, isCask);
+            if (s.isSuccess && s.stdErr.isEmpty() && !s.stdOut.isEmpty()) {
+                sc.ParseCmdSearch(s.stdOut, isCask);
+            } else {
+                //set err stderr
+                //dont need return, set relevant bindable var
+            }
+            return;
+        });
+    }
+
     void asyncRefreshData(const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {

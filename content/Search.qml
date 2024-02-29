@@ -5,19 +5,30 @@ import QtQuick.Layouts
 import Core
 
 ColumnLayout {
-    property var caskModel: []
-    property var formullaModel: []
+
 
     RowLayout {
         CoreTextField {
+            id: textSearch
             placeholderText: "Regex example /^r/"
             Layout.fillWidth: true
         }
         CoreButton {
             text: "Search"
+            enabled: !Constants.brewData.searchCaskRunning && !Constants.brewData.searchFormulaRunning
             onClicked: {
-                caskModel = ["a", "b"]
-                formullaModel = ["c", "d"]
+                Constants.brewData.asyncSearch(() => {
+                                                        //caskModel = ["a", "b"]
+                                                    },
+                                               textSearch.text,
+                                               true)
+                Constants.brewData.asyncSearch(() => {
+                                                        //formullaModel = ["c", "d"]
+                                                    },
+                                               textSearch.text,
+                                               false)
+
+
             }
         }
     }
@@ -25,22 +36,29 @@ ColumnLayout {
 
         ColumnLayout {
 
+            CoreLabel {
+                text: Constants.brewData.searchStatusCaskText
+                visible: Constants.brewData.searchStatusCaskVisible
+            }
+
             ExtendableHeader {
                 id: caskHeader
                 isExtended: true
                 headerText: "Cask"
+                visible: !Constants.brewData.searchCaskRunning
             }
             ColumnLayout {
-                visible: caskHeader.isExtended && caskModel.length > 0
+                visible: caskHeader.isExtended && Constants.brewData.searchItemsCask.length > 0
+                         && !Constants.brewData.searchCaskRunning
                 Repeater {
-                    model: caskModel
+                    model: Constants.brewData.searchItemsCask
                     delegate: SearchListItem {
-                        itemName: modelData
-                        itemTag: "Cakebrewjs"
-                        itemVer: "2.0.0"
-                        itemIsInstalled: true
-                        itemUrl: "https://google.com"
-                        itemDesk: "Do things"
+                        itemName: modelData.name
+                        itemTag: modelData.token
+                        itemVer: modelData.version
+                        itemIsInstalled: modelData.installed
+                        itemUrl: modelData.homepage
+                        itemDesk: modelData.desc
                     }
                 }
             }
@@ -48,22 +66,28 @@ ColumnLayout {
     }
 
     ColumnLayout {
+        CoreLabel {
+            text: Constants.brewData.searchStatusFormulaText
+            visible: Constants.brewData.searchStatusFormulaVisible
+        }
         ExtendableHeader {
             id: formulaHeader
             isExtended: true
             headerText: "Formula"
+            visible: !Constants.brewData.searchFormulaRunning
         }
         ColumnLayout {
-            visible: formulaHeader.isExtended && formullaModel.length > 0
+            visible: formulaHeader.isExtended && Constants.brewData.searchItemsFormula.length > 0
+                     && !Constants.brewData.searchFormulaRunning
             Repeater {
-                model: formullaModel
+                model: Constants.brewData.searchItemsFormula
                 delegate: SearchListItem {
-                    itemName: modelData
-                    itemTag: "Cakebrewjs"
-                    itemVer: "2.0.0"
-                    itemIsInstalled: true
-                    itemUrl: "https://google.com"
-                    itemDesk: "Do things"
+                    itemName: modelData.name
+                    itemTag: modelData.token
+                    itemVer: modelData.version
+                    itemIsInstalled: modelData.installed
+                    itemUrl: modelData.homepage
+                    itemDesk: modelData.desc
                 }
             }
         }
