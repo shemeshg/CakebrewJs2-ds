@@ -162,9 +162,14 @@ private:
     bool refreshData()
     {
         ShellCmd sc;
-        //sc.externalTerminalCmd();
-        //auto e = sc.exec("/usr/local/bin/brew", {"-h"});
-        sc.getSearch("cakebrew");
+        ProcessStatus s = sc.cmdSearch("aarch64-elf-binutils", false);
+        if (s.isSuccess && s.stdErr.isEmpty() && !s.stdOut.isEmpty()) {
+            sc.ParseCmdSearch(s.stdOut, false);
+        } else {
+            //set err stderr
+            //dont need return, set relevant bindable var
+        }
+
         return true;
     }
 

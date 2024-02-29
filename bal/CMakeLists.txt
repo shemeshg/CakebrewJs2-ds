@@ -17,4 +17,5 @@ qt6_add_qml_module(bal
             JsAsync.h
             JsAsync.cpp
             shellcmd.h shellcmd.cpp
+            json/single_include/nlohmann/json.hpp
               )

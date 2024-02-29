@@ -3,6 +3,9 @@
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
+#include "json/single_include/nlohmann/json.hpp"
+
+using json = nlohmann::json;
 
 struct ProcessStatus
 {
@@ -12,38 +15,89 @@ struct ProcessStatus
     QString stdErr;
 };
 
+struct SearchResultRow
+{
+    QString token, name, version, homepage, desc;
+
+    bool installed;
+};
+
 class ShellCmd
 {
 public:
     ShellCmd();
 
-    void getSearch(QString textSearch)
+    QVector<SearchResultRow> ParseCmdSearch(QString searchResult, bool isCask)
     {
-        QTemporaryFile fCasks, fFormulas;
+        QVector<SearchResultRow> v;
 
-        QString cmdCask = R"(#!/bin/sh
-/usr/local/bin/brew search --cask $1|head -50|xargs /usr/local/bin/brew info --cask --json=v2)";
-        if (fCasks.open()) {
-            fCasks.write(cmdCask.toUtf8());
-            fCasks.flush();
+        json data = json::parse(searchResult.toStdString());
+        if (isCask) {
+            data = data["casks"];
+        } else {
+            data = data["formulae"];
         }
-        exec("chmod", {"+x", fCasks.fileName()});
-        auto casks = exec(fCasks.fileName(), {textSearch});
+        for (auto &element : data) {
+            if (isCask) {
+                std::string token = element["token"].template get<std::string>();
+                std::string name = (element["name"][0]).template get<std::string>();
+                std::string version = element["version"].template get<std::string>();
+                std::string homepage = element["homepage"].template get<std::string>();
+                std::string desc = element["desc"].template get<std::string>();
+                bool installed = !element["installed"].is_null();
 
-        QString cmdFormulas = R"(#!/bin/sh
-/usr/local/bin/brew search --formula $1|head -50|xargs /usr/local/bin/brew info --formula --json=v2)";
-        if (fFormulas.open()) {
-            fFormulas.write(cmdFormulas.toUtf8());
-            fFormulas.flush();
+                SearchResultRow r;
+                r.token = QString::fromStdString(token);
+                r.name = QString::fromStdString(name);
+                r.version = QString::fromStdString(version);
+                r.homepage = QString::fromStdString(homepage);
+                r.desc = QString::fromStdString(desc);
+                r.installed = installed;
+
+                v.emplace_back(r);
+            } else {
+                std::string token = element["name"].template get<std::string>();
+                std::string name = element["full_name"].template get<std::string>();
+                std::string version = (element["versions"]["stable"]).template get<std::string>();
+                std::string homepage = element["homepage"].template get<std::string>();
+                std::string desc = element["desc"].template get<std::string>();
+                bool installed = element["installed"].size() != 0;
+
+                SearchResultRow r;
+                r.token = QString::fromStdString(token);
+                r.name = QString::fromStdString(name);
+                r.version = QString::fromStdString(version);
+                r.homepage = QString::fromStdString(homepage);
+                r.desc = QString::fromStdString(desc);
+                r.installed = installed;
+                v.emplace_back(r);
+            }
         }
-        exec("chmod", {"+x", fFormulas.fileName()});
-        auto formulas = exec(fFormulas.fileName(), {textSearch});
+        return v;
+    }
 
+    ProcessStatus cmdSearch(QString textSearch, bool isCask)
+    {
+        QString caskFormulaStr = isCask ? "--cask" : "--formula";
+
+        QTemporaryFile fTmp;
+
+        QString cmd = R"(#!/bin/sh
+/usr/local/bin/brew search %1 $1|head -50|xargs /usr/local/bin/brew info %1 --json=v2)";
+        cmd = cmd.arg(caskFormulaStr);
+        if (fTmp.open()) {
+            fTmp.write(cmd.toUtf8());
+            fTmp.flush();
+        }
+        exec("chmod", {"+x", fTmp.fileName()});
+        return exec(fTmp.fileName(), {textSearch});
+
+        /*
         QFile dbg{"//Volumes/RAM_Disk_4G/k"};
         dbg.open(QIODevice::WriteOnly | QIODevice::Text);
         dbg.write(casks.stdOut.toUtf8());
-
-        qDebug() << casks.stdOut;
+        qDebug() << casks.stdOut;        
+        */
     }
 
     void externalTerminalCmd()
