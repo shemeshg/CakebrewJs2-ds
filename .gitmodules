@@ -1,0 +1,3 @@
+[submodule "bal/json"]
+	path = bal/json
+	url = https://github.com/nlohmann/json.git
