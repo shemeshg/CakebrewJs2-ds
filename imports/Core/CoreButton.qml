@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import CakebrewJs2
 
 Button {
     id: btn
@@ -38,5 +39,5 @@ Button {
     palette.window : CoreSystemPalette.window
     palette.windowText : CoreSystemPalette.windowText
 
-
+    font.pointSize: Constants.fontSizeNormal()
 }

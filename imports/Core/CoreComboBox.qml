@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import CakebrewJs2
 
 ComboBox {
     palette.alternateBase : CoreSystemPalette.alternateBase
@@ -17,4 +18,6 @@ ComboBox {
     palette.text : CoreSystemPalette.text
     palette.window : CoreSystemPalette.window
     palette.windowText : CoreSystemPalette.windowText
+
+    font.pointSize: Constants.fontSizeNormal()
 }

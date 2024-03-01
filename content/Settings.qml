@@ -36,17 +36,11 @@ ColumnLayout {
     }
     CoreLabel {
         text: "Font size"
-        color: CoreSystemPalette.text
-        id: lblFontSize
+        color: CoreSystemPalette.text        
     }
     CoreTextField {
-        text: lblFontSize.font.pointSize
+        text: Constants.fontSizeNormal()
         Layout.fillWidth: true
-        onActiveFocusChanged: {
-            if (activeFocus) {
-                selectAll()
-            }
-        }
     }
     CoreSwitch {
         text: "Refresh on startup"

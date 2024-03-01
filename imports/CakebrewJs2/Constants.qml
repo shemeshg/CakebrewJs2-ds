@@ -33,4 +33,24 @@ QtObject {
     property var selectedCaskItems: []
 
     property BrewData brewData: BrewData {}
+
+    property Label dummyLabel: Label{}
+
+
+
+    function fontSizeNormal(){
+       if (isNaN(brewData.normalFontPointSize) ){
+           return dummyLabel.font.pointSize
+        } else {
+           return Number(brewData.normalFontPointSize);
+        }
+    }
+
+    function fontSizeLarge2(){
+        return fontSizeNormal() * 1.2;
+    }
+
+    function fontSizeLarge3(){
+        return fontSizeNormal() * 1.5;
+    }
 }

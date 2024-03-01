@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import CakebrewJs2
 
 TextArea {
     palette.alternateBase : CoreSystemPalette.alternateBase
@@ -17,4 +18,6 @@ TextArea {
     palette.text : CoreSystemPalette.text
     palette.window : CoreSystemPalette.window
     palette.windowText : CoreSystemPalette.windowText
+
+    font.pointSize: Constants.fontSizeNormal()
 }

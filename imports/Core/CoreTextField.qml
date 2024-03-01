@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import CakebrewJs2
 
 TextField {
 
@@ -24,4 +25,6 @@ TextField {
     palette.text: CoreSystemPalette.text
     palette.window: CoreSystemPalette.window
     palette.windowText: CoreSystemPalette.windowText
+
+    font.pointSize: Constants.fontSizeNormal()
 }

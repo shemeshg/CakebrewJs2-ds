@@ -17,21 +17,26 @@ ColumnLayout {
     RowLayout {        
         CoreLabel {
             text: "•"
+            font.pointSize: Constants.fontSizeLarge3()
         }
         CoreLabel {
             id: textStart
             text: itemName + " ( "
+            font.pointSize: Constants.fontSizeLarge3()
         }
         HyperlinkBtn {
             urlText: itemTag
+            font.pointSize: Constants.fontSizeLarge3()
         }
         CoreLabel {
             text: " ) " + itemVer
+            font.pointSize: Constants.fontSizeLarge3()
         }
         CoreLabel {
             visible: itemIsInstalled
             text: " installed"
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
+            font.pointSize: Constants.fontSizeLarge3()
         }
     }
     RowLayout {
@@ -39,6 +44,7 @@ ColumnLayout {
             leftPadding: 20
             text: itemDesk
             color: CoreSystemPalette.text
+            font.pointSize: Constants.fontSizeLarge2()
         }
     }
     RowLayout {

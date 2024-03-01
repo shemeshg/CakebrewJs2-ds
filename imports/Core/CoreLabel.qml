@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
+import CakebrewJs2
 
 Label {
     palette.alternateBase : CoreSystemPalette.alternateBase
@@ -18,4 +18,6 @@ Label {
     palette.text : CoreSystemPalette.text
     palette.window : CoreSystemPalette.window
     palette.windowText : CoreSystemPalette.windowText
+
+    font.pointSize: Constants.fontSizeNormal()
 }
