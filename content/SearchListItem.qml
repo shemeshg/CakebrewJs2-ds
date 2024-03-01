@@ -41,7 +41,9 @@ ColumnLayout {
         HyperlinkBtn {
             urlRef: itemUrl
             urlText: itemUrl
-            onLinkActivated: Qt.openUrlExternally(link)
+            onLinkActivated: link => {
+                                 Qt.openUrlExternally(link)
+                             }
         }
     }
     RowLayout {
