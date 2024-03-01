@@ -54,6 +54,7 @@ ColumnLayout {
                         itemIsInstalled: modelData.installed
                         itemUrl: modelData.homepage
                         itemDesk: modelData.desc
+                        itemFilterBy: textSearch.text
                     }
                 }
             }
@@ -83,6 +84,7 @@ ColumnLayout {
                     itemIsInstalled: modelData.installed
                     itemUrl: modelData.homepage
                     itemDesk: modelData.desc
+                    itemFilterBy: textSearch.text.toLowerCase()
                 }
             }
         }

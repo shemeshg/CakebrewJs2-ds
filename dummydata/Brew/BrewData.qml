@@ -18,23 +18,25 @@ QtObject {
         searchCaskRunning = true
         searchFormulaRunning = true
         timerCb = ()=>{
+            searchItemsCask = []
+            for (let i=0;i<40;i++){
+                searchItemsCask.push(                {token: "a" + i,
+                                           name: "Cakebrewjs",
+                                           version: "2.0.0",
+                                           homepage: "https://google.com",
+                                           desc: "Do things",
+                                           installed: true
+                                     })
+                searchItemsCask.push(                {token: "b" + i,
+                                           name: "Cakebrewjgpgp",
+                                           version: "2.0.0",
+                                           homepage: "https://hjksadf.com",
+                                           desc: "Do things",
+                                           installed: true
+                                     })
+            }
+            searchItemsCask = [...searchItemsCask]
 
-            searchItemsCask = [
-                {token: "a",
-                    name: "Cakebrewjs",
-                    version: "2.0.0",
-                    homepage: "https://google.com",
-                    desc: "Do things",
-                    installed: true
-                },
-                {token: "b",
-                    name: "Cakebrewjs",
-                    version: "2.0.0",
-                    homepage: "https://google.com",
-                    desc: "Do things",
-                    installed: true
-                }
-            ]
             searchStatusCaskText = ""
             searchStatusCaskVisible = false
 

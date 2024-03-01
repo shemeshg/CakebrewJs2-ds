@@ -11,9 +11,13 @@ ColumnLayout {
     property bool itemIsInstalled: false
     property string itemUrl: ""
     property string itemDesk: ""
+    property string filterStr: {
+        return (itemName +itemTag + itemVer + itemUrl + itemDesk).toLowerCase()
+    }
+    property string itemFilterBy: ""
 
-    RowLayout {
-
+    visible: filterStr.includes(itemFilterBy)
+    RowLayout {        
         CoreLabel {
             text: "•"
         }
