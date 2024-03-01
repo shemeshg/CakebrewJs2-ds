@@ -179,9 +179,21 @@ QtObject {
             "filterString": "unbound"
         }]
 
-    readonly property string lastUpdateDateStr: "02-24 13:34"
+    property string lastUpdateDateStr: "02-24 13:34"
 
-    readonly property string brewLocation: "/whatever/brew"
+    property string brewLocation: "/whatever/brew"
 
     property string normalFontPointSize: "14"
+
+    property string terminalApp: "iTerm"
+
+    function saveNormalFontPointSize(s){
+        normalFontPointSize = s
+    }
+    function saveBrewLocation(s){
+        brewLocation = s;
+    }
+    function saveTerminalApp(s){
+        terminalApp = s;
+    }
 }

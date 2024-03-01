@@ -13,6 +13,7 @@ public:
     {
         loadBrewLocation();
         loadNormalFontPointSize();
+        loadTerminalApp();
 
         QVector<GridCell *> *cask = &caskBodyList();
         GridCell *gc;
@@ -239,6 +240,12 @@ public slots:
         });
     }
 
+    void saveTerminalApp(const QString s)
+    {
+        settings.setValue("terminalApp", s);
+        loadTerminalApp();
+    }
+
     void saveNormalFontPointSize(const QString s)
     {
         settings.setValue("normalFontPointSize", s);
@@ -282,6 +289,13 @@ private:
         QString s=settings.value("normalFontPointSize", "").toString();
         setNormalFontPointSize(s);
     }
+
+    void loadTerminalApp()
+    {
+        QString s = settings.value("terminalApp", "iTerm").toString();
+        setTerminalApp(s);
+    }
+
     void loadBrewLocation()
     {
         QString s_brewLocation = settings.value("brewLocation", "").toString();

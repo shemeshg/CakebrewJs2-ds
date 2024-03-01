@@ -8,6 +8,7 @@ ColumnLayout {
     function saveSettings() {
         Constants.brewData.saveNormalFontPointSize(fontSizeInput.text)
         Constants.brewData.saveBrewLocation(brewLocation.text)
+        Constants.brewData.saveTerminalApp(terminalApp.currentText)
     }
 
     CoreLabel {
@@ -29,16 +30,22 @@ ColumnLayout {
         color: CoreSystemPalette.text
     }
     CoreComboBox {
-        id: cmb
+        id: terminalApp
         Layout.fillWidth: true
+        textRole: "text"
+        valueRole: "value"
         model: ListModel {
             ListElement {
+                value: "Terminal"
                 text: "Terminal"
             }
             ListElement {
+                value: "iTerm"
                 text: "iTerm"
             }
         }
+        Component.onCompleted: currentIndex = indexOfValue(
+                                   Constants.brewData.terminalApp)
     }
     CoreLabel {
         text: "Font size"

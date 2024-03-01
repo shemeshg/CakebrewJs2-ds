@@ -24,6 +24,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
+    Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsCask READ searchItemsCask  NOTIFY searchItemsCaskChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsFormula READ searchItemsFormula  NOTIFY searchItemsFormulaChanged )
     Q_PROPERTY(QString searchStatusCaskText READ searchStatusCaskText WRITE setSearchStatusCaskText NOTIFY searchStatusCaskTextChanged )
@@ -83,6 +84,18 @@ void setNormalFontPointSize(const QString &newNormalFontPointSize)
             return;
         m_normalFontPointSize = newNormalFontPointSize;
         emit normalFontPointSizeChanged();
+    }
+
+
+    
+    QString terminalApp() const{return m_terminalApp;} 
+    
+void setTerminalApp(const QString &newTerminalApp)
+    {
+        if (m_terminalApp == newTerminalApp)
+            return;
+        m_terminalApp = newTerminalApp;
+        emit terminalAppChanged();
     }
 
 
@@ -174,6 +187,7 @@ signals:
     void servicesBodyListChanged();
     void brewLocationChanged();
     void normalFontPointSizeChanged();
+    void terminalAppChanged();
     void searchItemsCaskChanged();
     void searchItemsFormulaChanged();
     void searchStatusCaskTextChanged();
@@ -191,6 +205,7 @@ private:
     QVector<GridCell *> m_servicesBodyList;
     QString m_brewLocation;
     QString m_normalFontPointSize;
+    QString m_terminalApp;
     QVector<SearchResultRow *> m_searchItemsCask;
     QVector<SearchResultRow *> m_searchItemsFormula;
     QString m_searchStatusCaskText;
