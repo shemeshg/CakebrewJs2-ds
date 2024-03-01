@@ -15,7 +15,9 @@ ColumnLayout {
         }
         CoreButton {
             text: "Search"
-            enabled: !Constants.brewData.searchCaskRunning && !Constants.brewData.searchFormulaRunning
+            enabled: !Constants.brewData.searchCaskRunning &&
+                     !Constants.brewData.searchFormulaRunning &&
+                     textSearch.text.trim() !== ""
             onClicked: {
                 Constants.brewData.asyncSearch(() => {
                                                         //caskModel = ["a", "b"]
