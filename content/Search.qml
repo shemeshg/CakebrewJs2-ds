@@ -24,23 +24,40 @@ ColumnLayout {
                                                                      ))
                                                          })
     }
+
+    property bool searchEnabled: {
+        return !Constants.brewData.searchCaskRunning
+                && !Constants.brewData.searchFormulaRunning
+                && textSearch.text.trim() !== ""
+    }
+
+    function doSearchAction() {
+        Constants.brewData.asyncSearch(() => {}, textSearch.text, true)
+        Constants.brewData.asyncSearch(() => {}, textSearch.text, false)
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            textSearch.forceActiveFocus()
+        }
+    }
+
     RowLayout {
         CoreTextField {
             id: textSearch
             placeholderText: "Regex example /^r/"
             Layout.fillWidth: true
+            onAccepted: {
+                if (searchEnabled) {
+                    doSearchAction()
+                }
+            }
         }
         CoreButton {
             text: "Search"
-            enabled: !Constants.brewData.searchCaskRunning
-                     && !Constants.brewData.searchFormulaRunning
-                     && textSearch.text.trim() !== ""
+            enabled: searchEnabled
             onClicked: {
-                Constants.brewData.asyncSearch(() => {//caskModel = ["a", "b"]
-                                               }, textSearch.text, true)
-                Constants.brewData.asyncSearch(
-                            () => {//formullaModel = ["c", "d"]
-                            }, textSearch.text, false)
+                doSearchAction()
             }
         }
     }
@@ -103,7 +120,7 @@ ColumnLayout {
                     itemVer: modelData.version
                     itemIsInstalled: modelData.installed
                     itemUrl: modelData.homepage
-                    itemDesk: modelData.desc                    
+                    itemDesk: modelData.desc
                 }
             }
         }
