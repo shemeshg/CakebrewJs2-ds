@@ -39,7 +39,7 @@ QtObject {
 
 
     function fontSizeNormal(){
-       if (isNaN(brewData.normalFontPointSize) ){
+       if (!brewData.normalFontPointSize || isNaN(brewData.normalFontPointSize) ){
            return dummyLabel.font.pointSize
         } else {
            return Number(brewData.normalFontPointSize);

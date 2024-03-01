@@ -23,6 +23,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVector<GridCell *> formulaBodyList READ formulaBodyList  NOTIFY formulaBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
+    Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsCask READ searchItemsCask  NOTIFY searchItemsCaskChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsFormula READ searchItemsFormula  NOTIFY searchItemsFormulaChanged )
     Q_PROPERTY(QString searchStatusCaskText READ searchStatusCaskText WRITE setSearchStatusCaskText NOTIFY searchStatusCaskTextChanged )
@@ -70,6 +71,18 @@ void setBrewLocation(const QString &newBrewLocation)
             return;
         m_brewLocation = newBrewLocation;
         emit brewLocationChanged();
+    }
+
+
+    
+    QString normalFontPointSize() const{return m_normalFontPointSize;} 
+    
+void setNormalFontPointSize(const QString &newNormalFontPointSize)
+    {
+        if (m_normalFontPointSize == newNormalFontPointSize)
+            return;
+        m_normalFontPointSize = newNormalFontPointSize;
+        emit normalFontPointSizeChanged();
     }
 
 
@@ -160,6 +173,7 @@ signals:
     void formulaBodyListChanged();
     void servicesBodyListChanged();
     void brewLocationChanged();
+    void normalFontPointSizeChanged();
     void searchItemsCaskChanged();
     void searchItemsFormulaChanged();
     void searchStatusCaskTextChanged();
@@ -176,6 +190,7 @@ private:
     QVector<GridCell *> m_formulaBodyList;
     QVector<GridCell *> m_servicesBodyList;
     QString m_brewLocation;
+    QString m_normalFontPointSize;
     QVector<SearchResultRow *> m_searchItemsCask;
     QVector<SearchResultRow *> m_searchItemsFormula;
     QString m_searchStatusCaskText;

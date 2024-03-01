@@ -60,6 +60,7 @@ ColumnLayout {
             width: previewData.width
             height: previewData.height
             Settings {
+                id: settings
                 visible: previewData.state === "Settings"
             }
 
@@ -86,6 +87,10 @@ ColumnLayout {
 
     BottomBar {
         id: bottomBar
+        onSaveSettingsClicked: {
+            settings.saveSettings()
+        }
+
         onBackClicked: {
             previewData.state = "Home"
             headerToolbarId.btnHomeId.checked = true

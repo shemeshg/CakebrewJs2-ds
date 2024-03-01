@@ -10,6 +10,7 @@ GroupBox {
     signal refreshClicked
     signal aboutClicked
     signal backClicked
+    signal saveSettingsClicked
     property string selectedPreview: ""
 
     readonly property int upgradableItems: {
@@ -58,6 +59,7 @@ GroupBox {
             visible: selectedPreview === "Settings"
             CoreButton {
                 text: "Save Settings"
+                onClicked: saveSettingsClicked()
             }
         }
         Item {

@@ -5,11 +5,17 @@ import QtQuick.Layouts
 import Core
 
 ColumnLayout {
+    function saveSettings() {
+        Constants.brewData.saveNormalFontPointSize(fontSizeInput.text)
+        Constants.brewData.saveBrewLocation(brewLocation.text)
+    }
+
     CoreLabel {
         text: "Brew location"
         color: CoreSystemPalette.text
     }
     CoreTextField {
+        id: brewLocation
         text: Constants.brewData.brewLocation
         Layout.fillWidth: true
         onActiveFocusChanged: {
@@ -36,9 +42,10 @@ ColumnLayout {
     }
     CoreLabel {
         text: "Font size"
-        color: CoreSystemPalette.text        
+        color: CoreSystemPalette.text
     }
     CoreTextField {
+        id: fontSizeInput
         text: Constants.fontSizeNormal()
         Layout.fillWidth: true
     }

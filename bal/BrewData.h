@@ -12,6 +12,7 @@ public:
         : BrewDataPrivate{parent}
     {
         loadBrewLocation();
+        loadNormalFontPointSize();
 
         QVector<GridCell *> *cask = &caskBodyList();
         GridCell *gc;
@@ -238,6 +239,12 @@ public slots:
         });
     }
 
+    void saveNormalFontPointSize(const QString s)
+    {
+        settings.setValue("normalFontPointSize", s);
+        loadNormalFontPointSize();
+    }
+
     void saveBrewLocation(const QString s)
     {
         settings.setValue("brewLocation", s);
@@ -271,18 +278,21 @@ private:
         return full_path;
     }
 
+    void loadNormalFontPointSize(){
+        QString s=settings.value("normalFontPointSize", "").toString();
+        setNormalFontPointSize(s);
+    }
     void loadBrewLocation()
     {
         QString s_brewLocation = settings.value("brewLocation", "").toString();
-        if (s_brewLocation.isEmpty()) {
+
+        QFileInfo check_file(s_brewLocation);
+        if (s_brewLocation.isEmpty() || !check_file.exists()) {
             s_brewLocation = getFindExecutable("brew");
             settings.setValue("brewLocation", s_brewLocation);
         }
 
-        QFileInfo check_file(s_brewLocation);
-        if (s_brewLocation.isEmpty() || !check_file.exists()) {
-            s_brewLocation = "";
-        }
         setBrewLocation(s_brewLocation);
+        emit brewLocationChanged();
     }
 };

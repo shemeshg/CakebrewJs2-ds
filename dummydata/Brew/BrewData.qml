@@ -7,8 +7,10 @@ QtObject {
         refreshDataTimer.start()
     }
 
-    function asyncSearch(cb, textSearch, isCask){
-        if (isCask){return}
+    function asyncSearch(cb, textSearch, isCask) {
+        if (isCask) {
+            return
+        }
         searchStatusCaskText = "Searching casks"
         searchStatusCaskVisible = true
 
@@ -17,22 +19,24 @@ QtObject {
 
         searchCaskRunning = true
         searchFormulaRunning = true
-        timerCb = ()=>{
+        timerCb = () => {
             searchItemsCask = []
-            for (let i=0;i<40;i++){
-                searchItemsCask.push(                {token: "a" + i,
-                                           name: "Cakebrewjs",
-                                           version: "2.0.0",
-                                           homepage: "https://google.com",
-                                           desc: "Do things",
-                                           installed: true
+            for (var i = 0; i < 40; i++) {
+                searchItemsCask.push({
+                                         "token": "a" + i,
+                                         "name": "Cakebrewjs",
+                                         "version": "2.0.0",
+                                         "homepage": "https://google.com",
+                                         "desc": "Do things",
+                                         "installed": true
                                      })
-                searchItemsCask.push(                {token: "b" + i,
-                                           name: "Cakebrewjgpgp",
-                                           version: "2.0.0",
-                                           homepage: "https://hjksadf.com",
-                                           desc: "Do things",
-                                           installed: true
+                searchItemsCask.push({
+                                         "token": "b" + i,
+                                         "name": "Cakebrewjgpgp",
+                                         "version": "2.0.0",
+                                         "homepage": "https://hjksadf.com",
+                                         "desc": "Do things",
+                                         "installed": true
                                      })
             }
             searchItemsCask = [...searchItemsCask]
@@ -40,22 +44,21 @@ QtObject {
             searchStatusCaskText = ""
             searchStatusCaskVisible = false
 
-            searchItemsFormula = [
-                {token: "d",
-                    name: "Cakebrewjs",
-                    version: "2.0.0",
-                    homepage: "https://google.com",
-                    desc: "Do things",
-                    installed: true
-                },
-                {token: "e",
-                    name: "Cakebrewjs",
-                    version: "2.0.0",
-                    homepage: "https://google.com",
-                    desc: "Do things",
-                    installed: true
-                }
-            ]
+            searchItemsFormula = [{
+                                      "token": "d",
+                                      "name": "Cakebrewjs",
+                                      "version": "2.0.0",
+                                      "homepage": "https://google.com",
+                                      "desc": "Do things",
+                                      "installed": true
+                                  }, {
+                                      "token": "e",
+                                      "name": "Cakebrewjs",
+                                      "version": "2.0.0",
+                                      "homepage": "https://google.com",
+                                      "desc": "Do things",
+                                      "installed": true
+                                  }]
             searchStatusFormulaText = ""
             searchStatusFormulaVisible = false
 
@@ -86,8 +89,6 @@ QtObject {
         onTriggered: timerCb()
         interval: 1000
     }
-
-
 
     property var caskBodyList: [{
             "cellType": "linkBtn",
@@ -183,5 +184,4 @@ QtObject {
     readonly property string brewLocation: "/whatever/brew"
 
     property string normalFontPointSize: "14"
-
 }
