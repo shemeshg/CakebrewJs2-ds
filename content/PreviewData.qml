@@ -48,29 +48,39 @@ ColumnLayout {
         }
     ]
 
-    ColumnLayout {
+    ScrollView {
 
-        Settings {
-            visible: previewData.state === "Settings"
-        }
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-        Search {
-            visible: previewData.state === "Search"
-        }
+        ColumnLayout {
+            id: clid
 
-        About {
-            visible: previewData.state === "About"
-        }
-        Info {
-            visible: previewData.state === "Info"
-        }
+            width: previewData.width
+            height: previewData.height
+            Settings {
+                visible: previewData.state === "Settings"
+            }
 
-        Home {
-            visible: previewData.state === "Home"
-        }
+            Search {
+                visible: previewData.state === "Search"
+            }
 
-        Item {
-            Layout.fillHeight: true
+            About {
+                visible: previewData.state === "About"
+            }
+            Info {
+                visible: previewData.state === "Info"
+            }
+
+            Home {
+                visible: previewData.state === "Home"
+            }
+
+            Item {
+                Layout.fillHeight: true
+            }
         }
     }
 
