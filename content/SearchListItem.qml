@@ -11,12 +11,9 @@ ColumnLayout {
     property bool itemIsInstalled: false
     property string itemUrl: ""
     property string itemDesk: ""
-    property string filterStr: {
-        return (itemName +itemTag + itemVer + itemUrl + itemDesk).toLowerCase()
-    }
+
     property string itemFilterBy: ""
 
-    visible: filterStr.includes(itemFilterBy)
     RowLayout {        
         CoreLabel {
             text: "•"
@@ -24,30 +21,17 @@ ColumnLayout {
         CoreLabel {
             id: textStart
             text: itemName + " ( "
-            color: CoreSystemPalette.text
         }
         HyperlinkBtn {
             urlText: itemTag
         }
         CoreLabel {
             text: " ) " + itemVer
-            color: CoreSystemPalette.text
         }
         CoreLabel {
             visible: itemIsInstalled
             text: " installed"
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
-        }
-        CoreLabel {
-            text: " - "
-            color: CoreSystemPalette.text
-        }
-        HyperlinkBtn {
-            urlRef: itemUrl
-            urlText: itemUrl
-            onLinkActivated: link => {
-                                 Qt.openUrlExternally(link)
-                             }
         }
     }
     RowLayout {
@@ -57,4 +41,16 @@ ColumnLayout {
             color: CoreSystemPalette.text
         }
     }
+    RowLayout {
+        HyperlinkBtn {
+            leftPadding: 20
+            urlRef: itemUrl
+            urlText: itemUrl
+            onLinkActivated: link => {
+                                 Qt.openUrlExternally(link)
+                             }
+        }
+    }
+
+
 }

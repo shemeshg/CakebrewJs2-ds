@@ -32,40 +32,50 @@ public:
             data = data["formulae"];
         }
         for (auto &element : data) {
-            if (isCask) {
+            try {
+                if (isCask) {
+                    std::string token = element["token"].template get<std::string>();
+                    std::string name = (element["name"][0]).template get<std::string>();
+                    std::string version = element["version"].template get<std::string>();
+                    std::string homepage = element["homepage"].template get<std::string>();
+
+                    std::string desc;
+                    if (!element["desc"].is_null()) {
+                        desc = element["desc"].template get<std::string>();
+                    }
+
+                    bool installed = !element["installed"].is_null();
+
+                    SearchResultRow *r = new SearchResultRow();
+                    r->setToken(QString::fromStdString(token));
+                    r->setName(QString::fromStdString(name));
+                    r->setVersion(QString::fromStdString(version));
+                    r->setHomepage(QString::fromStdString(homepage));
+                    r->setDesc(QString::fromStdString(desc));
+                    r->setInstalled(installed);
+
+                    v.push_back(r);
+                } else {
+                    std::string token = element["name"].template get<std::string>();
+                    std::string name = element["full_name"].template get<std::string>();
+                    std::string version = (element["versions"]["stable"]).template get<std::string>();
+                    std::string homepage = element["homepage"].template get<std::string>();
+                    std::string desc = element["desc"].template get<std::string>();
+                    bool installed = element["installed"].size() != 0;
+
+                    SearchResultRow *r = new SearchResultRow();
+                    r->setToken(QString::fromStdString(token));
+                    r->setName(QString::fromStdString(name));
+                    r->setVersion(QString::fromStdString(version));
+                    r->setHomepage(QString::fromStdString(homepage));
+                    r->setDesc(QString::fromStdString(desc));
+                    r->setInstalled(installed);
+
+                    v.push_back(r);
+                }
+            } catch (std::exception e) {
                 std::string token = element["token"].template get<std::string>();
-                std::string name = (element["name"][0]).template get<std::string>();
-                std::string version = element["version"].template get<std::string>();
-                std::string homepage = element["homepage"].template get<std::string>();
-                std::string desc = element["desc"].template get<std::string>();
-                bool installed = !element["installed"].is_null();
-
-                SearchResultRow *r = new SearchResultRow();
-                r->setToken(QString::fromStdString(token));
-                r->setName(QString::fromStdString(name));
-                r->setVersion(QString::fromStdString(version));
-                r->setHomepage(QString::fromStdString(homepage));
-                r->setDesc(QString::fromStdString(desc));
-                r->setInstalled(installed);
-
-                v.push_back(r);
-            } else {
-                std::string token = element["name"].template get<std::string>();
-                std::string name = element["full_name"].template get<std::string>();
-                std::string version = (element["versions"]["stable"]).template get<std::string>();
-                std::string homepage = element["homepage"].template get<std::string>();
-                std::string desc = element["desc"].template get<std::string>();
-                bool installed = element["installed"].size() != 0;
-
-                SearchResultRow *r = new SearchResultRow();
-                r->setToken(QString::fromStdString(token));
-                r->setName(QString::fromStdString(name));
-                r->setVersion(QString::fromStdString(version));
-                r->setHomepage(QString::fromStdString(homepage));
-                r->setDesc(QString::fromStdString(desc));
-                r->setInstalled(installed);
-
-                v.push_back(r);
+                qDebug() << e.what() << token;
             }
         }
         return v;

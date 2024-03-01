@@ -185,7 +185,9 @@ public slots:
         makeAsync<bool>(callback, [=]() {
             ShellCmd sc;
             ProcessStatus s = sc.cmdSearch(textSearch, isCask);
-            if (s.isSuccess && s.stdErr.isEmpty() && !s.stdOut.isEmpty()) {
+            if (s.isSuccess
+                //&& s.stdErr.isEmpty()
+                && !s.stdOut.isEmpty()) {
                 QVector<SearchResultRow *> parseCmdSearch = sc.ParseCmdSearch(s.stdOut, isCask);
 
                 for (auto row : parseCmdSearch) {
@@ -195,14 +197,14 @@ public slots:
                 parseCmdSearch.clear();
                 if (isCask) {
                     emit searchItemsCaskChanged();
-                    setSearchStatusCaskText("Success");
-                    setSearchStatusCaskVisible(false);
+                    setSearchStatusCaskText(s.stdErr);
+                    setSearchStatusCaskVisible(!s.stdErr.isEmpty());
                     setSearchCaskRunning(false);
 
                 } else {
                     emit searchItemsFormulaChanged();
-                    setSearchStatusFormulaText("");
-                    setSearchStatusFormulaVisible(false);
+                    setSearchStatusFormulaText(s.stdErr);
+                    setSearchStatusFormulaVisible(!s.stdErr.isEmpty());
                     setSearchFormulaRunning(false);
                 }
 
