@@ -136,21 +136,91 @@ public:
         gc->setFillWidth(false);
         gc->setFilterString("unbound");
         services->push_back(gc);
+
+        QObject::connect(this, &BrewData::addSearchRow, this, [=](SearchResultRow *row, bool isCask) {
+            QVector<SearchResultRow *> *listOfSearchResultRows;
+            if (isCask) {
+                listOfSearchResultRows = &searchItemsCask();
+            } else {
+                listOfSearchResultRows = &searchItemsFormula();
+            }
+            SearchResultRow *newRow = new SearchResultRow();
+            newRow->setToken(row->token());
+            newRow->setName(row->name());
+            newRow->setVersion(row->version());
+            newRow->setHomepage(row->homepage());
+            newRow->setDesc(row->desc());
+            newRow->setInstalled(row->installed());
+            listOfSearchResultRows->push_back(newRow);
+            delete row;
+        });
     }
+
+signals:
+    void addSearchRow(SearchResultRow *row, bool isCask);
 
 public slots:
     void asyncSearch(const QJSValue &callback, QString textSearch, bool isCask)
     {
-        makeAsync<void>(callback, [=]() {
+        QVector<SearchResultRow *> *listOfSearchResultRows;
+        if (isCask) {
+            listOfSearchResultRows = &searchItemsCask();
+
+            qDeleteAll(*listOfSearchResultRows);
+            listOfSearchResultRows->clear();
+            setSearchStatusCaskText("Search Casks");
+            setSearchStatusCaskVisible(true);
+            setSearchCaskRunning(true);
+
+        } else {
+            listOfSearchResultRows = &searchItemsFormula();
+
+            qDeleteAll(*listOfSearchResultRows);
+            listOfSearchResultRows->clear();
+            setSearchStatusFormulaText("Search Formula");
+            setSearchStatusFormulaVisible(true);
+            setSearchFormulaRunning(true);
+        }
+
+        makeAsync<bool>(callback, [=]() {
             ShellCmd sc;
             ProcessStatus s = sc.cmdSearch(textSearch, isCask);
             if (s.isSuccess && s.stdErr.isEmpty() && !s.stdOut.isEmpty()) {
-                sc.ParseCmdSearch(s.stdOut, isCask);
+                QVector<SearchResultRow *> parseCmdSearch = sc.ParseCmdSearch(s.stdOut, isCask);
+
+                for (auto row : parseCmdSearch) {
+                    emit addSearchRow(row, isCask);
+                }
+
+                parseCmdSearch.clear();
+                if (isCask) {
+                    emit searchItemsCaskChanged();
+                    setSearchStatusCaskText("Success");
+                    setSearchStatusCaskVisible(false);
+                    setSearchCaskRunning(false);
+
+                } else {
+                    emit searchItemsFormulaChanged();
+                    setSearchStatusFormulaText("");
+                    setSearchStatusFormulaVisible(false);
+                    setSearchFormulaRunning(false);
+                }
+
             } else {
-                //set err stderr
-                //dont need return, set relevant bindable var
+                if (isCask) {
+                    emit searchItemsCaskChanged();
+                    setSearchStatusCaskText(s.stdErr);
+                    setSearchStatusCaskVisible(true);
+                    setSearchCaskRunning(false);
+                } else {
+                    emit searchItemsFormulaChanged();
+                    setSearchStatusFormulaText(s.stdErr);
+                    setSearchStatusFormulaVisible(true);
+                    setSearchFormulaRunning(false);
+                }
             }
-            return;
+
+            return true;
         });
     }
 

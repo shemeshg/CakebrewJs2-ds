@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTemporaryFile>
 #include "json/single_include/nlohmann/json.hpp"
+#include "searchresultrow.h"
 
 using json = nlohmann::json;
 
@@ -15,21 +16,14 @@ struct ProcessStatus
     QString stdErr;
 };
 
-struct SearchResultRow
-{
-    QString token, name, version, homepage, desc;
-
-    bool installed;
-};
-
 class ShellCmd
 {
 public:
     ShellCmd();
 
-    QVector<SearchResultRow> ParseCmdSearch(QString searchResult, bool isCask)
+    QVector<SearchResultRow *> ParseCmdSearch(QString searchResult, bool isCask)
     {
-        QVector<SearchResultRow> v;
+        QVector<SearchResultRow *> v;
 
         json data = json::parse(searchResult.toStdString());
         if (isCask) {
@@ -46,15 +40,15 @@ public:
                 std::string desc = element["desc"].template get<std::string>();
                 bool installed = !element["installed"].is_null();
 
-                SearchResultRow r;
-                r.token = QString::fromStdString(token);
-                r.name = QString::fromStdString(name);
-                r.version = QString::fromStdString(version);
-                r.homepage = QString::fromStdString(homepage);
-                r.desc = QString::fromStdString(desc);
-                r.installed = installed;
+                SearchResultRow *r = new SearchResultRow();
+                r->setToken(QString::fromStdString(token));
+                r->setName(QString::fromStdString(name));
+                r->setVersion(QString::fromStdString(version));
+                r->setHomepage(QString::fromStdString(homepage));
+                r->setDesc(QString::fromStdString(desc));
+                r->setInstalled(installed);
 
-                v.emplace_back(r);
+                v.push_back(r);
             } else {
                 std::string token = element["name"].template get<std::string>();
                 std::string name = element["full_name"].template get<std::string>();
@@ -63,14 +57,15 @@ public:
                 std::string desc = element["desc"].template get<std::string>();
                 bool installed = element["installed"].size() != 0;
 
-                SearchResultRow r;
-                r.token = QString::fromStdString(token);
-                r.name = QString::fromStdString(name);
-                r.version = QString::fromStdString(version);
-                r.homepage = QString::fromStdString(homepage);
-                r.desc = QString::fromStdString(desc);
-                r.installed = installed;
-                v.emplace_back(r);
+                SearchResultRow *r = new SearchResultRow();
+                r->setToken(QString::fromStdString(token));
+                r->setName(QString::fromStdString(name));
+                r->setVersion(QString::fromStdString(version));
+                r->setHomepage(QString::fromStdString(homepage));
+                r->setDesc(QString::fromStdString(desc));
+                r->setInstalled(installed);
+
+                v.push_back(r);
             }
         }
         return v;

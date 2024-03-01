@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 #include "GridCell.h"
 #include "JsAsync.h"
+#include "searchresultrow.h"
 /*[[[cog
 import cog
 from BrewDataPrivate import classBrewDataPrivate
@@ -22,6 +23,14 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVector<GridCell *> formulaBodyList READ formulaBodyList  NOTIFY formulaBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
+    Q_PROPERTY(QVector<SearchResultRow *> searchItemsCask READ searchItemsCask  NOTIFY searchItemsCaskChanged )
+    Q_PROPERTY(QVector<SearchResultRow *> searchItemsFormula READ searchItemsFormula  NOTIFY searchItemsFormulaChanged )
+    Q_PROPERTY(QString searchStatusCaskText READ searchStatusCaskText WRITE setSearchStatusCaskText NOTIFY searchStatusCaskTextChanged )
+    Q_PROPERTY(QString searchStatusFormulaText READ searchStatusFormulaText WRITE setSearchStatusFormulaText NOTIFY searchStatusFormulaTextChanged )
+    Q_PROPERTY(bool searchStatusCaskVisible READ searchStatusCaskVisible WRITE setSearchStatusCaskVisible NOTIFY searchStatusCaskVisibleChanged )
+    Q_PROPERTY(bool searchStatusFormulaVisible READ searchStatusFormulaVisible WRITE setSearchStatusFormulaVisible NOTIFY searchStatusFormulaVisibleChanged )
+    Q_PROPERTY(bool searchCaskRunning READ searchCaskRunning WRITE setSearchCaskRunning NOTIFY searchCaskRunningChanged )
+    Q_PROPERTY(bool searchFormulaRunning READ searchFormulaRunning WRITE setSearchFormulaRunning NOTIFY searchFormulaRunningChanged )
     
     QML_ELEMENT
 public:
@@ -64,6 +73,86 @@ void setBrewLocation(const QString &newBrewLocation)
     }
 
 
+    
+    QVector<SearchResultRow *> &searchItemsCask() {return m_searchItemsCask;} 
+    
+
+    
+    QVector<SearchResultRow *> &searchItemsFormula() {return m_searchItemsFormula;} 
+    
+
+    
+    QString searchStatusCaskText() const{return m_searchStatusCaskText;} 
+    
+void setSearchStatusCaskText(const QString &newSearchStatusCaskText)
+    {
+        if (m_searchStatusCaskText == newSearchStatusCaskText)
+            return;
+        m_searchStatusCaskText = newSearchStatusCaskText;
+        emit searchStatusCaskTextChanged();
+    }
+
+
+    
+    QString searchStatusFormulaText() const{return m_searchStatusFormulaText;} 
+    
+void setSearchStatusFormulaText(const QString &newSearchStatusFormulaText)
+    {
+        if (m_searchStatusFormulaText == newSearchStatusFormulaText)
+            return;
+        m_searchStatusFormulaText = newSearchStatusFormulaText;
+        emit searchStatusFormulaTextChanged();
+    }
+
+
+    
+    bool searchStatusCaskVisible() const{return m_searchStatusCaskVisible;} 
+    
+void setSearchStatusCaskVisible(const bool newSearchStatusCaskVisible)
+    {
+        if (m_searchStatusCaskVisible == newSearchStatusCaskVisible)
+            return;
+        m_searchStatusCaskVisible = newSearchStatusCaskVisible;
+        emit searchStatusCaskVisibleChanged();
+    }
+
+
+    
+    bool searchStatusFormulaVisible() const{return m_searchStatusFormulaVisible;} 
+    
+void setSearchStatusFormulaVisible(const bool newSearchStatusFormulaVisible)
+    {
+        if (m_searchStatusFormulaVisible == newSearchStatusFormulaVisible)
+            return;
+        m_searchStatusFormulaVisible = newSearchStatusFormulaVisible;
+        emit searchStatusFormulaVisibleChanged();
+    }
+
+
+    
+    bool searchCaskRunning() const{return m_searchCaskRunning;} 
+    
+void setSearchCaskRunning(const bool newSearchCaskRunning)
+    {
+        if (m_searchCaskRunning == newSearchCaskRunning)
+            return;
+        m_searchCaskRunning = newSearchCaskRunning;
+        emit searchCaskRunningChanged();
+    }
+
+
+    
+    bool searchFormulaRunning() const{return m_searchFormulaRunning;} 
+    
+void setSearchFormulaRunning(const bool newSearchFormulaRunning)
+    {
+        if (m_searchFormulaRunning == newSearchFormulaRunning)
+            return;
+        m_searchFormulaRunning = newSearchFormulaRunning;
+        emit searchFormulaRunningChanged();
+    }
+
+
 
 signals:
     void lastUpdateDateStrChanged();
@@ -71,6 +160,14 @@ signals:
     void formulaBodyListChanged();
     void servicesBodyListChanged();
     void brewLocationChanged();
+    void searchItemsCaskChanged();
+    void searchItemsFormulaChanged();
+    void searchStatusCaskTextChanged();
+    void searchStatusFormulaTextChanged();
+    void searchStatusCaskVisibleChanged();
+    void searchStatusFormulaVisibleChanged();
+    void searchCaskRunningChanged();
+    void searchFormulaRunningChanged();
     
 
 private:
@@ -79,6 +176,14 @@ private:
     QVector<GridCell *> m_formulaBodyList;
     QVector<GridCell *> m_servicesBodyList;
     QString m_brewLocation;
+    QVector<SearchResultRow *> m_searchItemsCask;
+    QVector<SearchResultRow *> m_searchItemsFormula;
+    QString m_searchStatusCaskText;
+    QString m_searchStatusFormulaText;
+    bool m_searchStatusCaskVisible;
+    bool m_searchStatusFormulaVisible;
+    bool m_searchCaskRunning;
+    bool m_searchFormulaRunning;
     
     void ctorClass();
 };

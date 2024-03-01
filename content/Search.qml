@@ -36,11 +36,6 @@ ColumnLayout {
 
         ColumnLayout {
 
-            CoreLabel {
-                text: Constants.brewData.searchStatusCaskText
-                visible: Constants.brewData.searchStatusCaskVisible
-            }
-
             ExtendableHeader {
                 id: caskHeader
                 isExtended: true
@@ -62,14 +57,14 @@ ColumnLayout {
                     }
                 }
             }
+            CoreLabel {
+                text: Constants.brewData.searchStatusCaskText
+                visible: Constants.brewData.searchStatusCaskVisible
+            }
         }
     }
 
     ColumnLayout {
-        CoreLabel {
-            text: Constants.brewData.searchStatusFormulaText
-            visible: Constants.brewData.searchStatusFormulaVisible
-        }
         ExtendableHeader {
             id: formulaHeader
             isExtended: true
@@ -90,6 +85,10 @@ ColumnLayout {
                     itemDesk: modelData.desc
                 }
             }
+        }
+        CoreLabel {
+            text: Constants.brewData.searchStatusFormulaText
+            visible: Constants.brewData.searchStatusFormulaVisible
         }
     }
 }
