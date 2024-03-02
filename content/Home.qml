@@ -2,11 +2,16 @@ import CakebrewJs2
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Core
 
 ColumnLayout {
-
+    CoreLabel {
+          text: Constants.brewData.refreshStatusCaskText
+          visible: Constants.brewData.refreshStatusCaskVisible
+    }
 
     CollapseableGrid {
+        visible: !Constants.brewData.refreshCaskRunning
 
         onCheckboxClicked: (c,v)=>{
                                if (c){
@@ -39,7 +44,13 @@ ColumnLayout {
         sortedColOrder: GridLayoutHeader.SortOrder.Dsc
     }
 
+    CoreLabel {
+          text: Constants.brewData.refreshStatusFormulaText
+          visible: Constants.brewData.refreshStatusFormulaVisible
+     }
+
     CollapseableGrid {
+        visible: !Constants.brewData.refreshFormulaRunning
 
         onCheckboxClicked: (c,v)=>{
                                if (c){
@@ -70,8 +81,13 @@ ColumnLayout {
     }
 
 
+    CoreLabel {
+        text: Constants.brewData.refreshStatusServicesText
+        visible: Constants.brewData.refreshStatusServicesVisible
+    }
 
     CollapseableGrid {
+        visible: !Constants.brewData.refreshServicesRunning
         isExtended: true
         headerText: "Services"
 

@@ -19,7 +19,8 @@ QtObject {
 
         searchCaskRunning = true
         searchFormulaRunning = true
-        timerCb = () => {
+
+        timerCb = ()=>{
             searchItemsCask = []
             for (var i = 0; i < 40; i++) {
                 searchItemsCask.push({
@@ -71,16 +72,16 @@ QtObject {
     }
 
     property var searchItemsCask: []
-    property var searchItemsFormula: []
-
     property string searchStatusCaskText: ""
-    property string searchStatusFormulaText: ""
-
     property bool searchStatusCaskVisible: false
-    property bool searchStatusFormulaVisible: false
-
     property bool searchCaskRunning: false
+
+    property var searchItemsFormula: []
+    property string searchStatusFormulaText: ""
+    property bool searchStatusFormulaVisible: false    
     property bool searchFormulaRunning: false
+
+
 
     property var timerCb: () => {}
     property Timer refreshDataTimer: Timer {
@@ -181,6 +182,7 @@ QtObject {
 
     property string lastUpdateDateStr: "02-24 13:34"
 
+
     property string brewLocation: "/whatever/brew"
 
     property string normalFontPointSize: "14"
@@ -195,5 +197,142 @@ QtObject {
     }
     function saveTerminalApp(s){
         terminalApp = s;
+    }
+
+
+    property string refreshStatusServicesText: ""
+    property bool refreshStatusServicesVisible: false
+    property bool refreshServicesRunning: false
+
+    property string refreshStatusFormulaText: ""
+    property bool refreshStatusFormulaVisible: false
+    property bool refreshFormulaRunning: false
+
+    property string refreshStatusCaskText: ""
+    property bool refreshStatusCaskVisible: false
+    property bool refreshCaskRunning: false
+
+    function asyncRefreshServices(cb){
+        refreshStatusServicesText = "Refresh services"
+        refreshStatusServicesVisible = true
+        refreshServicesRunning = true
+        servicesBodyList = []
+
+        refreshStatusCaskText = "Refresh cask"
+        refreshStatusCaskVisible = true
+        refreshCaskRunning = true
+        caskBodyList = []
+
+        refreshStatusFormulaText = "Refresh Formula"
+        refreshStatusFormulaVisible = true
+        refreshFormulaRunning = true
+        formulaBodyList = []
+
+        timerCb = ()=>{
+
+            servicesBodyList = [{
+                "cellType": "text",
+                "cellText": "unbound",
+                "fillWidth": false,
+                "filterString": "unbound"
+            }, {
+                "cellType": "text",
+                "cellText": "none",
+                "fillWidth": false,
+                "filterString": "unbound"
+            }, {
+                "cellType": "text",
+                "cellText": "Refreshed",
+                "fillWidth": false,
+                "filterString": "unbound"
+            }, {
+                "cellType": "text",
+                "cellText": "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist",
+                "fillWidth": true,
+                "filterString": "unbound"
+            }, {
+                "cellType": "linkBtn",
+                "cellText": "stop",
+                "fillWidth": false,
+                "filterString": "unbound"
+            }]
+
+            caskBodyList = [{
+                    "cellType": "linkBtn",
+                    "cellText": "anaconda",
+                    "fillWidth": false,
+                    "filterString": "anaconda"
+                }, {
+                    "cellType": "text",
+                    "cellText": "REFRESHED Distribution of the Python and R programming languages for scientific computing",
+                    "fillWidth": true,
+                    "filterString": "anaconda"
+                }, {
+                    "cellType": "text",
+                    "cellText": "homebrew/tap",
+                    "fillWidth": false,
+                    "filterString": "anaconda"
+                }, {
+                    "cellType": "text",
+                    "cellText": "1.3.5",
+                    "fillWidth": false,
+                    "filterString": "anaconda"
+                }, {
+                    "cellType": "checkbox",
+                    "cellText": "1.3.6",
+                    "fillWidth": false,
+                    "onToggled": "anaconda",
+                    "filterString": "anaconda"
+                }]
+
+            formulaBodyList = [{
+                    "cellType": "linkBtn",
+                    "cellText": "libxext",
+                    "fillWidth": false,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": "REFRESHED X.Org: Library for common extensions to the X11 protocol",
+                    "fillWidth": true,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": "homebrew/tap",
+                    "fillWidth": false,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": "1.3.5",
+                    "fillWidth": false,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "checkbox",
+                    "cellText": "1.3.6",
+                    "fillWidth": false,
+                    "onToggled": "linkBtn",
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": ".",
+                    "fillWidth": false,
+                    "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
+                    "filterString": "libxext"
+                }]
+
+            refreshStatusServicesText = ""
+            refreshStatusServicesVisible = false
+            refreshServicesRunning = false
+
+            refreshStatusFormulaText = ""
+            refreshStatusFormulaVisible = false
+            refreshFormulaRunning = false
+
+            refreshStatusCaskText = ""
+            refreshStatusCaskVisible = false
+            refreshCaskRunning = false
+            cb()
+        }
+
+        refreshDataTimer.start()
     }
 }
