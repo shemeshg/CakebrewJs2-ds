@@ -1,5 +1,6 @@
 #pragma once
 #include "BrewDataPrivate.h"
+#include "ServiceRow.h"
 #include "shellcmd.h"
 
 class BrewData : public BrewDataPrivate
@@ -104,40 +105,17 @@ public:
 
         QVector<GridCell *> *services = &servicesBodyList();
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("unbound");
-        gc->setFillWidth(false);
-        gc->setFilterString("unbound");
-        services->push_back(gc);
+        qDeleteAll(*services);
+        services->clear();
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("none");
-        gc->setFillWidth(false);
-        gc->setFilterString("unbound");
-        services->push_back(gc);
+        ServiceRow serviceRow{};
+        serviceRow.name = "unbound";
+        serviceRow.status = "none";
+        serviceRow.user = "";
+        serviceRow.plist = "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist";
+        serviceRow.action = "start unbound";
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("");
-        gc->setFillWidth(false);
-        gc->setFilterString("unbound");
-        services->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("/usr/local/opt/unbound/homebrew.mxcl.unbound.plist");
-        gc->setFillWidth(true);
-        gc->setFilterString("unbound");
-        services->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("linkBtn");
-        gc->setCellText("stop");
-        gc->setFillWidth(false);
-        gc->setFilterString("unbound");
-        services->push_back(gc);
+        serviceRow.addToList(services);
 
         QObject::connect(this, &BrewData::addSearchRow, this, [=](SearchResultRow *row, bool isCask) {
             QVector<SearchResultRow *> *listOfSearchResultRows;

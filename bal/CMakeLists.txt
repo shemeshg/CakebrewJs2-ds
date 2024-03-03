@@ -18,5 +18,6 @@ qt6_add_qml_module(bal
             JsAsync.cpp
             shellcmd.h shellcmd.cpp
             json/single_include/nlohmann/json.hpp
-            SOURCES searchresultrow.h searchresultrow.cpp
+            searchresultrow.h searchresultrow.cpp
+            ServiceRow.h ServiceRow.cpp
               )
