@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QString>
 #include "GridCell.h"
 
 class ServiceRow

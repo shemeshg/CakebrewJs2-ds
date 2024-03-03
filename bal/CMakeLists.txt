@@ -20,4 +20,6 @@ qt6_add_qml_module(bal
             json/single_include/nlohmann/json.hpp
             searchresultrow.h searchresultrow.cpp
             ServiceRow.h ServiceRow.cpp
+            CaskRow.h CaskRow.cpp
+            FormulaRow.h FormulaRow.cpp
               )

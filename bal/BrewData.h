@@ -1,5 +1,7 @@
 #pragma once
 #include "BrewDataPrivate.h"
+#include "CaskRow.h"
+#include "FormulaRow.h"
 #include "ServiceRow.h"
 #include "shellcmd.h"
 
@@ -17,105 +19,42 @@ public:
         loadTerminalApp();
 
         QVector<GridCell *> *cask = &caskBodyList();
-        GridCell *gc;
-        gc = new GridCell();
-        gc->setCellType("linkBtn");
-        gc->setCellText("anaconda");
-        gc->setFillWidth(false);
-        gc->setFilterString("anaconda");
-        cask->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(
-            "Distribution of the Python and R programming languages for scientific computing");
-        gc->setFillWidth(true);
-        gc->setFilterString("anaconda");
-        cask->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("homebrew/tap");
-        gc->setFillWidth(false);
-        gc->setFilterString("anaconda");
-        cask->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("1.3.5");
-        gc->setFillWidth(false);
-        gc->setFilterString("anaconda");
-        cask->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("checkbox");
-        gc->setCellText("1.3.6");
-        gc->setFillWidth(false);
-        gc->setFilterString("anaconda");
-        gc->setOnToggled("anaconda");
-        cask->push_back(gc);
-
+        qDeleteAll(*cask);
+        cask->clear();
+        CaskRow cr{};
+        cr.token = "anaconda";
+        cr.desc = "anaconda analitical framework";
+        cr.tap = "tap/homebrew";
+        cr.version = "1,01";
+        cr.outdated = "2.03";
+        cr.addToList(cask);
         emit caskBodyListChanged();
 
         QVector<GridCell *> *formula = &formulaBodyList();
-
-        gc = new GridCell();
-        gc->setCellType("linkBtn");
-        gc->setCellText("libxext");
-        gc->setFillWidth(false);
-        gc->setFilterString("libxext");
-        formula->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("X.Org: Library for common extensions to the X11 protocol");
-        gc->setFillWidth(true);
-        gc->setFilterString("libxext");
-        formula->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("homebrew/tap");
-        gc->setFillWidth(false);
-        gc->setFilterString("libxext");
-        formula->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText("1.3.5");
-        gc->setFillWidth(false);
-        gc->setFilterString("libxext");
-        formula->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("checkbox");
-        gc->setCellText("1.3.6");
-        gc->setFillWidth(false);
-        gc->setFilterString("libxext");
-        gc->setOnToggled("libxext");
-        formula->push_back(gc);
-
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(".");
-        gc->setFillWidth(false);
-        gc->setFilterString("libxext");
-        gc->setHoverText("<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>");
-        formula->push_back(gc);
+        qDeleteAll(*formula);
+        formula->clear();
+        FormulaRow fr{};
+        fr.token = "electron";
+        fr.desc = "electron software whatever applications";
+        fr.tap = "homebrew/tap";
+        fr.version = "0.03";
+        fr.outdated = "1.02";
+        fr.leafText = ".";
+        fr.leafPopup = "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>";
+        fr.addToList(formula);
+        emit formulaBodyListChanged();
 
         QVector<GridCell *> *services = &servicesBodyList();
-
         qDeleteAll(*services);
         services->clear();
-
         ServiceRow serviceRow{};
         serviceRow.name = "unbound";
         serviceRow.status = "none";
         serviceRow.user = "";
         serviceRow.plist = "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist";
         serviceRow.action = "start unbound";
-
         serviceRow.addToList(services);
+        emit servicesBodyListChanged();
 
         QObject::connect(this, &BrewData::addSearchRow, this, [=](SearchResultRow *row, bool isCask) {
             QVector<SearchResultRow *> *listOfSearchResultRows;
