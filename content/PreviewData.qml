@@ -107,7 +107,10 @@ ColumnLayout {
                                                     stateGroup.state = "Preview"
                                                 })
             */
-            Constants.brewData.asyncRefreshServices(()=>{})
+            Constants.brewData.asyncRefreshServices(()=>{});
+            Constants.brewData.asyncRefreshCask(()=>{});
+            Constants.brewData.asyncRefreshFormula(()=>{});
+
         }
     }
 }

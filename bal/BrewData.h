@@ -228,16 +228,21 @@ public slots:
         });
     }
 
-    void asyncRefreshData(const QJSValue &callback)
+    void asyncRefreshServices(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() { return true; });
+    }
+    void asyncRefreshFormula(const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {
-            bool success = refreshData();
-            if (success) {
-                setLastUpdateDateStr("02-24 13:34");
-                qDebug() << "setLast refresh date";                
-            }
-            return success;
+            setLastUpdateDateStr("02-24 13:34");
+            return true;
         });
+    }
+
+    void asyncRefreshCask(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() { return true; });
     }
 
     void saveTerminalApp(const QString s)
@@ -260,19 +265,6 @@ public slots:
 
 private:
     QSettings settings{"shemeshg", "Cakebrewjs2"};
-    bool refreshData()
-    {
-        ShellCmd sc;
-        ProcessStatus s = sc.cmdSearch("aarch64-elf-binutils", false);
-        if (s.isSuccess && s.stdErr.isEmpty() && !s.stdOut.isEmpty()) {
-            sc.ParseCmdSearch(s.stdOut, false);
-        } else {
-            //set err stderr
-            //dont need return, set relevant bindable var
-        }
-
-        return true;
-    }
 
     const QString getFindExecutable(const QString &exec) const
     {

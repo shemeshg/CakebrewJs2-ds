@@ -84,7 +84,51 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
-
+p = Prpt("QString",'refreshStatusCaskText')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("QString",'refreshStatusFormulaText')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("QString",'refreshStatusServicesText')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'refreshStatusServicesVisible')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'refreshStatusFormulaVisible')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'refreshStatusCaskVisible')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'refreshServicesRunning')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'refreshFormulaRunning')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'refreshCaskRunning')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
 
 classBrewDataPrivate = PrptClass("BrewDataPrivate", ary)
 classBrewDataPrivate.inhirit_from = "JsAsync"

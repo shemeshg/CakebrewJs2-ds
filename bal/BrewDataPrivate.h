@@ -33,6 +33,15 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(bool searchStatusFormulaVisible READ searchStatusFormulaVisible WRITE setSearchStatusFormulaVisible NOTIFY searchStatusFormulaVisibleChanged )
     Q_PROPERTY(bool searchCaskRunning READ searchCaskRunning WRITE setSearchCaskRunning NOTIFY searchCaskRunningChanged )
     Q_PROPERTY(bool searchFormulaRunning READ searchFormulaRunning WRITE setSearchFormulaRunning NOTIFY searchFormulaRunningChanged )
+    Q_PROPERTY(QString refreshStatusCaskText READ refreshStatusCaskText WRITE setRefreshStatusCaskText NOTIFY refreshStatusCaskTextChanged )
+    Q_PROPERTY(QString refreshStatusFormulaText READ refreshStatusFormulaText WRITE setRefreshStatusFormulaText NOTIFY refreshStatusFormulaTextChanged )
+    Q_PROPERTY(QString refreshStatusServicesText READ refreshStatusServicesText WRITE setRefreshStatusServicesText NOTIFY refreshStatusServicesTextChanged )
+    Q_PROPERTY(bool refreshStatusServicesVisible READ refreshStatusServicesVisible WRITE setRefreshStatusServicesVisible NOTIFY refreshStatusServicesVisibleChanged )
+    Q_PROPERTY(bool refreshStatusFormulaVisible READ refreshStatusFormulaVisible WRITE setRefreshStatusFormulaVisible NOTIFY refreshStatusFormulaVisibleChanged )
+    Q_PROPERTY(bool refreshStatusCaskVisible READ refreshStatusCaskVisible WRITE setRefreshStatusCaskVisible NOTIFY refreshStatusCaskVisibleChanged )
+    Q_PROPERTY(bool refreshServicesRunning READ refreshServicesRunning WRITE setRefreshServicesRunning NOTIFY refreshServicesRunningChanged )
+    Q_PROPERTY(bool refreshFormulaRunning READ refreshFormulaRunning WRITE setRefreshFormulaRunning NOTIFY refreshFormulaRunningChanged )
+    Q_PROPERTY(bool refreshCaskRunning READ refreshCaskRunning WRITE setRefreshCaskRunning NOTIFY refreshCaskRunningChanged )
     
     QML_ELEMENT
 public:
@@ -179,6 +188,114 @@ void setSearchFormulaRunning(const bool newSearchFormulaRunning)
     }
 
 
+    
+    QString refreshStatusCaskText() const{return m_refreshStatusCaskText;} 
+    
+void setRefreshStatusCaskText(const QString &newRefreshStatusCaskText)
+    {
+        if (m_refreshStatusCaskText == newRefreshStatusCaskText)
+            return;
+        m_refreshStatusCaskText = newRefreshStatusCaskText;
+        emit refreshStatusCaskTextChanged();
+    }
+
+
+    
+    QString refreshStatusFormulaText() const{return m_refreshStatusFormulaText;} 
+    
+void setRefreshStatusFormulaText(const QString &newRefreshStatusFormulaText)
+    {
+        if (m_refreshStatusFormulaText == newRefreshStatusFormulaText)
+            return;
+        m_refreshStatusFormulaText = newRefreshStatusFormulaText;
+        emit refreshStatusFormulaTextChanged();
+    }
+
+
+    
+    QString refreshStatusServicesText() const{return m_refreshStatusServicesText;} 
+    
+void setRefreshStatusServicesText(const QString &newRefreshStatusServicesText)
+    {
+        if (m_refreshStatusServicesText == newRefreshStatusServicesText)
+            return;
+        m_refreshStatusServicesText = newRefreshStatusServicesText;
+        emit refreshStatusServicesTextChanged();
+    }
+
+
+    
+    bool refreshStatusServicesVisible() const{return m_refreshStatusServicesVisible;} 
+    
+void setRefreshStatusServicesVisible(const bool newRefreshStatusServicesVisible)
+    {
+        if (m_refreshStatusServicesVisible == newRefreshStatusServicesVisible)
+            return;
+        m_refreshStatusServicesVisible = newRefreshStatusServicesVisible;
+        emit refreshStatusServicesVisibleChanged();
+    }
+
+
+    
+    bool refreshStatusFormulaVisible() const{return m_refreshStatusFormulaVisible;} 
+    
+void setRefreshStatusFormulaVisible(const bool newRefreshStatusFormulaVisible)
+    {
+        if (m_refreshStatusFormulaVisible == newRefreshStatusFormulaVisible)
+            return;
+        m_refreshStatusFormulaVisible = newRefreshStatusFormulaVisible;
+        emit refreshStatusFormulaVisibleChanged();
+    }
+
+
+    
+    bool refreshStatusCaskVisible() const{return m_refreshStatusCaskVisible;} 
+    
+void setRefreshStatusCaskVisible(const bool newRefreshStatusCaskVisible)
+    {
+        if (m_refreshStatusCaskVisible == newRefreshStatusCaskVisible)
+            return;
+        m_refreshStatusCaskVisible = newRefreshStatusCaskVisible;
+        emit refreshStatusCaskVisibleChanged();
+    }
+
+
+    
+    bool refreshServicesRunning() const{return m_refreshServicesRunning;} 
+    
+void setRefreshServicesRunning(const bool newRefreshServicesRunning)
+    {
+        if (m_refreshServicesRunning == newRefreshServicesRunning)
+            return;
+        m_refreshServicesRunning = newRefreshServicesRunning;
+        emit refreshServicesRunningChanged();
+    }
+
+
+    
+    bool refreshFormulaRunning() const{return m_refreshFormulaRunning;} 
+    
+void setRefreshFormulaRunning(const bool newRefreshFormulaRunning)
+    {
+        if (m_refreshFormulaRunning == newRefreshFormulaRunning)
+            return;
+        m_refreshFormulaRunning = newRefreshFormulaRunning;
+        emit refreshFormulaRunningChanged();
+    }
+
+
+    
+    bool refreshCaskRunning() const{return m_refreshCaskRunning;} 
+    
+void setRefreshCaskRunning(const bool newRefreshCaskRunning)
+    {
+        if (m_refreshCaskRunning == newRefreshCaskRunning)
+            return;
+        m_refreshCaskRunning = newRefreshCaskRunning;
+        emit refreshCaskRunningChanged();
+    }
+
+
 
 signals:
     void lastUpdateDateStrChanged();
@@ -196,6 +313,15 @@ signals:
     void searchStatusFormulaVisibleChanged();
     void searchCaskRunningChanged();
     void searchFormulaRunningChanged();
+    void refreshStatusCaskTextChanged();
+    void refreshStatusFormulaTextChanged();
+    void refreshStatusServicesTextChanged();
+    void refreshStatusServicesVisibleChanged();
+    void refreshStatusFormulaVisibleChanged();
+    void refreshStatusCaskVisibleChanged();
+    void refreshServicesRunningChanged();
+    void refreshFormulaRunningChanged();
+    void refreshCaskRunningChanged();
     
 
 private:
@@ -214,6 +340,15 @@ private:
     bool m_searchStatusFormulaVisible;
     bool m_searchCaskRunning;
     bool m_searchFormulaRunning;
+    QString m_refreshStatusCaskText;
+    QString m_refreshStatusFormulaText;
+    QString m_refreshStatusServicesText;
+    bool m_refreshStatusServicesVisible;
+    bool m_refreshStatusFormulaVisible;
+    bool m_refreshStatusCaskVisible;
+    bool m_refreshServicesRunning;
+    bool m_refreshFormulaRunning;
+    bool m_refreshCaskRunning;
     
     void ctorClass();
 };

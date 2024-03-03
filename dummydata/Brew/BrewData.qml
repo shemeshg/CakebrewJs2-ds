@@ -2,11 +2,13 @@ import QtQuick 6.5
 
 QtObject {
 
+
+    /*
     function asyncRefreshData(cb) {
         timerCb = cb
         refreshDataTimer.start()
     }
-
+    */
     function asyncSearch(cb, textSearch, isCask) {
         if (isCask) {
             return
@@ -20,7 +22,7 @@ QtObject {
         searchCaskRunning = true
         searchFormulaRunning = true
 
-        timerCb = ()=>{
+        timerCb = () => {
             searchItemsCask = []
             for (var i = 0; i < 40; i++) {
                 searchItemsCask.push({
@@ -78,10 +80,8 @@ QtObject {
 
     property var searchItemsFormula: []
     property string searchStatusFormulaText: ""
-    property bool searchStatusFormulaVisible: false    
+    property bool searchStatusFormulaVisible: false
     property bool searchFormulaRunning: false
-
-
 
     property var timerCb: () => {}
     property Timer refreshDataTimer: Timer {
@@ -182,23 +182,21 @@ QtObject {
 
     property string lastUpdateDateStr: "02-24 13:34"
 
-
     property string brewLocation: "/whatever/brew"
 
     property string normalFontPointSize: "14"
 
     property string terminalApp: "iTerm"
 
-    function saveNormalFontPointSize(s){
+    function saveNormalFontPointSize(s) {
         normalFontPointSize = s
     }
-    function saveBrewLocation(s){
-        brewLocation = s;
+    function saveBrewLocation(s) {
+        brewLocation = s
     }
-    function saveTerminalApp(s){
-        terminalApp = s;
+    function saveTerminalApp(s) {
+        terminalApp = s
     }
-
 
     property string refreshStatusServicesText: ""
     property bool refreshStatusServicesVisible: false
@@ -212,7 +210,7 @@ QtObject {
     property bool refreshStatusCaskVisible: false
     property bool refreshCaskRunning: false
 
-    function asyncRefreshServices(cb){
+    function asyncRefreshServices(cb) {
         refreshStatusServicesText = "Refresh services"
         refreshStatusServicesVisible = true
         refreshServicesRunning = true
@@ -228,96 +226,96 @@ QtObject {
         refreshFormulaRunning = true
         formulaBodyList = []
 
-        timerCb = ()=>{
+        timerCb = () => {
 
             servicesBodyList = [{
-                "cellType": "text",
-                "cellText": "unbound",
-                "fillWidth": false,
-                "filterString": "unbound"
-            }, {
-                "cellType": "text",
-                "cellText": "none",
-                "fillWidth": false,
-                "filterString": "unbound"
-            }, {
-                "cellType": "text",
-                "cellText": "Refreshed",
-                "fillWidth": false,
-                "filterString": "unbound"
-            }, {
-                "cellType": "text",
-                "cellText": "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist",
-                "fillWidth": true,
-                "filterString": "unbound"
-            }, {
-                "cellType": "linkBtn",
-                "cellText": "stop",
-                "fillWidth": false,
-                "filterString": "unbound"
-            }]
+                                    "cellType": "text",
+                                    "cellText": "unbound",
+                                    "fillWidth": false,
+                                    "filterString": "unbound"
+                                }, {
+                                    "cellType": "text",
+                                    "cellText": "none",
+                                    "fillWidth": false,
+                                    "filterString": "unbound"
+                                }, {
+                                    "cellType": "text",
+                                    "cellText": "Refreshed",
+                                    "fillWidth": false,
+                                    "filterString": "unbound"
+                                }, {
+                                    "cellType": "text",
+                                    "cellText": "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist",
+                                    "fillWidth": true,
+                                    "filterString": "unbound"
+                                }, {
+                                    "cellType": "linkBtn",
+                                    "cellText": "stop",
+                                    "fillWidth": false,
+                                    "filterString": "unbound"
+                                }]
 
             caskBodyList = [{
-                    "cellType": "linkBtn",
-                    "cellText": "anaconda",
-                    "fillWidth": false,
-                    "filterString": "anaconda"
-                }, {
-                    "cellType": "text",
-                    "cellText": "REFRESHED Distribution of the Python and R programming languages for scientific computing",
-                    "fillWidth": true,
-                    "filterString": "anaconda"
-                }, {
-                    "cellType": "text",
-                    "cellText": "homebrew/tap",
-                    "fillWidth": false,
-                    "filterString": "anaconda"
-                }, {
-                    "cellType": "text",
-                    "cellText": "1.3.5",
-                    "fillWidth": false,
-                    "filterString": "anaconda"
-                }, {
-                    "cellType": "checkbox",
-                    "cellText": "1.3.6",
-                    "fillWidth": false,
-                    "onToggled": "anaconda",
-                    "filterString": "anaconda"
-                }]
+                                "cellType": "linkBtn",
+                                "cellText": "anaconda",
+                                "fillWidth": false,
+                                "filterString": "anaconda"
+                            }, {
+                                "cellType": "text",
+                                "cellText": "REFRESHED Distribution of the Python and R programming languages for scientific computing",
+                                "fillWidth": true,
+                                "filterString": "anaconda"
+                            }, {
+                                "cellType": "text",
+                                "cellText": "homebrew/tap",
+                                "fillWidth": false,
+                                "filterString": "anaconda"
+                            }, {
+                                "cellType": "text",
+                                "cellText": "1.3.5",
+                                "fillWidth": false,
+                                "filterString": "anaconda"
+                            }, {
+                                "cellType": "checkbox",
+                                "cellText": "1.3.6",
+                                "fillWidth": false,
+                                "onToggled": "anaconda",
+                                "filterString": "anaconda"
+                            }]
 
             formulaBodyList = [{
-                    "cellType": "linkBtn",
-                    "cellText": "libxext",
-                    "fillWidth": false,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": "REFRESHED X.Org: Library for common extensions to the X11 protocol",
-                    "fillWidth": true,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": "homebrew/tap",
-                    "fillWidth": false,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": "1.3.5",
-                    "fillWidth": false,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "checkbox",
-                    "cellText": "1.3.6",
-                    "fillWidth": false,
-                    "onToggled": "linkBtn",
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": ".",
-                    "fillWidth": false,
-                    "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
-                    "filterString": "libxext"
-                }]
+                                   "cellType": "linkBtn",
+                                   "cellText": "libxext",
+                                   "fillWidth": false,
+                                   "filterString": "libxext"
+                               }, {
+                                   "cellType": "text",
+                                   "cellText": "REFRESHED X.Org: Library for common extensions to the X11 protocol",
+                                   "fillWidth": true,
+                                   "filterString": "libxext"
+                               }, {
+                                   "cellType": "text",
+                                   "cellText": "homebrew/tap",
+                                   "fillWidth": false,
+                                   "filterString": "libxext"
+                               }, {
+                                   "cellType": "text",
+                                   "cellText": "1.3.5",
+                                   "fillWidth": false,
+                                   "filterString": "libxext"
+                               }, {
+                                   "cellType": "checkbox",
+                                   "cellText": "1.3.6",
+                                   "fillWidth": false,
+                                   "onToggled": "linkBtn",
+                                   "filterString": "libxext"
+                               }, {
+                                   "cellType": "text",
+                                   "cellText": ".",
+                                   "fillWidth": false,
+                                   "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
+                                   "filterString": "libxext"
+                               }]
 
             refreshStatusServicesText = ""
             refreshStatusServicesVisible = false
@@ -334,5 +332,13 @@ QtObject {
         }
 
         refreshDataTimer.start()
+    }
+
+    function asyncRefreshCask(cb) {
+        cb()
+    }
+
+    function asyncRefreshFormula(cb) {
+        cb()
     }
 }
