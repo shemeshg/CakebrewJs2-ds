@@ -3,6 +3,8 @@
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
+#include "GridCell.h"
+#include "ServiceRow.h"
 #include "json/single_include/nlohmann/json.hpp"
 #include "searchresultrow.h"
 
@@ -20,6 +22,29 @@ class ShellCmd
 {
 public:
     ShellCmd();
+    void parseServicesList(QString &strResult, QVector<GridCell *> *list)
+    {
+        json data = json::parse(strResult.toStdString());
+        for (auto &element : data) {
+            std::string name = element["name"].template get<std::string>();
+            std::string status = (element["status"]).template get<std::string>();
+            std::string file = element["file"].template get<std::string>();
+            std::string user;
+
+            std::string action = "start";
+            if (!element["user"].is_null()) {
+                user = element["user"].template get<std::string>();
+                action = "stop";
+            }
+            ServiceRow serviceRow{};
+            serviceRow.name = QString::fromStdString(name);
+            serviceRow.status = QString::fromStdString(status);
+            serviceRow.user = QString::fromStdString(user);
+            serviceRow.plist = QString::fromStdString(file);
+            serviceRow.action = QString::fromStdString(action);
+            serviceRow.addToList(list);
+        }
+    }
 
     QVector<SearchResultRow *> parseCmdSearch(QString searchResult, bool isCask)
     {

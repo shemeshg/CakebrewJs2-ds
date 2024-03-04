@@ -73,10 +73,16 @@ public:
             listOfSearchResultRows->push_back(newRow);
             delete row;
         });
+
+        QObject::connect(this,
+                         &BrewData::parseRefreshServicesSignal,
+                         this,
+                         &BrewData::parseRefreshServices);
     }
 
 signals:
     void addSearchRow(SearchResultRow *row, bool isCask);
+    void parseRefreshServicesSignal(QString strResult);
 
 public slots:
     void asyncSearch(const QJSValue &callback, QString textSearch, bool isCask)
@@ -162,7 +168,7 @@ public slots:
 
             if (s.isSuccess && !s.stdOut.isEmpty()) {
                 qDebug() << s.stdOut;
-                qDebug() << "Doing parsing";
+                emit parseRefreshServicesSignal(s.stdOut);
             } else {
                 if (s.stdErr.isEmpty()) {
                     s.stdErr = "Err" + QString::number(s.exitCode);
@@ -209,6 +215,13 @@ public slots:
     {
         settings.setValue("brewLocation", s);
         loadBrewLocation();
+    }
+
+private slots:
+    void parseRefreshServices(QString strResult)
+    {
+        ShellCmd sc;
+        sc.parseServicesList(strResult, &servicesBodyList());
     }
 
 private:
