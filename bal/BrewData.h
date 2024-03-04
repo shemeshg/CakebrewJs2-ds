@@ -205,11 +205,13 @@ private slots:
     void parseRefreshServices(QString strResult)
     {
         ShellCmd sc;
-        sc.parseServicesList(strResult, &servicesBodyList());
+        serviceRows = sc.parseServicesList(strResult, &servicesBodyList());
     }
 
 private:
     QSettings settings{"shemeshg", "Cakebrewjs2"};
+
+    QVector<ServiceRow> serviceRows;
 
     const QString getFindExecutable(const QString &exec) const
     {

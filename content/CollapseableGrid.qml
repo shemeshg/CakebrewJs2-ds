@@ -65,7 +65,6 @@ ColumnLayout {
                                collapseableGrid.checkboxClicked(c, v)
                            }
         onHyperlinkBtnClicked: (filterString, cellText) => {
-                                   console.log("YES")
                                    collapseableGrid.hyperlinkBtnClicked(
                                        filterString, cellText)
                                }
