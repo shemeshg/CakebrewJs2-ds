@@ -206,6 +206,9 @@ private slots:
     {
         ShellCmd sc;
         serviceRows = sc.parseServicesList(strResult, &servicesBodyList());
+        std::sort(serviceRows.begin(), serviceRows.end(), [](ServiceRow &a, ServiceRow &b) {
+            return a.name > b.name;
+        });
     }
 
 private:
