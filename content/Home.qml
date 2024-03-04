@@ -6,37 +6,29 @@ import Core
 
 ColumnLayout {
     CoreLabel {
-          text: Constants.brewData.refreshStatusCaskText
-          visible: Constants.brewData.refreshStatusCaskVisible
+        text: Constants.brewData.refreshStatusCaskText
+        visible: Constants.brewData.refreshStatusCaskVisible
     }
 
     CollapseableGrid {
         visible: !Constants.brewData.refreshCaskRunning
 
-        onCheckboxClicked: (c,v)=>{
-                               if (c){
+        onCheckboxClicked: (c, v) => {
+                               if (c) {
                                    Constants.selectedCaskItems.push(v)
-                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems];
+                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems]
                                } else {
-                                   Constants.selectedCaskItems.splice(Constants.selectedCaskItems.indexOf(v), 1);
-                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems];
+                                   Constants.selectedCaskItems.splice(
+                                       Constants.selectedCaskItems.indexOf(v),
+                                       1)
+                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems]
                                }
                            }
-         headerText: "Cask (" + Constants.selectedCaskItems.length + ")"
+        headerText: "Cask (" + Constants.selectedCaskItems.length + ")"
 
         isExtended: true
 
-
-        headerList: [
-            "Token",
-            "Desk",
-            "Tap",
-            "Version",
-            "outdated",
-        ]
-
-
-
+        headerList: ["Token", "Desk", "Tap", "Version", "outdated"]
 
         bodyList: Constants.brewData.caskBodyList
 
@@ -45,41 +37,37 @@ ColumnLayout {
     }
 
     CoreLabel {
-          text: Constants.brewData.refreshStatusFormulaText
-          visible: Constants.brewData.refreshStatusFormulaVisible
-     }
+        text: Constants.brewData.refreshStatusFormulaText
+        visible: Constants.brewData.refreshStatusFormulaVisible
+    }
 
     CollapseableGrid {
         visible: !Constants.brewData.refreshFormulaRunning
 
-        onCheckboxClicked: (c,v)=>{
-                               if (c){
+        onCheckboxClicked: (c, v) => {
+                               if (c) {
                                    Constants.selectedFormulaItems.push(v)
-                                   Constants.selectedFormulaItems = [...Constants.selectedFormulaItems];
+                                   Constants.selectedFormulaItems
+                                   = [...Constants.selectedFormulaItems]
                                } else {
-                                   Constants.selectedFormulaItems.splice(Constants.selectedFormulaItems.indexOf(v), 1);
-                                   Constants.selectedFormulaItems = [...Constants.selectedFormulaItems];
+                                   Constants.selectedFormulaItems.splice(
+                                       Constants.selectedFormulaItems.indexOf(
+                                           v), 1)
+                                   Constants.selectedFormulaItems
+                                   = [...Constants.selectedFormulaItems]
                                }
                            }
-         headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
+        headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
 
         isExtended: true
 
-        headerList: [
-            "Name",
-            "Desk",
-            "Tap",
-            "Version",
-            "outdated",
-            "Leaf"
-        ]
+        headerList: ["Name", "Desk", "Tap", "Version", "outdated", "Leaf"]
 
         bodyList: Constants.brewData.formulaBodyList
 
         sortedColIdx: 4
         sortedColOrder: GridLayoutHeader.SortOrder.Dsc
     }
-
 
     CoreLabel {
         text: Constants.brewData.refreshStatusServicesText
@@ -91,18 +79,14 @@ ColumnLayout {
         isExtended: true
         headerText: "Services"
 
-        headerList: [
-            "Name",
-            "Status",
-            "User",
-            "Plist",
-            "Actions",
-        ]
+        headerList: ["Name", "Status", "User", "Plist", "Actions"]
 
         bodyList: Constants.brewData.servicesBodyList
 
         sortedColIdx: 0
         sortedColOrder: GridLayoutHeader.SortOrder.Dsc
+        onHyperlinkBtnClicked: (filterString, cellText) => {
+                                   console.log(cellText + " " + filterString)
+                               }
     }
-
 }

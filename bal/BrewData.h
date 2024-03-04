@@ -52,7 +52,7 @@ public:
         serviceRow.status = "none";
         serviceRow.user = "";
         serviceRow.plist = "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist";
-        serviceRow.action = "start unbound";
+        serviceRow.action = "start";
         serviceRow.addToList(services);
         emit servicesBodyListChanged();
 
@@ -167,7 +167,6 @@ public slots:
             ProcessStatus s = sc.cmdListServices();
 
             if (s.isSuccess && !s.stdOut.isEmpty()) {
-                qDebug() << s.stdOut;
                 emit parseRefreshServicesSignal(s.stdOut);
             } else {
                 if (s.stdErr.isEmpty()) {

@@ -9,8 +9,9 @@ ColumnLayout {
     property string headerText: ""
     property bool isExtended: true
 
-    signal checkboxClicked(checked: bool, val: var )
-    signal headerClicked(idx: int)
+    signal checkboxClicked(bool checked, var val)
+    signal headerClicked(int idx)
+    signal hyperlinkBtnClicked(string filterString, string cellText)
 
     property var headerList: []
     property var bodyList: []
@@ -38,21 +39,21 @@ ColumnLayout {
 
         visible: formulaHeader.isExtended
         filterString: filterByExp.text
-        onHeaderClicked: (idx)=>{
-                       if (sortedColIdx !== idx){
-                           sortedColOrder = GridLayoutHeader.SortOrder.No
-                       }
+        onHeaderClicked: idx => {
+                             if (sortedColIdx !== idx) {
+                                 sortedColOrder = GridLayoutHeader.SortOrder.No
+                             }
 
-                       sortedColIdx = idx;
-                       if (sortedColOrder === GridLayoutHeader.SortOrder.Asc){
-                           sortedColOrder = GridLayoutHeader.SortOrder.Dsc
-                       } else if (sortedColOrder === GridLayoutHeader.SortOrder.Dsc){
-                           sortedColOrder = GridLayoutHeader.SortOrder.No
-                       } else {
-                           sortedColOrder = GridLayoutHeader.SortOrder.Asc
-                       }
-                       collapseableGrid.headerClicked(idx)
-                   }
+                             sortedColIdx = idx
+                             if (sortedColOrder === GridLayoutHeader.SortOrder.Asc) {
+                                 sortedColOrder = GridLayoutHeader.SortOrder.Dsc
+                             } else if (sortedColOrder === GridLayoutHeader.SortOrder.Dsc) {
+                                 sortedColOrder = GridLayoutHeader.SortOrder.No
+                             } else {
+                                 sortedColOrder = GridLayoutHeader.SortOrder.Asc
+                             }
+                             collapseableGrid.headerClicked(idx)
+                         }
         headerList: collapseableGrid.headerList
 
         bodyList: collapseableGrid.bodyList
@@ -60,8 +61,13 @@ ColumnLayout {
         sortedColIdx: collapseableGrid.sortedColIdx
         sortedColOrder: collapseableGrid.sortedColOrder
 
-        onCheckboxClicked: (c,v)=>{
-            collapseableGrid.checkboxClicked(c,v)
+        onCheckboxClicked: (c, v) => {
+                               collapseableGrid.checkboxClicked(c, v)
                            }
+        onHyperlinkBtnClicked: (filterString, cellText) => {
+                                   console.log("YES")
+                                   collapseableGrid.hyperlinkBtnClicked(
+                                       filterString, cellText)
+                               }
     }
 }
