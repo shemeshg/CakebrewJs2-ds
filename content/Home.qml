@@ -86,7 +86,8 @@ ColumnLayout {
         sortedColIdx: 0
         sortedColOrder: GridLayoutHeader.SortOrder.Dsc
         onHyperlinkBtnClicked: (filterString, cellText) => {
-                                   console.log(cellText + " " + filterString)
+                                   Constants.brewData.asyncServicesAction(
+                                       () => {}, filterString, cellText)
                                }
     }
 }

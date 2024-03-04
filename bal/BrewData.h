@@ -150,39 +150,22 @@ public slots:
         });
     }
 
-    void asyncRefreshServices(const QJSValue &callback)
+    void asyncServicesAction(const QJSValue &callback, QString name, QString action)
     {
-        QVector<GridCell *> *list;
-        list = &servicesBodyList();
-
-        qDeleteAll(*list);
-        list->clear();
-
-        setRefreshStatusServicesText("Refresh services");
-        setRefreshStatusServicesVisible(true);
-        setRefreshServicesRunning(true);
-
+        refreshServicesBeforeCallback();
         makeAsync<bool>(callback, [=]() {
             ShellCmd sc;
-            ProcessStatus s = sc.cmdListServices();
+            sc.externalTerminalCmd();
+            refreshServicesAfterCallback();
+            return true;
+        });
+    }
 
-            if (s.isSuccess && !s.stdOut.isEmpty()) {
-                emit parseRefreshServicesSignal(s.stdOut);
-            } else {
-                if (s.stdErr.isEmpty()) {
-                    s.stdErr = "Err" + QString::number(s.exitCode);
-                }
-            }
-            if (!s.stdErr.isEmpty()) {
-                setRefreshStatusServicesText(s.stdErr);
-                setRefreshStatusServicesVisible(true);
-            } else {
-                setRefreshStatusServicesVisible(false);
-            }
-            setRefreshServicesRunning(false);
-            emit servicesBodyListChanged();
-            //emit of
-            //sc.parseCmdListServices(s;
+    void asyncRefreshServices(const QJSValue &callback)
+    {
+        refreshServicesBeforeCallback();
+        makeAsync<bool>(callback, [=]() {
+            refreshServicesAfterCallback();
             return true;
         });
     }
@@ -260,5 +243,40 @@ private:
 
         setBrewLocation(s_brewLocation);
         emit brewLocationChanged();
+    }
+
+    void refreshServicesBeforeCallback()
+    {
+        QVector<GridCell *> *list;
+        list = &servicesBodyList();
+
+        qDeleteAll(*list);
+        list->clear();
+
+        setRefreshStatusServicesText("Refresh services");
+        setRefreshStatusServicesVisible(true);
+        setRefreshServicesRunning(true);
+    }
+
+    void refreshServicesAfterCallback()
+    {
+        ShellCmd sc;
+        ProcessStatus s = sc.cmdListServices();
+
+        if (s.isSuccess && !s.stdOut.isEmpty()) {
+            emit parseRefreshServicesSignal(s.stdOut);
+        } else {
+            if (s.stdErr.isEmpty()) {
+                s.stdErr = "Err" + QString::number(s.exitCode);
+            }
+        }
+        if (!s.stdErr.isEmpty()) {
+            setRefreshStatusServicesText(s.stdErr);
+            setRefreshStatusServicesVisible(true);
+        } else {
+            setRefreshStatusServicesVisible(false);
+        }
+        setRefreshServicesRunning(false);
+        emit servicesBodyListChanged();
     }
 };

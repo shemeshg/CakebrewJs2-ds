@@ -339,4 +339,8 @@ QtObject {
     function asyncRefreshFormula(cb) {
         cb()
     }
+
+    function asyncServicesAction(cb, name, action) {
+        console.log("starting/stoping " + name)
+    }
 }
