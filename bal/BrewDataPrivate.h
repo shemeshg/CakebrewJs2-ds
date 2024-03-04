@@ -18,7 +18,6 @@ cog.outl(classBrewDataPrivate.getClassHeader(),
 class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
-    Q_PROPERTY(QString lastUpdateDateStr READ lastUpdateDateStr WRITE setLastUpdateDateStr NOTIFY lastUpdateDateStrChanged )
     Q_PROPERTY(QVector<GridCell *> caskBodyList READ caskBodyList  NOTIFY caskBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> formulaBodyList READ formulaBodyList  NOTIFY formulaBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
@@ -48,18 +47,6 @@ public:
     BrewDataPrivate(QObject *parent = nullptr);
 
     
-    
-    QString lastUpdateDateStr() const{return m_lastUpdateDateStr;} 
-    
-void setLastUpdateDateStr(const QString &newLastUpdateDateStr)
-    {
-        if (m_lastUpdateDateStr == newLastUpdateDateStr)
-            return;
-        m_lastUpdateDateStr = newLastUpdateDateStr;
-        emit lastUpdateDateStrChanged();
-    }
-
-
     
     QVector<GridCell *> &caskBodyList() {return m_caskBodyList;} 
     
@@ -298,7 +285,6 @@ void setRefreshCaskRunning(const bool newRefreshCaskRunning)
 
 
 signals:
-    void lastUpdateDateStrChanged();
     void caskBodyListChanged();
     void formulaBodyListChanged();
     void servicesBodyListChanged();
@@ -325,7 +311,6 @@ signals:
     
 
 private:
-    QString m_lastUpdateDateStr;
     QVector<GridCell *> m_caskBodyList;
     QVector<GridCell *> m_formulaBodyList;
     QVector<GridCell *> m_servicesBodyList;

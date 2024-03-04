@@ -2,11 +2,6 @@ from property import Prpt, PrptClass
 
 
 ary = []
-p = Prpt("QString",'lastUpdateDateStr')
-p.is_bindable = False
-p.is_writable = True
-p.is_notify = True
-ary.append(p)
 p = Prpt("QVector<GridCell *>",'caskBodyList')
 p.is_bindable = False
 p.is_writable = False

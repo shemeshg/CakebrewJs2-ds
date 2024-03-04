@@ -180,8 +180,6 @@ QtObject {
             "filterString": "unbound"
         }]
 
-    property string lastUpdateDateStr: "02-24 13:34"
-
     property string brewLocation: "/whatever/brew"
 
     property string normalFontPointSize: "14"

@@ -152,7 +152,6 @@ public slots:
     void asyncRefreshFormula(const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {
-            setLastUpdateDateStr("02-24 13:34");
             return true;
         });
     }

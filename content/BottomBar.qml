@@ -29,7 +29,7 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Home"
             CoreButton {
-                text: "Refresh (" + Constants.brewData.lastUpdateDateStr + ")"
+                text: "Refresh"
                 onClicked: {
                     refreshClicked()
                 }
