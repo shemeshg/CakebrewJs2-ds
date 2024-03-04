@@ -105,9 +105,8 @@ public slots:
             ShellCmd sc;
             ProcessStatus s = sc.cmdSearch(textSearch, isCask);
             if (s.isSuccess
-                //&& s.stdErr.isEmpty()
                 && !s.stdOut.isEmpty()) {
-                QVector<SearchResultRow *> parseCmdSearch = sc.ParseCmdSearch(s.stdOut, isCask);
+                QVector<SearchResultRow *> parseCmdSearch = sc.parseCmdSearch(s.stdOut, isCask);
 
                 for (auto row : parseCmdSearch) {
                     emit addSearchRow(row, isCask);
@@ -147,7 +146,40 @@ public slots:
 
     void asyncRefreshServices(const QJSValue &callback)
     {
-        makeAsync<bool>(callback, [=]() { return true; });
+        QVector<GridCell *> *list;
+        list = &servicesBodyList();
+
+        qDeleteAll(*list);
+        list->clear();
+
+        setRefreshStatusServicesText("Refresh services");
+        setRefreshStatusServicesVisible(true);
+        setRefreshServicesRunning(true);
+
+        makeAsync<bool>(callback, [=]() {
+            ShellCmd sc;
+            ProcessStatus s = sc.cmdListServices();
+
+            if (s.isSuccess && !s.stdOut.isEmpty()) {
+                qDebug() << s.stdOut;
+                qDebug() << "Doing parsing";
+            } else {
+                if (s.stdErr.isEmpty()) {
+                    s.stdErr = "Err" + QString::number(s.exitCode);
+                }
+            }
+            if (!s.stdErr.isEmpty()) {
+                setRefreshStatusServicesText(s.stdErr);
+                setRefreshStatusServicesVisible(true);
+            } else {
+                setRefreshStatusServicesVisible(false);
+            }
+            setRefreshServicesRunning(false);
+            emit servicesBodyListChanged();
+            //emit of
+            //sc.parseCmdListServices(s;
+            return true;
+        });
     }
     void asyncRefreshFormula(const QJSValue &callback)
     {

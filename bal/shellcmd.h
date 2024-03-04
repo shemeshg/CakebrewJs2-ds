@@ -21,7 +21,7 @@ class ShellCmd
 public:
     ShellCmd();
 
-    QVector<SearchResultRow *> ParseCmdSearch(QString searchResult, bool isCask)
+    QVector<SearchResultRow *> parseCmdSearch(QString searchResult, bool isCask)
     {
         QVector<SearchResultRow *> v;
 
@@ -105,6 +105,12 @@ public:
         */
     }
 
+    ProcessStatus cmdListServices()
+    {
+        QString cmd = "/usr/local/bin/brew";
+        return exec(cmd, {"services", "--json"});
+    }
+
     void externalTerminalCmd()
     {
         QString cmdToRun = "ls -l /Volumes/FAST/develop/cakebrewJs/src";
@@ -139,7 +145,7 @@ public:
         ProcessStatus ps;
         ps.isSuccess = true;
 
-        if (pingProcess.exitStatus() != QProcess::NormalExit && pingProcess.exitCode() != 0) {
+        if (pingProcess.exitStatus() != QProcess::NormalExit || pingProcess.exitCode() != 0) {
             ps.isSuccess = false;
         }
 
