@@ -24,7 +24,7 @@ class ShellCmd
 {
 public:
     ShellCmd();
-    QVector<ServiceRow> parseServicesList(QString &strResult, QVector<GridCell *> *list)
+    QVector<ServiceRow> parseServicesList(QString &strResult)
     {
         QVector<ServiceRow> serviceRows;
         json data = json::parse(strResult.toStdString());
@@ -45,7 +45,6 @@ public:
             serviceRow.user = QString::fromStdString(user);
             serviceRow.plist = QString::fromStdString(file);
             serviceRow.action = QString::fromStdString(action);
-            serviceRow.addToList(list);
             serviceRows.emplaceBack(serviceRow);
         }
         return serviceRows;

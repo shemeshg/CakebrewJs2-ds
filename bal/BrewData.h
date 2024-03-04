@@ -205,10 +205,19 @@ private slots:
     void parseRefreshServices(QString strResult)
     {
         ShellCmd sc;
-        serviceRows = sc.parseServicesList(strResult, &servicesBodyList());
+        serviceRows = sc.parseServicesList(strResult);
         std::sort(serviceRows.begin(), serviceRows.end(), [](ServiceRow &a, ServiceRow &b) {
             return a.name > b.name;
         });
+        QVector<GridCell *> *list;
+        list = &servicesBodyList();
+
+        qDeleteAll(*list);
+        list->clear();
+        for (ServiceRow &r : serviceRows) {
+            r.addToList(list);
+        }
+        emit servicesBodyListChanged();
     }
 
 private:
@@ -254,12 +263,6 @@ private:
 
     void refreshServicesBeforeCallback()
     {
-        QVector<GridCell *> *list;
-        list = &servicesBodyList();
-
-        qDeleteAll(*list);
-        list->clear();
-
         setRefreshStatusServicesText("Refresh services");
         setRefreshStatusServicesVisible(true);
         setRefreshServicesRunning(true);
@@ -284,6 +287,5 @@ private:
             setRefreshStatusServicesVisible(false);
         }
         setRefreshServicesRunning(false);
-        emit servicesBodyListChanged();
     }
 };
