@@ -1,5 +1,7 @@
 #pragma once
 #include <QDebug>
+#include <QEventLoop>
+#include <QFileSystemWatcher>
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
@@ -136,9 +138,8 @@ public:
         return exec(cmd, {"services", "--json"});
     }
 
-    void externalTerminalCmd()
+    void externalTerminalCmd(QString cmdToRun)
     {
-        QString cmdToRun = "ls -l /Volumes/FAST/develop/cakebrewJs/src";
         QString s = R"(trap "rm %1" EXIT;%2)";
 
         QTemporaryFile file;
@@ -151,6 +152,11 @@ public:
             exec("chmod", {"+x", file.fileName()});
             exec("open", {"-a", "Terminal", file.fileName()});
         }
+        QFileSystemWatcher watcher;
+        watcher.addPath(file.fileName());
+        QEventLoop loop;
+        QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, &loop, &QEventLoop::quit);
+        loop.exec();
     }
 
     ProcessStatus exec(const QString program, const QStringList arguments)

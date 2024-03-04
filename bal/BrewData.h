@@ -155,7 +155,9 @@ public slots:
         refreshServicesBeforeCallback();
         makeAsync<bool>(callback, [=]() {
             ShellCmd sc;
-            sc.externalTerminalCmd();
+            QString cmd = "%1 services '%2' '%3'";
+            cmd = cmd.arg("/usr/local/bin/brew", action, name);
+            sc.externalTerminalCmd(cmd);
             refreshServicesAfterCallback();
             return true;
         });
