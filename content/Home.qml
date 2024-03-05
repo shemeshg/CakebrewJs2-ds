@@ -77,14 +77,20 @@ ColumnLayout {
     CollapseableGrid {
         visible: !Constants.brewData.refreshServicesRunning
         isExtended: true
-        headerText: "Services"
+        headerText: "Services" + sortedColIdx
 
         headerList: ["Name", "Status", "User", "Plist", "Actions"]
 
         bodyList: Constants.brewData.servicesBodyList
 
-        sortedColIdx: 0
-        sortedColOrder: GridLayoutHeader.SortOrder.Dsc
+        sortedColIdx: Constants.brewData.servicesSortedColIdx
+        sortedColOrder: Constants.brewData.servicesSortedColOrder
+        onHeaderClicked: (colId,sortOrder)=>{
+            Constants.brewData.servicesSortedColIdx =  colId;
+            Constants.brewData.servicesSortedColOrder = sortOrder
+            Constants.brewData.servicesSort()
+                          }
+
         onHyperlinkBtnClicked: (filterString, cellText) => {
                                    Constants.brewData.asyncServicesAction(
                                        () => {}, filterString, cellText)

@@ -41,6 +41,8 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(bool refreshServicesRunning READ refreshServicesRunning WRITE setRefreshServicesRunning NOTIFY refreshServicesRunningChanged )
     Q_PROPERTY(bool refreshFormulaRunning READ refreshFormulaRunning WRITE setRefreshFormulaRunning NOTIFY refreshFormulaRunningChanged )
     Q_PROPERTY(bool refreshCaskRunning READ refreshCaskRunning WRITE setRefreshCaskRunning NOTIFY refreshCaskRunningChanged )
+    Q_PROPERTY(int servicesSortedColIdx READ servicesSortedColIdx WRITE setServicesSortedColIdx NOTIFY servicesSortedColIdxChanged )
+    Q_PROPERTY(int servicesSortedColOrder READ servicesSortedColOrder WRITE setServicesSortedColOrder NOTIFY servicesSortedColOrderChanged )
     
     QML_ELEMENT
 public:
@@ -283,6 +285,30 @@ void setRefreshCaskRunning(const bool newRefreshCaskRunning)
     }
 
 
+    
+    int servicesSortedColIdx() const{return m_servicesSortedColIdx;} 
+    
+void setServicesSortedColIdx(const int newServicesSortedColIdx)
+    {
+        if (m_servicesSortedColIdx == newServicesSortedColIdx)
+            return;
+        m_servicesSortedColIdx = newServicesSortedColIdx;
+        emit servicesSortedColIdxChanged();
+    }
+
+
+    
+    int servicesSortedColOrder() const{return m_servicesSortedColOrder;} 
+    
+void setServicesSortedColOrder(const int newServicesSortedColOrder)
+    {
+        if (m_servicesSortedColOrder == newServicesSortedColOrder)
+            return;
+        m_servicesSortedColOrder = newServicesSortedColOrder;
+        emit servicesSortedColOrderChanged();
+    }
+
+
 
 signals:
     void caskBodyListChanged();
@@ -308,6 +334,8 @@ signals:
     void refreshServicesRunningChanged();
     void refreshFormulaRunningChanged();
     void refreshCaskRunningChanged();
+    void servicesSortedColIdxChanged();
+    void servicesSortedColOrderChanged();
     
 
 private:
@@ -334,6 +362,8 @@ private:
     bool m_refreshServicesRunning;
     bool m_refreshFormulaRunning;
     bool m_refreshCaskRunning;
+    int m_servicesSortedColIdx;
+    int m_servicesSortedColOrder;
     
     void ctorClass();
 };

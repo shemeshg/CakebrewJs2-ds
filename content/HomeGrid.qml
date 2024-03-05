@@ -11,7 +11,7 @@ GridLayout {
     signal checkboxClicked(bool checked, var val)
     signal hyperlinkBtnClicked(string filterString, string cellText)
 
-    id: homeFormulaGrid
+    id: homeGrid
     property var headerList: []
 
     property var bodyList: []
@@ -25,7 +25,7 @@ GridLayout {
             headerText: modelData
             sortOrder: sortedColIdx === index ? sortedColOrder : GridLayoutHeader.SortOrder.No
             onHeaderClicked: {
-                homeFormulaGrid.headerClicked(index)
+                homeGrid.headerClicked(index)
             }
         }
     }
@@ -66,7 +66,7 @@ GridLayout {
                          && modelData.filterString.includes(filterString)
                 text: modelData.cellText
                 onClicked: () => {
-                               homeFormulaGrid.checkboxClicked(
+                               homeGrid.checkboxClicked(
                                    checked, modelData.onToggled)
                            }
             }
@@ -76,7 +76,7 @@ GridLayout {
                 urlText: modelData.cellText
                 onLinkActivated: data => {
                                      var d = JSON.parse(data)
-                                     homeFormulaGrid.hyperlinkBtnClicked(d[0],
+                                     homeGrid.hyperlinkBtnClicked(d[0],
                                                                          d[1])
                                  }
                 urlRef: JSON.stringify(

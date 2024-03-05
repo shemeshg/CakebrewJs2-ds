@@ -201,12 +201,45 @@ public slots:
         loadBrewLocation();
     }
 
-private slots:
-    void parseRefreshServices(QString strResult)
+    void servicesSort()
     {
-        ShellCmd sc;
-        serviceRows = sc.parseServicesList(strResult);
-        std::sort(serviceRows.begin(), serviceRows.end(), [](ServiceRow &a, ServiceRow &b) {
+        std::sort(serviceRows.begin(), serviceRows.end(), [=](ServiceRow &a, ServiceRow &b) {
+            if (servicesSortedColIdx() == 0 && servicesSortedColOrder() == 1) {
+                return a.name < b.name;
+            }
+
+            if (servicesSortedColIdx() == 1) {
+                if (servicesSortedColOrder() == 1) {
+                    return a.status + a.name < b.status + a.name;
+                } else if (servicesSortedColOrder() == 2) {
+                    return a.status + a.name > b.status + a.name;
+                }
+            }
+
+            if (servicesSortedColIdx() == 2) {
+                if (servicesSortedColOrder() == 1) {
+                    return a.user + a.name < b.user + a.name;
+                } else if (servicesSortedColOrder() == 2) {
+                    return a.user + a.name > b.user + a.name;
+                }
+            }
+
+            if (servicesSortedColIdx() == 3) {
+                if (servicesSortedColOrder() == 1) {
+                    return a.plist < b.plist;
+                } else if (servicesSortedColOrder() == 2) {
+                    return a.plist > b.plist;
+                }
+            }
+
+            if (servicesSortedColIdx() == 4) {
+                if (servicesSortedColOrder() == 1) {
+                    return a.action + a.name < b.action + a.name;
+                } else if (servicesSortedColOrder() == 2) {
+                    return a.action + a.name > b.action + a.name;
+                }
+            }
+
             return a.name > b.name;
         });
         QVector<GridCell *> *list;
@@ -218,6 +251,14 @@ private slots:
             r.addToList(list);
         }
         emit servicesBodyListChanged();
+    }
+
+private slots:
+    void parseRefreshServices(QString strResult)
+    {
+        ShellCmd sc;
+        serviceRows = sc.parseServicesList(strResult);
+        servicesSort();
     }
 
 private:

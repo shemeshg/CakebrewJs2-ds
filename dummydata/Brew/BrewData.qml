@@ -343,4 +343,11 @@ QtObject {
     function asyncServicesAction(cb, name, action) {
         console.log("starting/stoping " + name)
     }
+
+    property int servicesSortedColIdx: 0
+    property int servicesSortedColOrder: 2
+
+    function servicesSort(){
+        console.log("Re-returned sorted")
+    }
 }

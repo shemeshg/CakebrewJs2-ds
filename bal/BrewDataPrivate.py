@@ -124,6 +124,16 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
+p = Prpt("int",'servicesSortedColIdx')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'servicesSortedColOrder')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
 
 classBrewDataPrivate = PrptClass("BrewDataPrivate", ary)
 classBrewDataPrivate.inhirit_from = "JsAsync"

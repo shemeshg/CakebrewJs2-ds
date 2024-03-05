@@ -20,5 +20,6 @@ cog.outl(classBrewDataPrivate.getClassCpp(),
 
 void BrewDataPrivate::ctorClass()
 {
-
+    m_servicesSortedColIdx = 0;
+    m_servicesSortedColOrder = 2;
 }

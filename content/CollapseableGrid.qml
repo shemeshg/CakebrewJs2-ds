@@ -10,7 +10,7 @@ ColumnLayout {
     property bool isExtended: true
 
     signal checkboxClicked(bool checked, var val)
-    signal headerClicked(int idx)
+    signal headerClicked(int idx,int sortOrder)
     signal hyperlinkBtnClicked(string filterString, string cellText)
 
     property var headerList: []
@@ -52,7 +52,7 @@ ColumnLayout {
                              } else {
                                  sortedColOrder = GridLayoutHeader.SortOrder.Asc
                              }
-                             collapseableGrid.headerClicked(idx)
+                             collapseableGrid.headerClicked(idx, sortedColOrder)
                          }
         headerList: collapseableGrid.headerList
 
