@@ -332,13 +332,11 @@ QtObject {
         refreshDataTimer.start()
     }
 
-    function asyncRefreshCask(cb) {
+    function asyncRefreshCaskAndFormula(cb) {
         cb()
     }
 
-    function asyncRefreshFormula(cb) {
-        cb()
-    }
+
 
     function asyncServicesAction(cb, name, action) {
         console.log("starting/stoping " + name)

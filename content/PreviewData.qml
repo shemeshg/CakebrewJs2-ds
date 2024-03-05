@@ -108,9 +108,7 @@ ColumnLayout {
                                                 })
             */
             Constants.brewData.asyncRefreshServices(()=>{});
-            Constants.brewData.asyncRefreshCask(()=>{});
-            Constants.brewData.asyncRefreshFormula(()=>{});
-
+            Constants.brewData.asyncRefreshCaskAndFormula(()=>{});
         }
     }
 }

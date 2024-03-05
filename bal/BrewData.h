@@ -171,14 +171,8 @@ public slots:
             return true;
         });
     }
-    void asyncRefreshFormula(const QJSValue &callback)
-    {
-        makeAsync<bool>(callback, [=]() {
-            return true;
-        });
-    }
 
-    void asyncRefreshCask(const QJSValue &callback)
+    void asyncRefreshCaskAndFormula(const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() { return true; });
     }
