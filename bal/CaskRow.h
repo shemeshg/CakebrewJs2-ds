@@ -10,32 +10,34 @@ public:
     {
         GridCell *gc;
 
+        QString filterString = token + "|" + desc + "|" + tap;
+
         gc = new GridCell();
         gc->setCellType("linkBtn");
         gc->setCellText(token);
         gc->setFillWidth(false);
-        gc->setFilterString(token);
+        gc->setFilterString(filterString);
         cask->push_back(gc);
 
         gc = new GridCell();
         gc->setCellType("text");
         gc->setCellText(desc);
         gc->setFillWidth(true);
-        gc->setFilterString(token);
+        gc->setFilterString(filterString);
         cask->push_back(gc);
 
         gc = new GridCell();
         gc->setCellType("text");
         gc->setCellText(tap);
         gc->setFillWidth(false);
-        gc->setFilterString(token);
+        gc->setFilterString(filterString);
         cask->push_back(gc);
 
         gc = new GridCell();
         gc->setCellType("text");
         gc->setCellText(version);
         gc->setFillWidth(false);
-        gc->setFilterString(token);
+        gc->setFilterString(filterString);
         cask->push_back(gc);
 
         gc = new GridCell();
@@ -43,7 +45,7 @@ public:
             gc->setCellType("checkbox");
             gc->setCellText(outdated);
             gc->setFillWidth(false);
-            gc->setFilterString(token);
+            gc->setFilterString(filterString);
             gc->setOnToggled(token);
             cask->push_back(gc);
         } else {
@@ -51,7 +53,7 @@ public:
             gc->setCellType("text");
             gc->setCellText("");
             gc->setFillWidth(false);
-            gc->setFilterString(token);
+            gc->setFilterString(filterString);
             cask->push_back(gc);
         }
     }
