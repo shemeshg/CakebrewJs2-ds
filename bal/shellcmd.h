@@ -125,13 +125,12 @@ public:
         }
         exec("chmod", {"+x", fTmp.fileName()});
         return exec(fTmp.fileName(), {textSearch});
+    }
 
-        /*
-        QFile dbg{"//Volumes/RAM_Disk_4G/k"};
-        dbg.open(QIODevice::WriteOnly | QIODevice::Text);
-        dbg.write(casks.stdOut.toUtf8());
-        qDebug() << casks.stdOut;        
-        */
+    ProcessStatus cmdListCaskAndFormula()
+    {
+        QString cmd = "/usr/local/bin/brew";
+        return exec(cmd, {"info", "--installed", "--json=v2"});
     }
 
     ProcessStatus cmdListServices()

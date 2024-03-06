@@ -174,7 +174,11 @@ public slots:
 
     void asyncRefreshCaskAndFormula(const QJSValue &callback)
     {
-        makeAsync<bool>(callback, [=]() { return true; });
+        refreshCaskAndFormulaBeforeCallback();
+        makeAsync<bool>(callback, [=]() {
+            refreshCaskAndFormulaAfterCallback();
+            return true;
+        });
     }
 
     void saveTerminalApp(const QString s)
@@ -294,6 +298,42 @@ private:
 
         setBrewLocation(s_brewLocation);
         emit brewLocationChanged();
+    }
+
+    void refreshCaskAndFormulaBeforeCallback()
+    {
+        setRefreshStatusFormulaText("Refresh formula");
+        setRefreshStatusFormulaVisible(true);
+        setRefreshFormulaRunning(true);
+
+        setRefreshStatusCaskText("Refresh formula");
+        setRefreshStatusCaskVisible(true);
+        setRefreshCaskRunning(true);
+    }
+
+    void refreshCaskAndFormulaAfterCallback()
+    {
+        ShellCmd sc;
+        ProcessStatus s = sc.cmdListCaskAndFormula();
+
+        if (s.isSuccess && !s.stdOut.isEmpty()) {
+            //emit parseRefreshServicesSignal(s.stdOut);
+        } else {
+            if (s.stdErr.isEmpty()) {
+                s.stdErr = "Err" + QString::number(s.exitCode);
+            }
+        }
+        if (!s.stdErr.isEmpty()) {
+            setRefreshStatusFormulaText(s.stdErr);
+            setRefreshStatusCaskText(s.stdErr);
+            setRefreshStatusFormulaVisible(true);
+            setRefreshStatusCaskVisible(true);
+        } else {
+            setRefreshStatusFormulaVisible(false);
+            setRefreshStatusCaskVisible(false);
+        }
+        setRefreshFormulaRunning(false);
+        setRefreshCaskRunning(false);
     }
 
     void refreshServicesBeforeCallback()
