@@ -49,7 +49,6 @@ public:
             gc->setOnToggled(token);
             cask->push_back(gc);
         } else {
-            gc = new GridCell();
             gc->setCellType("text");
             gc->setCellText("");
             gc->setFillWidth(false);

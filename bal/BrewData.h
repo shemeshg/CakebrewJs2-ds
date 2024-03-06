@@ -205,6 +205,26 @@ public slots:
         loadBrewLocation();
     }
 
+    void formulaSort()
+    {
+        std::sort(formulaRows.begin(), formulaRows.end(), [=](FormulaRow &a, FormulaRow &b) {
+            if (caskSortedColIdx() == 4 && caskSortedColOrder() == 1) {
+                return a.outdated + a.token < b.outdated + b.token;
+            }
+
+            return a.outdated + a.token > b.outdated + b.token;
+        });
+        QVector<GridCell *> *list;
+        list = &formulaBodyList();
+
+        qDeleteAll(*list);
+        list->clear();
+        for (FormulaRow &r : formulaRows) {
+            r.addToList(list);
+        }
+        emit formulaBodyListChanged();
+    }
+
     void caskSort()
     {
         std::sort(caskRows.begin(), caskRows.end(), [=](CaskRow &a, CaskRow &b) {
@@ -256,6 +276,7 @@ public slots:
         }
         emit caskBodyListChanged();
     }
+
     void servicesSort()
     {
         std::sort(serviceRows.begin(), serviceRows.end(), [=](ServiceRow &a, ServiceRow &b) {
@@ -320,9 +341,9 @@ private slots:
     {
         ShellCmd sc;
         caskRows = sc.parseCaskList(strResult);
-        //serviceRows = sc.parseFormulaList(strResult);
+        formulaRows = sc.parseFormulaList(strResult);
         caskSort();
-        //formulaSort();
+        formulaSort();
     }
 
 private:
@@ -330,6 +351,7 @@ private:
 
     QVector<ServiceRow> serviceRows;
     QVector<CaskRow> caskRows;
+    QVector<FormulaRow> formulaRows;
 
     const QString getFindExecutable(const QString &exec) const
     {
@@ -380,6 +402,7 @@ private:
 
     void refreshCaskAndFormulaAfterCallback()
     {
+        //brew outdated --json=v2
         ShellCmd sc;
         ProcessStatus s = sc.cmdListCaskAndFormula();
 

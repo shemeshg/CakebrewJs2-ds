@@ -6,6 +6,7 @@
 #include <QString>
 #include <QTemporaryFile>
 #include "CaskRow.h"
+#include "FormulaRow.h"
 #include "ServiceRow.h"
 #include "json/single_include/nlohmann/json.hpp"
 #include "searchresultrow.h"
@@ -50,9 +51,39 @@ public:
         return serviceRows;
     }
 
+    QVector<FormulaRow> parseFormulaList(QString &strResult)
+    {
+        QVector<FormulaRow> rows;
+        json data = json::parse(strResult.toStdString());
+        for (auto &element : data["formulae"]) {
+            std::string name = element["name"].template get<std::string>();
+            std::string desc = (element["desc"]).template get<std::string>();
+            std::string tap = element["tap"].template get<std::string>();
+            std::string updatedVersion = (element["versions"]["stable"]).template get<std::string>();
+            bool isInstalled = element["installed"].size() != 0;
+            bool isOutdated = false;
+            std::string installedVersion;
+            if (isInstalled) {
+                installedVersion = (element["installed"][0]["version"]).template get<std::string>();
+                isOutdated = element["outdated"].template get<bool>();
+            }
+
+            FormulaRow row{};
+            row.token = QString::fromStdString(name);
+            row.desc = QString::fromStdString(desc);
+            row.tap = QString::fromStdString(tap);
+            row.version = QString::fromStdString(installedVersion);
+            row.outdated = QString::fromStdString(updatedVersion);
+            row.isOutdated = isOutdated;
+
+            rows.emplaceBack(row);
+        }
+        return rows;
+    }
+
     QVector<CaskRow> parseCaskList(QString &strResult)
     {
-        QVector<CaskRow> serviceRows;
+        QVector<CaskRow> rows;
         json data = json::parse(strResult.toStdString());
         for (auto &element : data["casks"]) {
             std::string token = element["token"].template get<std::string>();
@@ -72,9 +103,9 @@ public:
             cr.outdated = QString::fromStdString(outdated);
             cr.isOutdated = isOutdated;
 
-            serviceRows.emplaceBack(cr);
+            rows.emplaceBack(cr);
         }
-        return serviceRows;
+        return rows;
     }
 
     QVector<SearchResultRow *> parseCmdSearch(QString searchResult, bool isCask)
