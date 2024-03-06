@@ -5,6 +5,7 @@
 #include <QProcess>
 #include <QString>
 #include <QTemporaryFile>
+#include "CaskRow.h"
 #include "GridCell.h"
 #include "ServiceRow.h"
 #include "json/single_include/nlohmann/json.hpp"
@@ -46,6 +47,33 @@ public:
             serviceRow.plist = QString::fromStdString(file);
             serviceRow.action = QString::fromStdString(action);
             serviceRows.emplaceBack(serviceRow);
+        }
+        return serviceRows;
+    }
+
+    QVector<CaskRow> parseCaskList(QString &strResult)
+    {
+        QVector<CaskRow> serviceRows;
+        json data = json::parse(strResult.toStdString());
+        for (auto &element : data["casks"]) {
+            std::string token = element["token"].template get<std::string>();
+            std::string desc = (element["desc"]).template get<std::string>();
+            std::string tap = element["tap"].template get<std::string>();
+            std::string version = element["installed"].template get<std::string>();
+            std::string outdated;
+            bool isOutdated = element["outdated"].template get<bool>();
+            if (isOutdated) {
+                outdated = element["version"].template get<std::string>();
+            }
+            CaskRow cr{};
+            cr.token = QString::fromStdString(token);
+            cr.desc = QString::fromStdString(desc);
+            cr.tap = QString::fromStdString(tap);
+            cr.version = QString::fromStdString(version);
+            cr.outdated = QString::fromStdString(outdated);
+            cr.isOutdated = isOutdated;
+
+            serviceRows.emplaceBack(cr);
         }
         return serviceRows;
     }

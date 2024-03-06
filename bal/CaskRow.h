@@ -5,6 +5,7 @@ class CaskRow
 {
 public:
     QString token, desc, tap, version, outdated;
+    bool isOutdated;
     void addToList(QVector<GridCell *> *cask)
     {
         GridCell *gc;
@@ -38,11 +39,20 @@ public:
         cask->push_back(gc);
 
         gc = new GridCell();
-        gc->setCellType("checkbox");
-        gc->setCellText(outdated);
-        gc->setFillWidth(false);
-        gc->setFilterString(token);
-        gc->setOnToggled(token);
-        cask->push_back(gc);
+        if (isOutdated) {
+            gc->setCellType("checkbox");
+            gc->setCellText(outdated);
+            gc->setFillWidth(false);
+            gc->setFilterString(token);
+            gc->setOnToggled(token);
+            cask->push_back(gc);
+        } else {
+            gc = new GridCell();
+            gc->setCellType("text");
+            gc->setCellText("");
+            gc->setFillWidth(false);
+            gc->setFilterString(token);
+            cask->push_back(gc);
+        }
     }
 };

@@ -78,11 +78,17 @@ public:
                          &BrewData::parseRefreshServicesSignal,
                          this,
                          &BrewData::parseRefreshServices);
+
+        QObject::connect(this,
+                         &BrewData::parseRefreshCaskAndFormulaSignal,
+                         this,
+                         &BrewData::parseRefreshCaskAndFormula);
     }
 
 signals:
     void addSearchRow(SearchResultRow *row, bool isCask);
     void parseRefreshServicesSignal(QString strResult);
+    void parseRefreshCaskAndFormulaSignal(QString strResult);
 
 public slots:
     void asyncSearch(const QJSValue &callback, QString textSearch, bool isCask)
@@ -199,6 +205,35 @@ public slots:
         loadBrewLocation();
     }
 
+    void caskSort()
+    {
+        std::sort(caskRows.begin(), caskRows.end(), [=](CaskRow &a, CaskRow &b) {
+            if (servicesSortedColIdx() == 3 && servicesSortedColOrder() == 1) {
+                return a.outdated + a.token < b.outdated + b.token;
+            }
+
+            /*
+            if (servicesSortedColIdx() == 1) {
+                if (servicesSortedColOrder() == 1) {
+                    return a.status + a.name < b.status + a.name;
+                } else if (servicesSortedColOrder() == 2) {
+                    return a.status + a.name > b.status + a.name;
+                }
+            }
+            */
+
+            return a.outdated + a.token > b.outdated + b.token;
+        });
+        QVector<GridCell *> *list;
+        list = &caskBodyList();
+
+        qDeleteAll(*list);
+        list->clear();
+        for (CaskRow &r : caskRows) {
+            r.addToList(list);
+        }
+        emit caskBodyListChanged();
+    }
     void servicesSort()
     {
         std::sort(serviceRows.begin(), serviceRows.end(), [=](ServiceRow &a, ServiceRow &b) {
@@ -259,10 +294,20 @@ private slots:
         servicesSort();
     }
 
+    void parseRefreshCaskAndFormula(QString strResult)
+    {
+        ShellCmd sc;
+        caskRows = sc.parseCaskList(strResult);
+        //serviceRows = sc.parseFormulaList(strResult);
+        caskSort();
+        //formulaSort();
+    }
+
 private:
     QSettings settings{"shemeshg", "Cakebrewjs2"};
 
     QVector<ServiceRow> serviceRows;
+    QVector<CaskRow> caskRows;
 
     const QString getFindExecutable(const QString &exec) const
     {
@@ -317,7 +362,7 @@ private:
         ProcessStatus s = sc.cmdListCaskAndFormula();
 
         if (s.isSuccess && !s.stdOut.isEmpty()) {
-            //emit parseRefreshServicesSignal(s.stdOut);
+            emit parseRefreshCaskAndFormulaSignal(s.stdOut);
         } else {
             if (s.stdErr.isEmpty()) {
                 s.stdErr = "Err" + QString::number(s.exitCode);
