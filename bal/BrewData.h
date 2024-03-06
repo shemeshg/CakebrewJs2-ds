@@ -208,19 +208,41 @@ public slots:
     void caskSort()
     {
         std::sort(caskRows.begin(), caskRows.end(), [=](CaskRow &a, CaskRow &b) {
-            if (servicesSortedColIdx() == 3 && servicesSortedColOrder() == 1) {
+            if (caskSortedColIdx() == 4 && caskSortedColOrder() == 1) {
                 return a.outdated + a.token < b.outdated + b.token;
             }
 
-            /*
-            if (servicesSortedColIdx() == 1) {
-                if (servicesSortedColOrder() == 1) {
-                    return a.status + a.name < b.status + a.name;
-                } else if (servicesSortedColOrder() == 2) {
-                    return a.status + a.name > b.status + a.name;
+            if (caskSortedColIdx() == 0) {
+                if (caskSortedColOrder() == 1) {
+                    return a.token < b.token;
+                } else if (caskSortedColOrder() == 2) {
+                    return a.token > b.token;
                 }
             }
-            */
+
+            if (caskSortedColIdx() == 1) {
+                if (caskSortedColOrder() == 1) {
+                    return a.desc < b.desc;
+                } else if (caskSortedColOrder() == 2) {
+                    return a.desc > b.desc;
+                }
+            }
+
+            if (caskSortedColIdx() == 2) {
+                if (caskSortedColOrder() == 1) {
+                    return a.tap + a.token < b.tap + b.token;
+                } else if (caskSortedColOrder() == 2) {
+                    return a.tap + a.token > b.tap + b.token;
+                }
+            }
+
+            if (caskSortedColIdx() == 3) {
+                if (caskSortedColOrder() == 1) {
+                    return a.version < b.version;
+                } else if (caskSortedColOrder() == 2) {
+                    return a.version > b.version;
+                }
+            }
 
             return a.outdated + a.token > b.outdated + b.token;
         });
@@ -351,7 +373,7 @@ private:
         setRefreshStatusFormulaVisible(true);
         setRefreshFormulaRunning(true);
 
-        setRefreshStatusCaskText("Refresh formula");
+        setRefreshStatusCaskText("Refresh cask");
         setRefreshStatusCaskVisible(true);
         setRefreshCaskRunning(true);
     }

@@ -43,6 +43,10 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(bool refreshCaskRunning READ refreshCaskRunning WRITE setRefreshCaskRunning NOTIFY refreshCaskRunningChanged )
     Q_PROPERTY(int servicesSortedColIdx READ servicesSortedColIdx WRITE setServicesSortedColIdx NOTIFY servicesSortedColIdxChanged )
     Q_PROPERTY(int servicesSortedColOrder READ servicesSortedColOrder WRITE setServicesSortedColOrder NOTIFY servicesSortedColOrderChanged )
+    Q_PROPERTY(int caskSortedColIdx READ caskSortedColIdx WRITE setCaskSortedColIdx NOTIFY caskSortedColIdxChanged )
+    Q_PROPERTY(int caskSortedColOrder READ caskSortedColOrder WRITE setCaskSortedColOrder NOTIFY caskSortedColOrderChanged )
+    Q_PROPERTY(int formulaSortedColIdx READ formulaSortedColIdx WRITE setFormulaSortedColIdx NOTIFY formulaSortedColIdxChanged )
+    Q_PROPERTY(int formulaSortedColOrder READ formulaSortedColOrder WRITE setFormulaSortedColOrder NOTIFY formulaSortedColOrderChanged )
     
     QML_ELEMENT
 public:
@@ -309,6 +313,54 @@ void setServicesSortedColOrder(const int newServicesSortedColOrder)
     }
 
 
+    
+    int caskSortedColIdx() const{return m_caskSortedColIdx;} 
+    
+void setCaskSortedColIdx(const int newCaskSortedColIdx)
+    {
+        if (m_caskSortedColIdx == newCaskSortedColIdx)
+            return;
+        m_caskSortedColIdx = newCaskSortedColIdx;
+        emit caskSortedColIdxChanged();
+    }
+
+
+    
+    int caskSortedColOrder() const{return m_caskSortedColOrder;} 
+    
+void setCaskSortedColOrder(const int newCaskSortedColOrder)
+    {
+        if (m_caskSortedColOrder == newCaskSortedColOrder)
+            return;
+        m_caskSortedColOrder = newCaskSortedColOrder;
+        emit caskSortedColOrderChanged();
+    }
+
+
+    
+    int formulaSortedColIdx() const{return m_formulaSortedColIdx;} 
+    
+void setFormulaSortedColIdx(const int newFormulaSortedColIdx)
+    {
+        if (m_formulaSortedColIdx == newFormulaSortedColIdx)
+            return;
+        m_formulaSortedColIdx = newFormulaSortedColIdx;
+        emit formulaSortedColIdxChanged();
+    }
+
+
+    
+    int formulaSortedColOrder() const{return m_formulaSortedColOrder;} 
+    
+void setFormulaSortedColOrder(const int newFormulaSortedColOrder)
+    {
+        if (m_formulaSortedColOrder == newFormulaSortedColOrder)
+            return;
+        m_formulaSortedColOrder = newFormulaSortedColOrder;
+        emit formulaSortedColOrderChanged();
+    }
+
+
 
 signals:
     void caskBodyListChanged();
@@ -336,6 +388,10 @@ signals:
     void refreshCaskRunningChanged();
     void servicesSortedColIdxChanged();
     void servicesSortedColOrderChanged();
+    void caskSortedColIdxChanged();
+    void caskSortedColOrderChanged();
+    void formulaSortedColIdxChanged();
+    void formulaSortedColOrderChanged();
     
 
 private:
@@ -364,6 +420,10 @@ private:
     bool m_refreshCaskRunning;
     int m_servicesSortedColIdx;
     int m_servicesSortedColOrder;
+    int m_caskSortedColIdx;
+    int m_caskSortedColOrder;
+    int m_formulaSortedColIdx;
+    int m_formulaSortedColOrder;
     
     void ctorClass();
 };

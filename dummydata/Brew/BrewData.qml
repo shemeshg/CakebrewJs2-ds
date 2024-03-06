@@ -336,16 +336,19 @@ QtObject {
         cb()
     }
 
-
-
     function asyncServicesAction(cb, name, action) {
         console.log("starting/stoping " + name)
     }
 
     property int servicesSortedColIdx: 0
     property int servicesSortedColOrder: 2
+    function servicesSort() {
+        console.log("Re-returned sorted")
+    }
 
-    function servicesSort(){
+    property int caskSortedColIdx: 4
+    property int caskSortedColOrder: 2
+    function caskSort() {
         console.log("Re-returned sorted")
     }
 }

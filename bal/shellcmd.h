@@ -6,7 +6,6 @@
 #include <QString>
 #include <QTemporaryFile>
 #include "CaskRow.h"
-#include "GridCell.h"
 #include "ServiceRow.h"
 #include "json/single_include/nlohmann/json.hpp"
 #include "searchresultrow.h"

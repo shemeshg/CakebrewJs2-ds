@@ -134,6 +134,26 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
+p = Prpt("int",'caskSortedColIdx')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'caskSortedColOrder')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'formulaSortedColIdx')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'formulaSortedColOrder')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
 
 classBrewDataPrivate = PrptClass("BrewDataPrivate", ary)
 classBrewDataPrivate.inhirit_from = "JsAsync"

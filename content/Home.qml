@@ -32,8 +32,14 @@ ColumnLayout {
 
         bodyList: Constants.brewData.caskBodyList
 
-        sortedColIdx: 4
-        sortedColOrder: GridLayoutHeader.SortOrder.Dsc
+        sortedColIdx: Constants.brewData.caskSortedColIdx
+        sortedColOrder: Constants.brewData.caskSortedColOrder
+
+        onHeaderClicked: (colId,sortOrder)=>{
+            Constants.brewData.caskSortedColIdx =  colId;
+            Constants.brewData.caskSortedColOrder = sortOrder
+            Constants.brewData.caskSort()
+                          }
     }
 
     CoreLabel {
