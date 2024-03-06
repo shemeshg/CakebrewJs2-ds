@@ -19,6 +19,12 @@ GridLayout {
     property int sortedColOrder: GridLayoutHeader.SortOrder.No
     property string filterString: ""
 
+    function bodylistFiltered(){
+        return bodyList.filter(row=>{
+                                   return row.filterString.toLowerCase().includes(filterString.toLowerCase())
+                               })
+    }
+
     Repeater {
         model: headerList
         delegate: GridLayoutHeader {
@@ -31,11 +37,10 @@ GridLayout {
     }
 
     Repeater {
-        model: bodyList
+        model: bodylistFiltered()
         delegate: RowLayout {
             CoreLabel {
                 visible: !modelData.fillWidth && modelData.cellType === "text"
-                         &&  modelData.filterString.toLowerCase().includes(filterString.toLowerCase())
                 text: modelData.cellText
                 color: CoreSystemPalette.text
                 CoreToolTip {
@@ -56,14 +61,12 @@ GridLayout {
             CoreLabel {
                 text: modelData.cellText
                 visible: modelData.fillWidth && modelData.cellType === "text"
-                         && modelData.filterString.toLowerCase().includes(filterString.toLowerCase())
                 color: CoreSystemPalette.text
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
             CheckBox {
                 visible: modelData.cellType === "checkbox"
-                         && modelData.filterString.toLowerCase().includes(filterString.toLowerCase())
                 text: modelData.cellText
                 onClicked: () => {
                                homeGrid.checkboxClicked(
@@ -72,7 +75,6 @@ GridLayout {
             }
             HyperlinkBtn {
                 visible: modelData.cellType === "linkBtn"
-                         && modelData.filterString.toLowerCase().includes(filterString.toLowerCase())
                 urlText: modelData.cellText
                 onLinkActivated: data => {
                                      var d = JSON.parse(data)
