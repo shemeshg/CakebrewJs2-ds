@@ -77,7 +77,7 @@ ColumnLayout {
     CollapseableGrid {
         visible: !Constants.brewData.refreshServicesRunning
         isExtended: true
-        headerText: "Services" + sortedColIdx
+        headerText: "Services"
 
         headerList: ["Name", "Status", "User", "Plist", "Actions"]
 
