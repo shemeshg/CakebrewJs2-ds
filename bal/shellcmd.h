@@ -68,10 +68,13 @@ public:
             std::string updatedVersion = (element["versions"]["stable"]).template get<std::string>();
             bool isInstalled = element["installed"].size() != 0;
             bool isOutdated = false;
+            bool installedOnRequest = false;
             std::string installedVersion;
             if (isInstalled) {
                 installedVersion = (element["installed"][0]["version"]).template get<std::string>();
                 isOutdated = element["outdated"].template get<bool>();
+                installedOnRequest = (element["installed"][0]["installed_on_request"])
+                                         .template get<bool>();
             }
 
             FormulaRow row{};
@@ -81,12 +84,13 @@ public:
             row.version = QString::fromStdString(installedVersion);
             row.outdated = QString::fromStdString(updatedVersion);
             row.isOutdated = isOutdated;
+            row.installedOnRequest = installedOnRequest;
 
             for (auto &dep : element["dependencies"]) {
                 std::string d = dep.template get<std::string>();
                 bool found = (usedIn.find(d) != usedIn.end());
                 if (found) {
-                    usedIn[d].push_back(d);
+                    usedIn[d].push_back(row.token.toStdString());
                 }
             }
 
