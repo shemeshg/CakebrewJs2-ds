@@ -351,4 +351,10 @@ QtObject {
     function caskSort() {
         console.log("Re-returned sorted")
     }
+
+    property int formulaSortedColIdx: 4
+    property int formulaSortedColOrder: 2
+    function formulaSort() {
+        console.log("Re-returned sorted")
+    }
 }

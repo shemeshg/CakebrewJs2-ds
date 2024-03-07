@@ -208,11 +208,23 @@ public slots:
     void formulaSort()
     {
         std::sort(formulaRows.begin(), formulaRows.end(), [=](FormulaRow &a, FormulaRow &b) {
-            if (caskSortedColIdx() == 4 && caskSortedColOrder() == 1) {
-                return a.outdated + a.token < b.outdated + b.token;
+            QString aOutdated = "_";
+            QString bOutdated = "_";
+            if (a.isOutdated) {
+                aOutdated = "_" + a.token;
+            } else {
+                aOutdated = a.token;
+            }
+            if (b.isOutdated) {
+                bOutdated = "_" + b.token;
+            } else {
+                bOutdated = b.token;
+            }
+            if (formulaSortedColIdx() == 4 && formulaSortedColOrder() == 2) {
+                return aOutdated > bOutdated;
             }
 
-            return a.outdated + a.token > b.outdated + b.token;
+            return aOutdated < bOutdated;
         });
         QVector<GridCell *> *list;
         list = &formulaBodyList();

@@ -71,8 +71,17 @@ ColumnLayout {
 
         bodyList: Constants.brewData.formulaBodyList
 
-        sortedColIdx: 4
-        sortedColOrder: GridLayoutHeader.SortOrder.Dsc
+
+
+        sortedColIdx: Constants.brewData.formulaSortedColIdx
+        sortedColOrder: Constants.brewData.formulaSortedColOrder
+
+        onHeaderClicked: (colId,sortOrder)=>{
+            Constants.brewData.formulaSortedColIdx =  colId;
+            Constants.brewData.formulaSortedColOrder = sortOrder
+            Constants.brewData.formulaSort()
+                          }
+
     }
 
     CoreLabel {
