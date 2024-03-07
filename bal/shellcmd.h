@@ -10,6 +10,7 @@
 #include "ServiceRow.h"
 #include "json/single_include/nlohmann/json.hpp"
 #include "searchresultrow.h"
+#include <map>
 
 using json = nlohmann::json;
 
@@ -55,6 +56,11 @@ public:
     {
         QVector<FormulaRow> rows;
         json data = json::parse(strResult.toStdString());
+        std::map<std::string, std::vector<std::string>> usedIn;
+
+        for (auto &element : data["formulae"]) {
+            usedIn[element["name"].template get<std::string>()] = {};
+        }
         for (auto &element : data["formulae"]) {
             std::string name = element["name"].template get<std::string>();
             std::string desc = (element["desc"]).template get<std::string>();
@@ -76,7 +82,21 @@ public:
             row.outdated = QString::fromStdString(updatedVersion);
             row.isOutdated = isOutdated;
 
+            for (auto &dep : element["dependencies"]) {
+                std::string d = dep.template get<std::string>();
+                bool found = (usedIn.find(d) != usedIn.end());
+                if (found) {
+                    usedIn[d].push_back(d);
+                }
+            }
+
             rows.emplaceBack(row);
+        }
+
+        for (auto &row : rows) {
+            for (const auto &str : usedIn[row.token.toStdString()]) {
+                row.usedIn << QString::fromStdString(str);
+            }
         }
         return rows;
     }

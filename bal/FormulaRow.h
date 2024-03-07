@@ -6,6 +6,7 @@ class FormulaRow
 public:
     QString token, desc, tap, version, outdated, leafText, leafPopup;
     bool isOutdated;
+    QStringList usedIn;
     void addToList(QVector<GridCell *> *formula)
     {
         GridCell *gc;
@@ -55,6 +56,11 @@ public:
             formula->push_back(gc);
         }
 
+        if (usedIn.length() == 0) {
+            leafText = "🍃";
+        } else {
+            leafText = "*";
+        }
         gc = new GridCell();
         gc->setCellType("text");
         gc->setCellText(leafText);
