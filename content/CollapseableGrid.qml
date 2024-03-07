@@ -34,11 +34,22 @@ ColumnLayout {
                 selectAll()
             }
         }
+        onTextChanged: {
+            filterSetTimer.start()
+        }
+
+        Timer {
+            id: filterSetTimer
+            running: true
+            repeat: false
+            onTriggered: homeGrid.filterString = filterByExp.text
+            interval: 800
+        }
     }
     HomeGrid {
-
+        id: homeGrid
         visible: formulaHeader.isExtended
-        filterString: filterByExp.text
+        //filterString: filterByExp.text
         onHeaderClicked: idx => {
                              if (sortedColIdx !== idx) {
                                  sortedColOrder = GridLayoutHeader.SortOrder.No

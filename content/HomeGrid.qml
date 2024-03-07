@@ -7,6 +7,7 @@ import Core
 GridLayout {
     columns: headerList.length
     Layout.margins: 20
+    rowSpacing: 10
     signal headerClicked(int idx)
     signal checkboxClicked(bool checked, var val)
     signal hyperlinkBtnClicked(string filterString, string cellText)
