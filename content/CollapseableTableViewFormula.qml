@@ -70,64 +70,59 @@ ColumnLayout {
             // Each row is one type of fruit that can be ordered
             rows: [
                 {
-                    "name"// Each property is one cell/column.
-                    : "Name",
-                    "desc": "Description",
-                    "tap": "Tap",
-                    "version": "Version",
-                    "outdated": "Outdated",
-                    "leaf": "Leaf"
+                    "name": {text: "Name"},
+                    "desc": {text: "Description"},
+                    "tap": {text: "Tap"},
+                    "version": {text: "Version"},
+                    "outdated": {text: "Outdated"},
+                    "leaf": {text: "Leaf"},
+
 
                 },
                 {
-                    "name"// Each property is one cell/column.
-                    : "libext",
-                    "desc": "very asdfhaksdgflkagdsfasdlflhkg Description",
-                    "tap": "Tap",
-                    "version": "1.23",
-                    "outdated": "2.00",
-                    "leaf": "*"
+                    "name": {text: "libext"},
+                    "desc": {text: "very asdfhaksdgflkagdsfasdlflhkg Description"},
+                    "tap": {text: "Tap"},
+                    "version": {text: "1.23"},
+                    "outdated": {text: "2.00"},
+                    "leaf": {text: "*"}
                 },  {
-                    "name"// Each property is one cell/column.
-                    : "asdf",
-                    "desc": "very pioutyoiuyrt Description",
-                    "tap": "Tap",
-                    "version": "1.23",
-                    "outdated": "2.00",
-                    "leaf": "*"
+                    "name": {text: "libext"},
+                    "desc": {text: "very pioutyoiuyrt Description"},
+                    "tap": {text: "Tap"},
+                    "version": {text: "1.23"},
+                    "outdated": {text: "2.00"},
+                    "leaf": {text: "*"}
                 },  {
-                    "name"// Each property is one cell/column.
-                    : "asdf",
-                    "desc": "very pioutyoiuyrt Description",
-                    "tap": "Tap",
-                    "version": "1.23",
-                    "outdated": "2.00",
-                    "leaf": "*"
+                    "name": {text: "libext"},
+                    "desc": {text: "very pioutyoiuyrt Description"},
+                    "tap": {text: "Tap"},
+                    "version": {text: "1.23"},
+                    "outdated": {text: "2.00"},
+                    "leaf": {text: "*"}
                 },
                 {
-                    "name"// Each property is one cell/column.
-                    : "asdf",
-                    "desc": "very pioutyoiuyrt Description",
-                    "tap": "Tap",
-                    "version": "1.23",
-                    "outdated": "2.00",
-                    "leaf": "*"
+                    "name": {text: "libext"},
+                    "desc": {text: "very pioutyoiuyrt Description"},
+                    "tap": {text: "Tap"},
+                    "version": {text: "1.23"},
+                    "outdated": {text: "2.00"},
+                    "leaf": {text: "*"}
                 },
                 {
-                    "name"// Each property is one cell/column.
-                    : "asdf",
-                    "desc": "very pioutyoiuyrt Description",
-                    "tap": "Tap",
-                    "version": "1.23",
-                    "outdated": "2.00",
-                    "leaf": "*"
+                    "name": {text: "libext"},
+                    "desc": {text: "very pioutyoiuyrt Description"},
+                    "tap": {text: "Tap"},
+                    "version": {text: "1.23"},
+                    "outdated": {text: "2.00"},
+                    "leaf": {text: "*"}
                 }]
         }
         delegate: DelegateChooser {
             DelegateChoice {
                 index:0
                 CoreLabel {
-                    text: model.display
+                    text: model.display.text
                     leftPadding: 10
                 }
             }
@@ -135,7 +130,7 @@ ColumnLayout {
             DelegateChoice {
                 column: 4
                 delegate: CheckBox {
-                    checked: model.display
+                    checked: model.display.text
                     leftPadding: 10
                     //onToggled: model.display = checked
                 }
@@ -144,14 +139,14 @@ ColumnLayout {
             DelegateChoice {
                 column: tableView.autoExtendCol
                 CoreLabel {
-                    text: model.display
+                    text: model.display.text
                     wrapMode: Text.WordWrap
                     leftPadding: 10
                 }
             }
             DelegateChoice {
                 CoreLabel {
-                    text: model.display
+                    text: model.display.text
                     leftPadding: 10
                 }
             }
