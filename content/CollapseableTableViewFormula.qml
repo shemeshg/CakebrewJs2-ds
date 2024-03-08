@@ -105,46 +105,44 @@ ColumnLayout {
                     "version": {text: "Version"},
                     "outdated": {text: "Outdated"},
                     "leaf": {text: "Leaf"},
-
-
                 },
                 {
                     "name": {text: "libext"},
                     "desc": {text: "very asdfhaksdgflkagdsfasdlflhkg Description"},
                     "tap": {text: "Tap"},
                     "version": {text: "1.23"},
-                    "outdated": {text: "2.00"},
-                    "leaf": {text: "*"}
+                    "outdated": {text: "2.00", tsChecked: false},
+                    "leaf": {text: "*", hoverText: "shalom\nolam"}
                 },  {
                     "name": {text: "libext"},
                     "desc": {text: "very pioutyoiuyrt Description"},
                     "tap": {text: "Tap"},
                     "version": {text: "1.23"},
-                    "outdated": {text: "2.00"},
-                    "leaf": {text: "*"}
+                    "outdated": {text: "2.00", tsChecked: false},
+                    "leaf": {text: "*", hoverText: "shalom\nolam"}
                 },  {
                     "name": {text: "libext"},
                     "desc": {text: "very pioutyoiuyrt Description"},
                     "tap": {text: "Tap"},
                     "version": {text: "1.23"},
-                    "outdated": {text: "2.00"},
-                    "leaf": {text: "*"}
+                    "outdated": {text: "2.00", tsChecked: false},
+                    "leaf": {text: "*", hoverText: "shalom\nolam"}
                 },
                 {
                     "name": {text: "libext"},
                     "desc": {text: "very pioutyoiuyrt Description"},
                     "tap": {text: "Tap"},
                     "version": {text: "1.23"},
-                    "outdated": {text: "2.00"},
-                    "leaf": {text: "*"}
+                    "outdated": {text: "2.00", tsChecked: false},
+                    "leaf": {text: "*", hoverText: "shalom\nolam"}
                 },
                 {
                     "name": {text: "libext"},
                     "desc": {text: "very pioutyoiuyrt Description"},
                     "tap": {text: "Tap"},
                     "version": {text: "1.23"},
-                    "outdated": {text: "2.00"},
-                    "leaf": {text: "*"}
+                    "outdated": {text: "2.00", tsChecked: false},
+                    "leaf": {text: "*", hoverText: "shalom\nolam"}
                 }]
         }
         delegate: DelegateChooser {
@@ -165,11 +163,48 @@ ColumnLayout {
             }
 
             DelegateChoice {
+                column: 0
+                delegate: HyperlinkBtn {
+                    leftPadding: 10
+                    urlText: model.display.text
+                    onLinkActivated: data => {
+                                        console.log(data)
+                                     }
+                    urlRef: model.display.text
+                }
+            }
+
+            DelegateChoice {
                 column: 4
                 delegate: CheckBox {
-                    checked: model.display.text
+                    checked: model.display.tsChecked
                     leftPadding: 10
-                    //onToggled: model.display = checked
+                    text: model.display.text
+                    onToggled: model.display.tsChecked = checked
+                }
+            }
+
+
+            DelegateChoice {
+                column: 5
+                delegate: CoreLabel {
+                    leftPadding: 10
+                    text: model.display.text
+                    color: CoreSystemPalette.text
+                    CoreToolTip {
+                        id: toolTip
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: modelData.hoverText ? Qt.PointingHandCursor : cursorShape
+                        hoverEnabled: true
+                        onHoveredChanged: {
+                            if (modelData.hoverText) {
+                                toolTip.show(model.display.hoverText, 3000)
+                            }
+                        }
+                    }
                 }
             }
 
