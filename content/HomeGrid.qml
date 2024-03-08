@@ -40,6 +40,12 @@ GridLayout {
     Repeater {
         model: bodylistFiltered()
         delegate: RowLayout {
+            Rectangle {
+                visible: modelData.cellType === "bar"
+                Layout.fillWidth:  true
+                implicitHeight: 2
+                color: CoreSystemPalette.mid
+            }
             CoreLabel {
                 visible: !modelData.fillWidth && modelData.cellType === "text"
                 text: modelData.cellText

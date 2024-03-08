@@ -72,5 +72,14 @@ public:
         gc->setFilterString(filterString);
         gc->setHoverText(leafPopup);
         formula->push_back(gc);
+
+        for (int i = 0; i <= 5; ++i) {
+            gc = new GridCell();
+            gc->setCellType("bar");
+            gc->setCellText("");
+            gc->setFillWidth(false);
+            gc->setFilterString(filterString);
+            formula->push_back(gc);
+        }
     }
 };

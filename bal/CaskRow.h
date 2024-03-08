@@ -55,5 +55,14 @@ public:
             gc->setFilterString(filterString);
             cask->push_back(gc);
         }
+
+        for (int i = 0; i <= 4; ++i) {
+            gc = new GridCell();
+            gc->setCellType("bar");
+            gc->setCellText("");
+            gc->setFillWidth(false);
+            gc->setFilterString(filterString);
+            cask->push_back(gc);
+        }
     }
 };

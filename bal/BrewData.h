@@ -234,6 +234,7 @@ public slots:
         for (FormulaRow &r : formulaRows) {
             r.addToList(list);
         }
+
         emit formulaBodyListChanged();
     }
 

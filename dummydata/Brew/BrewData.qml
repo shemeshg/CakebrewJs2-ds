@@ -88,7 +88,7 @@ QtObject {
         running: true
         repeat: false
         onTriggered: timerCb()
-        interval: 1000
+        interval: 200
     }
 
     property var caskBodyList: [{
@@ -151,7 +151,85 @@ QtObject {
             "fillWidth": false,
             "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
             "filterString": "libxext"
-        }]
+        },
+        //
+        {
+            "cellType": "bar",
+            "cellText": "",
+            "fillWidth": false,
+            "hoverText": "",
+            "filterString": ""
+         },
+        {
+            "cellType": "bar",
+            "cellText": "",
+            "fillWidth": false,
+            "hoverText": "",
+            "filterString": ""
+         },
+        {
+            "cellType": "bar",
+            "cellText": "",
+            "fillWidth": false,
+            "hoverText": "",
+            "filterString": ""
+         },
+        {
+            "cellType": "bar",
+            "cellText": "",
+            "fillWidth": false,
+            "hoverText": "",
+            "filterString": ""
+         },
+        {
+            "cellType": "bar",
+            "cellText": "",
+            "fillWidth": false,
+            "hoverText": "",
+            "filterString": ""
+         },
+        {
+            "cellType": "bar",
+            "cellText": "",
+            "fillWidth": false,
+            "hoverText": "",
+            "filterString": ""
+         },
+        //
+        {
+                    "cellType": "linkBtn",
+                    "cellText": "libxext",
+                    "fillWidth": false,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": "X.Org: Library for common extensions to the X11 protocol",
+                    "fillWidth": true,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": "homebrew/tap",
+                    "fillWidth": false,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": "1.3.5",
+                    "fillWidth": false,
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "checkbox",
+                    "cellText": "1.3.6",
+                    "fillWidth": false,
+                    "onToggled": "linkBtn",
+                    "filterString": "libxext"
+                }, {
+                    "cellType": "text",
+                    "cellText": ".",
+                    "fillWidth": false,
+                    "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
+                    "filterString": "libxext"
+                },
+    ]
 
     property var servicesBodyList: [{
             "cellType": "text",
