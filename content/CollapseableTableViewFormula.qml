@@ -5,9 +5,18 @@ import core
 import Qt.labs.qmlmodels
 
 ColumnLayout {
-    Layout.fillWidth: true
-    signal headerClicked
+
     id: collapseableTableViewFormula
+    property var calWids: [0,0,0,0,0,0]
+    property int autoExtendCol: 1
+    property int sortedColOrder: CollapseableTableViewFormula.SortOrder.Asc
+    property int sortedColIdx: 2
+
+    Layout.fillWidth: true
+
+    signal headerClicked(int column)
+
+
     CoreLabel {
         text: "Table will be here"
     }
@@ -17,13 +26,12 @@ ColumnLayout {
            Asc,
            Dsc
      }
-    property int sortOrder: CollapseableTableViewFormula.SortOrder.Asc
-    property int sortCol: 2
+
     function getOrderSymble(col){
-        if (col === sortCol){
-            if (sortOrder === CollapseableTableViewFormula.SortOrder.Asc){
+        if (col === sortedColIdx){
+            if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc){
                 return " ↑"
-            } else if (sortOrder === CollapseableTableViewFormula.SortOrder.Dsc){
+            } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc){
                 return " ↓"
             } else {
                 return ""
@@ -42,8 +50,7 @@ ColumnLayout {
         clip: true
         id: tableView
 
-        property var calWids: [0,0,0,0,0,0]
-        property int autoExtendCol: 1
+
 
         columnWidthProvider: function (column) {
             calWids[column] = implicitColumnWidth(column)
@@ -146,11 +153,12 @@ ColumnLayout {
                 CoreLabel {
                     text:  "<h4>" +  model.display.text + getOrderSymble(column)  + "</h4>"
                     leftPadding: 10
+                    rightPadding: 10
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: ()=>{
-                                       collapseableTableViewFormula.headerClicked()
+                                       collapseableTableViewFormula.headerClicked(column)
                                    }
                     }
                 }
@@ -166,7 +174,7 @@ ColumnLayout {
             }
 
             DelegateChoice {
-                column: tableView.autoExtendCol
+                column: collapseableTableViewFormula.autoExtendCol
                 CoreLabel {
                     text: model.display.text
                     wrapMode: Text.WordWrap
