@@ -6,9 +6,31 @@ import Qt.labs.qmlmodels
 
 ColumnLayout {
     Layout.fillWidth: true
-
+    signal headerClicked
+    id: collapseableTableViewFormula
     CoreLabel {
         text: "Table will be here"
+    }
+
+    enum SortOrder {
+           No,
+           Asc,
+           Dsc
+     }
+    property int sortOrder: CollapseableTableViewFormula.SortOrder.Asc
+    property int sortCol: 2
+    function getOrderSymble(col){
+        if (col === sortCol){
+            if (sortOrder === CollapseableTableViewFormula.SortOrder.Asc){
+                return " ↑"
+            } else if (sortOrder === CollapseableTableViewFormula.SortOrder.Dsc){
+                return " ↓"
+            } else {
+                return ""
+            }
+        }
+
+        return ""
     }
 
     TableView {
@@ -122,8 +144,15 @@ ColumnLayout {
             DelegateChoice {
                 index:0
                 CoreLabel {
-                    text: model.display.text
+                    text:  "<h4>" +  model.display.text + getOrderSymble(column)  + "</h4>"
                     leftPadding: 10
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: ()=>{
+                                       collapseableTableViewFormula.headerClicked()
+                                   }
+                    }
                 }
             }
 
