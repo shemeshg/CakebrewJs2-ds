@@ -142,7 +142,7 @@ ColumnLayout {
             }
 
             DelegateChoice {
-                column: 1 //autoExtendCol
+                column: tableView.autoExtendCol
                 CoreLabel {
                     text: model.display
                     wrapMode: Text.WordWrap
