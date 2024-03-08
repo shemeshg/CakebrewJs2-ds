@@ -224,6 +224,46 @@ public slots:
                 return aOutdated > bOutdated;
             }
 
+            if (formulaSortedColIdx() == 5) {
+                if (formulaSortedColOrder() == 1) {
+                    return a.leafText + a.token < b.leafText + b.token;
+                } else if (formulaSortedColOrder() == 2) {
+                    return a.leafText + a.token > b.leafText + b.token;
+                }
+            }
+
+            if (formulaSortedColIdx() == 3) {
+                if (formulaSortedColOrder() == 1) {
+                    return a.version < b.version;
+                } else if (formulaSortedColOrder() == 2) {
+                    return a.version > b.version;
+                }
+            }
+
+            if (formulaSortedColIdx() == 2) {
+                if (formulaSortedColOrder() == 1) {
+                    return a.tap + a.token < b.tap + b.token;
+                } else if (formulaSortedColOrder() == 2) {
+                    return a.tap + a.token > b.tap + b.token;
+                }
+            }
+
+            if (formulaSortedColIdx() == 1) {
+                if (formulaSortedColOrder() == 1) {
+                    return a.desc < b.desc;
+                } else if (formulaSortedColOrder() == 2) {
+                    return a.desc > b.desc;
+                }
+            }
+
+            if (formulaSortedColIdx() == 0) {
+                if (formulaSortedColOrder() == 1) {
+                    return a.token < b.token;
+                } else if (formulaSortedColOrder() == 2) {
+                    return a.token > b.token;
+                }
+            }
+
             return aOutdated < bOutdated;
         });
         QVector<GridCell *> *list;

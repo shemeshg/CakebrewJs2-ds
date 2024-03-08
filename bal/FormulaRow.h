@@ -59,7 +59,7 @@ public:
         if (usedIn.length() == 0) {
             leafText = "🍃";
         } else if (installedOnRequest) {
-            leafText = "i";
+            leafText = "in";
             leafPopup = usedIn.join("\n");
         } else {
             leafText = "*";
