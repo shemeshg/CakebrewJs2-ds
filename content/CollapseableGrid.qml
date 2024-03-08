@@ -8,6 +8,8 @@ ColumnLayout {
     id: collapseableGrid
     property string headerText: ""
     property bool isExtended: true
+    Layout.rightMargin:  20
+    Layout.leftMargin:  20
 
     signal checkboxClicked(bool checked, var val)
     signal headerClicked(int idx,int sortOrder)
@@ -28,6 +30,7 @@ ColumnLayout {
         visible: formulaHeader.isExtended
         text: ""
         Layout.fillWidth: true
+        Layout.rightMargin:  5
         placeholderText: "Filter"
         onActiveFocusChanged: {
             if (activeFocus) {
