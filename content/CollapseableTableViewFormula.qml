@@ -51,7 +51,7 @@ ColumnLayout {
         id: tableView
 
 
-
+        onWidthChanged: tableView.forceLayout()
         columnWidthProvider: function (column) {
             calWids[column] = implicitColumnWidth(column)
             let total=0
@@ -69,8 +69,6 @@ ColumnLayout {
             }
             return implicitColumnWidth(column)
         }
-
-        onWidthChanged: tableView.forceLayout()
 
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AsNeeded
