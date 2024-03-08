@@ -111,4 +111,8 @@ ColumnLayout {
                                        () => {}, filterString, cellText)
                                }
     }
+
+    CollapseableTableViewFormula{
+
+    }
 }
