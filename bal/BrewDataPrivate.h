@@ -47,6 +47,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(int caskSortedColOrder READ caskSortedColOrder WRITE setCaskSortedColOrder NOTIFY caskSortedColOrderChanged )
     Q_PROPERTY(int formulaSortedColIdx READ formulaSortedColIdx WRITE setFormulaSortedColIdx NOTIFY formulaSortedColIdxChanged )
     Q_PROPERTY(int formulaSortedColOrder READ formulaSortedColOrder WRITE setFormulaSortedColOrder NOTIFY formulaSortedColOrderChanged )
+    Q_PROPERTY(QVariantList formulaTableBodyList READ formulaTableBodyList  NOTIFY formulaTableBodyListChanged )
     
     QML_ELEMENT
 public:
@@ -361,6 +362,10 @@ void setFormulaSortedColOrder(const int newFormulaSortedColOrder)
     }
 
 
+    
+    QVariantList &formulaTableBodyList() {return m_formulaTableBodyList;} 
+    
+
 
 signals:
     void caskBodyListChanged();
@@ -392,6 +397,7 @@ signals:
     void caskSortedColOrderChanged();
     void formulaSortedColIdxChanged();
     void formulaSortedColOrderChanged();
+    void formulaTableBodyListChanged();
     
 
 private:
@@ -424,6 +430,7 @@ private:
     int m_caskSortedColOrder;
     int m_formulaSortedColIdx;
     int m_formulaSortedColOrder;
+    QVariantList m_formulaTableBodyList;
     
     void ctorClass();
 };

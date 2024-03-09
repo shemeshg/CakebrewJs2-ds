@@ -1,18 +1,18 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import core
+import Core
 import Qt.labs.qmlmodels
 
-CoreLabel {    
+CoreLabel {
     signal headerClicked(int column)
     property int sortedColOrder: 0
     property int sortedColIdx: 0
-    function getOrderSymble(col){
-        if (col === sortedColIdx){
-            if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc){
+    function getOrderSymble(col) {
+        if (col === sortedColIdx) {
+            if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc) {
                 return " ↑"
-            } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc){
+            } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc) {
                 return " ↓"
             } else {
                 return ""
@@ -23,13 +23,13 @@ CoreLabel {
     }
 
     id: tableHeaderLabel
-    text:  "<h4>" +  model.display.text + getOrderSymble(column)  + "</h4>"
+    text: "<h4>" + model.display.text + getOrderSymble(column) + "</h4>"
     leftPadding: 10
     rightPadding: 10
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: ()=>{
+        onClicked: () => {
 
                        if (sortedColIdx !== column) {
                            sortedColOrder = CollapseableTableViewFormula.SortOrder.No

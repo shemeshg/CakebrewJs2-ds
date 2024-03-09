@@ -117,59 +117,7 @@ ColumnLayout {
         id: ctvf
 
         headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
-        rowsModel: [
-                {
-                    "name": {text: "Name"},
-                    "desc": {text: "Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "Version"},
-                    "outdated": {text: "Outdated"},
-                    "leaf": {text: "Leaf"},
-                    "filterString": "" //header must filter empty
-                },
-                {
-                    "name": {text: "libext"},
-                    "desc": {text: "very asdfhaksdgflkagdsfasdlflhkg Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"},
-                    "filterString": "abc"
-                },  {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"},
-                    "filterString": "abc"
-                },  {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"},
-                    "filterString": "abc"
-                },
-                {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"},
-                    "filterString": "abc"
-                },
-                {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"},
-                    "filterString": "abc"
-                }]
+        rowsModel: Constants.brewData.formulaTableBodyList
         tableView.model:  TableModel {
 
             TableModelColumn {

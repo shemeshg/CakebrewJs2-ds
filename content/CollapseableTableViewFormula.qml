@@ -1,12 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import core
+import Core
 import Qt.labs.qmlmodels
 
 ColumnLayout {
 
-    id: collapseableTableViewFormula    
+    id: collapseableTableViewFormula
     property int autoExtendCol: 1
     property int sortedColOrder: CollapseableTableViewFormula.SortOrder.Asc
     property int sortedColIdx: 2
@@ -18,24 +18,20 @@ ColumnLayout {
 
     Layout.fillWidth: true
 
-
-
-
-
     enum SortOrder {
-           No,
-           Asc,
-           Dsc
-     }
-
-    function getRowsModel(){
-        return rowsModel.filter((row)=>{
-                                return row.filterString.toLowerCase().includes(filterByExp.text.toLowerCase()) ||
-                                    row.filterString === ""
-                                });
+        No,
+        Asc,
+        Dsc
     }
 
-
+    function getRowsModel() {
+        return rowsModel.filter(row => {
+                                    return row.filterString.toLowerCase(
+                                        ).includes(
+                                        filterByExp.text.toLowerCase())
+                                    || row.filterString === ""
+                                })
+    }
 
     ExtendableHeader {
         id: formulaHeader
@@ -48,7 +44,7 @@ ColumnLayout {
         visible: formulaHeader.isExtended
         text: ""
         Layout.fillWidth: true
-        Layout.rightMargin:  5
+        Layout.rightMargin: 5
         placeholderText: "Filter"
         onTextChanged: {
             filteredModel = []
@@ -72,9 +68,8 @@ ColumnLayout {
         }
     }
 
-
-    TableView {        
-        property var calWids: []//[0,0,0,0,0,0]
+    TableView {
+        property var calWids: [] //[0,0,0,0,0,0]
 
         Layout.fillWidth: true
         visible: formulaHeader.isExtended
@@ -84,15 +79,14 @@ ColumnLayout {
         clip: true
         id: tableView
 
-
         onWidthChanged: tableView.forceLayout()
         columnWidthProvider: function (column) {
             tableView.calWids[column] = implicitColumnWidth(column)
-            let total=0
-            if (column === autoExtendCol){
-                for (let i=0;i<tableView.calWids.length;i++){
-                    if (i!==autoExtendCol){
-                        if (tableView.calWids[i] <=0){
+            let total = 0
+            if (column === autoExtendCol) {
+                for (var i = 0; i < tableView.calWids.length; i++) {
+                    if (i !== autoExtendCol) {
+                        if (tableView.calWids[i] <= 0) {
                             return implicitColumnWidth(column)
                         }
 
@@ -107,9 +101,5 @@ ColumnLayout {
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AsNeeded
         }
-
-
-
-
     }
 }

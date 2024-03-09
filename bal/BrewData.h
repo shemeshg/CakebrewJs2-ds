@@ -33,16 +33,21 @@ public:
         QVector<GridCell *> *formula = &formulaBodyList();
         qDeleteAll(*formula);
         formula->clear();
+
         FormulaRow fr{};
+        fr.addListHeader(formulaTableBodyList());
+
         fr.token = "electron";
         fr.desc = "electron software whatever applications";
         fr.tap = "homebrew/tap";
+        fr.isOutdated = true;
         fr.version = "0.03";
         fr.outdated = "1.02";
         fr.leafText = ".";
         fr.leafPopup = "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>";
-        fr.addToList(formula);
+        fr.addToList(formula, formulaTableBodyList());
         emit formulaBodyListChanged();
+        emit formulaTableBodyListChanged();
 
         QVector<GridCell *> *services = &servicesBodyList();
         qDeleteAll(*services);
@@ -271,11 +276,17 @@ public slots:
 
         qDeleteAll(*list);
         list->clear();
+
+        formulaTableBodyList().clear();
+        FormulaRow fr{};
+        fr.addListHeader(formulaTableBodyList());
+
         for (FormulaRow &r : formulaRows) {
-            r.addToList(list);
+            r.addToList(list, formulaTableBodyList());
         }
 
         emit formulaBodyListChanged();
+        emit formulaTableBodyListChanged();
     }
 
     void caskSort()

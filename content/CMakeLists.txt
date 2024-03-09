@@ -13,6 +13,7 @@ qt6_add_qml_module(content
         App.qml
         BottomBar.qml
         CollapseableGrid.qml
+        CollapseableTableViewFormula.qml
         ExtendableHeader.qml
         GridLayoutHeader.qml
         HeaderToolbar.qml
@@ -25,5 +26,6 @@ qt6_add_qml_module(content
         Search.qml
         SearchListItem.qml
         Settings.qml
+        TableHeaderLabel.qml
 
 )
