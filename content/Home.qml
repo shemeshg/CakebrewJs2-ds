@@ -113,6 +113,12 @@ ColumnLayout {
                                }
     }
 
+
+    CoreLabel {
+        text: Constants.brewData.refreshStatusFormulaText
+        visible: Constants.brewData.refreshStatusFormulaVisible
+    }
+
     CollapseableTableViewFormula{
         id: ctvf
 
@@ -150,9 +156,10 @@ ColumnLayout {
                 TableHeaderLabel {
                     sortedColOrder:ctvf.sortedColOrder
                     sortedColIdx: ctvf.sortedColIdx
-                    onHeaderClicked: idx => {
-
-                                                //collapseableGrid.headerClicked(idx, sortedColOrder)
+                    onHeaderClicked: (idx, sortOrder) => {
+                                         Constants.brewData.formulaSortedColIdx =  idx;
+                                         Constants.brewData.formulaSortedColOrder = sortOrder
+                                         Constants.brewData.formulaSort()
                                             }
                 }
             }

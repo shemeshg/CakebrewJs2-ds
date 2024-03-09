@@ -5,7 +5,7 @@ import Core
 import Qt.labs.qmlmodels
 
 CoreLabel {
-    signal headerClicked(int column)
+    signal headerClicked(int column, int sortedColOrder)
     property int sortedColOrder: 0
     property int sortedColIdx: 0
     function getOrderSymble(col) {
@@ -42,7 +42,7 @@ CoreLabel {
                        } else {
                            sortedColOrder = CollapseableTableViewFormula.SortOrder.Asc
                        }
-                       tableHeaderLabel.headerClicked(column)
+                       tableHeaderLabel.headerClicked(sortedColIdx, sortedColOrder)
                    }
     }
 }
