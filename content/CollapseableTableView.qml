@@ -6,9 +6,9 @@ import Qt.labs.qmlmodels
 
 ColumnLayout {
 
-    id: collapseableTableViewFormula
+    id: collapseableTableView
     property int autoExtendCol: 1
-    property int sortedColOrder: CollapseableTableViewFormula.SortOrder.Asc
+    property int sortedColOrder: CollapseableTableView.SortOrder.Asc
     property int sortedColIdx: 4
     property string headerText: ""
     property bool isExtended: true
@@ -44,8 +44,8 @@ ColumnLayout {
 
     ExtendableHeader {
         id: formulaHeader
-        isExtended: collapseableTableViewFormula.isExtended
-        headerText: collapseableTableViewFormula.headerText
+        isExtended: collapseableTableView.isExtended
+        headerText: collapseableTableView.headerText
     }
 
     CoreTextField {

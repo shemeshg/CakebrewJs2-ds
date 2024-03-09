@@ -76,7 +76,7 @@ ColumnLayout {
         visible: Constants.brewData.refreshStatusFormulaVisible
     }
 
-    CollapseableTableViewFormula {
+    CollapseableTableView {
         id: ctvf
         visible: !Constants.brewData.refreshFormulaRunning
 

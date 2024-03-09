@@ -10,9 +10,9 @@ CoreLabel {
     property int sortedColIdx: 0
     function getOrderSymble(col) {
         if (col === sortedColIdx) {
-            if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc) {
+            if (sortedColOrder === CollapseableTableView.SortOrder.Asc) {
                 return " ↑"
-            } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc) {
+            } else if (sortedColOrder === CollapseableTableView.SortOrder.Dsc) {
                 return " ↓"
             } else {
                 return ""
@@ -32,15 +32,15 @@ CoreLabel {
         onClicked: () => {
 
                        if (sortedColIdx !== column) {
-                           sortedColOrder = CollapseableTableViewFormula.SortOrder.No
+                           sortedColOrder = CollapseableTableView.SortOrder.No
                        }
                        sortedColIdx = column
-                       if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc) {
-                           sortedColOrder = CollapseableTableViewFormula.SortOrder.Dsc
-                       } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc) {
-                           sortedColOrder = CollapseableTableViewFormula.SortOrder.No
+                       if (sortedColOrder === CollapseableTableView.SortOrder.Asc) {
+                           sortedColOrder = CollapseableTableView.SortOrder.Dsc
+                       } else if (sortedColOrder === CollapseableTableView.SortOrder.Dsc) {
+                           sortedColOrder = CollapseableTableView.SortOrder.No
                        } else {
-                           sortedColOrder = CollapseableTableViewFormula.SortOrder.Asc
+                           sortedColOrder = CollapseableTableView.SortOrder.Asc
                        }
                        tableHeaderLabel.headerClicked(sortedColIdx, sortedColOrder)
                    }
