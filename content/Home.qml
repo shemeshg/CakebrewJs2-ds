@@ -43,33 +43,7 @@ ColumnLayout {
                          }
     }
 
-    CoreLabel {
-        text: Constants.brewData.refreshStatusServicesText
-        visible: Constants.brewData.refreshStatusServicesVisible
-    }
 
-    CollapseableGrid {
-        visible: !Constants.brewData.refreshServicesRunning
-        isExtended: true
-        headerText: "Services"
-
-        headerList: ["Name", "Status", "User", "Plist", "Actions"]
-
-        bodyList: Constants.brewData.servicesBodyList
-
-        sortedColIdx: Constants.brewData.servicesSortedColIdx
-        sortedColOrder: Constants.brewData.servicesSortedColOrder
-        onHeaderClicked: (colId, sortOrder) => {
-                             Constants.brewData.servicesSortedColIdx = colId
-                             Constants.brewData.servicesSortedColOrder = sortOrder
-                             Constants.brewData.servicesSort()
-                         }
-
-        onHyperlinkBtnClicked: (filterString, cellText) => {
-                                   Constants.brewData.asyncServicesAction(
-                                       () => {}, filterString, cellText)
-                               }
-    }
 
     CoreLabel {
         text: Constants.brewData.refreshStatusFormulaText
@@ -189,4 +163,35 @@ ColumnLayout {
             }
         }
     }
+
+
+    CoreLabel {
+        text: Constants.brewData.refreshStatusServicesText
+        visible: Constants.brewData.refreshStatusServicesVisible
+    }
+
+
+    CollapseableGrid {
+        visible: !Constants.brewData.refreshServicesRunning
+        isExtended: true
+        headerText: "Services"
+
+        headerList: ["Name", "Status", "User", "Plist", "Actions"]
+
+        bodyList: Constants.brewData.servicesBodyList
+
+        sortedColIdx: Constants.brewData.servicesSortedColIdx
+        sortedColOrder: Constants.brewData.servicesSortedColOrder
+        onHeaderClicked: (colId, sortOrder) => {
+                             Constants.brewData.servicesSortedColIdx = colId
+                             Constants.brewData.servicesSortedColOrder = sortOrder
+                             Constants.brewData.servicesSort()
+                         }
+
+        onHyperlinkBtnClicked: (filterString, cellText) => {
+                                   Constants.brewData.asyncServicesAction(
+                                       () => {}, filterString, cellText)
+                               }
+    }
+
 }

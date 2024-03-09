@@ -5,6 +5,8 @@ import Core
 import Qt.labs.qmlmodels
 
 ColumnLayout {
+    Layout.margins: 20
+
 
     id: collapseableTableView
     property int autoExtendCol: 1
