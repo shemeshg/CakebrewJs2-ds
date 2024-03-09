@@ -6,8 +6,7 @@ import Qt.labs.qmlmodels
 
 ColumnLayout {
 
-    id: collapseableTableViewFormula
-    property var calWids: [0,0,0,0,0,0]
+    id: collapseableTableViewFormula    
     property int autoExtendCol: 1
     property int sortedColOrder: CollapseableTableViewFormula.SortOrder.Asc
     property int sortedColIdx: 2
@@ -138,6 +137,7 @@ ColumnLayout {
 
     TableView {
         property var filteredModel: rowsModel
+        property var calWids: []//[0,0,0,0,0,0]
 
         Layout.fillWidth: true
         visible: formulaHeader.isExtended
@@ -150,16 +150,16 @@ ColumnLayout {
 
         onWidthChanged: tableView.forceLayout()
         columnWidthProvider: function (column) {
-            calWids[column] = implicitColumnWidth(column)
+            tableView.calWids[column] = implicitColumnWidth(column)
             let total=0
             if (column === autoExtendCol){
-                for (let i=0;i<calWids.length;i++){
+                for (let i=0;i<tableView.calWids.length;i++){
                     if (i!==autoExtendCol){
-                        if (calWids[i] <=0){
+                        if (tableView.calWids[i] <=0){
                             return implicitColumnWidth(column)
                         }
 
-                        total = total + calWids[i]
+                        total = total + tableView.calWids[i]
                     }
                 }
                 return tableView.width - total - 30
