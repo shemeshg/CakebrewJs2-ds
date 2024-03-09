@@ -1,56 +1,65 @@
 #pragma once
 
-#include "GridCell.h"
+#include <QVariant>
 
 class ServiceRow
 {
 public:
     QString name, status, user, plist, action;
-    void addToList(QVector<GridCell *> *services)
+
+    void addListHeader(QVariantList &formulaTableBodyList)
     {
-        GridCell *gc;
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(name);
-        gc->setFillWidth(false);
-        gc->setFilterString(name);
-        services->push_back(gc);
+        QMap<QString, QVariant> row;
+        QMap<QString, QVariant> text;
+        row["filterString"] = "";
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(status);
-        gc->setFillWidth(false);
-        gc->setFilterString(name);
-        services->push_back(gc);
+        text = {};
+        text["text"] = "Name";
+        row["name"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(user);
-        gc->setFillWidth(false);
-        gc->setFilterString(name);
-        services->push_back(gc);
+        text = {};
+        text["text"] = "Status";
+        row["status"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(plist);
-        gc->setFillWidth(true);
-        gc->setFilterString(name);
-        services->push_back(gc);
+        text = {};
+        text["text"] = "User";
+        row["user"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("linkBtn");
-        gc->setCellText(action);
-        gc->setFillWidth(false);
-        gc->setFilterString(name);
-        services->push_back(gc);
+        text = {};
+        text["text"] = "Plist";
+        row["plist"] = text;
 
-        for (int i = 0; i <= 4; ++i) {
-            gc = new GridCell();
-            gc->setCellType("bar");
-            gc->setCellText("");
-            gc->setFillWidth(false);
-            gc->setFilterString(name);
-            services->push_back(gc);
-        }
+        text = {};
+        text["text"] = "Actions";
+        row["action"] = text;
+
+        formulaTableBodyList.emplaceBack(row);
+    }
+
+    void addToList(QVariantList &serviceTableBodyList)
+    {
+        QMap<QString, QVariant> row;
+        QMap<QString, QVariant> text;
+        row["filterString"] = name;
+        text["text"] = name;
+        row["name"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = status;
+        row["status"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = user;
+        row["user"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = plist;
+        row["plist"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = action;
+        row["action"] = QVariant::fromValue(text);
+
+        serviceTableBodyList.emplaceBack(row);
     }
 };

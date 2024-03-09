@@ -6,44 +6,98 @@ import Core
 import Qt.labs.qmlmodels
 
 ColumnLayout {
+
     CoreLabel {
         text: Constants.brewData.refreshStatusCaskText
         visible: Constants.brewData.refreshStatusCaskVisible
     }
 
-    CollapseableGrid {
+    CollapseableTableView {
+        id: ctvc
         visible: !Constants.brewData.refreshCaskRunning
 
-        onCheckboxClicked: (c, v) => {
-                               if (c) {
-                                   Constants.selectedCaskItems.push(v)
-                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems]
-                               } else {
-                                   Constants.selectedCaskItems.splice(
-                                       Constants.selectedCaskItems.indexOf(v),
-                                       1)
-                                   Constants.selectedCaskItems = [...Constants.selectedCaskItems]
-                               }
-                           }
         headerText: "Cask (" + Constants.selectedCaskItems.length + ")"
+        rowsModel: Constants.brewData.caskTableBodyList
+        tableView.model: TableModel {
 
-        isExtended: true
+            TableModelColumn {
+                display: "token"
+            }
+            TableModelColumn {
+                display: "desc"
+            }
+            TableModelColumn {
+                display: "tap"
+            }
+            TableModelColumn {
+                display: "version"
+            }
+            TableModelColumn {
+                display: "outdated"
+            }
 
-        headerList: ["Token", "Desk", "Tap", "Version", "outdated"]
+            // Each row is one type of fruit that can be ordered
+            rows: ctvc.filteredModel
+        }
 
-        bodyList: Constants.brewData.caskBodyList
+        tableView.delegate: DelegateChooser {
+            DelegateChoice {
+                index: 0
+                TableHeaderLabel {
+                    sortedColOrder: ctvc.sortedColOrder
+                    sortedColIdx: ctvc.sortedColIdx
+                    onHeaderClicked: (idx, sortOrder) => {
+                                         Constants.brewData.caskSortedColIdx = idx
+                                         Constants.brewData.caskSortedColOrder = sortOrder
+                                         ctvc.sortedColIdx = idx
+                                         ctvc.sortedColOrder = sortOrder
+                                         Constants.brewData.asyncCaskSort(
+                                             () => {
+                                                 ctvc.filterTableByFilter()
+                                             })
+                                     }
+                }
+            }
 
-        sortedColIdx: Constants.brewData.caskSortedColIdx
-        sortedColOrder: Constants.brewData.caskSortedColOrder
+            DelegateChoice {
+                column: 0
+                delegate: HyperlinkBtn {
+                    leftPadding: 10
+                    urlText: model.display.text
+                    onLinkActivated: data => {
+                                         console.log(data)
+                                     }
+                    urlRef: model.display.text
+                }
+            }
 
-        onHeaderClicked: (colId, sortOrder) => {
-                             Constants.brewData.caskSortedColIdx = colId
-                             Constants.brewData.caskSortedColOrder = sortOrder
-                             Constants.brewData.caskSort()
-                         }
+            DelegateChoice {
+                column: 4
+                delegate: CheckBox {
+                    visible: model.display.text
+                    checked: model.display.tsChecked
+                    leftPadding: 10
+                    text: model.display.text
+                    onToggled: model.display.tsChecked = checked
+                }
+            }
+
+            DelegateChoice {
+                column: ctvc.autoExtendCol
+                CoreLabel {
+                    text: model.display.text
+                    wrapMode: Text.WordWrap
+                    leftPadding: 10
+                }
+            }
+            DelegateChoice {
+                CoreLabel {
+                    text: model.display.text
+                    leftPadding: 10
+                }
+            }
+        }
     }
-
-
 
     CoreLabel {
         text: Constants.brewData.refreshStatusFormulaText
@@ -92,11 +146,10 @@ ColumnLayout {
                                          Constants.brewData.formulaSortedColOrder = sortOrder
                                          ctvf.sortedColIdx = idx
                                          ctvf.sortedColOrder = sortOrder
-                                         Constants.brewData.asyncFormulaSort(()=>{
-                                                                         ctvf.filterTableByFilter();
-                                                                        })
-
-
+                                         Constants.brewData.asyncFormulaSort(
+                                             () => {
+                                                 ctvf.filterTableByFilter()
+                                             })
                                      }
                 }
             }
@@ -164,34 +217,91 @@ ColumnLayout {
         }
     }
 
+    CoreLabel {
+        text: Constants.brewData.refreshStatusServiceText
+        visible: Constants.brewData.refreshStatusServiceVisible
+    }
 
     CoreLabel {
-        text: Constants.brewData.refreshStatusServicesText
-        visible: Constants.brewData.refreshStatusServicesVisible
+        text: Constants.brewData.refreshStatusServiceText
+        visible: Constants.brewData.refreshStatusServiceVisible
     }
 
+    CollapseableTableView {
+        id: ctvs
+        autoExtendCol: 3
+        visible: !Constants.brewData.refreshServiceRunning
 
-    CollapseableGrid {
-        visible: !Constants.brewData.refreshServicesRunning
-        isExtended: true
-        headerText: "Services"
+        headerText: "Service"
+        rowsModel: Constants.brewData.serviceTableBodyList
+        tableView.model: TableModel {
 
-        headerList: ["Name", "Status", "User", "Plist", "Actions"]
+            TableModelColumn {
+                display: "name"
+            }
+            TableModelColumn {
+                display: "status"
+            }
+            TableModelColumn {
+                display: "user"
+            }
+            TableModelColumn {
+                display: "plist"
+            }
+            TableModelColumn {
+                display: "action"
+            }
 
-        bodyList: Constants.brewData.servicesBodyList
+            // Each row is one type of fruit that can be ordered
+            rows: ctvs.filteredModel
+        }
 
-        sortedColIdx: Constants.brewData.servicesSortedColIdx
-        sortedColOrder: Constants.brewData.servicesSortedColOrder
-        onHeaderClicked: (colId, sortOrder) => {
-                             Constants.brewData.servicesSortedColIdx = colId
-                             Constants.brewData.servicesSortedColOrder = sortOrder
-                             Constants.brewData.servicesSort()
-                         }
+        tableView.delegate: DelegateChooser {
+            DelegateChoice {
+                index: 0
+                TableHeaderLabel {
+                    sortedColOrder: ctvs.sortedColOrder
+                    sortedColIdx: ctvs.sortedColIdx
+                    onHeaderClicked: (idx, sortOrder) => {
+                                         Constants.brewData.serviceSortedColIdx = idx
+                                         Constants.brewData.serviceSortedColOrder = sortOrder
+                                         ctvs.sortedColIdx = idx
+                                         ctvs.sortedColOrder = sortOrder
+                                         Constants.brewData.asyncServiceSort(
+                                             () => {
+                                                 ctvs.filterTableByFilter()
+                                             })
+                                     }
+                }
+            }
 
-        onHyperlinkBtnClicked: (filterString, cellText) => {
-                                   Constants.brewData.asyncServicesAction(
-                                       () => {}, filterString, cellText)
-                               }
+            DelegateChoice {
+                column: 4
+                delegate: HyperlinkBtn {
+                    leftPadding: 10
+                    urlText: model.display.text
+                    onLinkActivated: data => {
+                                         console.log(data)
+                                         //Constants.brewData.asyncServiceAction(() => {}, filterString, cellText)
+                                     }
+                    urlRef: model.display.text
+                }
+            }
+
+            DelegateChoice {
+                column: ctvs.autoExtendCol
+                CoreLabel {
+                    text: model.display.text
+                    wrapMode: Text.WordWrap
+                    leftPadding: 10
+                }
+            }
+            DelegateChoice {
+                CoreLabel {
+                    text: model.display.text
+                    leftPadding: 10
+                }
+            }
+        }
     }
-
 }

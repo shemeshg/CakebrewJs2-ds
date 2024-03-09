@@ -18,17 +18,16 @@ public:
         loadNormalFontPointSize();
         loadTerminalApp();
 
-        QVector<GridCell *> *cask = &caskBodyList();
-        qDeleteAll(*cask);
-        cask->clear();
         CaskRow cr{};
+        cr.addListHeader(caskTableBodyList());
+
         cr.token = "anaconda";
         cr.desc = "anaconda analitical framework";
         cr.tap = "tap/homebrew";
         cr.version = "1,01";
         cr.outdated = "2.03";
-        cr.addToList(cask);
-        emit caskBodyListChanged();
+        cr.addToList(caskTableBodyList());
+        emit caskTableBodyListChanged();
 
         FormulaRow fr{};
         fr.addListHeader(formulaTableBodyList());
@@ -44,17 +43,16 @@ public:
         fr.addToList(formulaTableBodyList());
         emit formulaTableBodyListChanged();
 
-        QVector<GridCell *> *services = &servicesBodyList();
-        qDeleteAll(*services);
-        services->clear();
         ServiceRow serviceRow{};
+        serviceRow.addListHeader(serviceTableBodyList());
+
         serviceRow.name = "unbound";
         serviceRow.status = "none";
         serviceRow.user = "";
         serviceRow.plist = "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist";
         serviceRow.action = "start";
-        serviceRow.addToList(services);
-        emit servicesBodyListChanged();
+        serviceRow.addToList(serviceTableBodyList());
+        emit serviceTableBodyListChanged();
 
         QObject::connect(this, &BrewData::addSearchRow, this, [=](SearchResultRow *row, bool isCask) {
             QVector<SearchResultRow *> *listOfSearchResultRows;
@@ -327,67 +325,68 @@ public slots:
 
             return a.outdated + a.token > b.outdated + b.token;
         });
-        QVector<GridCell *> *list;
-        list = &caskBodyList();
 
-        qDeleteAll(*list);
-        list->clear();
+        caskTableBodyList().clear();
+        CaskRow fr{};
+        fr.addListHeader(caskTableBodyList());
+
         for (CaskRow &r : caskRows) {
-            r.addToList(list);
+            r.addToList(caskTableBodyList());
         }
-        emit caskBodyListChanged();
+
+        emit caskTableBodyListChanged();
     }
 
-    void servicesSort()
+    void serviceSort()
     {
         std::sort(serviceRows.begin(), serviceRows.end(), [=](ServiceRow &a, ServiceRow &b) {
-            if (servicesSortedColIdx() == 0 && servicesSortedColOrder() == 1) {
+            if (serviceSortedColIdx() == 0 && serviceSortedColOrder() == 1) {
                 return a.name < b.name;
             }
 
-            if (servicesSortedColIdx() == 1) {
-                if (servicesSortedColOrder() == 1) {
+            if (serviceSortedColIdx() == 1) {
+                if (serviceSortedColOrder() == 1) {
                     return a.status + a.name < b.status + a.name;
-                } else if (servicesSortedColOrder() == 2) {
+                } else if (serviceSortedColOrder() == 2) {
                     return a.status + a.name > b.status + a.name;
                 }
             }
 
-            if (servicesSortedColIdx() == 2) {
-                if (servicesSortedColOrder() == 1) {
+            if (serviceSortedColIdx() == 2) {
+                if (serviceSortedColOrder() == 1) {
                     return a.user + a.name < b.user + a.name;
-                } else if (servicesSortedColOrder() == 2) {
+                } else if (serviceSortedColOrder() == 2) {
                     return a.user + a.name > b.user + a.name;
                 }
             }
 
-            if (servicesSortedColIdx() == 3) {
-                if (servicesSortedColOrder() == 1) {
+            if (serviceSortedColIdx() == 3) {
+                if (serviceSortedColOrder() == 1) {
                     return a.plist < b.plist;
-                } else if (servicesSortedColOrder() == 2) {
+                } else if (serviceSortedColOrder() == 2) {
                     return a.plist > b.plist;
                 }
             }
 
-            if (servicesSortedColIdx() == 4) {
-                if (servicesSortedColOrder() == 1) {
+            if (serviceSortedColIdx() == 4) {
+                if (serviceSortedColOrder() == 1) {
                     return a.action + a.name < b.action + a.name;
-                } else if (servicesSortedColOrder() == 2) {
+                } else if (serviceSortedColOrder() == 2) {
                     return a.action + a.name > b.action + a.name;
                 }
             }
 
             return a.name > b.name;
         });
-        QVector<GridCell *> *list;
-        list = &servicesBodyList();
+        serviceTableBodyList().clear();
+        ServiceRow fr{};
+        fr.addListHeader(serviceTableBodyList());
 
-        qDeleteAll(*list);
-        list->clear();
         for (ServiceRow &r : serviceRows) {
-            r.addToList(list);
+            r.addToList(serviceTableBodyList());
         }
-        emit servicesBodyListChanged();
+
+        emit serviceTableBodyListChanged();
     }
 
 private slots:
@@ -395,7 +394,7 @@ private slots:
     {
         ShellCmd sc;
         serviceRows = sc.parseServicesList(strResult);
-        servicesSort();
+        serviceSort();
     }
 
     void parseRefreshCaskAndFormula(QString strResult)
@@ -489,9 +488,9 @@ private:
 
     void refreshServicesBeforeCallback()
     {
-        setRefreshStatusServicesText("Refresh services");
-        setRefreshStatusServicesVisible(true);
-        setRefreshServicesRunning(true);
+        setRefreshStatusServiceText("Refresh services");
+        setRefreshStatusServiceVisible(true);
+        setRefreshServiceRunning(true);
     }
 
     void refreshServicesAfterCallback()
@@ -507,11 +506,11 @@ private:
             }
         }
         if (!s.stdErr.isEmpty()) {
-            setRefreshStatusServicesText(s.stdErr);
-            setRefreshStatusServicesVisible(true);
+            setRefreshStatusServiceText(s.stdErr);
+            setRefreshStatusServiceVisible(true);
         } else {
-            setRefreshStatusServicesVisible(false);
+            setRefreshStatusServiceVisible(false);
         }
-        setRefreshServicesRunning(false);
+        setRefreshServiceRunning(false);
     }
 };

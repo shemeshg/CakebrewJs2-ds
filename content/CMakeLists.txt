@@ -12,13 +12,11 @@ qt6_add_qml_module(content
         About.qml
         App.qml
         BottomBar.qml
-        CollapseableGrid.qml
         CollapseableTableView.qml
         ExtendableHeader.qml
         GridLayoutHeader.qml
         HeaderToolbar.qml
         Home.qml
-        HomeGrid.qml
         HyperlinkBtn.qml
         Info.qml
         LoadingData.qml

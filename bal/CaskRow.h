@@ -1,68 +1,70 @@
 #pragma once
-#include "GridCell.h"
+#include <QVariant>
 
 class CaskRow
 {
 public:
     QString token, desc, tap, version, outdated;
     bool isOutdated;
-    void addToList(QVector<GridCell *> *cask)
+
+    void addListHeader(QVariantList &formulaTableBodyList)
     {
-        GridCell *gc;
+        QMap<QString, QVariant> row;
+        QMap<QString, QVariant> text;
+        row["filterString"] = "";
 
-        QString filterString = token + "|" + desc + "|" + tap;
+        text = {};
+        text["text"] = "Token";
+        row["token"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("linkBtn");
-        gc->setCellText(token);
-        gc->setFillWidth(false);
-        gc->setFilterString(filterString);
-        cask->push_back(gc);
+        text = {};
+        text["text"] = "Description";
+        row["desc"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(desc);
-        gc->setFillWidth(true);
-        gc->setFilterString(filterString);
-        cask->push_back(gc);
+        text = {};
+        text["text"] = "Tap";
+        row["tap"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(tap);
-        gc->setFillWidth(false);
-        gc->setFilterString(filterString);
-        cask->push_back(gc);
+        text = {};
+        text["text"] = "Version";
+        row["version"] = text;
 
-        gc = new GridCell();
-        gc->setCellType("text");
-        gc->setCellText(version);
-        gc->setFillWidth(false);
-        gc->setFilterString(filterString);
-        cask->push_back(gc);
+        text = {};
+        text["text"] = "Outdated";
+        row["outdated"] = text;
 
-        gc = new GridCell();
+        formulaTableBodyList.emplaceBack(row);
+    }
+
+    void addToList(QVariantList &caskTableBodyList)
+    {
+        QMap<QString, QVariant> row;
+        QMap<QString, QVariant> text;
+        row["filterString"] = token + "|" + desc + "|" + tap;
+        text["text"] = token;
+        row["token"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = desc;
+        row["desc"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = tap;
+        row["tap"] = QVariant::fromValue(text);
+
+        text = {};
+        text["text"] = version;
+        row["version"] = QVariant::fromValue(text);
+
+        text = {};
         if (isOutdated) {
-            gc->setCellType("checkbox");
-            gc->setCellText(outdated);
-            gc->setFillWidth(false);
-            gc->setFilterString(filterString);
-            gc->setOnToggled(token);
-            cask->push_back(gc);
+            text["text"] = outdated;
         } else {
-            gc->setCellType("text");
-            gc->setCellText("");
-            gc->setFillWidth(false);
-            gc->setFilterString(filterString);
-            cask->push_back(gc);
+            text["text"] = "";
         }
+        text["tsChecked"] = false;
+        row["outdated"] = QVariant::fromValue(text);
 
-        for (int i = 0; i <= 4; ++i) {
-            gc = new GridCell();
-            gc->setCellType("bar");
-            gc->setCellText("");
-            gc->setFillWidth(false);
-            gc->setFilterString(filterString);
-            cask->push_back(gc);
-        }
+        caskTableBodyList.emplaceBack(row);
     }
 };

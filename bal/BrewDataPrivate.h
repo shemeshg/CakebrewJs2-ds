@@ -3,7 +3,6 @@
 #include <QObject>
 #include <QObjectComputedProperty>
 #include <QQmlEngine>
-#include "GridCell.h"
 #include "JsAsync.h"
 #include "searchresultrow.h"
 /*[[[cog
@@ -18,8 +17,6 @@ cog.outl(classBrewDataPrivate.getClassHeader(),
 class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
-    Q_PROPERTY(QVector<GridCell *> caskBodyList READ caskBodyList  NOTIFY caskBodyListChanged )
-    Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
     Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
@@ -33,34 +30,28 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(bool searchFormulaRunning READ searchFormulaRunning WRITE setSearchFormulaRunning NOTIFY searchFormulaRunningChanged )
     Q_PROPERTY(QString refreshStatusCaskText READ refreshStatusCaskText WRITE setRefreshStatusCaskText NOTIFY refreshStatusCaskTextChanged )
     Q_PROPERTY(QString refreshStatusFormulaText READ refreshStatusFormulaText WRITE setRefreshStatusFormulaText NOTIFY refreshStatusFormulaTextChanged )
-    Q_PROPERTY(QString refreshStatusServicesText READ refreshStatusServicesText WRITE setRefreshStatusServicesText NOTIFY refreshStatusServicesTextChanged )
-    Q_PROPERTY(bool refreshStatusServicesVisible READ refreshStatusServicesVisible WRITE setRefreshStatusServicesVisible NOTIFY refreshStatusServicesVisibleChanged )
+    Q_PROPERTY(QString refreshStatusServiceText READ refreshStatusServiceText WRITE setRefreshStatusServiceText NOTIFY refreshStatusServiceTextChanged )
+    Q_PROPERTY(bool refreshStatusServiceVisible READ refreshStatusServiceVisible WRITE setRefreshStatusServiceVisible NOTIFY refreshStatusServiceVisibleChanged )
     Q_PROPERTY(bool refreshStatusFormulaVisible READ refreshStatusFormulaVisible WRITE setRefreshStatusFormulaVisible NOTIFY refreshStatusFormulaVisibleChanged )
     Q_PROPERTY(bool refreshStatusCaskVisible READ refreshStatusCaskVisible WRITE setRefreshStatusCaskVisible NOTIFY refreshStatusCaskVisibleChanged )
-    Q_PROPERTY(bool refreshServicesRunning READ refreshServicesRunning WRITE setRefreshServicesRunning NOTIFY refreshServicesRunningChanged )
+    Q_PROPERTY(bool refreshServiceRunning READ refreshServiceRunning WRITE setRefreshServiceRunning NOTIFY refreshServiceRunningChanged )
     Q_PROPERTY(bool refreshFormulaRunning READ refreshFormulaRunning WRITE setRefreshFormulaRunning NOTIFY refreshFormulaRunningChanged )
     Q_PROPERTY(bool refreshCaskRunning READ refreshCaskRunning WRITE setRefreshCaskRunning NOTIFY refreshCaskRunningChanged )
-    Q_PROPERTY(int servicesSortedColIdx READ servicesSortedColIdx WRITE setServicesSortedColIdx NOTIFY servicesSortedColIdxChanged )
-    Q_PROPERTY(int servicesSortedColOrder READ servicesSortedColOrder WRITE setServicesSortedColOrder NOTIFY servicesSortedColOrderChanged )
+    Q_PROPERTY(int serviceSortedColIdx READ serviceSortedColIdx WRITE setServiceSortedColIdx NOTIFY serviceSortedColIdxChanged )
+    Q_PROPERTY(int serviceSortedColOrder READ serviceSortedColOrder WRITE setServiceSortedColOrder NOTIFY serviceSortedColOrderChanged )
     Q_PROPERTY(int caskSortedColIdx READ caskSortedColIdx WRITE setCaskSortedColIdx NOTIFY caskSortedColIdxChanged )
     Q_PROPERTY(int caskSortedColOrder READ caskSortedColOrder WRITE setCaskSortedColOrder NOTIFY caskSortedColOrderChanged )
     Q_PROPERTY(int formulaSortedColIdx READ formulaSortedColIdx WRITE setFormulaSortedColIdx NOTIFY formulaSortedColIdxChanged )
     Q_PROPERTY(int formulaSortedColOrder READ formulaSortedColOrder WRITE setFormulaSortedColOrder NOTIFY formulaSortedColOrderChanged )
     Q_PROPERTY(QVariantList formulaTableBodyList READ formulaTableBodyList  NOTIFY formulaTableBodyListChanged )
+    Q_PROPERTY(QVariantList caskTableBodyList READ caskTableBodyList  NOTIFY caskTableBodyListChanged )
+    Q_PROPERTY(QVariantList serviceTableBodyList READ serviceTableBodyList  NOTIFY serviceTableBodyListChanged )
     
     QML_ELEMENT
 public:
     BrewDataPrivate(QObject *parent = nullptr);
 
     
-    
-    QVector<GridCell *> &caskBodyList() {return m_caskBodyList;} 
-    
-
-    
-    QVector<GridCell *> &servicesBodyList() {return m_servicesBodyList;} 
-    
-
     
     QString brewLocation() const{return m_brewLocation;} 
     
@@ -202,26 +193,26 @@ void setRefreshStatusFormulaText(const QString &newRefreshStatusFormulaText)
 
 
     
-    QString refreshStatusServicesText() const{return m_refreshStatusServicesText;} 
+    QString refreshStatusServiceText() const{return m_refreshStatusServiceText;} 
     
-void setRefreshStatusServicesText(const QString &newRefreshStatusServicesText)
+void setRefreshStatusServiceText(const QString &newRefreshStatusServiceText)
     {
-        if (m_refreshStatusServicesText == newRefreshStatusServicesText)
+        if (m_refreshStatusServiceText == newRefreshStatusServiceText)
             return;
-        m_refreshStatusServicesText = newRefreshStatusServicesText;
-        emit refreshStatusServicesTextChanged();
+        m_refreshStatusServiceText = newRefreshStatusServiceText;
+        emit refreshStatusServiceTextChanged();
     }
 
 
     
-    bool refreshStatusServicesVisible() const{return m_refreshStatusServicesVisible;} 
+    bool refreshStatusServiceVisible() const{return m_refreshStatusServiceVisible;} 
     
-void setRefreshStatusServicesVisible(const bool newRefreshStatusServicesVisible)
+void setRefreshStatusServiceVisible(const bool newRefreshStatusServiceVisible)
     {
-        if (m_refreshStatusServicesVisible == newRefreshStatusServicesVisible)
+        if (m_refreshStatusServiceVisible == newRefreshStatusServiceVisible)
             return;
-        m_refreshStatusServicesVisible = newRefreshStatusServicesVisible;
-        emit refreshStatusServicesVisibleChanged();
+        m_refreshStatusServiceVisible = newRefreshStatusServiceVisible;
+        emit refreshStatusServiceVisibleChanged();
     }
 
 
@@ -250,14 +241,14 @@ void setRefreshStatusCaskVisible(const bool newRefreshStatusCaskVisible)
 
 
     
-    bool refreshServicesRunning() const{return m_refreshServicesRunning;} 
+    bool refreshServiceRunning() const{return m_refreshServiceRunning;} 
     
-void setRefreshServicesRunning(const bool newRefreshServicesRunning)
+void setRefreshServiceRunning(const bool newRefreshServiceRunning)
     {
-        if (m_refreshServicesRunning == newRefreshServicesRunning)
+        if (m_refreshServiceRunning == newRefreshServiceRunning)
             return;
-        m_refreshServicesRunning = newRefreshServicesRunning;
-        emit refreshServicesRunningChanged();
+        m_refreshServiceRunning = newRefreshServiceRunning;
+        emit refreshServiceRunningChanged();
     }
 
 
@@ -286,26 +277,26 @@ void setRefreshCaskRunning(const bool newRefreshCaskRunning)
 
 
     
-    int servicesSortedColIdx() const{return m_servicesSortedColIdx;} 
+    int serviceSortedColIdx() const{return m_serviceSortedColIdx;} 
     
-void setServicesSortedColIdx(const int newServicesSortedColIdx)
+void setServiceSortedColIdx(const int newServiceSortedColIdx)
     {
-        if (m_servicesSortedColIdx == newServicesSortedColIdx)
+        if (m_serviceSortedColIdx == newServiceSortedColIdx)
             return;
-        m_servicesSortedColIdx = newServicesSortedColIdx;
-        emit servicesSortedColIdxChanged();
+        m_serviceSortedColIdx = newServiceSortedColIdx;
+        emit serviceSortedColIdxChanged();
     }
 
 
     
-    int servicesSortedColOrder() const{return m_servicesSortedColOrder;} 
+    int serviceSortedColOrder() const{return m_serviceSortedColOrder;} 
     
-void setServicesSortedColOrder(const int newServicesSortedColOrder)
+void setServiceSortedColOrder(const int newServiceSortedColOrder)
     {
-        if (m_servicesSortedColOrder == newServicesSortedColOrder)
+        if (m_serviceSortedColOrder == newServiceSortedColOrder)
             return;
-        m_servicesSortedColOrder = newServicesSortedColOrder;
-        emit servicesSortedColOrderChanged();
+        m_serviceSortedColOrder = newServiceSortedColOrder;
+        emit serviceSortedColOrderChanged();
     }
 
 
@@ -361,10 +352,16 @@ void setFormulaSortedColOrder(const int newFormulaSortedColOrder)
     QVariantList &formulaTableBodyList() {return m_formulaTableBodyList;} 
     
 
+    
+    QVariantList &caskTableBodyList() {return m_caskTableBodyList;} 
+    
+
+    
+    QVariantList &serviceTableBodyList() {return m_serviceTableBodyList;} 
+    
+
 
 signals:
-    void caskBodyListChanged();
-    void servicesBodyListChanged();
     void brewLocationChanged();
     void normalFontPointSizeChanged();
     void terminalAppChanged();
@@ -378,25 +375,25 @@ signals:
     void searchFormulaRunningChanged();
     void refreshStatusCaskTextChanged();
     void refreshStatusFormulaTextChanged();
-    void refreshStatusServicesTextChanged();
-    void refreshStatusServicesVisibleChanged();
+    void refreshStatusServiceTextChanged();
+    void refreshStatusServiceVisibleChanged();
     void refreshStatusFormulaVisibleChanged();
     void refreshStatusCaskVisibleChanged();
-    void refreshServicesRunningChanged();
+    void refreshServiceRunningChanged();
     void refreshFormulaRunningChanged();
     void refreshCaskRunningChanged();
-    void servicesSortedColIdxChanged();
-    void servicesSortedColOrderChanged();
+    void serviceSortedColIdxChanged();
+    void serviceSortedColOrderChanged();
     void caskSortedColIdxChanged();
     void caskSortedColOrderChanged();
     void formulaSortedColIdxChanged();
     void formulaSortedColOrderChanged();
     void formulaTableBodyListChanged();
+    void caskTableBodyListChanged();
+    void serviceTableBodyListChanged();
     
 
 private:
-    QVector<GridCell *> m_caskBodyList;
-    QVector<GridCell *> m_servicesBodyList;
     QString m_brewLocation;
     QString m_normalFontPointSize;
     QString m_terminalApp;
@@ -410,20 +407,22 @@ private:
     bool m_searchFormulaRunning;
     QString m_refreshStatusCaskText;
     QString m_refreshStatusFormulaText;
-    QString m_refreshStatusServicesText;
-    bool m_refreshStatusServicesVisible;
+    QString m_refreshStatusServiceText;
+    bool m_refreshStatusServiceVisible;
     bool m_refreshStatusFormulaVisible;
     bool m_refreshStatusCaskVisible;
-    bool m_refreshServicesRunning;
+    bool m_refreshServiceRunning;
     bool m_refreshFormulaRunning;
     bool m_refreshCaskRunning;
-    int m_servicesSortedColIdx;
-    int m_servicesSortedColOrder;
+    int m_serviceSortedColIdx;
+    int m_serviceSortedColOrder;
     int m_caskSortedColIdx;
     int m_caskSortedColOrder;
     int m_formulaSortedColIdx;
     int m_formulaSortedColOrder;
     QVariantList m_formulaTableBodyList;
+    QVariantList m_caskTableBodyList;
+    QVariantList m_serviceTableBodyList;
     
     void ctorClass();
 };

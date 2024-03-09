@@ -91,173 +91,6 @@ QtObject {
         interval: 200
     }
 
-    property var caskBodyList: [{
-            "cellType": "linkBtn",
-            "cellText": "anaconda",
-            "fillWidth": false,
-            "filterString": "anaconda"
-        }, {
-            "cellType": "text",
-            "cellText": "Distribution of the Python and R programming languages for scientific computing",
-            "fillWidth": true,
-            "filterString": "anaconda"
-        }, {
-            "cellType": "text",
-            "cellText": "homebrew/tap",
-            "fillWidth": false,
-            "filterString": "anaconda"
-        }, {
-            "cellType": "text",
-            "cellText": "1.3.5",
-            "fillWidth": false,
-            "filterString": "anaconda"
-        }, {
-            "cellType": "checkbox",
-            "cellText": "1.3.6",
-            "fillWidth": false,
-            "onToggled": "anaconda",
-            "filterString": "anaconda"
-        }]
-
-    property var formulaBodyList: [{
-            "cellType": "linkBtn",
-            "cellText": "libxext",
-            "fillWidth": false,
-            "filterString": "libxext"
-        }, {
-            "cellType": "text",
-            "cellText": "X.Org: Library for common extensions to the X11 protocol",
-            "fillWidth": true,
-            "filterString": "libxext"
-        }, {
-            "cellType": "text",
-            "cellText": "homebrew/tap",
-            "fillWidth": false,
-            "filterString": "libxext"
-        }, {
-            "cellType": "text",
-            "cellText": "1.3.5",
-            "fillWidth": false,
-            "filterString": "libxext"
-        }, {
-            "cellType": "checkbox",
-            "cellText": "1.3.6",
-            "fillWidth": false,
-            "onToggled": "linkBtn",
-            "filterString": "libxext"
-        }, {
-            "cellType": "text",
-            "cellText": ".",
-            "fillWidth": false,
-            "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
-            "filterString": "libxext"
-        },
-        //
-        {
-            "cellType": "bar",
-            "cellText": "",
-            "fillWidth": false,
-            "hoverText": "",
-            "filterString": ""
-         },
-        {
-            "cellType": "bar",
-            "cellText": "",
-            "fillWidth": false,
-            "hoverText": "",
-            "filterString": ""
-         },
-        {
-            "cellType": "bar",
-            "cellText": "",
-            "fillWidth": false,
-            "hoverText": "",
-            "filterString": ""
-         },
-        {
-            "cellType": "bar",
-            "cellText": "",
-            "fillWidth": false,
-            "hoverText": "",
-            "filterString": ""
-         },
-        {
-            "cellType": "bar",
-            "cellText": "",
-            "fillWidth": false,
-            "hoverText": "",
-            "filterString": ""
-         },
-        {
-            "cellType": "bar",
-            "cellText": "",
-            "fillWidth": false,
-            "hoverText": "",
-            "filterString": ""
-         },
-        //
-        {
-                    "cellType": "linkBtn",
-                    "cellText": "libxext",
-                    "fillWidth": false,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": "X.Org: Library for common extensions to the X11 protocol",
-                    "fillWidth": true,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": "homebrew/tap",
-                    "fillWidth": false,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": "1.3.5",
-                    "fillWidth": false,
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "checkbox",
-                    "cellText": "1.3.6",
-                    "fillWidth": false,
-                    "onToggled": "linkBtn",
-                    "filterString": "libxext"
-                }, {
-                    "cellType": "text",
-                    "cellText": ".",
-                    "fillWidth": false,
-                    "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
-                    "filterString": "libxext"
-                },
-    ]
-
-    property var servicesBodyList: [{
-            "cellType": "text",
-            "cellText": "unbound",
-            "fillWidth": false,
-            "filterString": "unbound"
-        }, {
-            "cellType": "text",
-            "cellText": "none",
-            "fillWidth": false,
-            "filterString": "unbound"
-        }, {
-            "cellType": "text",
-            "cellText": "",
-            "fillWidth": false,
-            "filterString": "unbound"
-        }, {
-            "cellType": "text",
-            "cellText": "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist",
-            "fillWidth": true,
-            "filterString": "unbound"
-        }, {
-            "cellType": "linkBtn",
-            "cellText": "stop",
-            "fillWidth": false,
-            "filterString": "unbound"
-        }]
-
     property string brewLocation: "/whatever/brew"
 
     property string normalFontPointSize: "14"
@@ -274,9 +107,9 @@ QtObject {
         terminalApp = s
     }
 
-    property string refreshStatusServicesText: ""
-    property bool refreshStatusServicesVisible: false
-    property bool refreshServicesRunning: false
+    property string refreshStatusServiceText: ""
+    property bool refreshStatusServiceVisible: false
+    property bool refreshServiceRunning: false
 
     property string refreshStatusFormulaText: ""
     property bool refreshStatusFormulaVisible: false
@@ -286,116 +119,24 @@ QtObject {
     property bool refreshStatusCaskVisible: false
     property bool refreshCaskRunning: false
 
-    function asyncRefreshServices(cb) {
-        refreshStatusServicesText = "Refresh services"
-        refreshStatusServicesVisible = true
-        refreshServicesRunning = true
-        servicesBodyList = []
+    function asyncRefreshService(cb) {
+        refreshStatusServiceText = "Refresh service"
+        refreshStatusServiceVisible = true
+        refreshServiceRunning = true
 
         refreshStatusCaskText = "Refresh cask"
         refreshStatusCaskVisible = true
         refreshCaskRunning = true
-        caskBodyList = []
 
         refreshStatusFormulaText = "Refresh Formula"
         refreshStatusFormulaVisible = true
         refreshFormulaRunning = true
-        formulaBodyList = []
 
         timerCb = () => {
 
-            servicesBodyList = [{
-                                    "cellType": "text",
-                                    "cellText": "unbound",
-                                    "fillWidth": false,
-                                    "filterString": "unbound"
-                                }, {
-                                    "cellType": "text",
-                                    "cellText": "none",
-                                    "fillWidth": false,
-                                    "filterString": "unbound"
-                                }, {
-                                    "cellType": "text",
-                                    "cellText": "Refreshed",
-                                    "fillWidth": false,
-                                    "filterString": "unbound"
-                                }, {
-                                    "cellType": "text",
-                                    "cellText": "/usr/local/opt/unbound/homebrew.mxcl.unbound.plist",
-                                    "fillWidth": true,
-                                    "filterString": "unbound"
-                                }, {
-                                    "cellType": "linkBtn",
-                                    "cellText": "stop",
-                                    "fillWidth": false,
-                                    "filterString": "unbound"
-                                }]
-
-            caskBodyList = [{
-                                "cellType": "linkBtn",
-                                "cellText": "anaconda",
-                                "fillWidth": false,
-                                "filterString": "anaconda"
-                            }, {
-                                "cellType": "text",
-                                "cellText": "REFRESHED Distribution of the Python and R programming languages for scientific computing",
-                                "fillWidth": true,
-                                "filterString": "anaconda"
-                            }, {
-                                "cellType": "text",
-                                "cellText": "homebrew/tap",
-                                "fillWidth": false,
-                                "filterString": "anaconda"
-                            }, {
-                                "cellType": "text",
-                                "cellText": "1.3.5",
-                                "fillWidth": false,
-                                "filterString": "anaconda"
-                            }, {
-                                "cellType": "checkbox",
-                                "cellText": "1.3.6",
-                                "fillWidth": false,
-                                "onToggled": "anaconda",
-                                "filterString": "anaconda"
-                            }]
-
-            formulaBodyList = [{
-                                   "cellType": "linkBtn",
-                                   "cellText": "libxext",
-                                   "fillWidth": false,
-                                   "filterString": "libxext"
-                               }, {
-                                   "cellType": "text",
-                                   "cellText": "REFRESHED X.Org: Library for common extensions to the X11 protocol",
-                                   "fillWidth": true,
-                                   "filterString": "libxext"
-                               }, {
-                                   "cellType": "text",
-                                   "cellText": "homebrew/tap",
-                                   "fillWidth": false,
-                                   "filterString": "libxext"
-                               }, {
-                                   "cellType": "text",
-                                   "cellText": "1.3.5",
-                                   "fillWidth": false,
-                                   "filterString": "libxext"
-                               }, {
-                                   "cellType": "checkbox",
-                                   "cellText": "1.3.6",
-                                   "fillWidth": false,
-                                   "onToggled": "linkBtn",
-                                   "filterString": "libxext"
-                               }, {
-                                   "cellType": "text",
-                                   "cellText": ".",
-                                   "fillWidth": false,
-                                   "hoverText": "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>",
-                                   "filterString": "libxext"
-                               }]
-
-            refreshStatusServicesText = ""
-            refreshStatusServicesVisible = false
-            refreshServicesRunning = false
+            refreshStatusServiceText = ""
+            refreshStatusServiceVisible = false
+            refreshServiceRunning = false
 
             refreshStatusFormulaText = ""
             refreshStatusFormulaVisible = false
@@ -414,13 +155,13 @@ QtObject {
         cb()
     }
 
-    function asyncServicesAction(cb, name, action) {
+    function asyncServiceAction(cb, name, action) {
         console.log("starting/stoping " + name)
     }
 
-    property int servicesSortedColIdx: 0
-    property int servicesSortedColOrder: 2
-    function servicesSort() {
+    property int serviceSortedColIdx: 0
+    property int serviceSortedColOrder: 2
+    function serviceSort() {
         console.log("Re-returned sorted")
     }
 
@@ -436,61 +177,214 @@ QtObject {
         console.log("Re-returned sorted")
     }
 
-    property var formulaTableBodyList:  [
-        {
-            "name": {text: "Name"},
-            "desc": {text: "Description"},
-            "tap": {text: "Tap"},
-            "version": {text: "Version"},
-            "outdated": {text: "Outdated"},
-            "leaf": {text: "Leaf"},
+    property var serviceTableBodyList: [{
+            "name": {
+                "text": "Name"
+            },
+            "status": {
+                "text": "Status"
+            },
+            "user": {
+                "text": "User"
+            },
+            "plist": {
+                "text": "Plist"
+            },
+            "action": {
+                "text": "Action"
+            },
             "filterString": "" //header must filter empty
-        },
-        {
-            "name": {text: "libext"},
-            "desc": {text: "very asdfhaksdgflkagdsfasdlflhkg Description"},
-            "tap": {text: "Tap"},
-            "version": {text: "1.23"},
-            "outdated": {text: "2.00", tsChecked: false},
-            "leaf": {text: "*", hoverText: "shalom\nolam"},
-            "filterString": "abc"
-        },  {
-            "name": {text: "libext"},
-            "desc": {text: "very pioutyoiuyrt Description"},
-            "tap": {text: "Tap"},
-            "version": {text: "1.23"},
-            "outdated": {text: "2.00", tsChecked: false},
-            "leaf": {text: "*", hoverText: "shalom\nolam"},
-            "filterString": "abc"
-        },  {
-            "name": {text: "libext"},
-            "desc": {text: "very pioutyoiuyrt Description"},
-            "tap": {text: "Tap"},
-            "version": {text: "1.23"},
-            "outdated": {text: "2.00", tsChecked: false},
-            "leaf": {text: "*", hoverText: "shalom\nolam"},
-            "filterString": "abc"
-        },
-        {
-            "name": {text: "libext"},
-            "desc": {text: "very pioutyoiuyrt Description"},
-            "tap": {text: "Tap"},
-            "version": {text: "1.23"},
-            "outdated": {text: "2.00", tsChecked: false},
-            "leaf": {text: "*", hoverText: "shalom\nolam"},
-            "filterString": "abc"
-        },
-        {
-            "name": {text: "libext"},
-            "desc": {text: "very pioutyoiuyrt Description"},
-            "tap": {text: "Tap"},
-            "version": {text: "1.23"},
-            "outdated": {text: "", tsChecked: false},
-            "leaf": {text: "*", hoverText: "shalom\nolam"},
+        }, {
+            "name": {
+                "text": "aaa"
+            },
+            "status": {
+                "text": "runnng"
+            },
+            "user": {
+                "text": "User"
+            },
+            "plist": {
+                "text": "Plistasd asdfasdfasdfasdfasdfadsf"
+            },
+            "action": {
+                "text": "stop"
+            },
+            "filterString": "" //header must filter empty
+        }]
+
+    property var caskTableBodyList: [{
+            "token": {
+                "text": "Token"
+            },
+            "desc": {
+                "text": "Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "Version"
+            },
+            "outdated": {
+                "text": "Outdated"
+            },
+            "filterString": "" //header must filter empty
+        }, {
+            "token": {
+                "text": "libext"
+            },
+            "desc": {
+                "text": "very asdfhaksdgflkagdsfasdlflhkg Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "1.23"
+            },
+            "outdated": {
+                "text": "2.00",
+                "tsChecked": false
+            },
+            "leaf": {
+                "text": "*",
+                "hoverText": "shalom\nolam"
+            },
             "filterString": "abc"
         }]
 
-    function asyncFormulaSort(cb){
+    property var formulaTableBodyList: [{
+            "name": {
+                "text": "Name"
+            },
+            "desc": {
+                "text": "Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "Version"
+            },
+            "outdated": {
+                "text": "Outdated"
+            },
+            "leaf": {
+                "text": "Leaf"
+            },
+            "filterString": "" //header must filter empty
+        }, {
+            "name": {
+                "text": "libext"
+            },
+            "desc": {
+                "text": "very asdfhaksdgflkagdsfasdlflhkg Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "1.23"
+            },
+            "outdated": {
+                "text": "2.00",
+                "tsChecked": false
+            },
+            "leaf": {
+                "text": "*",
+                "hoverText": "shalom\nolam"
+            },
+            "filterString": "abc"
+        }, {
+            "name": {
+                "text": "libext"
+            },
+            "desc": {
+                "text": "very pioutyoiuyrt Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "1.23"
+            },
+            "outdated": {
+                "text": "2.00",
+                "tsChecked": false
+            },
+            "leaf": {
+                "text": "*",
+                "hoverText": "shalom\nolam"
+            },
+            "filterString": "abc"
+        }, {
+            "name": {
+                "text": "libext"
+            },
+            "desc": {
+                "text": "very pioutyoiuyrt Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "1.23"
+            },
+            "outdated": {
+                "text": "2.00",
+                "tsChecked": false
+            },
+            "leaf": {
+                "text": "*",
+                "hoverText": "shalom\nolam"
+            },
+            "filterString": "abc"
+        }, {
+            "name": {
+                "text": "libext"
+            },
+            "desc": {
+                "text": "very pioutyoiuyrt Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "1.23"
+            },
+            "outdated": {
+                "text": "2.00",
+                "tsChecked": false
+            },
+            "leaf": {
+                "text": "*",
+                "hoverText": "shalom\nolam"
+            },
+            "filterString": "abc"
+        }, {
+            "name": {
+                "text": "libext"
+            },
+            "desc": {
+                "text": "very pioutyoiuyrt Description"
+            },
+            "tap": {
+                "text": "Tap"
+            },
+            "version": {
+                "text": "1.23"
+            },
+            "outdated": {
+                "text": "",
+                "tsChecked": false
+            },
+            "leaf": {
+                "text": "*",
+                "hoverText": "shalom\nolam"
+            },
+            "filterString": "abc"
+        }]
 
-    }
+    function asyncFormulaSort(cb) {}
 }

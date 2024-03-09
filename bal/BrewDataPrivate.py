@@ -2,18 +2,6 @@ from property import Prpt, PrptClass
 
 
 ary = []
-p = Prpt("QVector<GridCell *>",'caskBodyList')
-p.is_bindable = False
-p.is_writable = False
-p.is_notify = True
-p.is_getter_ref = True
-ary.append(p)
-p = Prpt("QVector<GridCell *>",'servicesBodyList')
-p.is_bindable = False
-p.is_writable = False
-p.is_notify = True
-p.is_getter_ref = True
-ary.append(p)
 p = Prpt("QString",'brewLocation')
 p.is_bindable = False
 p.is_writable = True
@@ -83,12 +71,12 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
-p = Prpt("QString",'refreshStatusServicesText')
+p = Prpt("QString",'refreshStatusServiceText')
 p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
-p = Prpt("bool",'refreshStatusServicesVisible')
+p = Prpt("bool",'refreshStatusServiceVisible')
 p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
@@ -103,7 +91,7 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
-p = Prpt("bool",'refreshServicesRunning')
+p = Prpt("bool",'refreshServiceRunning')
 p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
@@ -118,12 +106,12 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
-p = Prpt("int",'servicesSortedColIdx')
+p = Prpt("int",'serviceSortedColIdx')
 p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
-p = Prpt("int",'servicesSortedColOrder')
+p = Prpt("int",'serviceSortedColOrder')
 p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
@@ -154,8 +142,20 @@ p.is_writable = False
 p.is_notify = True
 p.is_getter_ref = True
 ary.append(p)
+p = Prpt("QVariantList",'caskTableBodyList')
+p.is_bindable = False
+p.is_writable = False
+p.is_notify = True
+p.is_getter_ref = True
+ary.append(p)
+p = Prpt("QVariantList",'serviceTableBodyList')
+p.is_bindable = False
+p.is_writable = False
+p.is_notify = True
+p.is_getter_ref = True
+ary.append(p)
 
 classBrewDataPrivate = PrptClass("BrewDataPrivate", ary)
 classBrewDataPrivate.inhirit_from = "JsAsync"
-        
+
 
