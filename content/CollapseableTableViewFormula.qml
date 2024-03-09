@@ -68,38 +68,40 @@ ColumnLayout {
         }
     }
 
-    TableView {
-        property var calWids: [] //[0,0,0,0,0,0]
-
-        Layout.fillWidth: true
+    ColumnLayout {
         visible: formulaHeader.isExtended
-        implicitHeight: contentHeight
-        columnSpacing: 1
-        rowSpacing: 1
-        clip: true
-        id: tableView
+        TableView {
+            property var calWids: [] //[0,0,0,0,0,0]
 
-        onWidthChanged: tableView.forceLayout()
-        columnWidthProvider: function (column) {
-            tableView.calWids[column] = implicitColumnWidth(column)
-            let total = 0
-            if (column === autoExtendCol) {
-                for (var i = 0; i < tableView.calWids.length; i++) {
-                    if (i !== autoExtendCol) {
-                        if (tableView.calWids[i] <= 0) {
-                            return implicitColumnWidth(column)
+            Layout.fillWidth: true
+            implicitHeight: contentHeight
+            columnSpacing: 1
+            rowSpacing: 1
+            clip: true
+            id: tableView
+
+            onWidthChanged: tableView.forceLayout()
+            columnWidthProvider: function (column) {
+                tableView.calWids[column] = implicitColumnWidth(column)
+                let total = 0
+                if (column === autoExtendCol) {
+                    for (var i = 0; i < tableView.calWids.length; i++) {
+                        if (i !== autoExtendCol) {
+                            if (tableView.calWids[i] <= 0) {
+                                return implicitColumnWidth(column)
+                            }
+
+                            total = total + tableView.calWids[i]
                         }
-
-                        total = total + tableView.calWids[i]
                     }
+                    return tableView.width - total - 30
                 }
-                return tableView.width - total - 30
+                return implicitColumnWidth(column)
             }
-            return implicitColumnWidth(column)
-        }
 
-        ScrollBar.vertical: ScrollBar {
-            policy: ScrollBar.AsNeeded
+            ScrollBar.vertical: ScrollBar {
+                policy: ScrollBar.AsNeeded
+            }
         }
     }
 }
