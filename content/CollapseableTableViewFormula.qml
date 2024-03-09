@@ -20,7 +20,7 @@ ColumnLayout {
             "version": {text: "Version"},
             "outdated": {text: "Outdated"},
             "leaf": {text: "Leaf"},
-            "filterString": "abc" //header must filter empty
+            "filterString": "" //header must filter empty
         },
         {
             "name": {text: "libext"},
@@ -81,7 +81,8 @@ ColumnLayout {
 
     function getRowsModel(){
         return rowsModel.filter((row)=>{
-                                return row.filterString.toLowerCase().includes(filterByExp.text.toLowerCase())
+                                return row.filterString.toLowerCase().includes(filterByExp.text.toLowerCase()) ||
+                                    row.filterString === ""
                                 });
     }
 
