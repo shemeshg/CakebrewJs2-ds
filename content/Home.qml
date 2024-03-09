@@ -118,9 +118,11 @@ ColumnLayout {
                                          Constants.brewData.formulaSortedColOrder = sortOrder
                                          ctvf.sortedColIdx = idx
                                          ctvf.sortedColOrder = sortOrder
-                                         Constants.brewData.formulaSort()
+                                         Constants.brewData.asyncFormulaSort(()=>{
+                                                                         ctvf.filterTableByFilter();
+                                                                        })
 
-                                         ctvf.filterTableByFilter()
+
                                      }
                 }
             }

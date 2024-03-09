@@ -489,4 +489,8 @@ QtObject {
             "leaf": {text: "*", hoverText: "shalom\nolam"},
             "filterString": "abc"
         }]
+
+    function asyncFormulaSort(cb){
+
+    }
 }

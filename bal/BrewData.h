@@ -205,6 +205,14 @@ public slots:
         loadBrewLocation();
     }
 
+    void asyncFormulaSort(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            formulaSort();
+            return true;
+        });
+    }
+
     void formulaSort()
     {
         std::sort(formulaRows.begin(), formulaRows.end(), [=](FormulaRow &a, FormulaRow &b) {
