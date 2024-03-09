@@ -276,7 +276,4 @@ ColumnLayout {
             }
         }
     }
-    CoreLabel {
-        text: "<h1>we have more</h1>"
-    }
 }
