@@ -208,6 +208,18 @@ ColumnLayout {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: ()=>{
+
+                                       if (sortedColIdx !== column) {
+                                           sortedColOrder = CollapseableTableViewFormula.SortOrder.No
+                                       }
+                                       sortedColIdx = column
+                                       if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc) {
+                                           sortedColOrder = CollapseableTableViewFormula.SortOrder.Dsc
+                                       } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc) {
+                                           sortedColOrder = CollapseableTableViewFormula.SortOrder.No
+                                       } else {
+                                           sortedColOrder = CollapseableTableViewFormula.SortOrder.Asc
+                                       }
                                        collapseableTableViewFormula.headerClicked(column)
                                    }
                     }

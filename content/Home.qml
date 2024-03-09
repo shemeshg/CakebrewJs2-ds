@@ -114,18 +114,7 @@ ColumnLayout {
 
     CollapseableTableViewFormula{
         onHeaderClicked: idx => {
-                                    if (sortedColIdx !== idx) {
-                                        sortedColOrder = CollapseableTableViewFormula.SortOrder.No
-                                    }
 
-                                    sortedColIdx = idx
-                                    if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Asc) {
-                                        sortedColOrder = CollapseableTableViewFormula.SortOrder.Dsc
-                                    } else if (sortedColOrder === CollapseableTableViewFormula.SortOrder.Dsc) {
-                                        sortedColOrder = CollapseableTableViewFormula.SortOrder.No
-                                    } else {
-                                        sortedColOrder = CollapseableTableViewFormula.SortOrder.Asc
-                                    }
                                     //collapseableGrid.headerClicked(idx, sortedColOrder)
                                 }
     }
