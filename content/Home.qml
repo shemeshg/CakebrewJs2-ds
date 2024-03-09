@@ -36,53 +36,11 @@ ColumnLayout {
         sortedColIdx: Constants.brewData.caskSortedColIdx
         sortedColOrder: Constants.brewData.caskSortedColOrder
 
-        onHeaderClicked: (colId,sortOrder)=>{
-            Constants.brewData.caskSortedColIdx =  colId;
-            Constants.brewData.caskSortedColOrder = sortOrder
-            Constants.brewData.caskSort()
-                          }
-    }
-
-    CoreLabel {
-        text: Constants.brewData.refreshStatusFormulaText
-        visible: Constants.brewData.refreshStatusFormulaVisible
-    }
-
-    CollapseableGrid {
-        visible: !Constants.brewData.refreshFormulaRunning
-
-        onCheckboxClicked: (c, v) => {
-                               if (c) {
-                                   Constants.selectedFormulaItems.push(v)
-                                   Constants.selectedFormulaItems
-                                   = [...Constants.selectedFormulaItems]
-                               } else {
-                                   Constants.selectedFormulaItems.splice(
-                                       Constants.selectedFormulaItems.indexOf(
-                                           v), 1)
-                                   Constants.selectedFormulaItems
-                                   = [...Constants.selectedFormulaItems]
-                               }
-                           }
-        headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
-
-        isExtended: true
-
-        headerList: ["Name", "Desk", "Tap", "Version", "outdated", "Leaf"]
-
-        bodyList: Constants.brewData.formulaBodyList
-
-
-
-        sortedColIdx: Constants.brewData.formulaSortedColIdx
-        sortedColOrder: Constants.brewData.formulaSortedColOrder
-
-        onHeaderClicked: (colId,sortOrder)=>{
-            Constants.brewData.formulaSortedColIdx =  colId;
-            Constants.brewData.formulaSortedColOrder = sortOrder
-            Constants.brewData.formulaSort()
-                          }
-
+        onHeaderClicked: (colId, sortOrder) => {
+                             Constants.brewData.caskSortedColIdx = colId
+                             Constants.brewData.caskSortedColOrder = sortOrder
+                             Constants.brewData.caskSort()
+                         }
     }
 
     CoreLabel {
@@ -101,11 +59,11 @@ ColumnLayout {
 
         sortedColIdx: Constants.brewData.servicesSortedColIdx
         sortedColOrder: Constants.brewData.servicesSortedColOrder
-        onHeaderClicked: (colId,sortOrder)=>{
-            Constants.brewData.servicesSortedColIdx =  colId;
-            Constants.brewData.servicesSortedColOrder = sortOrder
-            Constants.brewData.servicesSort()
-                          }
+        onHeaderClicked: (colId, sortOrder) => {
+                             Constants.brewData.servicesSortedColIdx = colId
+                             Constants.brewData.servicesSortedColOrder = sortOrder
+                             Constants.brewData.servicesSort()
+                         }
 
         onHyperlinkBtnClicked: (filterString, cellText) => {
                                    Constants.brewData.asyncServicesAction(
@@ -113,18 +71,18 @@ ColumnLayout {
                                }
     }
 
-
     CoreLabel {
         text: Constants.brewData.refreshStatusFormulaText
         visible: Constants.brewData.refreshStatusFormulaVisible
     }
 
-    CollapseableTableViewFormula{
+    CollapseableTableViewFormula {
         id: ctvf
+        visible: !Constants.brewData.refreshFormulaRunning
 
         headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
         rowsModel: Constants.brewData.formulaTableBodyList
-        tableView.model:  TableModel {
+        tableView.model: TableModel {
 
             TableModelColumn {
                 display: "name"
@@ -147,20 +105,23 @@ ColumnLayout {
 
             // Each row is one type of fruit that can be ordered
             rows: ctvf.filteredModel
-
         }
 
         tableView.delegate: DelegateChooser {
             DelegateChoice {
-                index:0
+                index: 0
                 TableHeaderLabel {
-                    sortedColOrder:ctvf.sortedColOrder
+                    sortedColOrder: ctvf.sortedColOrder
                     sortedColIdx: ctvf.sortedColIdx
                     onHeaderClicked: (idx, sortOrder) => {
-                                         Constants.brewData.formulaSortedColIdx =  idx;
+                                         Constants.brewData.formulaSortedColIdx = idx
                                          Constants.brewData.formulaSortedColOrder = sortOrder
+                                         ctvf.sortedColIdx = idx
+                                         ctvf.sortedColOrder = sortOrder
                                          Constants.brewData.formulaSort()
-                                            }
+
+                                         ctvf.filterTableByFilter()
+                                     }
                 }
             }
 
@@ -170,7 +131,7 @@ ColumnLayout {
                     leftPadding: 10
                     urlText: model.display.text
                     onLinkActivated: data => {
-                                        console.log(data)
+                                         console.log(data)
                                      }
                     urlRef: model.display.text
                 }
@@ -186,7 +147,6 @@ ColumnLayout {
                     onToggled: model.display.tsChecked = checked
                 }
             }
-
 
             DelegateChoice {
                 column: 5

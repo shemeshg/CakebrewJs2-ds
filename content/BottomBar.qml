@@ -14,12 +14,9 @@ GroupBox {
     property string selectedPreview: ""
 
     readonly property int upgradableItems: {
-        return Constants.brewData.formulaBodyList.filter(row => {
-                                                             return row.cellType === "checkbox"
-                                                         }).length
-                + Constants.brewData.caskBodyList.filter(row => {
-                                                             return row.cellType === "checkbox"
-                                                         }).length
+        return Constants.brewData.caskBodyList.filter(row => {
+                                                          return row.cellType === "checkbox"
+                                                      }).length
     }
 
     RowLayout {

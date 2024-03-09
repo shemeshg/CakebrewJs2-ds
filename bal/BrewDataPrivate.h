@@ -19,7 +19,6 @@ class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
     Q_PROPERTY(QVector<GridCell *> caskBodyList READ caskBodyList  NOTIFY caskBodyListChanged )
-    Q_PROPERTY(QVector<GridCell *> formulaBodyList READ formulaBodyList  NOTIFY formulaBodyListChanged )
     Q_PROPERTY(QVector<GridCell *> servicesBodyList READ servicesBodyList  NOTIFY servicesBodyListChanged )
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
@@ -56,10 +55,6 @@ public:
     
     
     QVector<GridCell *> &caskBodyList() {return m_caskBodyList;} 
-    
-
-    
-    QVector<GridCell *> &formulaBodyList() {return m_formulaBodyList;} 
     
 
     
@@ -369,7 +364,6 @@ void setFormulaSortedColOrder(const int newFormulaSortedColOrder)
 
 signals:
     void caskBodyListChanged();
-    void formulaBodyListChanged();
     void servicesBodyListChanged();
     void brewLocationChanged();
     void normalFontPointSizeChanged();
@@ -402,7 +396,6 @@ signals:
 
 private:
     QVector<GridCell *> m_caskBodyList;
-    QVector<GridCell *> m_formulaBodyList;
     QVector<GridCell *> m_servicesBodyList;
     QString m_brewLocation;
     QString m_normalFontPointSize;

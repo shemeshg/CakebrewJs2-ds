@@ -9,7 +9,7 @@ ColumnLayout {
     id: collapseableTableViewFormula
     property int autoExtendCol: 1
     property int sortedColOrder: CollapseableTableViewFormula.SortOrder.Asc
-    property int sortedColIdx: 2
+    property int sortedColIdx: 4
     property string headerText: ""
     property bool isExtended: true
     property var rowsModel: []
@@ -33,6 +33,15 @@ ColumnLayout {
                                 })
     }
 
+    function filterTableByFilter(){
+        filteredModel = []
+        filteredModel = getRowsModel()
+        tableView.visible = false
+        tableView.forceLayout()
+
+        filterSetTimer.start()
+    }
+
     ExtendableHeader {
         id: formulaHeader
         isExtended: collapseableTableViewFormula.isExtended
@@ -47,12 +56,7 @@ ColumnLayout {
         Layout.rightMargin: 5
         placeholderText: "Filter"
         onTextChanged: {
-            filteredModel = []
-            filteredModel = getRowsModel()
-            tableView.visible = false
-            tableView.forceLayout()
-
-            filterSetTimer.start()
+            filterTableByFilter()
         }
         Timer {
             id: filterSetTimer

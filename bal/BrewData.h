@@ -30,10 +30,6 @@ public:
         cr.addToList(cask);
         emit caskBodyListChanged();
 
-        QVector<GridCell *> *formula = &formulaBodyList();
-        qDeleteAll(*formula);
-        formula->clear();
-
         FormulaRow fr{};
         fr.addListHeader(formulaTableBodyList());
 
@@ -45,8 +41,7 @@ public:
         fr.outdated = "1.02";
         fr.leafText = ".";
         fr.leafPopup = "<h3>Used in</h3><p>item 1</p><h3>Used by</h3><p>item 2</p>";
-        fr.addToList(formula, formulaTableBodyList());
-        emit formulaBodyListChanged();
+        fr.addToList(formulaTableBodyList());
         emit formulaTableBodyListChanged();
 
         QVector<GridCell *> *services = &servicesBodyList();
@@ -271,21 +266,15 @@ public slots:
 
             return aOutdated < bOutdated;
         });
-        QVector<GridCell *> *list;
-        list = &formulaBodyList();
-
-        qDeleteAll(*list);
-        list->clear();
 
         formulaTableBodyList().clear();
         FormulaRow fr{};
         fr.addListHeader(formulaTableBodyList());
 
         for (FormulaRow &r : formulaRows) {
-            r.addToList(list, formulaTableBodyList());
+            r.addToList(formulaTableBodyList());
         }
 
-        emit formulaBodyListChanged();
         emit formulaTableBodyListChanged();
     }
 

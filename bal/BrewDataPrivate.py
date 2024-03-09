@@ -8,12 +8,6 @@ p.is_writable = False
 p.is_notify = True
 p.is_getter_ref = True
 ary.append(p)
-p = Prpt("QVector<GridCell *>",'formulaBodyList')
-p.is_bindable = False
-p.is_writable = False
-p.is_notify = True
-p.is_getter_ref = True
-ary.append(p)
 p = Prpt("QVector<GridCell *>",'servicesBodyList')
 p.is_bindable = False
 p.is_writable = False
