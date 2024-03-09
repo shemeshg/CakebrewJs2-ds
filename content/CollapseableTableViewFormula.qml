@@ -11,21 +11,80 @@ ColumnLayout {
     property int autoExtendCol: 1
     property int sortedColOrder: CollapseableTableViewFormula.SortOrder.Asc
     property int sortedColIdx: 2
+    property string headerText: "Formula Table"
+    property bool isExtended: true
+    property var rowsModel: [
+        {
+            "name": {text: "Name"},
+            "desc": {text: "Description"},
+            "tap": {text: "Tap"},
+            "version": {text: "Version"},
+            "outdated": {text: "Outdated"},
+            "leaf": {text: "Leaf"},
+            "filterString": "abc" //header must filter empty
+        },
+        {
+            "name": {text: "libext"},
+            "desc": {text: "very asdfhaksdgflkagdsfasdlflhkg Description"},
+            "tap": {text: "Tap"},
+            "version": {text: "1.23"},
+            "outdated": {text: "2.00", tsChecked: false},
+            "leaf": {text: "*", hoverText: "shalom\nolam"},
+            "filterString": "abc"
+        },  {
+            "name": {text: "libext"},
+            "desc": {text: "very pioutyoiuyrt Description"},
+            "tap": {text: "Tap"},
+            "version": {text: "1.23"},
+            "outdated": {text: "2.00", tsChecked: false},
+            "leaf": {text: "*", hoverText: "shalom\nolam"},
+            "filterString": "abc"
+        },  {
+            "name": {text: "libext"},
+            "desc": {text: "very pioutyoiuyrt Description"},
+            "tap": {text: "Tap"},
+            "version": {text: "1.23"},
+            "outdated": {text: "2.00", tsChecked: false},
+            "leaf": {text: "*", hoverText: "shalom\nolam"},
+            "filterString": "abc"
+        },
+        {
+            "name": {text: "libext"},
+            "desc": {text: "very pioutyoiuyrt Description"},
+            "tap": {text: "Tap"},
+            "version": {text: "1.23"},
+            "outdated": {text: "2.00", tsChecked: false},
+            "leaf": {text: "*", hoverText: "shalom\nolam"},
+            "filterString": "abc"
+        },
+        {
+            "name": {text: "libext"},
+            "desc": {text: "very pioutyoiuyrt Description"},
+            "tap": {text: "Tap"},
+            "version": {text: "1.23"},
+            "outdated": {text: "2.00", tsChecked: false},
+            "leaf": {text: "*", hoverText: "shalom\nolam"},
+            "filterString": "abc"
+        }]
+
 
     Layout.fillWidth: true
 
     signal headerClicked(int column)
 
 
-    CoreLabel {
-        text: "Table will be here"
-    }
 
     enum SortOrder {
            No,
            Asc,
            Dsc
      }
+
+    function getRowsModel(){
+        return rowsModel.filter((row)=>{
+                                return row.filterString.toLowerCase().includes(filterByExp.text.toLowerCase())
+                                });
+    }
 
     function getOrderSymble(col){
         if (col === sortedColIdx){
@@ -41,9 +100,47 @@ ColumnLayout {
         return ""
     }
 
-    TableView {
-        Layout.fillWidth: true
+    ExtendableHeader {
+        id: formulaHeader
+        isExtended: collapseableTableViewFormula.isExtended
+        headerText: collapseableTableViewFormula.headerText
+    }
 
+    CoreTextField {
+        id: filterByExp
+        visible: formulaHeader.isExtended
+        text: ""
+        Layout.fillWidth: true
+        Layout.rightMargin:  5
+        placeholderText: "Filter"
+        onTextChanged: {
+            tableView.filteredModel = []
+            tableView.filteredModel = getRowsModel()
+            tableView.visible = false
+            tableView.forceLayout()
+
+            filterSetTimer.start()
+        }
+        Timer {
+            id: filterSetTimer
+            running: true
+            repeat: false
+            onTriggered: {
+                tableView.forceLayout()
+                tableView.height = tableView.contentHeight
+                tableView.visible = true
+            }
+
+            interval: 0
+        }
+    }
+
+
+    TableView {
+        property var filteredModel: rowsModel
+
+        Layout.fillWidth: true
+        visible: formulaHeader.isExtended
         implicitHeight: contentHeight
         columnSpacing: 1
         rowSpacing: 1
@@ -75,6 +172,7 @@ ColumnLayout {
         }
 
         model: TableModel {
+
             TableModelColumn {
                 display: "name"
             }
@@ -95,53 +193,8 @@ ColumnLayout {
             }
 
             // Each row is one type of fruit that can be ordered
-            rows: [
-                {
-                    "name": {text: "Name"},
-                    "desc": {text: "Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "Version"},
-                    "outdated": {text: "Outdated"},
-                    "leaf": {text: "Leaf"},
-                },
-                {
-                    "name": {text: "libext"},
-                    "desc": {text: "very asdfhaksdgflkagdsfasdlflhkg Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"}
-                },  {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"}
-                },  {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"}
-                },
-                {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"}
-                },
-                {
-                    "name": {text: "libext"},
-                    "desc": {text: "very pioutyoiuyrt Description"},
-                    "tap": {text: "Tap"},
-                    "version": {text: "1.23"},
-                    "outdated": {text: "2.00", tsChecked: false},
-                    "leaf": {text: "*", hoverText: "shalom\nolam"}
-                }]
+            rows: tableView.filteredModel
+
         }
         delegate: DelegateChooser {
             DelegateChoice {
