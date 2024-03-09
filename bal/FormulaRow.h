@@ -1,6 +1,6 @@
 #pragma once
 #include <QMap>
-#include "GridCell.h"
+#include <QVariant>
 
 class FormulaRow
 {
@@ -16,27 +16,27 @@ public:
 
         text = {};
         text["text"] = "Name";
-        row["name"] = QVariant::fromValue(text);
+        row["name"] = text;
 
         text = {};
         text["text"] = "Description";
-        row["desc"] = QVariant::fromValue(text);
+        row["desc"] = text;
 
         text = {};
         text["text"] = "Tap";
-        row["tap"] = QVariant::fromValue(text);
+        row["tap"] = text;
 
         text = {};
         text["text"] = "Version";
-        row["version"] = QVariant::fromValue(text);
+        row["version"] = text;
 
         text = {};
         text["text"] = "Outdated";
-        row["outdated"] = QVariant::fromValue(text);
+        row["outdated"] = text;
 
         text = {};
         text["text"] = "Leaf";
-        row["leaf"] = QVariant::fromValue(text);
+        row["leaf"] = text;
 
         formulaTableBodyList.emplaceBack(row);
     }
@@ -84,8 +84,5 @@ public:
         text["hoverText"] = leafPopup;
         row["leaf"] = QVariant::fromValue(text);
         formulaTableBodyList.emplaceBack(row);
-
-        GridCell *gc;
-        QString filterString = token + "|" + desc + "|" + tap;
     }
 };
