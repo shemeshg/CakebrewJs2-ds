@@ -61,7 +61,7 @@ ColumnLayout {
             "desc": {text: "very pioutyoiuyrt Description"},
             "tap": {text: "Tap"},
             "version": {text: "1.23"},
-            "outdated": {text: "2.00", tsChecked: false},
+            "outdated": {text: "", tsChecked: false},
             "leaf": {text: "*", hoverText: "shalom\nolam"},
             "filterString": "abc"
         }]
@@ -241,6 +241,7 @@ ColumnLayout {
             DelegateChoice {
                 column: 4
                 delegate: CheckBox {
+                    visible: model.display.text
                     checked: model.display.tsChecked
                     leftPadding: 10
                     text: model.display.text
