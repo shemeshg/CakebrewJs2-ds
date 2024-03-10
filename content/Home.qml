@@ -191,7 +191,7 @@ ColumnLayout {
                         anchors.fill: parent
                         cursorShape: modelData.hoverText ? Qt.PointingHandCursor : cursorShape
                         hoverEnabled: true
-                        onHoveredChanged: {
+                        onClicked:  {
                             if (modelData.hoverText) {
                                 toolTip.show(model.display.hoverText, 3000)
                             }
