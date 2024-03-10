@@ -14,7 +14,6 @@ qt6_add_qml_module(content
         BottomBar.qml
         CollapseableTableView.qml
         ExtendableHeader.qml
-        GridLayoutHeader.qml
         HeaderToolbar.qml
         Home.qml
         HyperlinkBtn.qml

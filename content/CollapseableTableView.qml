@@ -81,8 +81,8 @@ ColumnLayout {
 
             Layout.fillWidth: true
             implicitHeight: contentHeight
-            columnSpacing: 1
-            rowSpacing: 1
+            columnSpacing: 10
+            rowSpacing: 10
             clip: true
             id: tableView
 
