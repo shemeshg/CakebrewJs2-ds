@@ -331,7 +331,7 @@ public slots:
                 }
             }
 
-            return a.outdated + a.token > b.outdated + b.token;
+            return a.outdated + a.token < b.outdated + b.token;
         });
 
         caskTableBodyList().clear();
