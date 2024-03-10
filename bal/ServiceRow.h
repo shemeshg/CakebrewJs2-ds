@@ -58,6 +58,7 @@ public:
 
         text = {};
         text["text"] = action;
+        text["name"] = name;
         row["action"] = QVariant::fromValue(text);
 
         serviceTableBodyList.emplaceBack(row);

@@ -154,7 +154,7 @@ public slots:
         });
     }
 
-    void asyncServicesAction(const QJSValue &callback, QString name, QString action)
+    void asyncServiceAction(const QJSValue &callback, QString name, QString action)
     {
         refreshServicesBeforeCallback();
         makeAsync<bool>(callback, [=]() {
@@ -284,6 +284,14 @@ public slots:
         emit formulaTableBodyListChanged();
     }
 
+    void asyncCaskSort(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            caskSort();
+            return true;
+        });
+    }
+
     void caskSort()
     {
         std::sort(caskRows.begin(), caskRows.end(), [=](CaskRow &a, CaskRow &b) {
@@ -335,6 +343,14 @@ public slots:
         }
 
         emit caskTableBodyListChanged();
+    }
+
+    void asyncServiceSort(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            serviceSort();
+            return true;
+        });
     }
 
     void serviceSort()

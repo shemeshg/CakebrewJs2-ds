@@ -222,11 +222,6 @@ ColumnLayout {
         visible: Constants.brewData.refreshStatusServiceVisible
     }
 
-    CoreLabel {
-        text: Constants.brewData.refreshStatusServiceText
-        visible: Constants.brewData.refreshStatusServiceVisible
-    }
-
     CollapseableTableView {
         id: ctvs
         autoExtendCol: 3
@@ -281,8 +276,7 @@ ColumnLayout {
                     leftPadding: 10
                     urlText: model.display.text
                     onLinkActivated: data => {
-                                         console.log(data)
-                                         //Constants.brewData.asyncServiceAction(() => {}, filterString, cellText)
+                                         Constants.brewData.asyncServiceAction(() => {}, model.display.name, model.display.text)
                                      }
                     urlRef: model.display.text
                 }
