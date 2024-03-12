@@ -27,66 +27,70 @@ ColumnLayout {
             }
         }
         CoreButton {
-            text: "Home page"
+            text: "Info"
         }
-        CoreButton {
-            text: "Script"
+
+    }
+
+    RowLayout {
+        CoreLabel {
+            text: "<h2>Joplin " + "2.14.19" + "</h2>"
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        CoreLabel {
+            text: "Cask joplin"
         }
     }
-    CoreTextArea {
-        selectionColor: CoreSystemPalette.highlight
-        selectedTextColor: CoreSystemPalette.highlightedText
-        placeholderTextColor: CoreSystemPalette.text
-        text:
-`==> cakebrewjs: 1.4.4
-https://sourceforge.net/projects/cakebrewjs/
-/usr/local/Caskroom/cakebrewjs/1.4.4 (124B)
-From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/c/cakebrewjs.rb
-==> Name
-cakebrewjs
-==> Description
-Homebrew GUI app written in electron
-==> Artifacts
-cakebrewjs.app (App)
-==> Analytics
-install: 25 (30 days), 94 (90 days), 237 (365 days)
-23M	/Users/macos/Library/Application Support/cakebrewjs
-4.0K	/Users/macos/Library/Preferences/com.electron.cakebrewjs.plist`
-        Layout.fillWidth: true
-    }
-    CoreLabel {
-        text: "<h2>Formula used in</h2>"
-    }
-    Repeater {
-        model: ["formula 1", "formula 2"]
-        delegate: SearchListItem {
-            itemName: modelData
-            itemTag: "Cakebrewjs"
-            itemVer: "2.0.0"
-            itemIsInstalled: true
-            itemUrl: "https://google.com"
-            itemDesk: "Do things"
+    RowLayout {
+        CoreLabel {
+            text: "outdated "
+             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
+        }
+        CoreLabel {
+            text: "2.14.17"
+            color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
     }
     CoreLabel {
-        text: "<h2>Formula used by</h2>"
+        text: "Note taking and to-do application with synchronisation capabilities"
     }
-    Repeater {
-        model: ["formula 3", "formula 4"]
-        delegate: SearchListItem {
-            itemName: modelData
-            itemTag: "Cakebrewjs"
-            itemVer: "2.0.0"
-            itemIsInstalled: true
-            itemUrl: "https://google.com"
-            itemDesk: "Do things"
-        }
-    }
-    CoreLabel {
-        text: "<h2>CaskRooom Folder 170M total</h2>"
-    }
+
+
     HyperlinkBtn {
-        urlRef: "\asdf\sadfasdf"
-        urlText: "\asdf\sadfasdf"
+        urlRef: "https://joplinapp.org/"
+        urlText: "https://joplinapp.org/"
+    }
+    RowLayout {
+        HyperlinkBtn {
+            urlRef: "file://usr/local/Caskroom/joplin/2.14.17"
+            urlText: "/usr/local/Caskroom/joplin/2.14.17"
+        }
+        Label {
+            text: " 180 Mb"
+        }
+    }
+    Label {
+        font.pointSize: Constants.fontSizeLarge3()
+        font.bold: true
+        topPadding: 20
+        text: "Artifacts"
+
+    }
+    Label {
+        text: "releaseOSX11_1.4.3/Midi router client.app (App)"
+    }
+    Label {
+        text: "releaseOSX11_1.4.3/Midi router server.app (App)"
+    }
+    Label {
+        font.pointSize: Constants.fontSizeLarge3()
+        font.bold: true
+        topPadding: 20
+        text: "Analytics"
+    }
+    Label {
+        text: "install: 6 (30 days), 11 (90 days), 46 (365 days)"
     }
 }
