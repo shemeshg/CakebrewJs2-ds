@@ -83,7 +83,13 @@ ColumnLayout {
         topPadding: 15
         text: "Analytics"
     }
-    CoreLabel {
-        text: "install: 6 (30 days), 11 (90 days), 46 (365 days)"
+    RowLayout {
+        CoreLabel {
+            text: "install: "
+            font.bold: true
+        }
+        CoreLabel {
+            text: "6 (30 days), 11 (90 days), 46 (365 days)"
+        }
     }
 }

@@ -35,4 +35,8 @@ ColumnLayout {
     InfoCask {
         visible: cmb.currentText === "Cask"
     }
+
+    InfoFormula {
+       visible: cmb.currentText === "Formula"
+    }
 }
