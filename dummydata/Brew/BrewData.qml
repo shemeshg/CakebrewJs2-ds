@@ -387,4 +387,8 @@ QtObject {
         }]
 
     function asyncFormulaSort(cb) {}
+
+    function asyncGetInfo(tokent,isCask,cb){
+        cb({isCask: isCask, found: true} )
+    }
 }
