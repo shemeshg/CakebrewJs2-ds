@@ -3,17 +3,11 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Core
+import Brew
 
 ColumnLayout {
-    enum InfoStatus {
-        Idile,
-        Running,
-        CaskFound,
-        FormulaFound,
-        CaskNotFound,
-        FormulaNotFound
-    }
-    property int status: Info.InfoStatus.Idile
+
+    property int infoStatus: BrewData.InfoStatus.Idile
 
     RowLayout {
         CoreComboBox {
@@ -36,7 +30,6 @@ ColumnLayout {
                     selectAll()
                 }
             }
-            enabled: Boolean(text.trim())
         }
         CoreButton {
             text: "Info"
@@ -44,30 +37,18 @@ ColumnLayout {
                            var isCask = cmb.currentText === "Cask"
                            Constants.brewData.asyncGetInfo(token.text, isCask,
                                                            result => {
-                                                               if (result.found) {
-                                                                   if (result.isCask) {
-                                                                       status
-                                                                       = Info.InfoStatus.CaskFound
-                                                                   } else {
-                                                                       status = Info.InfoStatus.FormulaFound
-                                                                   }
-                                                               } else {
-                                                                   if (result.isCask) {
-                                                                       status = Info.InfoStatus.CaskNotFound
-                                                                   } else {
-                                                                       status = Info.InfoStatus.FormulaNotFound
-                                                                   }
-                                                               }
+                                                               infoStatus = result.infoStatus
                                                            })
                        }
+            enabled: Boolean(token.text.trim())
         }
     }
 
     InfoCask {
-        visible: status === Info.InfoStatus.CaskFound
+        visible: infoStatus === BrewData.InfoStatus.CaskFound
     }
 
     InfoFormula {
-        visible: status === Info.InfoStatus.FormulaFound
+        visible: infoStatus === BrewData.InfoStatus.FormulaFound
     }
 }

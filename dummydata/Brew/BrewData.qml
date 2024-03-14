@@ -388,7 +388,18 @@ QtObject {
 
     function asyncFormulaSort(cb) {}
 
+
+    enum InfoStatus {
+        Idile,
+        Running,
+        CaskFound,
+        FormulaFound,
+        CaskNotFound,
+        FormulaNotFound
+    }
+
     function asyncGetInfo(tokent,isCask,cb){
-        cb({isCask: isCask, found: true} )
+        var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
+        cb({infoStatus: i, found: true} )
     }
 }
