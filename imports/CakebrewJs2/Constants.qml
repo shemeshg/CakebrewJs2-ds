@@ -27,30 +27,27 @@ QtObject {
         fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
     }
 
-
-
     property var selectedFormulaItems: []
     property var selectedCaskItems: []
 
     property BrewData brewData: BrewData {}
 
-    property Label dummyLabel: Label{}
+    property Label dummyLabel: Label {}
 
-
-
-    function fontSizeNormal(){
-       if (!brewData.normalFontPointSize || isNaN(brewData.normalFontPointSize) ){
-           return dummyLabel.font.pointSize
+    function fontSizeNormal() {
+        if (!brewData.normalFontPointSize || isNaN(
+                    brewData.normalFontPointSize)) {
+            return dummyLabel.font.pointSize
         } else {
-           return Number(brewData.normalFontPointSize);
+            return Number(brewData.normalFontPointSize)
         }
     }
 
-    function fontSizeLarge2(){
-        return fontSizeNormal() * 1.2;
+    function fontSizeLarge2() {
+        return fontSizeNormal() * 1.2
     }
 
-    function fontSizeLarge3(){
-        return fontSizeNormal() * 1.5;
+    function fontSizeLarge3() {
+        return fontSizeNormal() * 1.5
     }
 }

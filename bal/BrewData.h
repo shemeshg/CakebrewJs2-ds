@@ -11,6 +11,16 @@ class BrewData : public BrewDataPrivate
     Q_OBJECT
     QML_ELEMENT
 public:
+    enum class InfoStatus {
+        Idile,
+        Running,
+        CaskFound,
+        FormulaFound,
+        CaskNotFound,
+        FormulaNotFound
+    };
+    Q_ENUM(InfoStatus)
+
     explicit BrewData(QObject *parent = nullptr)
         : BrewDataPrivate{parent}
     {
