@@ -400,6 +400,6 @@ QtObject {
 
     function asyncGetInfo(tokent,isCask,cb){
         var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
-        cb({infoStatus: i, found: true} )
+        cb({infoStatus: i} )
     }
 }

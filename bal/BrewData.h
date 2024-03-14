@@ -355,6 +355,18 @@ public slots:
         emit caskTableBodyListChanged();
     }
 
+    void asyncGetInfo(QString token, bool isCask, const QJSValue &callback)
+    {
+        makeAsync<QVariant>(callback, [=]() { return getInfo(token, isCask); });
+    }
+
+    QVariant getInfo(const QString token, bool isCask)
+    {
+        QMap<QString, QVariant> row;
+        row["infoStatus"] = isCask ? (int) InfoStatus::CaskFound : (int) InfoStatus::FormulaFound;
+        return row;
+    }
+
     void asyncServiceSort(const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {
