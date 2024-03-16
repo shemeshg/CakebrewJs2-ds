@@ -8,6 +8,8 @@
 #include "import_qml_components_plugins.h"
 #include "import_qml_plugins.h"
 
+#include "config.h"
+
 int main(int argc, char *argv[])
 {
     set_qt_environment();
@@ -33,5 +35,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    app.setApplicationVersion(PROJECT_VER);
     return app.exec();
 }

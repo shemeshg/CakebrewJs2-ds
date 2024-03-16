@@ -3,9 +3,12 @@ cmake_minimum_required(VERSION 3.21.1)
 option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
 option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 
-project(CakebrewJs2App LANGUAGES CXX)
+project(CakebrewJs2App VERSION 2.0.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
+
+configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/config.h")
+include_directories("${CMAKE_BINARY_DIR}")
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
 
