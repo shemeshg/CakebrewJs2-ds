@@ -363,7 +363,20 @@ public slots:
     QVariant getInfo(const QString token, bool isCask)
     {
         QMap<QString, QVariant> row;
-        row["infoStatus"] = isCask ? (int) InfoStatus::CaskFound : (int) InfoStatus::FormulaFound;
+        ShellCmd sc;
+        ProcessStatus s = sc.cmdGetInfo(token, isCask);
+
+        if (s.isSuccess && !s.stdOut.isEmpty()) {
+            row["infoStatus"] = isCask ? (int) InfoStatus::CaskFound
+                                       : (int) InfoStatus::FormulaFound;
+        } else {
+            if (s.stdErr.isEmpty()) {
+                s.stdErr = "Err" + QString::number(s.exitCode);
+            }
+            row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
+                                       : (int) InfoStatus::FormulaNotFound;
+            row["err"] = s.stdErr;
+        }
         return row;
     }
 

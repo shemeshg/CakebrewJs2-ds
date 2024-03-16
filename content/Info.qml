@@ -34,14 +34,27 @@ ColumnLayout {
         CoreButton {
             text: "Info"
             onClicked: () => {
+                           infoStatus = BrewData.InfoStatus.Running
                            var isCask = cmb.currentText === "Cask"
                            Constants.brewData.asyncGetInfo(token.text, isCask,
                                                            result => {
                                                                infoStatus = result.infoStatus
+                                                               err.text = result.err
                                                            })
                        }
             enabled: Boolean(token.text.trim())
         }
+    }
+
+    CoreLabel {
+        text: "Running"
+        visible: infoStatus === BrewData.InfoStatus.Running
+    }
+
+    CoreLabel {
+        id: err
+        visible: infoStatus === BrewData.InfoStatus.CaskNotFound
+                 || infoStatus === BrewData.InfoStatus.FormulaNotFound
     }
 
     InfoCask {
