@@ -111,14 +111,20 @@ public:
         json data = json::parse(strResult.toStdString());
         for (auto &element : data["casks"]) {
             std::string token = element["token"].template get<std::string>();
+            std::string name = (element["name"][0]).template get<std::string>();
             std::string desc = (element["desc"]).template get<std::string>();
             std::string tap = element["tap"].template get<std::string>();
-            std::string version = element["installed"].template get<std::string>();
+            std::string version;
+            bool isInstalled = false;
+            if (!element["installed"].is_null()) {
+                version = element["installed"].template get<std::string>();
+                isInstalled = true;
+            }
             std::string outdated;
             bool isOutdated = element["outdated"].template get<bool>();
-            if (isOutdated) {
-                outdated = element["version"].template get<std::string>();
-            }
+            //if (isOutdated) {
+            outdated = element["version"].template get<std::string>();
+            //}
             CaskRow cr{};
             cr.token = QString::fromStdString(token);
             cr.desc = QString::fromStdString(desc);
@@ -126,6 +132,8 @@ public:
             cr.version = QString::fromStdString(version);
             cr.outdated = QString::fromStdString(outdated);
             cr.isOutdated = isOutdated;
+            cr.isInstalled = isInstalled;
+            cr.name = QString::fromStdString(name);
 
             rows.emplaceBack(cr);
         }

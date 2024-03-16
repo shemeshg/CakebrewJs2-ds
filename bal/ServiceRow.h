@@ -61,6 +61,6 @@ public:
         text["name"] = name;
         row["action"] = QVariant::fromValue(text);
 
-        serviceTableBodyList.emplaceBack(row);
+        serviceTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
 };

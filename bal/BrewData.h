@@ -367,16 +367,39 @@ public slots:
         ProcessStatus s = sc.cmdGetInfo(token, isCask);
 
         if (s.isSuccess && !s.stdOut.isEmpty()) {
-            row["infoStatus"] = isCask ? (int) InfoStatus::CaskFound
-                                       : (int) InfoStatus::FormulaFound;
+            if (isCask) {
+                CaskRow caskRow = sc.parseCaskList(s.stdOut).at(0);
+                row["infoStatus"] = (int) InfoStatus::CaskFound;
+                row["token"] = caskRow.token;
+                row["desc"] = caskRow.desc;
+                row["tap"] = caskRow.tap;
+                row["version"] = caskRow.version;
+                row["outdated"] = caskRow.outdated;
+                row["isOutdated"] = caskRow.isOutdated;
+                row["isInstalled"] = caskRow.isInstalled;
+                row["name"] = caskRow.name;
+
+            } else {
+                FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
+                row["infoStatus"] = (int) InfoStatus::FormulaFound;
+                row["token"] = formulaRow.token;
+                row["desc"] = formulaRow.desc;
+                row["tap"] = formulaRow.tap;
+                row["version"] = formulaRow.version;
+                row["outdated"] = formulaRow.outdated;
+                row["leafText"] = formulaRow.leafText;
+                row["isOutdated"] = formulaRow.isOutdated;
+                row["installedOnRequest"] = formulaRow.installedOnRequest;
+                row["usedIn"] = formulaRow.usedIn;
+            }
         } else {
             if (s.stdErr.isEmpty()) {
                 s.stdErr = "Err" + QString::number(s.exitCode);
             }
             row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
-                                       : (int) InfoStatus::FormulaNotFound;
-            row["err"] = s.stdErr;
+                                       : (int) InfoStatus::FormulaNotFound;            
         }
+        row["err"] = s.stdErr;
         return row;
     }
 

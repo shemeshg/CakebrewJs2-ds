@@ -38,8 +38,28 @@ ColumnLayout {
                            var isCask = cmb.currentText === "Cask"
                            Constants.brewData.asyncGetInfo(token.text, isCask,
                                                            result => {
+
                                                                infoStatus = result.infoStatus
                                                                err.text = result.err
+
+                                                               if (isCask) {
+                                                                   infoCask.token = result.token
+                                                                   infoCask.version = result.version
+                                                                   infoCask.outdated
+                                                                   = result.outdated
+
+                                                                   infoCask.name = result.name
+
+                                                                   infoCask.isOutdated
+                                                                   = result.isOutdated
+                                                                   infoCask.isInstalled
+                                                                   = result.isInstalled
+                                                                   infoCask.desc = result.desc
+
+                                                                   console.log(
+                                                                       JSON.stringify(
+                                                                           result))
+                                                               }
                                                            })
                        }
             enabled: Boolean(token.text.trim())
@@ -58,6 +78,7 @@ ColumnLayout {
     }
 
     InfoCask {
+        id: infoCask
         visible: infoStatus === BrewData.InfoStatus.CaskFound
     }
 

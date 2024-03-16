@@ -83,6 +83,6 @@ public:
         text["text"] = leafText;
         text["hoverText"] = leafPopup;
         row["leaf"] = QVariant::fromValue(text);
-        formulaTableBodyList.emplaceBack(row);
+        formulaTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
 };

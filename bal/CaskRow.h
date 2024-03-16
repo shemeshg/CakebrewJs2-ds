@@ -4,8 +4,8 @@
 class CaskRow
 {
 public:
-    QString token, desc, tap, version, outdated;
-    bool isOutdated;
+    QString token, name, desc, tap, version, outdated;
+    bool isOutdated, isInstalled;
 
     void addListHeader(QVariantList &formulaTableBodyList)
     {
@@ -65,6 +65,6 @@ public:
         text["tsChecked"] = false;
         row["outdated"] = QVariant::fromValue(text);
 
-        caskTableBodyList.emplaceBack(row);
+        caskTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
 };
