@@ -384,6 +384,7 @@ public slots:
                 if (caskRow.isInstalled) {
                     row["caskroomSize"] = sc.cmdGetCaskroomSize(caskRow.token).stdOut.simplified();
                 }
+                row["artifacts"] = caskRow.artifacts;
 
             } else {
                 FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);

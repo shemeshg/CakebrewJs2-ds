@@ -61,7 +61,8 @@ ColumnLayout {
                                                                    infoCask.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/master/${result.ruby_source_path}`
                                                                    infoCask.caskroomSize
                                                                    = result.caskroomSize
-
+                                                                   infoCask.artifacts
+                                                                   = result.artifacts
                                                                    console.log(
                                                                        JSON.stringify(
                                                                            result))

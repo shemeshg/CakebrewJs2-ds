@@ -13,6 +13,8 @@ ColumnLayout {
     property string homepage: ""
     property string caskRbGithub: ""
     property string caskroomSize: ""
+    property string artifacts: ""
+
     property bool isOutdated: false
     property bool isInstalled: false
 
@@ -78,24 +80,6 @@ ColumnLayout {
         text: "Artifacts"
     }
     CoreLabel {
-        text: "releaseOSX11_1.4.3/Midi router client.app (App)"
-    }
-    CoreLabel {
-        text: "releaseOSX11_1.4.3/Midi router server.app (App)"
-    }
-    CoreLabel {
-        font.pointSize: Constants.fontSizeLarge3()
-        font.bold: true
-        topPadding: 15
-        text: "Analytics"
-    }
-    RowLayout {
-        CoreLabel {
-            text: "install: "
-            font.bold: true
-        }
-        CoreLabel {
-            text: "6 (30 days), 11 (90 days), 46 (365 days)"
-        }
+        text: artifacts
     }
 }

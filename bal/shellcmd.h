@@ -10,6 +10,7 @@
 #include "ServiceRow.h"
 #include "json/single_include/nlohmann/json.hpp"
 #include "searchresultrow.h"
+#include <iostream>
 #include <map>
 
 using json = nlohmann::json;
@@ -123,10 +124,27 @@ public:
                 isInstalled = true;
             }
             std::string outdated;
-            bool isOutdated = element["outdated"].template get<bool>();
-            //if (isOutdated) {
+            bool isOutdated = element["outdated"].template get<bool>();            
             outdated = element["version"].template get<std::string>();
-            //}
+
+            std::string artifacts;
+            for (auto &art : element["artifacts"].items()) {
+                if (art.value().contains("app")) {
+                    for (auto &app : art.value()["app"]) {
+                        if (app.is_string()) {
+                            artifacts = artifacts + app.template get<std::string>() + " (app)\n";
+                        }
+                    }
+                }
+                if (art.value().contains("binary")) {
+                    for (auto &app : art.value()["binary"]) {
+                        if (app.is_string()) {
+                            artifacts = artifacts + app.template get<std::string>() + " (bin)\n";
+                        }
+                    }
+                }
+            }
+
             CaskRow cr{};
             cr.token = QString::fromStdString(token);
             cr.desc = QString::fromStdString(desc);
@@ -138,6 +156,7 @@ public:
             cr.name = QString::fromStdString(name);
             cr.homepage = QString::fromStdString(homepage);
             cr.ruby_source_path = QString::fromStdString(ruby_source_path);
+            cr.artifacts = QString::fromStdString(artifacts);
 
             rows.emplaceBack(cr);
         }
