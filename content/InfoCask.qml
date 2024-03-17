@@ -11,7 +11,8 @@ ColumnLayout {
     property string name: ""
     property string desc: ""
     property string homepage: ""
-    property string caskRbGithub: "asdf"
+    property string caskRbGithub: ""
+    property string caskroomSize: ""
     property bool isOutdated: false
     property bool isInstalled: false
 
@@ -49,12 +50,8 @@ ColumnLayout {
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
 
-        HyperlinkBtn {
-            urlRef: "file://usr/local/Caskroom/joplin/2.14.17"
-            urlText: "/usr/local/Caskroom/joplin/2.14.17"
-        }
         CoreLabel {
-            text: " 180 Mb"
+            text: caskroomSize
         }
     }
 

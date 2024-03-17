@@ -380,6 +380,11 @@ public slots:
                 row["name"] = caskRow.name;
                 row["homepage"] = caskRow.homepage;
                 row["ruby_source_path"] = caskRow.ruby_source_path;
+                row["caskroomSize"] = "";
+                if (caskRow.isInstalled) {
+                    row["caskroomSize"] = sc.cmdGetCaskroomSize(caskRow.token).stdOut.simplified();
+                }
+
             } else {
                 FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
                 row["infoStatus"] = (int) InfoStatus::FormulaFound;
