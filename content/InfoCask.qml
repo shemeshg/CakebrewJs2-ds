@@ -30,7 +30,14 @@ ColumnLayout {
         }
     }
 
+    CoreLabel {
+        topPadding: 5
+        text: desc
+        font.pointSize: Constants.fontSizeLarge2()
+    }
+
     RowLayout {
+        Layout.topMargin: 5
         visible: isInstalled
         CoreLabel {
             text: isOutdated ? "outdated " : "installed "
@@ -41,11 +48,14 @@ ColumnLayout {
             text: version
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
-    }
 
-    CoreLabel {
-        topPadding: 5
-        text: desc
+        HyperlinkBtn {
+            urlRef: "file://usr/local/Caskroom/joplin/2.14.17"
+            urlText: "/usr/local/Caskroom/joplin/2.14.17"
+        }
+        CoreLabel {
+            text: " 180 Mb"
+        }
     }
 
     CoreLabel {
@@ -57,15 +67,6 @@ ColumnLayout {
     HyperlinkBtn {
         urlRef: homepage
         urlText: homepage
-    }
-    RowLayout {
-        HyperlinkBtn {
-            urlRef: "file://usr/local/Caskroom/joplin/2.14.17"
-            urlText: "/usr/local/Caskroom/joplin/2.14.17"
-        }
-        CoreLabel {
-            text: " 180 Mb"
-        }
     }
 
     HyperlinkBtn {
