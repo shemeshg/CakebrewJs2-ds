@@ -10,6 +10,8 @@ ColumnLayout {
     property string outdated: ""
     property string name: ""
     property string desc: ""
+    property string homepage: ""
+    property string caskRbGithub: "asdf"
     property bool isOutdated: false
     property bool isInstalled: false
 
@@ -53,8 +55,8 @@ ColumnLayout {
         text: "Links"
     }
     HyperlinkBtn {
-        urlRef: "https://joplinapp.org/"
-        urlText: "https://joplinapp.org/"
+        urlRef: homepage
+        urlText: homepage
     }
     RowLayout {
         HyperlinkBtn {
@@ -67,8 +69,8 @@ ColumnLayout {
     }
 
     HyperlinkBtn {
-        urlRef: "https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/j/joplin.rb"
-        urlText: "https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/j/joplin.rb"
+        urlRef: caskRbGithub
+        urlText: caskRbGithub
     }
 
     CoreLabel {

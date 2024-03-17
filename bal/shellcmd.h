@@ -114,6 +114,8 @@ public:
             std::string name = (element["name"][0]).template get<std::string>();
             std::string desc = (element["desc"]).template get<std::string>();
             std::string tap = element["tap"].template get<std::string>();
+            std::string homepage = element["homepage"].template get<std::string>();
+            std::string ruby_source_path = element["ruby_source_path"].template get<std::string>();
             std::string version;
             bool isInstalled = false;
             if (!element["installed"].is_null()) {
@@ -134,6 +136,8 @@ public:
             cr.isOutdated = isOutdated;
             cr.isInstalled = isInstalled;
             cr.name = QString::fromStdString(name);
+            cr.homepage = QString::fromStdString(homepage);
+            cr.ruby_source_path = QString::fromStdString(ruby_source_path);
 
             rows.emplaceBack(cr);
         }

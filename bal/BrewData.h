@@ -378,7 +378,8 @@ public slots:
                 row["isOutdated"] = caskRow.isOutdated;
                 row["isInstalled"] = caskRow.isInstalled;
                 row["name"] = caskRow.name;
-
+                row["homepage"] = caskRow.homepage;
+                row["ruby_source_path"] = caskRow.ruby_source_path;
             } else {
                 FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
                 row["infoStatus"] = (int) InfoStatus::FormulaFound;

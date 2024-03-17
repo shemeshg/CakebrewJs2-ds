@@ -55,6 +55,10 @@ ColumnLayout {
                                                                    infoCask.isInstalled
                                                                    = result.isInstalled
                                                                    infoCask.desc = result.desc
+                                                                   infoCask.homepage
+                                                                   = result.homepage
+
+                                                                   infoCask.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/master/${result.ruby_source_path}`
 
                                                                    console.log(
                                                                        JSON.stringify(
