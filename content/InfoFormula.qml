@@ -21,7 +21,13 @@ ColumnLayout {
         }
     }
 
+    CoreLabel {
+        topPadding: 5
+        text: "Platform built on V8 to build network applications"
+    }
+
     RowLayout {
+        Layout.topMargin: 5
         CoreLabel {
             text: "outdated "
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
@@ -30,11 +36,9 @@ ColumnLayout {
             text: "21.6.2_1"
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
-    }
-
-    CoreLabel {
-        topPadding: 5
-        text: "Platform built on V8 to build network applications"
+        CoreLabel {
+            text: "50Mb"
+        }
     }
 
     CoreLabel {
@@ -42,20 +46,10 @@ ColumnLayout {
         font.bold: true
         topPadding: 15
         text: "Links"
-
     }
     HyperlinkBtn {
         urlRef: "https://nodejs.org/"
         urlText: "https://nodejs.org/"
-    }
-    RowLayout {
-        HyperlinkBtn {
-            urlRef: "file://usr/local/Cellar/node/21.6.2_1"
-            urlText: "/usr/local/Cellar/node/21.6.2_1"
-        }
-        CoreLabel {
-            text: " 64.5 Mb"
-        }
     }
 
     HyperlinkBtn {
@@ -71,10 +65,9 @@ ColumnLayout {
         }
         CoreLabel {
             topPadding: 15
-            text: "MIT: "
+            text: "MIT"
         }
     }
-
 
     CoreLabel {
         font.pointSize: Constants.fontSizeLarge3()
@@ -100,40 +93,4 @@ ColumnLayout {
             text: "brotli, c-ares, icu4c, libnghttp2, libuv, openssl@3"
         }
     }
-
-    CoreLabel {
-        font.pointSize: Constants.fontSizeLarge3()
-        font.bold: true
-        topPadding: 15
-        text: "Analytics"
-    }
-    RowLayout {
-        CoreLabel {
-            text: "install: "
-            font.bold: true
-        }
-        CoreLabel {
-            text: "6 (30 days), 11 (90 days), 46 (365 days)"
-        }
-    }
-
-    RowLayout {
-        CoreLabel {
-            text: "install-on-request: "
-            font.bold: true
-        }
-        CoreLabel {
-            text: "6 (30 days), 11 (90 days), 46 (365 days)"
-        }
-    }
-    RowLayout {
-        CoreLabel {
-            text: "build-error: "
-            font.bold: true
-        }
-        CoreLabel {
-            text: "417 (30 days)"
-        }
-    }
-
 }

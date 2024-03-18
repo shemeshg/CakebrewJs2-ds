@@ -388,7 +388,6 @@ QtObject {
 
     function asyncFormulaSort(cb) {}
 
-
     enum InfoStatus {
         Idile,
         Running,
@@ -398,8 +397,29 @@ QtObject {
         FormulaNotFound
     }
 
-    function asyncGetInfo(tokent,isCask,cb){
-        var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
-        cb({infoStatus: i} )
+    function asyncGetInfo(tokent, isCask, cb) {
+        //var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
+        if (isCask) {
+            cb({
+                   "artifacts": "cakebrewjs.app (app)\n",
+                   "caskroomSize": "170M total",
+                   "desc": "Homebrew GUI app written in electron",
+                   "err": "",
+                   "homepage": "https://sourceforge.net/projects/cakebrewjs/",
+                   "infoStatus": 2,
+                   "isInstalled": true,
+                   "isOutdated": false,
+                   "name": "cakebrewjs",
+                   "outdated": "1.4.4",
+                   "ruby_source_path": "Casks/c/cakebrewjs.rb",
+                   "tap": "homebrew/cask",
+                   "token": "cakebrewjs",
+                   "version": "1.4.4"
+               })
+        } else {
+            cb({
+                   "infoStatus": BrewData.InfoStatus.FormulaFound
+               })
+        }
     }
 }
