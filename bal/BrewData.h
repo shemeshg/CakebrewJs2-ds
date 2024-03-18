@@ -390,6 +390,7 @@ public slots:
                 FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
                 row["infoStatus"] = (int) InfoStatus::FormulaFound;
                 row["token"] = formulaRow.token;
+                row["fullName"] = formulaRow.fullName;
                 row["desc"] = formulaRow.desc;
                 row["tap"] = formulaRow.tap;
                 row["version"] = formulaRow.version;
@@ -397,6 +398,7 @@ public slots:
                 row["leafText"] = formulaRow.leafText;
                 row["isOutdated"] = formulaRow.isOutdated;
                 row["installedOnRequest"] = formulaRow.installedOnRequest;
+                row["isInstalled"] = formulaRow.isInstalled;
                 row["usedIn"] = formulaRow.usedIn;
             }
         } else {

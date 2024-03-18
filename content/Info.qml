@@ -63,6 +63,22 @@ ColumnLayout {
                                                                    = result.caskroomSize
                                                                    infoCask.artifacts
                                                                    = result.artifacts
+                                                               } else {
+                                                                   infoFormula.token = result.token
+                                                                   infoFormula.fullName
+                                                                   = result.fullName
+                                                                   infoFormula.desc = result.desc
+
+                                                                   infoFormula.version
+                                                                   = result.version
+                                                                   infoFormula.outdated
+                                                                   = result.outdated
+
+                                                                   infoFormula.isOutdated
+                                                                   = result.isOutdated
+                                                                   infoFormula.isInstalled
+                                                                   = result.isInstalled
+
                                                                    console.log(
                                                                        JSON.stringify(
                                                                            result))
@@ -90,6 +106,7 @@ ColumnLayout {
     }
 
     InfoFormula {
+        id: infoFormula
         visible: infoStatus === BrewData.InfoStatus.FormulaFound
     }
 }

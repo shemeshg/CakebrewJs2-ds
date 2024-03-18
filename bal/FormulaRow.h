@@ -5,8 +5,8 @@
 class FormulaRow
 {
 public:
-    QString token, desc, tap, version, outdated, leafText, leafPopup;
-    bool isOutdated, installedOnRequest;
+    QString token, desc, tap, version, outdated, leafText, leafPopup, fullName;
+    bool isOutdated, installedOnRequest, isInstalled;
     QStringList usedIn;
     void addListHeader(QVariantList &formulaTableBodyList)
     {

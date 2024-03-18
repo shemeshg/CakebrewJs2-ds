@@ -5,25 +5,34 @@ import QtQuick.Layouts
 import Core
 
 ColumnLayout {
+    property string token: ""
+    property string fullName: ""
+    property string desc: ""
+
+    property string version: ""
+    property string outdated: ""
+
+    property bool isOutdated: false
+    property bool isInstalled: false
 
     RowLayout {
         CoreLabel {
             font.pointSize: Constants.fontSizeLarge3()
             font.bold: true
             topPadding: 20
-            text: "Node " + "21.7.1"
+            text: fullName + " " + version
         }
         Item {
             Layout.fillWidth: true
         }
         CoreLabel {
-            text: "Formula: node "
+            text: "Formula: " + token + " "
         }
     }
 
     CoreLabel {
         topPadding: 5
-        text: "Platform built on V8 to build network applications"
+        text: desc
     }
 
     RowLayout {

@@ -64,6 +64,7 @@ public:
         }
         for (auto &element : data["formulae"]) {
             std::string name = element["name"].template get<std::string>();
+            std::string fullName = element["full_name"].template get<std::string>();
             std::string desc = (element["desc"]).template get<std::string>();
             std::string tap = element["tap"].template get<std::string>();
             std::string updatedVersion = (element["versions"]["stable"]).template get<std::string>();
@@ -80,12 +81,14 @@ public:
 
             FormulaRow row{};
             row.token = QString::fromStdString(name);
+            row.fullName = QString::fromStdString(fullName);
             row.desc = QString::fromStdString(desc);
             row.tap = QString::fromStdString(tap);
             row.version = QString::fromStdString(installedVersion);
             row.outdated = QString::fromStdString(updatedVersion);
             row.isOutdated = isOutdated;
             row.installedOnRequest = installedOnRequest;
+            row.isInstalled = isInstalled;
 
             for (auto &dep : element["dependencies"]) {
                 std::string d = dep.template get<std::string>();
