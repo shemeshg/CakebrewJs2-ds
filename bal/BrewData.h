@@ -365,11 +365,11 @@ public slots:
     QVariant getInfo(const QString token, bool isCask)
     {
         QMap<QString, QVariant> row;
-        ShellCmd sc;
-        ProcessStatus s = sc.cmdGetInfo(token, isCask);
 
-        if (s.isSuccess && !s.stdOut.isEmpty()) {
-            if (isCask) {
+        if (isCask) {
+            ShellCmd sc;
+            ProcessStatus s = sc.cmdGetInfo(token, isCask);
+            if (s.isSuccess && !s.stdOut.isEmpty()) {
                 CaskRow caskRow = sc.parseCaskList(s.stdOut).at(0);
                 row["infoStatus"] = (int) InfoStatus::CaskFound;
                 row["token"] = caskRow.token;
@@ -387,8 +387,18 @@ public slots:
                     row["caskroomSize"] = sc.cmdGetCaskroomSize(caskRow.token).stdOut.simplified();
                 }
                 row["artifacts"] = caskRow.artifacts;
-
             } else {
+                if (s.stdErr.isEmpty()) {
+                    s.stdErr = "Err" + QString::number(s.exitCode);
+                }
+                row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
+                                           : (int) InfoStatus::FormulaNotFound;
+            }
+            row["err"] = s.stdErr;
+        } else {
+            ShellCmd sc;
+            ProcessStatus s = sc.cmdGetInfo(token, isCask);
+            if (s.isSuccess && !s.stdOut.isEmpty()) {
                 FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
                 row["infoStatus"] = (int) InfoStatus::FormulaFound;
                 row["token"] = formulaRow.token;
@@ -410,15 +420,16 @@ public slots:
                 if (formulaRow.isInstalled) {
                     row["cellarSize"] = formulaRow.getCellarSize();
                 }
+            } else {
+                if (s.stdErr.isEmpty()) {
+                    s.stdErr = "Err" + QString::number(s.exitCode);
+                }
+                row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
+                                           : (int) InfoStatus::FormulaNotFound;
             }
-        } else {
-            if (s.stdErr.isEmpty()) {
-                s.stdErr = "Err" + QString::number(s.exitCode);
-            }
-            row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
-                                       : (int) InfoStatus::FormulaNotFound;            
+            row["err"] = s.stdErr;
         }
-        row["err"] = s.stdErr;
+
         return row;
     }
 
