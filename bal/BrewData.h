@@ -305,8 +305,10 @@ public slots:
     void caskSort()
     {
         std::sort(caskRows.begin(), caskRows.end(), [=](CaskRow &a, CaskRow &b) {
+            QString aOutdatedText = a.isOutdated ? a.outdated : "";
+            QString bOutdatedText = b.isOutdated ? b.outdated : "";
             if (caskSortedColIdx() == 4 && caskSortedColOrder() == 1) {
-                return a.outdated + a.token < b.outdated + b.token;
+                return aOutdatedText + a.token > bOutdatedText + b.token;
             }
 
             if (caskSortedColIdx() == 0) {
@@ -341,7 +343,7 @@ public slots:
                 }
             }
 
-            return a.outdated + a.token < b.outdated + b.token;
+            return aOutdatedText + a.token < bOutdatedText + b.token;
         });
 
         caskTableBodyList().clear();
@@ -400,6 +402,9 @@ public slots:
                 row["installedOnRequest"] = formulaRow.installedOnRequest;
                 row["isInstalled"] = formulaRow.isInstalled;
                 row["usedIn"] = formulaRow.usedIn;
+                row["homepage"] = formulaRow.homepage;
+                row["ruby_source_path"] = formulaRow.ruby_source_path;
+                row["license"] = formulaRow.license;
 
                 row["cellarSize"] = "";
                 if (formulaRow.isInstalled) {

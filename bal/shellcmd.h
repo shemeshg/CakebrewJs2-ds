@@ -67,6 +67,12 @@ public:
             std::string fullName = element["full_name"].template get<std::string>();
             std::string desc = (element["desc"]).template get<std::string>();
             std::string tap = element["tap"].template get<std::string>();
+            std::string homepage = element["homepage"].template get<std::string>();
+            std::string license;
+            if (!element["license"].is_null()) {
+                license = element["license"].template get<std::string>();
+            }
+            std::string ruby_source_path = element["ruby_source_path"].template get<std::string>();
             std::string updatedVersion = (element["versions"]["stable"]).template get<std::string>();
             bool isInstalled = element["installed"].size() != 0;
             bool isOutdated = false;
@@ -86,6 +92,9 @@ public:
             row.tap = QString::fromStdString(tap);
             row.version = QString::fromStdString(installedVersion);
             row.outdated = QString::fromStdString(updatedVersion);
+            row.ruby_source_path = QString::fromStdString(ruby_source_path);
+            row.homepage = QString::fromStdString(homepage);
+            row.license = QString::fromStdString(license);
             row.isOutdated = isOutdated;
             row.installedOnRequest = installedOnRequest;
             row.isInstalled = isInstalled;

@@ -5,7 +5,8 @@
 class FormulaRow
 {
 public:
-    QString token, desc, tap, version, outdated, leafText, leafPopup, fullName;
+    QString token, desc, tap, version, outdated, leafText, leafPopup, fullName, homepage,
+        ruby_source_path, license;
     bool isOutdated, installedOnRequest, isInstalled;
     QStringList usedIn;
     void addListHeader(QVariantList &formulaTableBodyList)

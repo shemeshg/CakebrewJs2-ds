@@ -58,7 +58,7 @@ ColumnLayout {
                                                                    infoCask.homepage
                                                                    = result.homepage
 
-                                                                   infoCask.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/master/${result.ruby_source_path}`
+                                                                   infoCask.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/HEAD/${result.ruby_source_path}`
                                                                    infoCask.caskroomSize
                                                                    = result.caskroomSize
                                                                    infoCask.artifacts
@@ -81,6 +81,13 @@ ColumnLayout {
 
                                                                    infoFormula.cellarSize
                                                                    = result.cellarSize
+
+                                                                   infoFormula.homepage
+                                                                   = result.homepage
+                                                                   infoFormula.license
+                                                                   = result.license
+
+                                                                   infoFormula.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/HEAD/${result.ruby_source_path}`
 
                                                                    console.log(
                                                                        JSON.stringify(
