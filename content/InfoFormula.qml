@@ -11,6 +11,7 @@ ColumnLayout {
 
     property string version: ""
     property string outdated: ""
+    property string cellarSize: ""
 
     property bool isOutdated: false
     property bool isInstalled: false
@@ -37,16 +38,17 @@ ColumnLayout {
 
     RowLayout {
         Layout.topMargin: 5
+        visible: isInstalled
         CoreLabel {
-            text: "outdated "
+            text: isOutdated ? "outdated " : "installed "
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
         CoreLabel {
-            text: "21.6.2_1"
+            text: outdated
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
         CoreLabel {
-            text: "50Mb"
+            text: cellarSize
         }
     }
 

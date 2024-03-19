@@ -400,6 +400,11 @@ public slots:
                 row["installedOnRequest"] = formulaRow.installedOnRequest;
                 row["isInstalled"] = formulaRow.isInstalled;
                 row["usedIn"] = formulaRow.usedIn;
+
+                row["cellarSize"] = "";
+                if (formulaRow.isInstalled) {
+                    row["cellarSize"] = sc.cmdGetcCellarSize(formulaRow.token).stdOut.simplified();
+                }
             }
         } else {
             if (s.stdErr.isEmpty()) {

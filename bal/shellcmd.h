@@ -263,6 +263,20 @@ public:
         return exec(cmd, {"info", type, "--json=v2", token});
     }
 
+    ProcessStatus cmdGetcCellarSize(QString token)
+    {
+        QString s = R"(#!/bin/zsh
+find `/usr/local/bin/brew --cellar`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shHc|tail -n 1)";
+
+        QTemporaryFile file;
+        file.open();
+        file.write(s.toUtf8());
+        file.flush();
+
+        exec("chmod", {"+x", file.fileName()});
+        return exec(file.fileName(), {token});
+    }
+
     ProcessStatus cmdGetCaskroomSize(QString token)
     {
         QString s = R"(#!/bin/zsh

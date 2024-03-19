@@ -79,6 +79,9 @@ ColumnLayout {
                                                                    infoFormula.isInstalled
                                                                    = result.isInstalled
 
+                                                                   infoFormula.cellarSize
+                                                                   = result.cellarSize
+
                                                                    console.log(
                                                                        JSON.stringify(
                                                                            result))
