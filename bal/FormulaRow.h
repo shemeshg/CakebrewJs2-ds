@@ -86,4 +86,9 @@ public:
         row["leaf"] = QVariant::fromValue(text);
         formulaTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
+
+    const QString getCellarSize();
+
+private:
+    QString m_cellarSize;
 };

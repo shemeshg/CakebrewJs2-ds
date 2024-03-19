@@ -408,7 +408,7 @@ public slots:
 
                 row["cellarSize"] = "";
                 if (formulaRow.isInstalled) {
-                    row["cellarSize"] = sc.cmdGetcCellarSize(formulaRow.token).stdOut.simplified();
+                    row["cellarSize"] = formulaRow.getCellarSize();
                 }
             }
         } else {
