@@ -67,4 +67,9 @@ public:
 
         caskTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
+
+    const QString getCaskroomSize();
+
+private:
+    QString m_caskroomSize;
 };

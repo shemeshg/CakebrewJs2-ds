@@ -367,67 +367,47 @@ public slots:
         QMap<QString, QVariant> row;
 
         if (isCask) {
-            ShellCmd sc;
-            ProcessStatus s = sc.cmdGetInfo(token, isCask);
-            if (s.isSuccess && !s.stdOut.isEmpty()) {
-                CaskRow caskRow = sc.parseCaskList(s.stdOut).at(0);
-                row["infoStatus"] = (int) InfoStatus::CaskFound;
-                row["token"] = caskRow.token;
-                row["desc"] = caskRow.desc;
-                row["tap"] = caskRow.tap;
-                row["version"] = caskRow.version;
-                row["outdated"] = caskRow.outdated;
-                row["isOutdated"] = caskRow.isOutdated;
-                row["isInstalled"] = caskRow.isInstalled;
-                row["name"] = caskRow.name;
-                row["homepage"] = caskRow.homepage;
-                row["ruby_source_path"] = caskRow.ruby_source_path;
-                row["caskroomSize"] = "";
-                if (caskRow.isInstalled) {
-                    row["caskroomSize"] = sc.cmdGetCaskroomSize(caskRow.token).stdOut.simplified();
-                }
-                row["artifacts"] = caskRow.artifacts;
+            auto it = std::find_if(caskRows.begin(), caskRows.end(), [=](auto &row) {
+                return row.token == token;
+            });
+            if (it != caskRows.end()) {
+                setRowFromCaskRow(row, *it);
             } else {
-                if (s.stdErr.isEmpty()) {
-                    s.stdErr = "Err" + QString::number(s.exitCode);
+                ShellCmd sc;
+                ProcessStatus s = sc.cmdGetInfo(token, isCask);
+                if (s.isSuccess && !s.stdOut.isEmpty()) {
+                    CaskRow caskRow = sc.parseCaskList(s.stdOut).at(0);
+                    setRowFromCaskRow(row, caskRow);
+                } else {
+                    if (s.stdErr.isEmpty()) {
+                        s.stdErr = "Err" + QString::number(s.exitCode);
+                    }
+                    row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
+                                               : (int) InfoStatus::FormulaNotFound;
                 }
-                row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
-                                           : (int) InfoStatus::FormulaNotFound;
+                row["err"] = s.stdErr;
             }
-            row["err"] = s.stdErr;
         } else {
-            ShellCmd sc;
-            ProcessStatus s = sc.cmdGetInfo(token, isCask);
-            if (s.isSuccess && !s.stdOut.isEmpty()) {
-                FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
-                row["infoStatus"] = (int) InfoStatus::FormulaFound;
-                row["token"] = formulaRow.token;
-                row["fullName"] = formulaRow.fullName;
-                row["desc"] = formulaRow.desc;
-                row["tap"] = formulaRow.tap;
-                row["version"] = formulaRow.version;
-                row["outdated"] = formulaRow.outdated;
-                row["leafText"] = formulaRow.leafText;
-                row["isOutdated"] = formulaRow.isOutdated;
-                row["installedOnRequest"] = formulaRow.installedOnRequest;
-                row["isInstalled"] = formulaRow.isInstalled;
-                row["usedIn"] = formulaRow.usedIn;
-                row["homepage"] = formulaRow.homepage;
-                row["ruby_source_path"] = formulaRow.ruby_source_path;
-                row["license"] = formulaRow.license;
-
-                row["cellarSize"] = "";
-                if (formulaRow.isInstalled) {
-                    row["cellarSize"] = formulaRow.getCellarSize();
-                }
+            auto it = std::find_if(formulaRows.begin(), formulaRows.end(), [=](auto &row) {
+                return row.token == token;
+            });
+            if (it != formulaRows.end()) {
+                setRowFromFormulaRow(row, *it);
             } else {
-                if (s.stdErr.isEmpty()) {
-                    s.stdErr = "Err" + QString::number(s.exitCode);
+                ShellCmd sc;
+                ProcessStatus s = sc.cmdGetInfo(token, isCask);
+                if (s.isSuccess && !s.stdOut.isEmpty()) {
+                    FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
+                    setRowFromFormulaRow(row, formulaRow);
+                } else {
+                    if (s.stdErr.isEmpty()) {
+                        s.stdErr = "Err" + QString::number(s.exitCode);
+                    }
+                    row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
+                                               : (int) InfoStatus::FormulaNotFound;
                 }
-                row["infoStatus"] = isCask ? (int) InfoStatus::CaskNotFound
-                                           : (int) InfoStatus::FormulaNotFound;
+                row["err"] = s.stdErr;
             }
-            row["err"] = s.stdErr;
         }
 
         return row;
@@ -616,5 +596,50 @@ private:
             setRefreshStatusServiceVisible(false);
         }
         setRefreshServiceRunning(false);
+    }
+
+    void setRowFromCaskRow(QMap<QString, QVariant> &row, CaskRow &caskRow)
+    {
+        row["infoStatus"] = (int) InfoStatus::CaskFound;
+        row["token"] = caskRow.token;
+        row["desc"] = caskRow.desc;
+        row["tap"] = caskRow.tap;
+        row["version"] = caskRow.version;
+        row["outdated"] = caskRow.outdated;
+        row["isOutdated"] = caskRow.isOutdated;
+        row["isInstalled"] = caskRow.isInstalled;
+        row["name"] = caskRow.name;
+        row["homepage"] = caskRow.homepage;
+        row["ruby_source_path"] = caskRow.ruby_source_path;
+        row["caskroomSize"] = "";
+        if (caskRow.isInstalled) {
+            row["caskroomSize"] = caskRow.getCaskroomSize();
+        }
+        row["artifacts"] = caskRow.artifacts;
+    }
+
+    void setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &formulaRow)
+    {
+        row["infoStatus"] = (int) InfoStatus::FormulaFound;
+        row["token"] = formulaRow.token;
+        row["fullName"] = formulaRow.fullName;
+        row["desc"] = formulaRow.desc;
+        row["tap"] = formulaRow.tap;
+        row["version"] = formulaRow.version;
+        row["outdated"] = formulaRow.outdated;
+        row["leafText"] = formulaRow.leafText;
+        row["isOutdated"] = formulaRow.isOutdated;
+        row["installedOnRequest"] = formulaRow.installedOnRequest;
+        row["isInstalled"] = formulaRow.isInstalled;
+        row["usedIn"] = formulaRow.usedIn;
+        row["homepage"] = formulaRow.homepage;
+        row["ruby_source_path"] = formulaRow.ruby_source_path;
+        row["license"] = formulaRow.license;
+
+        row["cellarSize"] = "";
+        if (formulaRow.isInstalled) {
+            row["cellarSize"] = formulaRow.getCellarSize();
+        }
+        row["err"] = "";
     }
 };
