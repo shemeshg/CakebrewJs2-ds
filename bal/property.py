@@ -211,9 +211,9 @@ private:
 
     def get_public_content(self):
         public_content = ""
-        for row in self.prptAry:
-            public_content = public_content + row.public_h_file()
         for row in self.enumClassAry:
+            public_content = public_content + row.public_h_file()        
+        for row in self.prptAry:
             public_content = public_content + row.public_h_file()
         return public_content
 

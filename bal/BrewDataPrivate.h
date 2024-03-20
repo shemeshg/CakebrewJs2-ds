@@ -47,12 +47,18 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVariantList formulaTableBodyList READ formulaTableBodyList  NOTIFY formulaTableBodyListChanged )
     Q_PROPERTY(QVariantList caskTableBodyList READ caskTableBodyList  NOTIFY caskTableBodyListChanged )
     Q_PROPERTY(QVariantList serviceTableBodyList READ serviceTableBodyList  NOTIFY serviceTableBodyListChanged )
+    Q_PROPERTY(InfoStatus infoStatus READ infoStatus WRITE setInfoStatus NOTIFY infoStatusChanged )
     
     QML_ELEMENT
 public:
     BrewDataPrivate(QObject *parent = nullptr);
 
     
+enum class InfoStatus {
+        Idile, Running, CaskFound, FormulaFound, CaskNotFound, FormulaNotFound
+    };
+Q_ENUM(InfoStatus)
+
     
     QString brewLocation() const{return m_brewLocation;} 
     
@@ -361,10 +367,17 @@ void setFormulaSortedColOrder(const int newFormulaSortedColOrder)
     QVariantList &serviceTableBodyList() {return m_serviceTableBodyList;} 
     
 
-enum class InfoStatus {
-        Idile, Running, CaskFound, FormulaFound, CaskNotFound, FormulaNotFound
-    };
-Q_ENUM(InfoStatus)
+    
+    InfoStatus infoStatus() const{return m_infoStatus;} 
+    
+void setInfoStatus(const InfoStatus &newInfoStatus)
+    {
+        if (m_infoStatus == newInfoStatus)
+            return;
+        m_infoStatus = newInfoStatus;
+        emit infoStatusChanged();
+    }
+
 
 
 signals:
@@ -397,6 +410,7 @@ signals:
     void formulaTableBodyListChanged();
     void caskTableBodyListChanged();
     void serviceTableBodyListChanged();
+    void infoStatusChanged();
     
 
 private:
@@ -429,6 +443,7 @@ private:
     QVariantList m_formulaTableBodyList;
     QVariantList m_caskTableBodyList;
     QVariantList m_serviceTableBodyList;
+    InfoStatus m_infoStatus;
     
     void ctorClass();
 };

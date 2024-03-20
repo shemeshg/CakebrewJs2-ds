@@ -7,7 +7,7 @@ import Brew
 
 ColumnLayout {
 
-    property int infoStatus: BrewData.InfoStatus.Idile
+
 
 
     function infoTextLookup(){
@@ -46,12 +46,12 @@ ColumnLayout {
             text: "Info"
             onClicked: () => {
                            infoTextLookup();
-                           infoStatus = BrewData.InfoStatus.Running
+                           Constants.brewData.infoStatus = BrewData.InfoStatus.Running
                            var isCask = cmb.currentText === "Cask"
                            Constants.brewData.asyncGetInfo(token.text, isCask,
                                                            result => {
 
-                                                               infoStatus = result.infoStatus
+                                                               Constants.brewData.infoStatus = result.infoStatus
                                                                err.text = result.err
 
                                                                if (isCask) {
@@ -118,23 +118,23 @@ ColumnLayout {
 
     CoreLabel {
         text: "Running"
-        visible: infoStatus === BrewData.InfoStatus.Running
+        visible: Constants.brewData.infoStatus === BrewData.InfoStatus.Running
     }
 
     CoreLabel {
         id: err
-        visible: infoStatus === BrewData.InfoStatus.CaskNotFound
-                 || infoStatus === BrewData.InfoStatus.FormulaNotFound
+        visible: Constants.brewData.infoStatus === BrewData.InfoStatus.CaskNotFound
+                 || Constants.brewData.infoStatus === BrewData.InfoStatus.FormulaNotFound
     }
 
     InfoCask {
         id: infoCask
-        visible: infoStatus === BrewData.InfoStatus.CaskFound
+        visible: Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound
     }
 
     InfoFormula {
         id: infoFormula
-        visible: infoStatus === BrewData.InfoStatus.FormulaFound
+        visible: Constants.brewData.infoStatus === BrewData.InfoStatus.FormulaFound
     }
 
 
