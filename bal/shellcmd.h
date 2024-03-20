@@ -283,7 +283,7 @@ public:
         QString cmd = "/usr/local/bin/brew";
         QString type = isCask ? "--cask" : "--formula";
 
-        return exec(cmd, {"info", type, token});
+        return exec(cmd, {"info", type, token}, false);
     }
 
     ProcessStatus cmdGetcCellarSize(QString token)
@@ -335,11 +335,13 @@ find `/usr/local/bin/brew --caskroom`/$1 -mindepth 2 -maxdepth 2  -not -path '*/
         loop.exec();
     }
 
-    ProcessStatus exec(const QString program, const QStringList arguments)
+    ProcessStatus exec(const QString program, const QStringList arguments, bool noGithubApi = true)
     {
         QProcess pingProcess;
         QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-        env.insert("HOMEBREW_NO_GITHUB_API", "1");
+        if (noGithubApi) {
+            env.insert("HOMEBREW_NO_GITHUB_API", "1");
+        }
         pingProcess.setProcessEnvironment(env);
 
         pingProcess.start(program, {arguments});
