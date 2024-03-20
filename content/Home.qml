@@ -16,8 +16,8 @@ ColumnLayout {
         id: ctvc
         visible: !Constants.brewData.refreshCaskRunning
 
-        property int caskSelected: Constants.selectedCaskItems().length
-        headerText: "Cask (" + caskSelected + ")"
+
+        headerText: "Cask (" + Constants.caskSelected + ")"
         rowsModel: Constants.brewData.caskTableBodyList
         tableView.model: TableModel {
 
@@ -82,7 +82,7 @@ ColumnLayout {
                     onToggled: {
                         model.display.tsChecked = checked
                         Constants.brewData.caskTableBodyList[model.row].outdated.tsChecked = checked
-                        ctvc.caskSelected = Constants.selectedCaskItems().length
+                        Constants.caskSelected = Constants.selectedCaskItems().length
                     }
                 }
             }
@@ -113,8 +113,8 @@ ColumnLayout {
         id: ctvf
         visible: !Constants.brewData.refreshFormulaRunning
 
-         property int formulaSelected: Constants.selectedFormulaItems().length
-        headerText: "Formula (" + formulaSelected + ")"
+
+        headerText: "Formula (" + Constants.formulaSelected + ")"
         rowsModel: Constants.brewData.formulaTableBodyList
         tableView.model: TableModel {
 
@@ -182,7 +182,7 @@ ColumnLayout {
                     onToggled: {
                         model.display.tsChecked = checked
                         Constants.brewData.formulaTableBodyList[model.row].outdated.tsChecked = checked
-                        ctvf.formulaSelected = Constants.selectedFormulaItems().length
+                        Constants.formulaSelected = Constants.selectedFormulaItems().length
                     }
                 }
             }

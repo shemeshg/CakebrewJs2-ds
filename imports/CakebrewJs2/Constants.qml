@@ -28,6 +28,9 @@ QtObject {
     }
 
 
+    property int caskSelected: selectedCaskItems().length
+    property int formulaSelected: selectedFormulaItems().length
+
     function selectedFormulaItems(){
         return brewData.formulaTableBodyList.filter(row => {
                                                                   return Boolean(

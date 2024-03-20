@@ -45,8 +45,8 @@ GroupBox {
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
-                          Constants.selectedFormulaItems().length
-                          + Constants.selectedCaskItems().length) + ")"
+                          Constants.caskSelected
+                          + Constants.formulaSelected) + ")"
             }
             CoreButton {
                 text: "Doctor"
