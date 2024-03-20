@@ -68,17 +68,14 @@ ColumnLayout {
                                                                    infoFormula.fullName
                                                                    = result.fullName
                                                                    infoFormula.desc = result.desc
-
                                                                    infoFormula.version
                                                                    = result.version
                                                                    infoFormula.outdated
                                                                    = result.outdated
-
                                                                    infoFormula.isOutdated
                                                                    = result.isOutdated
                                                                    infoFormula.isInstalled
                                                                    = result.isInstalled
-
                                                                    infoFormula.cellarSize
                                                                    = result.cellarSize
 
@@ -86,6 +83,14 @@ ColumnLayout {
                                                                    = result.homepage
                                                                    infoFormula.license
                                                                    = result.license
+                                                                   infoFormula.usedIn
+                                                                   = result.usedIn
+                                                                   infoFormula.buildDependencies
+                                                                   = result.buildDependencies
+                                                                   infoFormula.dependencies
+                                                                   = result.dependencies
+
+
 
                                                                    infoFormula.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/HEAD/${result.ruby_source_path}`
 

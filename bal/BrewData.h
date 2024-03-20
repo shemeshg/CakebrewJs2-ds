@@ -635,6 +635,8 @@ private:
         row["homepage"] = formulaRow.homepage;
         row["ruby_source_path"] = formulaRow.ruby_source_path;
         row["license"] = formulaRow.license;
+        row["dependencies"] = formulaRow.dependencies;
+        row["buildDependencies"] = formulaRow.buildDependencies;
 
         row["cellarSize"] = "";
         if (formulaRow.isInstalled) {

@@ -101,10 +101,16 @@ public:
 
             for (auto &dep : element["dependencies"]) {
                 std::string d = dep.template get<std::string>();
+                row.dependencies.push_back(QString::fromStdString(d));
                 bool found = (usedIn.find(d) != usedIn.end());
                 if (found) {
                     usedIn[d].push_back(row.token.toStdString());
-                }
+                }                
+            }
+
+            for (auto &dep : element["build_dependencies"]) {
+                std::string d = dep.template get<std::string>();
+                row.buildDependencies.push_back(QString::fromStdString(d));
             }
 
             rows.emplaceBack(row);

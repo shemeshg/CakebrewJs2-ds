@@ -8,7 +8,7 @@ public:
     QString token, desc, tap, version, outdated, leafText, leafPopup, fullName, homepage,
         ruby_source_path, license;
     bool isOutdated, installedOnRequest, isInstalled;
-    QStringList usedIn;
+    QStringList usedIn, dependencies, buildDependencies;
     void addListHeader(QVariantList &formulaTableBodyList)
     {
         QMap<QString, QVariant> row;

@@ -16,6 +16,9 @@ ColumnLayout {
     property string homepage: ""
     property string caskRbGithub: ""
     property string license: ""
+    property var usedIn: []
+    property var buildDependencies: []
+    property var dependencies: []
 
     RowLayout {
         CoreLabel {
@@ -92,8 +95,13 @@ ColumnLayout {
             text: "Build: "
             font.bold: true
         }
-        CoreLabel {
-            text: "pkg-config ,python@3.12"
+        RowLayout {
+            Repeater {
+                model: buildDependencies
+                delegate:  CoreLabel {
+                    text: modelData
+                }
+            }
         }
     }
     RowLayout {
@@ -101,8 +109,13 @@ ColumnLayout {
             text: "Required: "
             font.bold: true
         }
-        CoreLabel {
-            text: "brotli, c-ares, icu4c, libnghttp2, libuv, openssl@3"
+        RowLayout {
+            Repeater {
+                model: dependencies
+                delegate:  CoreLabel {
+                    text: modelData
+                }
+            }
         }
     }
     RowLayout {
@@ -110,8 +123,13 @@ ColumnLayout {
             text: "Used in: "
             font.bold: true
         }
-        CoreLabel {
-            text: "brotli, c-ares, icu4c, libnghttp2, libuv, openssl@3"
+        RowLayout {
+            Repeater {
+                model: usedIn
+                delegate:  CoreLabel {
+                    text: modelData
+                }
+            }
         }
     }
     HyperlinkBtn {
@@ -121,22 +139,22 @@ ColumnLayout {
     }
     CoreTextArea {
         text: `
-==> jq: stable 1.7.1 (bottled), HEAD
-Lightweight and flexible command-line JSON processor
-https://jqlang.github.io/jq/
-/usr/local/Cellar/jq/1.7.1 (19 files, 1.4MB) *
-Poured from bottle using the formulae.brew.sh API on 2023-12-15 at 20:24:10
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/j/jq.rb
-License: MIT
-==> Dependencies
-Required: oniguruma ✔
-==> Options
---HEAD
-Install HEAD version
-==> Analytics
-install: 53,150 (30 days), 185,825 (90 days), 586,075 (365 days)
-install-on-request: 52,523 (30 days), 183,498 (90 days), 577,860 (365 days)
-build-error: 1 (30 days)
+        ==> jq: stable 1.7.1 (bottled), HEAD
+        Lightweight and flexible command-line JSON processor
+        https://jqlang.github.io/jq/
+        /usr/local/Cellar/jq/1.7.1 (19 files, 1.4MB) *
+        Poured from bottle using the formulae.brew.sh API on 2023-12-15 at 20:24:10
+        From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/j/jq.rb
+        License: MIT
+        ==> Dependencies
+        Required: oniguruma ✔
+        ==> Options
+        --HEAD
+        Install HEAD version
+        ==> Analytics
+        install: 53,150 (30 days), 185,825 (90 days), 586,075 (365 days)
+        install-on-request: 52,523 (30 days), 183,498 (90 days), 577,860 (365 days)
+        build-error: 1 (30 days)
         `
     }
 }
