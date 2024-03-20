@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 #include "JsAsync.h"
 #include "searchresultrow.h"
+
 /*[[[cog
 import cog
 from BrewDataPrivate import classBrewDataPrivate
@@ -359,6 +360,11 @@ void setFormulaSortedColOrder(const int newFormulaSortedColOrder)
     
     QVariantList &serviceTableBodyList() {return m_serviceTableBodyList;} 
     
+
+enum class InfoStatus {
+        Idile, Running, CaskFound, FormulaFound, CaskNotFound, FormulaNotFound
+    };
+Q_ENUM(InfoStatus)
 
 
 signals:

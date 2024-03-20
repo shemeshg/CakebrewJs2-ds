@@ -14,11 +14,12 @@ GroupBox {
     property string selectedPreview: ""
 
     readonly property int upgradableItems: {
+
         /* return Constants.brewData.caskBodyList.filter(row => {
                                                           return row.cellType === "checkbox"
                                                       }).length
                                                       */
-        return 0;
+        return 0
     }
 
     RowLayout {
@@ -46,7 +47,7 @@ GroupBox {
             }
         }
         RowLayout {
-            visible: selectedPreview === "Info-cask"
+            visible: selectedPreview === "Info"
             CoreButton {
                 text: "Uninstall"
             }

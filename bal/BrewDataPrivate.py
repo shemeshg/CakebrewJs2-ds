@@ -1,4 +1,4 @@
-from property import Prpt, PrptClass
+from property import Prpt, PrptClass, EnumClass
 
 
 ary = []
@@ -155,7 +155,17 @@ p.is_notify = True
 p.is_getter_ref = True
 ary.append(p)
 
-classBrewDataPrivate = PrptClass("BrewDataPrivate", ary)
+enumClasss = []
+e = EnumClass("InfoStatus",
+        ["Idile",
+        "Running",
+        "CaskFound",
+        "FormulaFound",
+        "CaskNotFound",
+        "FormulaNotFound"])
+enumClasss.append(e)
+
+classBrewDataPrivate = PrptClass("BrewDataPrivate", ary, enumClasss)
 classBrewDataPrivate.inhirit_from = "JsAsync"
 
 

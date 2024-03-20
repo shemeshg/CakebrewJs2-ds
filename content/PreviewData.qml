@@ -24,7 +24,7 @@ ColumnLayout {
             when: headerToolbarId.btnInfoId.checked
             PropertyChanges {
                 target: bottomBar
-                selectedPreview: "Info-cask"
+                selectedPreview: "Info"
             }
         },
         State {
@@ -101,14 +101,15 @@ ColumnLayout {
         }
 
         onRefreshClicked: {
+
             /*
             stateGroup.state = "LoadingData"
             Constants.brewData.asyncRefreshData(() => {
                                                     stateGroup.state = "Preview"
                                                 })
             */
-            Constants.brewData.asyncRefreshServices(()=>{});
-            Constants.brewData.asyncRefreshCaskAndFormula(()=>{});
+            Constants.brewData.asyncRefreshServices(() => {})
+            Constants.brewData.asyncRefreshCaskAndFormula(() => {})
         }
     }
 }

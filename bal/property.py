@@ -3,6 +3,26 @@ from string import Template
 def initCapital(s):
     return s[0].upper() + s[1:]
 
+class EnumClass:
+    class_name = ""
+    class_options = []
+
+    def __init__(self, class_name, class_options):
+        self.class_name = class_name
+        self.class_options = class_options
+       
+    def public_h_file(self):
+        t = Template(
+"""
+enum class ${class_name} {
+        ${class_options}
+    };
+Q_ENUM(${class_name})
+""")
+        coma_class_options = ", ".join(self.class_options)
+        return t.substitute(class_name=self.class_name, class_options=coma_class_options)
+    
+
 class Prpt:
     is_bindable=False
     is_writable = False
@@ -127,9 +147,11 @@ class PrptClass:
     class_name = ""
     inhirit_from = "QObject"
     prptAry = []
-    def __init__(self, class_name, prptAry):
+    enumClassAry = []
+    def __init__(self, class_name, prptAry, enumClassAry):
         self.class_name = class_name
         self.prptAry = prptAry
+        self.enumClassAry = enumClassAry
 
     def getClassCpp(self):
         contr_init = [self.inhirit_from + "(parent)"]
@@ -191,6 +213,8 @@ private:
         public_content = ""
         for row in self.prptAry:
             public_content = public_content + row.public_h_file()
+        for row in self.enumClassAry:
+            public_content = public_content + row.public_h_file()
         return public_content
 
     def get_signals_content(self):
@@ -242,9 +266,20 @@ p.is_notify = False
 p.is_new_in_contr = True
 ary.append(p)
 
+enumClasss = []
+e = EnumClass("InfoStatus",
+        ["Idile",
+        "Running",
+        "CaskFound",
+        "FormulaFound",
+        "CaskNotFound",
+        "FormulaNotFound"])
+enumClasss.append(e)
 
-c = PrptClass("MyType", ary)
+c = PrptClass("MyType", ary, enumClasss)
 print (c.getClassHeader())
 print ("#####################")
 print (c.getClassCpp())
 """
+
+
