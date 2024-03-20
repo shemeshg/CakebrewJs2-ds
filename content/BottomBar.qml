@@ -16,16 +16,15 @@ GroupBox {
     readonly property int upgradableItems: {
 
         return Constants.brewData.caskTableBodyList.filter(row => {
-                                                          return Boolean(row.outdated.text) &&
-                                                               "tsChecked" in row.outdated
-                                                      }).length +
-                Constants.brewData.formulaTableBodyList.filter(row => {
-                                                                          return Boolean(row.outdated.text) &&
-                                                                               "tsChecked" in row.outdated
-                                                                      }).length
-
-
-
+                                                               return Boolean(
+                                                                   row.outdated.text)
+                                                               && "tsChecked" in row.outdated
+                                                           }).length
+                + Constants.brewData.formulaTableBodyList.filter(row => {
+                                                                     return Boolean(
+                                                                         row.outdated.text)
+                                                                     && "tsChecked" in row.outdated
+                                                                 }).length
     }
 
     RowLayout {
@@ -45,8 +44,7 @@ GroupBox {
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
-                          Constants.caskSelected
-                          + Constants.formulaSelected) + ")"
+                          Constants.caskSelected.length + Constants.formulaSelected.length) + ")"
             }
             CoreButton {
                 text: "Doctor"

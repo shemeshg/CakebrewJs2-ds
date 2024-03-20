@@ -16,8 +16,7 @@ ColumnLayout {
         id: ctvc
         visible: !Constants.brewData.refreshCaskRunning
 
-
-        headerText: "Cask (" + Constants.caskSelected + ")"
+        headerText: "Cask (" + Constants.caskSelected.length + ")"
         rowsModel: Constants.brewData.caskTableBodyList
         tableView.model: TableModel {
 
@@ -81,8 +80,17 @@ ColumnLayout {
                     text: model.display.text
                     onToggled: {
                         model.display.tsChecked = checked
-                        Constants.brewData.caskTableBodyList[model.row].outdated.tsChecked = checked
-                        Constants.caskSelected = Constants.selectedCaskItems().length
+                        if (checked) {
+                            Constants.caskSelected.push(
+                                        Constants.brewData.caskTableBodyList[model.row].token.text)
+                        } else {
+                            const indexToRemove = Constants.caskSelected.indexOf(
+                                                    Constants.brewData.caskTableBodyList[model.row].token.text)
+                            if (indexToRemove !== -1) {
+                                Constants.caskSelected.splice(indexToRemove, 1)
+                            }
+                        }
+                        Constants.caskSelected = [...Constants.caskSelected]
                     }
                 }
             }
@@ -113,8 +121,7 @@ ColumnLayout {
         id: ctvf
         visible: !Constants.brewData.refreshFormulaRunning
 
-
-        headerText: "Formula (" + Constants.formulaSelected + ")"
+        headerText: "Formula (" + Constants.formulaSelected.length + ")"
         rowsModel: Constants.brewData.formulaTableBodyList
         tableView.model: TableModel {
 
@@ -181,8 +188,18 @@ ColumnLayout {
                     text: model.display.text
                     onToggled: {
                         model.display.tsChecked = checked
-                        Constants.brewData.formulaTableBodyList[model.row].outdated.tsChecked = checked
-                        Constants.formulaSelected = Constants.selectedFormulaItems().length
+                        if (checked) {
+                            Constants.formulaSelected.push(
+                                        Constants.brewData.formulaTableBodyList[model.row].name.text)
+                        } else {
+                            const indexToRemove = Constants.formulaSelected.indexOf(
+                                                    Constants.brewData.formulaTableBodyList[model.row].name.text)
+                            if (indexToRemove !== -1) {
+                                Constants.formulaSelected.splice(indexToRemove,
+                                                                 1)
+                            }
+                        }
+                        Constants.formulaSelected = [...Constants.formulaSelected]
                     }
                 }
             }

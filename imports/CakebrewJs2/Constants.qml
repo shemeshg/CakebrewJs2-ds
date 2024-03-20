@@ -27,25 +27,8 @@ QtObject {
         fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
     }
 
-
-    property int caskSelected: selectedCaskItems().length
-    property int formulaSelected: selectedFormulaItems().length
-
-    function selectedFormulaItems(){
-        return brewData.formulaTableBodyList.filter(row => {
-                                                                  return Boolean(
-                                                                      row.outdated.text)
-                                                                  && row.outdated.tsChecked === true
-                                                              })
-    }
-
-    function  selectedCaskItems(){
-        return  brewData.caskTableBodyList.filter(row => {
-                                                               return Boolean(
-                                                                   row.outdated.text)
-                                                               && row.outdated.tsChecked === true
-                                                           })
-    }
+    property var caskSelected: []
+    property var formulaSelected: []
 
     property BrewData brewData: BrewData {}
 

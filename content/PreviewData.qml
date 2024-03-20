@@ -102,12 +102,15 @@ ColumnLayout {
 
         onRefreshClicked: {
 
+
             /*
             stateGroup.state = "LoadingData"
             Constants.brewData.asyncRefreshData(() => {
                                                     stateGroup.state = "Preview"
                                                 })
             */
+            Constants.caskSelected = []
+            Constants.formulaSelected.length = []
             Constants.brewData.asyncRefreshServices(() => {})
             Constants.brewData.asyncRefreshCaskAndFormula(() => {})
         }
