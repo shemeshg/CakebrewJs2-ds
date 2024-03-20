@@ -278,6 +278,14 @@ public:
         return exec(cmd, {"info", type, "--json=v2", token});
     }
 
+    ProcessStatus cmdGetInfoText(QString token, bool isCask)
+    {
+        QString cmd = "/usr/local/bin/brew";
+        QString type = isCask ? "--cask" : "--formula";
+
+        return exec(cmd, {"info", type, token});
+    }
+
     ProcessStatus cmdGetcCellarSize(QString token)
     {
         QString s = R"(#!/bin/zsh

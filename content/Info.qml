@@ -9,6 +9,17 @@ ColumnLayout {
 
     property int infoStatus: BrewData.InfoStatus.Idile
 
+
+    function infoTextLookup(){
+        if (!isShowBrewInfoText.checked || !token.text) {return;}
+        var isCask = cmb.currentText === "Cask"
+        brewInfoText.text = "running"
+        Constants.brewData.asyncGetInfoText(token.text, isCask,
+                                            result => {
+                                             brewInfoText.text =  result;
+                                            })
+    }
+
     RowLayout {
         CoreComboBox {
             id: cmb
@@ -34,6 +45,7 @@ ColumnLayout {
         CoreButton {
             text: "Info"
             onClicked: () => {
+                           infoTextLookup();
                            infoStatus = BrewData.InfoStatus.Running
                            var isCask = cmb.currentText === "Cask"
                            Constants.brewData.asyncGetInfo(token.text, isCask,
@@ -123,5 +135,21 @@ ColumnLayout {
     InfoFormula {
         id: infoFormula
         visible: infoStatus === BrewData.InfoStatus.FormulaFound
+    }
+
+
+
+    CoreSwitch {
+        id: isShowBrewInfoText
+        topPadding: 30
+        text: "Show brew info"
+        onToggled: ()=>{
+            infoTextLookup();
+                   }
+    }
+    CoreTextArea {
+        id: brewInfoText
+        visible: isShowBrewInfoText.checked
+        readOnly: true
     }
 }

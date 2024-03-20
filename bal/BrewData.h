@@ -357,6 +357,25 @@ public slots:
         emit caskTableBodyListChanged();
     }
 
+    void asyncGetInfoText(QString token, bool isCask, const QJSValue &callback)
+    {
+        makeAsync<QString>(callback, [=]() { return getInfoText(token, isCask); });
+    }
+
+    QString getInfoText(const QString token, bool isCask)
+    {
+        ShellCmd sc;
+        ProcessStatus s = sc.cmdGetInfoText(token, isCask);
+        if (s.isSuccess && !s.stdOut.isEmpty()) {
+            return s.stdOut;
+        } else {
+            if (s.stdErr.isEmpty()) {
+                s.stdErr = "Err" + QString::number(s.exitCode);
+            }
+            return s.stdErr;
+        }
+    }
+
     void asyncGetInfo(QString token, bool isCask, const QJSValue &callback)
     {
         makeAsync<QVariant>(callback, [=]() { return getInfo(token, isCask); });
