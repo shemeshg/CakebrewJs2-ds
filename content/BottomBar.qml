@@ -15,11 +15,17 @@ GroupBox {
 
     readonly property int upgradableItems: {
 
-        /* return Constants.brewData.caskBodyList.filter(row => {
-                                                          return row.cellType === "checkbox"
-                                                      }).length
-                                                      */
-        return 0
+        return Constants.brewData.caskTableBodyList.filter(row => {
+                                                          return Boolean(row.outdated.text) &&
+                                                               "tsChecked" in row.outdated
+                                                      }).length +
+                Constants.brewData.formulaTableBodyList.filter(row => {
+                                                                          return Boolean(row.outdated.text) &&
+                                                                               "tsChecked" in row.outdated
+                                                                      }).length
+
+
+
     }
 
     RowLayout {
@@ -39,8 +45,8 @@ GroupBox {
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
-                          Constants.selectedFormulaItems.length
-                          + Constants.selectedCaskItems.length) + ")"
+                          Constants.selectedFormulaItems().length
+                          + Constants.selectedCaskItems().length) + ")"
             }
             CoreButton {
                 text: "Doctor"

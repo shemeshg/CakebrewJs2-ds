@@ -16,7 +16,8 @@ ColumnLayout {
         id: ctvc
         visible: !Constants.brewData.refreshCaskRunning
 
-        headerText: "Cask (" + Constants.selectedCaskItems.length + ")"
+        property int caskSelected: Constants.selectedCaskItems().length
+        headerText: "Cask (" + caskSelected + ")"
         rowsModel: Constants.brewData.caskTableBodyList
         tableView.model: TableModel {
 
@@ -78,7 +79,11 @@ ColumnLayout {
                     checked: model.display.tsChecked
                     leftPadding: 10
                     text: model.display.text
-                    onToggled: model.display.tsChecked = checked
+                    onToggled: {
+                        model.display.tsChecked = checked
+                        Constants.brewData.caskTableBodyList[model.row].outdated.tsChecked = checked
+                        ctvc.caskSelected = Constants.selectedCaskItems().length
+                    }
                 }
             }
 
@@ -108,7 +113,8 @@ ColumnLayout {
         id: ctvf
         visible: !Constants.brewData.refreshFormulaRunning
 
-        headerText: "Formula (" + Constants.selectedFormulaItems.length + ")"
+         property int formulaSelected: Constants.selectedFormulaItems().length
+        headerText: "Formula (" + formulaSelected + ")"
         rowsModel: Constants.brewData.formulaTableBodyList
         tableView.model: TableModel {
 
@@ -173,7 +179,11 @@ ColumnLayout {
                     checked: model.display.tsChecked
                     leftPadding: 10
                     text: model.display.text
-                    onToggled: model.display.tsChecked = checked
+                    onToggled: {
+                        model.display.tsChecked = checked
+                        Constants.brewData.formulaTableBodyList[model.row].outdated.tsChecked = checked
+                        ctvf.formulaSelected = Constants.selectedFormulaItems().length
+                    }
                 }
             }
 
@@ -191,7 +201,7 @@ ColumnLayout {
                         anchors.fill: parent
                         cursorShape: modelData.hoverText ? Qt.PointingHandCursor : cursorShape
                         hoverEnabled: true
-                        onClicked:  {
+                        onClicked: {
                             if (modelData.hoverText) {
                                 toolTip.show(model.display.hoverText, 3000)
                             }
@@ -276,7 +286,9 @@ ColumnLayout {
                     leftPadding: 10
                     urlText: model.display.text
                     onLinkActivated: data => {
-                                         Constants.brewData.asyncServiceAction(() => {}, model.display.name, model.display.text)
+                                         Constants.brewData.asyncServiceAction(
+                                             () => {}, model.display.name,
+                                             model.display.text)
                                      }
                     urlRef: model.display.text
                 }
