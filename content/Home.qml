@@ -75,7 +75,11 @@ ColumnLayout {
                 column: 4
                 delegate: CheckBox {
                     visible: model.display.text
-                    checked: model.display.tsChecked
+                    checked: {
+                        return Constants.caskSelected.indexOf(
+                                    Constants.brewData.caskTableBodyList[model.row].token.text) > -1
+                    }
+
                     leftPadding: 10
                     text: model.display.text
                     onToggled: {
@@ -183,7 +187,11 @@ ColumnLayout {
                 column: 4
                 delegate: CheckBox {
                     visible: model.display.text
-                    checked: model.display.tsChecked
+                    checked: {
+                        return Constants.formulaSelected.indexOf(
+                                    Constants.brewData.formulaTableBodyList[model.row].name.text)
+                                > -1
+                    }
                     leftPadding: 10
                     text: model.display.text
                     onToggled: {

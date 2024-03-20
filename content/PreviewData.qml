@@ -110,7 +110,7 @@ ColumnLayout {
                                                 })
             */
             Constants.caskSelected = []
-            Constants.formulaSelected.length = []
+            Constants.formulaSelected = []
             Constants.brewData.asyncRefreshServices(() => {})
             Constants.brewData.asyncRefreshCaskAndFormula(() => {})
         }
