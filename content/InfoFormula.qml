@@ -13,6 +13,7 @@ ColumnLayout {
     property string cellarSize: ""
     property bool isOutdated: false
     property bool isInstalled: false
+    property bool isPinned: false
     property string homepage: ""
     property string caskRbGithub: ""
     property string license: ""
@@ -25,7 +26,7 @@ ColumnLayout {
             font.pointSize: Constants.fontSizeLarge3()
             font.bold: true
             topPadding: 20
-            text: fullName + " " + version
+            text: fullName + " " + (isPinned ? "📌 " : "") + version
         }
         Item {
             Layout.fillWidth: true

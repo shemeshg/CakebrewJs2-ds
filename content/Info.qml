@@ -81,6 +81,18 @@ ColumnLayout {
                                                                    = result.caskroomSize
                                                                    infoCask.artifacts
                                                                    = result.artifacts
+
+                                                                   if (infoCask.isInstalled && infoCask.isOutdated){
+                                                                       Constants.brewData.isInfoShowUpgrade = true
+                                                                   }
+                                                                   if (infoCask.isInstalled){
+                                                                       Constants.brewData.isInfoShowUninstall = true
+                                                                       Constants.brewData.isInfoShowUninstallZap = true
+                                                                   } else {
+                                                                       Constants.brewData.isInfoShowInstall = true
+                                                                   }
+
+
                                                                } else {
                                                                    infoFormula.token = result.token
                                                                    infoFormula.fullName
@@ -107,9 +119,24 @@ ColumnLayout {
                                                                    = result.buildDependencies
                                                                    infoFormula.dependencies
                                                                    = result.dependencies
+                                                                   infoFormula.isPinned
+                                                                   = result.isPinned
 
 
-
+                                                                   if(infoFormula.isInstalled && !infoFormula.isPinned){
+                                                                       Constants.brewData.isInfoShowPin = true;
+                                                                   }
+                                                                   if(infoFormula.isInstalled && infoFormula.isPinned){
+                                                                       Constants.brewData.isInfoShowUnpin = true;
+                                                                   }
+                                                                   if(infoFormula.isInstalled && infoFormula.isOutdated && !infoFormula.isPinned){
+                                                                       Constants.brewData.isInfoShowUpgrade = true;
+                                                                   }
+                                                                   if(infoFormula.isInstalled) {
+                                                                       Constants.brewData.isInfoShowUninstall = true;
+                                                                   } else {
+                                                                       Constants.brewData.isInfoShowInstall = true;
+                                                                   }
                                                                    infoFormula.caskRbGithub = `https://github.com/${result.tap.split("/")[0]}/homebrew-${result.tap.split("/")[1]}/blob/HEAD/${result.ruby_source_path}`
 
                                                                    console.log(

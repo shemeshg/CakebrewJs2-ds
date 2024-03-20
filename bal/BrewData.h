@@ -646,6 +646,7 @@ private:
         row["license"] = formulaRow.license;
         row["dependencies"] = formulaRow.dependencies;
         row["buildDependencies"] = formulaRow.buildDependencies;
+        row["isPinned"] = formulaRow.isPinned;
 
         row["cellarSize"] = "";
         if (formulaRow.isInstalled) {
