@@ -396,6 +396,7 @@ QtObject {
         CaskNotFound,
         FormulaNotFound
     }
+    property int infoStatus: BrewData.InfoStatus.Idile
 
     function asyncGetInfo(tokent, isCask, cb) {
         //var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
@@ -461,4 +462,12 @@ install-on-request: 212,526 (30 days), 556,150 (90 days), 2,143,934 (365 days)
 build-error: 441 (30 days)
            `)
     }
+
+    property bool isInfoShowPin: false
+    property bool isInfoShowUnpin: false
+    property bool isInfoShowUpgrade: false
+    property bool isInfoShowInstall: false
+    property bool isInfoShowUninstall: false
+    property bool isInfoShowUninstallZap: false
+
 }

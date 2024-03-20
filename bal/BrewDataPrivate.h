@@ -48,6 +48,12 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVariantList caskTableBodyList READ caskTableBodyList  NOTIFY caskTableBodyListChanged )
     Q_PROPERTY(QVariantList serviceTableBodyList READ serviceTableBodyList  NOTIFY serviceTableBodyListChanged )
     Q_PROPERTY(InfoStatus infoStatus READ infoStatus WRITE setInfoStatus NOTIFY infoStatusChanged )
+    Q_PROPERTY(bool isInfoShowPin READ isInfoShowPin WRITE setIsInfoShowPin NOTIFY isInfoShowPinChanged )
+    Q_PROPERTY(bool isInfoShowUnpin READ isInfoShowUnpin WRITE setIsInfoShowUnpin NOTIFY isInfoShowUnpinChanged )
+    Q_PROPERTY(bool isInfoShowUpgrade READ isInfoShowUpgrade WRITE setIsInfoShowUpgrade NOTIFY isInfoShowUpgradeChanged )
+    Q_PROPERTY(bool isInfoShowInstall READ isInfoShowInstall WRITE setIsInfoShowInstall NOTIFY isInfoShowInstallChanged )
+    Q_PROPERTY(bool isInfoShowUninstall READ isInfoShowUninstall WRITE setIsInfoShowUninstall NOTIFY isInfoShowUninstallChanged )
+    Q_PROPERTY(bool isInfoShowUninstallZap READ isInfoShowUninstallZap WRITE setIsInfoShowUninstallZap NOTIFY isInfoShowUninstallZapChanged )
     
     QML_ELEMENT
 public:
@@ -379,6 +385,78 @@ void setInfoStatus(const InfoStatus &newInfoStatus)
     }
 
 
+    
+    bool isInfoShowPin() const{return m_isInfoShowPin;} 
+    
+void setIsInfoShowPin(const bool newIsInfoShowPin)
+    {
+        if (m_isInfoShowPin == newIsInfoShowPin)
+            return;
+        m_isInfoShowPin = newIsInfoShowPin;
+        emit isInfoShowPinChanged();
+    }
+
+
+    
+    bool isInfoShowUnpin() const{return m_isInfoShowUnpin;} 
+    
+void setIsInfoShowUnpin(const bool newIsInfoShowUnpin)
+    {
+        if (m_isInfoShowUnpin == newIsInfoShowUnpin)
+            return;
+        m_isInfoShowUnpin = newIsInfoShowUnpin;
+        emit isInfoShowUnpinChanged();
+    }
+
+
+    
+    bool isInfoShowUpgrade() const{return m_isInfoShowUpgrade;} 
+    
+void setIsInfoShowUpgrade(const bool newIsInfoShowUpgrade)
+    {
+        if (m_isInfoShowUpgrade == newIsInfoShowUpgrade)
+            return;
+        m_isInfoShowUpgrade = newIsInfoShowUpgrade;
+        emit isInfoShowUpgradeChanged();
+    }
+
+
+    
+    bool isInfoShowInstall() const{return m_isInfoShowInstall;} 
+    
+void setIsInfoShowInstall(const bool newIsInfoShowInstall)
+    {
+        if (m_isInfoShowInstall == newIsInfoShowInstall)
+            return;
+        m_isInfoShowInstall = newIsInfoShowInstall;
+        emit isInfoShowInstallChanged();
+    }
+
+
+    
+    bool isInfoShowUninstall() const{return m_isInfoShowUninstall;} 
+    
+void setIsInfoShowUninstall(const bool newIsInfoShowUninstall)
+    {
+        if (m_isInfoShowUninstall == newIsInfoShowUninstall)
+            return;
+        m_isInfoShowUninstall = newIsInfoShowUninstall;
+        emit isInfoShowUninstallChanged();
+    }
+
+
+    
+    bool isInfoShowUninstallZap() const{return m_isInfoShowUninstallZap;} 
+    
+void setIsInfoShowUninstallZap(const bool newIsInfoShowUninstallZap)
+    {
+        if (m_isInfoShowUninstallZap == newIsInfoShowUninstallZap)
+            return;
+        m_isInfoShowUninstallZap = newIsInfoShowUninstallZap;
+        emit isInfoShowUninstallZapChanged();
+    }
+
+
 
 signals:
     void brewLocationChanged();
@@ -411,6 +489,12 @@ signals:
     void caskTableBodyListChanged();
     void serviceTableBodyListChanged();
     void infoStatusChanged();
+    void isInfoShowPinChanged();
+    void isInfoShowUnpinChanged();
+    void isInfoShowUpgradeChanged();
+    void isInfoShowInstallChanged();
+    void isInfoShowUninstallChanged();
+    void isInfoShowUninstallZapChanged();
     
 
 private:
@@ -444,6 +528,12 @@ private:
     QVariantList m_caskTableBodyList;
     QVariantList m_serviceTableBodyList;
     InfoStatus m_infoStatus;
+    bool m_isInfoShowPin;
+    bool m_isInfoShowUnpin;
+    bool m_isInfoShowUpgrade;
+    bool m_isInfoShowInstall;
+    bool m_isInfoShowUninstall;
+    bool m_isInfoShowUninstallZap;
     
     void ctorClass();
 };

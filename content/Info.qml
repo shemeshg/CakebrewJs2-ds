@@ -45,6 +45,12 @@ ColumnLayout {
         CoreButton {
             text: "Info"
             onClicked: () => {
+                           Constants.brewData.isInfoShowPin = false
+                           Constants.brewData.isInfoShowUnpin = false
+                           Constants.brewData.isInfoShowUpgrade = false
+                           Constants.brewData.isInfoShowInstall = false
+                           Constants.brewData.isInfoShowUninstall = false
+                           Constants.brewData.isInfoShowUninstallZap = false
                            infoTextLookup();
                            Constants.brewData.infoStatus = BrewData.InfoStatus.Running
                            var isCask = cmb.currentText === "Cask"

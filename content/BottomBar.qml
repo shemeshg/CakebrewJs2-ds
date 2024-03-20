@@ -49,10 +49,28 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Info"
             CoreButton {
+                text: "Pin"
+                visible: Constants.brewData.isInfoShowPin
+            }
+            CoreButton {
+                text: "Unpin"
+                visible: Constants.brewData.isInfoShowUnpin
+            }
+            CoreButton {
+                text: "Upgrade"
+                visible: Constants.brewData.isInfoShowUpgrade
+            }
+            CoreButton {
+                text: "Install"
+                visible: Constants.brewData.isInfoShowInstall
+            }
+            CoreButton {
                 text: "Uninstall"
+                visible: Constants.brewData.isInfoShowUninstall
             }
             CoreButton {
                 text: "Uninstall zap"
+                visible: Constants.brewData.isInfoShowUninstallZap
             }
         }
         RowLayout {
