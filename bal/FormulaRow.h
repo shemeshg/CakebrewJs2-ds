@@ -7,7 +7,7 @@ class FormulaRow
 public:
     QString token, desc, tap, version, outdated, leafText, leafPopup, fullName, homepage,
         ruby_source_path, license;
-    bool isOutdated, installedOnRequest, isInstalled;
+    bool isOutdated, isPinned, installedOnRequest, isInstalled;
     QStringList usedIn, dependencies, buildDependencies;
     void addListHeader(QVariantList &formulaTableBodyList)
     {
@@ -58,7 +58,11 @@ public:
         row["tap"] = QVariant::fromValue(text);
 
         text = {};
-        text["text"] = version;
+        if (isPinned) {
+            text["text"] = "📌 " + version;
+        } else {
+            text["text"] = version;
+        }
         row["version"] = QVariant::fromValue(text);
 
         text = {};

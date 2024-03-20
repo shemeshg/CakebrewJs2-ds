@@ -76,11 +76,13 @@ public:
             std::string updatedVersion = (element["versions"]["stable"]).template get<std::string>();
             bool isInstalled = element["installed"].size() != 0;
             bool isOutdated = false;
+            bool isPinned = false;
             bool installedOnRequest = false;
             std::string installedVersion;
             if (isInstalled) {
                 installedVersion = (element["installed"][0]["version"]).template get<std::string>();
                 isOutdated = element["outdated"].template get<bool>();
+                isPinned = element["pinned"].template get<bool>();
                 installedOnRequest = (element["installed"][0]["installed_on_request"])
                                          .template get<bool>();
             }
@@ -96,6 +98,7 @@ public:
             row.homepage = QString::fromStdString(homepage);
             row.license = QString::fromStdString(license);
             row.isOutdated = isOutdated;
+            row.isPinned = isPinned;
             row.installedOnRequest = installedOnRequest;
             row.isInstalled = isInstalled;
 
