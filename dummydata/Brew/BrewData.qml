@@ -151,7 +151,7 @@ QtObject {
         refreshDataTimer.start()
     }
 
-    function asyncRefreshCaskAndFormula(cb) {
+    function asyncRefreshCaskAndFormula(b, cb) {
         cb()
     }
 
@@ -398,7 +398,6 @@ QtObject {
     }
     property int infoStatus: BrewData.InfoStatus.Idile
 
-
     function asyncGetInfo(tokent, isCask, cb) {
         //var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
         if (isCask) {
@@ -493,5 +492,4 @@ QtObject {
     function asyncRefreshServices(cb) {
         cb()
     }
-
 }

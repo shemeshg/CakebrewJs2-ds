@@ -261,6 +261,12 @@ public:
         return exec(fTmp.fileName(), {textSearch});
     }
 
+    ProcessStatus cmdBrewUpdate()
+    {
+        QString cmd = "/usr/local/bin/brew";
+        return exec(cmd, {"update"});
+    }
+
     ProcessStatus cmdListCaskAndFormula()
     {
         QString cmd = "/usr/local/bin/brew";

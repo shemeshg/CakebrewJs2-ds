@@ -41,7 +41,7 @@ GroupBox {
         Constants.caskSelected = []
         Constants.formulaSelected = []
         Constants.brewData.asyncRefreshServices(() => {})
-        Constants.brewData.asyncRefreshCaskAndFormula(() => {
+        Constants.brewData.asyncRefreshCaskAndFormula(false, () => {
                                                           info.infoBtn.clicked()
                                                           bottomBarId.refreshClicked()
                                                       })
@@ -59,7 +59,7 @@ GroupBox {
                     Constants.caskSelected = []
                     Constants.formulaSelected = []
                     Constants.brewData.asyncRefreshServices(() => {})
-                    Constants.brewData.asyncRefreshCaskAndFormula(() => {
+                    Constants.brewData.asyncRefreshCaskAndFormula(true, () => {
                                                                       bottomBarId.refreshClicked()
                                                                   })
                 }

@@ -185,7 +185,7 @@ public slots:
                       + ";";
             }
             sc.externalTerminalCmd(cmd);
-            refreshCaskAndFormulaAfterCallback();
+            refreshCaskAndFormulaAfterCallback(false);
             return true;
         });
     }
@@ -203,7 +203,7 @@ public slots:
             QString cmd = "%1 '%2'";
             cmd = cmd.arg("/usr/local/bin/brew", "upgrade");
             sc.externalTerminalCmd(cmd);
-            refreshCaskAndFormulaAfterCallback();
+            refreshCaskAndFormulaAfterCallback(false);
             return true;
         });
     }
@@ -259,11 +259,11 @@ public slots:
         });
     }
 
-    void asyncRefreshCaskAndFormula(const QJSValue &callback)
+    void asyncRefreshCaskAndFormula(bool doBrewUpdate, const QJSValue &callback)
     {
         refreshCaskAndFormulaBeforeCallback();
         makeAsync<bool>(callback, [=]() {
-            refreshCaskAndFormulaAfterCallback();
+            refreshCaskAndFormulaAfterCallback(doBrewUpdate);
             return true;
         });
     }
@@ -637,11 +637,16 @@ private:
         setRefreshCaskRunning(true);
     }
 
-    void refreshCaskAndFormulaAfterCallback()
+    void refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
     {
         //brew outdated --json=v2
         ShellCmd sc;
-        ProcessStatus s = sc.cmdListCaskAndFormula();
+        ProcessStatus s;
+        if (doBrewUpdate) {
+            s = sc.cmdBrewUpdate();
+        }
+
+        s = sc.cmdListCaskAndFormula();
 
         if (s.isSuccess && !s.stdOut.isEmpty()) {
             emit parseRefreshCaskAndFormulaSignal(s.stdOut);
