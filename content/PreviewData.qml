@@ -76,6 +76,7 @@ ColumnLayout {
             }
 
             Home {
+                id: home
                 visible: previewData.state === "Home"
             }
 
@@ -101,18 +102,8 @@ ColumnLayout {
         }
 
         onRefreshClicked: {
-
-
-            /*
-            stateGroup.state = "LoadingData"
-            Constants.brewData.asyncRefreshData(() => {
-                                                    stateGroup.state = "Preview"
-                                                })
-            */
-            Constants.caskSelected = []
-            Constants.formulaSelected = []
-            Constants.brewData.asyncRefreshServices(() => {})
-            Constants.brewData.asyncRefreshCaskAndFormula(() => {})
+            home.ctvc.filterTableByFilter()
+            home.ctvf.filterTableByFilter()
         }
     }
 }

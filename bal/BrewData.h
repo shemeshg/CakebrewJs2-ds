@@ -154,6 +154,63 @@ public slots:
         });
     }
 
+    void asyncBrewUpgradeSelected(QStringList casks, QStringList formulas, const QJSValue &callback)
+    {
+        refreshCaskAndFormulaBeforeCallback();
+        makeAsync<bool>(callback, [=]() {
+            ShellCmd sc;
+            QString cmd;
+            QString cmdTemplate = "%1 '%2' `%3` %4";
+            if (casks.size() > 0) {
+                QStringList escCasks;
+                for (auto &i : casks) {
+                    escCasks.push_back("'" + i + "'");
+                }
+                cmd = cmdTemplate.arg("/usr/local/bin/brew", "upgrade", "--cask", escCasks.join(" "))
+                      + ";";
+            }
+            if (formulas.size() > 0) {
+                QStringList escFormulas;
+                for (auto &i : formulas) {
+                    escFormulas.push_back("'" + i + "'");
+                }
+                cmd = cmd
+                      + cmdTemplate.arg("/usr/local/bin/brew",
+                                        "upgrade",
+                                        "--formula",
+                                        escFormulas.join(" "))
+                      + ";";
+            }
+            sc.externalTerminalCmd(cmd);
+            refreshCaskAndFormulaAfterCallback();
+            return true;
+        });
+    }
+
+    void asyncBrewUpgradeAll(const QJSValue &callback)
+    {
+        refreshCaskAndFormulaBeforeCallback();
+        makeAsync<bool>(callback, [=]() {
+            ShellCmd sc;
+            QString cmd = "%1 '%2'";
+            cmd = cmd.arg("/usr/local/bin/brew", "upgrade");
+            sc.externalTerminalCmd(cmd);
+            refreshCaskAndFormulaAfterCallback();
+            return true;
+        });
+    }
+
+    void asyncBrewDoctor(const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            ShellCmd sc;
+            QString cmd = "%1 '%2'";
+            cmd = cmd.arg("/usr/local/bin/brew", "doctor");
+            sc.externalTerminalCmd(cmd);
+            return true;
+        });
+    }
+
     void asyncServiceAction(const QJSValue &callback, QString name, QString action)
     {
         refreshServicesBeforeCallback();

@@ -398,6 +398,10 @@ QtObject {
     }
     property int infoStatus: BrewData.InfoStatus.Idile
 
+    function asyncBrewDoctor(cb) {
+        cb()
+    }
+
     function asyncGetInfo(tokent, isCask, cb) {
         //var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
         if (isCask) {
@@ -444,22 +448,22 @@ QtObject {
 
     function asyncGetInfoText(tokent, isCask, cb) {
         cb(`==> node: stable 21.7.1 (bottled), HEAD
-Platform built on V8 to build network applications
-https://nodejs.org/
-/usr/local/Cellar/node/21.7.1 (2,133 files, 65.8MB) *
-Poured from bottle using the formulae.brew.sh API on 2024-03-14 at 22:07:27
-From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/n/node.rb
-License: MIT
-==> Dependencies
-Build: pkg-config ✔, python@3.12 ✔
-Required: brotli ✔, c-ares ✔, icu4c ✔, libnghttp2 ✔, libuv ✔, openssl@3 ✔
-==> Options
---HEAD
-Install HEAD version
-==> Analytics
-install: 242,795 (30 days), 636,903 (90 days), 2,446,258 (365 days)
-install-on-request: 212,526 (30 days), 556,150 (90 days), 2,143,934 (365 days)
-build-error: 441 (30 days)
+           Platform built on V8 to build network applications
+           https://nodejs.org/
+           /usr/local/Cellar/node/21.7.1 (2,133 files, 65.8MB) *
+           Poured from bottle using the formulae.brew.sh API on 2024-03-14 at 22:07:27
+           From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/n/node.rb
+           License: MIT
+           ==> Dependencies
+           Build: pkg-config ✔, python@3.12 ✔
+           Required: brotli ✔, c-ares ✔, icu4c ✔, libnghttp2 ✔, libuv ✔, openssl@3 ✔
+           ==> Options
+           --HEAD
+           Install HEAD version
+           ==> Analytics
+           install: 242,795 (30 days), 636,903 (90 days), 2,446,258 (365 days)
+           install-on-request: 212,526 (30 days), 556,150 (90 days), 2,143,934 (365 days)
+           build-error: 441 (30 days)
            `)
     }
 
@@ -470,4 +474,15 @@ build-error: 441 (30 days)
     property bool isInfoShowUninstall: false
     property bool isInfoShowUninstallZap: false
 
+    function asyncBrewDoctor(cb) {
+        cb()
+    }
+
+    function asyncBrewUpgradeAll(cb) {
+        cb()
+    }
+
+    function asyncBrewUpgradeAll(cb, casks, formulas) {
+        cb()
+    }
 }

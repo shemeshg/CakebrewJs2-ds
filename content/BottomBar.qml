@@ -36,18 +36,46 @@ GroupBox {
             CoreButton {
                 text: "Refresh"
                 onClicked: {
-                    refreshClicked()
+                    Constants.caskSelected = []
+                    Constants.formulaSelected = []
+                    Constants.brewData.asyncRefreshServices(() => {})
+                    Constants.brewData.asyncRefreshCaskAndFormula(() => {
+                                                                      bottomBarId.refreshClicked()
+                                                                  })
                 }
             }
             CoreButton {
                 text: "Upgrade all (" + upgradableItems + ")"
+                onClicked: () => {
+                               Constants.caskSelected = []
+                               Constants.formulaSelected = []
+                               Constants.brewData.asyncBrewUpgradeAll(() => {
+                                                                          bottomBarId.refreshClicked()
+                                                                      })
+                           }
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
                           Constants.caskSelected.length + Constants.formulaSelected.length) + ")"
+                onClicked: () => {
+                               var caskSelected = [...Constants.caskSelected]
+                               var formulaSelected = [...Constants.formulaSelected]
+                               Constants.caskSelected = []
+                               Constants.formulaSelected = []
+
+                               Constants.brewData.asyncBrewUpgradeSelected(
+                                   caskSelected, formulaSelected, () => {
+                                       bottomBarId.refreshClicked()
+                                   })
+                           }
+                enabled: Number(
+                             Constants.caskSelected.length + Constants.formulaSelected.length) > 0
             }
             CoreButton {
                 text: "Doctor"
+                onClicked: {
+                    Constants.brewData.asyncBrewDoctor(() => {})
+                }
             }
         }
         RowLayout {
@@ -97,6 +125,9 @@ GroupBox {
         CoreButton {
             visible: selectedPreview === "Home"
             text: "://brew.sh"
+            onClicked: () => {
+                           Qt.openUrlExternally("https://brew.sh")
+                       }
         }
         CoreButton {
             visible: selectedPreview === "Home"
