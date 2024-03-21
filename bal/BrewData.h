@@ -160,7 +160,7 @@ public slots:
         makeAsync<bool>(callback, [=]() {
             ShellCmd sc;
             QString cmd;
-            QString cmdTemplate = "%1 '%2' `%3` %4";
+            QString cmdTemplate = "%1 '%2' %3 %4";
             if (casks.size() > 0) {
                 QStringList escCasks;
                 for (auto &i : casks) {

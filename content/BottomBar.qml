@@ -28,6 +28,25 @@ GroupBox {
                                                                  }).length
     }
 
+    function beforeInfoAction() {
+        Constants.brewData.isInfoShowPin = false
+        Constants.brewData.isInfoShowUnpin = false
+        Constants.brewData.isInfoShowUpgrade = false
+        Constants.brewData.isInfoShowInstall = false
+        Constants.brewData.isInfoShowUninstall = false
+        Constants.brewData.isInfoShowUninstallZap = false
+        Constants.brewData.infoStatus = BrewData.InfoStatus.Running
+    }
+    function afterInfoAction() {
+        Constants.caskSelected = []
+        Constants.formulaSelected = []
+        Constants.brewData.asyncRefreshServices(() => {})
+        Constants.brewData.asyncRefreshCaskAndFormula(() => {
+                                                          info.infoBtn.clicked()
+                                                          bottomBarId.refreshClicked()
+                                                      })
+    }
+
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -81,28 +100,15 @@ GroupBox {
         }
         RowLayout {
             visible: selectedPreview === "Info"
+
             CoreButton {
                 text: "Pin"
                 visible: Constants.brewData.isInfoShowPin
                 onClicked: () => {
-                               Constants.brewData.isInfoShowPin = false
-                               Constants.brewData.isInfoShowUnpin = false
-                               Constants.brewData.isInfoShowUpgrade = false
-                               Constants.brewData.isInfoShowInstall = false
-                               Constants.brewData.isInfoShowUninstall = false
-                               Constants.brewData.isInfoShowUninstallZap = false
-                               Constants.brewData.infoStatus = BrewData.InfoStatus.Running
+                               beforeInfoAction()
                                Constants.brewData.asyncPin(
                                    Constants.brewData.infoToken, () => {
-                                       Constants.caskSelected = []
-                                       Constants.formulaSelected = []
-                                       Constants.brewData.asyncRefreshServices(
-                                           () => {})
-                                       Constants.brewData.asyncRefreshCaskAndFormula(
-                                           () => {
-                                               info.infoBtn.clicked()
-                                               bottomBarId.refreshClicked()
-                                           })
+                                       afterInfoAction()
                                    })
                            }
             }
@@ -110,30 +116,31 @@ GroupBox {
                 text: "Unpin"
                 visible: Constants.brewData.isInfoShowUnpin
                 onClicked: () => {
-                               Constants.brewData.isInfoShowPin = false
-                               Constants.brewData.isInfoShowUnpin = false
-                               Constants.brewData.isInfoShowUpgrade = false
-                               Constants.brewData.isInfoShowInstall = false
-                               Constants.brewData.isInfoShowUninstall = false
-                               Constants.brewData.isInfoShowUninstallZap = false
-                               Constants.brewData.infoStatus = BrewData.InfoStatus.Running
+                               beforeInfoAction()
                                Constants.brewData.asyncUnpin(
                                    Constants.brewData.infoToken, () => {
-                                       Constants.caskSelected = []
-                                       Constants.formulaSelected = []
-                                       Constants.brewData.asyncRefreshServices(
-                                           () => {})
-                                       Constants.brewData.asyncRefreshCaskAndFormula(
-                                           () => {
-                                               info.infoBtn.clicked()
-                                               bottomBarId.refreshClicked()
-                                           })
+                                       afterInfoAction()
                                    })
                            }
             }
             CoreButton {
                 text: "Upgrade"
                 visible: Constants.brewData.isInfoShowUpgrade
+                onClicked: {
+                    if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewUpgradeSelected(
+                                    [Constants.brewData.infoToken], [], () => {
+                                        afterInfoAction()
+                                    })
+                    } else if (Constants.brewData.infoStatus === BrewData.InfoStatus.FormulaFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewUpgradeSelected(
+                                    [], [Constants.brewData.infoToken], () => {
+                                        afterInfoAction()
+                                    })
+                    }
+                }
             }
             CoreButton {
                 text: "Install"
