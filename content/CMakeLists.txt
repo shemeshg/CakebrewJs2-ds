@@ -17,6 +17,7 @@ qt6_add_qml_module(content
         HeaderToolbar.qml
         Home.qml
         HyperlinkBtn.qml
+        HyperlinkBtnInfo.qml
         Info.qml
         InfoCask.qml
         InfoFormula.qml

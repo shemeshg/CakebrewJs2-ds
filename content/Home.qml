@@ -64,12 +64,10 @@ ColumnLayout {
 
             DelegateChoice {
                 column: 0
-                delegate: HyperlinkBtn {
+                delegate: HyperlinkBtnInfo {
+                    isCask: true
                     leftPadding: 10
-                    urlText: model.display.text
-                    onLinkActivated: data => {
-                                         console.log(data)
-                                     }
+                    urlText: model.display.text                    
                     urlRef: model.display.text
                 }
             }
@@ -176,12 +174,10 @@ ColumnLayout {
 
             DelegateChoice {
                 column: 0
-                delegate: HyperlinkBtn {
+                delegate: HyperlinkBtnInfo {
+                    isCask: false
                     leftPadding: 10
                     urlText: model.display.text
-                    onLinkActivated: data => {
-                                         console.log(data)
-                                     }
                     urlRef: model.display.text
                 }
             }

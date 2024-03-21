@@ -72,6 +72,7 @@ ColumnLayout {
                 visible: previewData.state === "About"
             }
             Info {
+                id: info
                 visible: previewData.state === "Info"
             }
 

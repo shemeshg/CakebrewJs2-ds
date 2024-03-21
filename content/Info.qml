@@ -6,6 +6,9 @@ import Core
 import Brew
 
 ColumnLayout {
+    property alias  cmb: cmb
+    property alias  token: token
+    property alias infoBtn: infoBtn
 
     function infoTextLookup() {
         if (!isShowBrewInfoText.checked || !token.text) {
@@ -41,6 +44,7 @@ ColumnLayout {
             }
         }
         CoreButton {
+            id: infoBtn
             text: "Info"
             onClicked: () => {
                            Constants.brewData.isInfoShowPin = false

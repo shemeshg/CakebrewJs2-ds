@@ -32,8 +32,14 @@ ColumnLayout {
             Layout.fillWidth: true
         }
         CoreLabel {
-            text: "Formula: " + token + " "
+            text: "Formula: "
         }
+        HyperlinkBtnInfo {
+                            isCask: false
+                            leftPadding: 10
+                            urlText: token
+                            urlRef: token
+                        }
     }
 
     CoreLabel {
@@ -101,8 +107,11 @@ ColumnLayout {
         RowLayout {
             Repeater {
                 model: buildDependencies
-                delegate:  CoreLabel {
-                    text: modelData
+                delegate:  HyperlinkBtnInfo {
+                    isCask: false
+                    leftPadding: 10
+                    urlText: modelData
+                    urlRef: modelData
                 }
             }
         }
@@ -115,8 +124,11 @@ ColumnLayout {
         RowLayout {
             Repeater {
                 model: dependencies
-                delegate:  CoreLabel {
-                    text: modelData
+                delegate:  HyperlinkBtnInfo {
+                    isCask: false
+                    leftPadding: 10
+                    urlText: modelData
+                    urlRef: modelData
                 }
             }
         }
@@ -129,8 +141,12 @@ ColumnLayout {
         RowLayout {
             Repeater {
                 model: usedIn
-                delegate:  CoreLabel {
-                    text: modelData
+
+                delegate: HyperlinkBtnInfo {
+                    isCask: false
+                    leftPadding: 10
+                    urlText: modelData
+                    urlRef: modelData
                 }
             }
         }

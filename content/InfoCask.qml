@@ -66,13 +66,17 @@ ColumnLayout {
     HyperlinkBtn {
         urlRef: homepage
         urlText: homepage
-        onLinkActivated: Qt.openUrlExternally(link)
+        onLinkActivated: link => {
+                             Qt.openUrlExternally(link)
+                         }
     }
 
     HyperlinkBtn {
         urlRef: caskRbGithub
         urlText: caskRbGithub
-        onLinkActivated: Qt.openUrlExternally(link)
+        onLinkActivated: link => {
+                             Qt.openUrlExternally(link)
+                         }
     }
 
     CoreLabel {
