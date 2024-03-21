@@ -6,6 +6,7 @@ import Core
 import Qt.labs.qmlmodels
 
 ColumnLayout {
+
     property alias ctvc: ctvc
     property alias ctvf: ctvf
     property alias ctvs: ctvs
@@ -15,7 +16,7 @@ ColumnLayout {
         visible: Constants.brewData.refreshStatusCaskVisible
     }
 
-    CollapseableTableView {
+    CollapseableTableView {       
         id: ctvc
         visible: !Constants.brewData.refreshCaskRunning
 
@@ -214,7 +215,7 @@ ColumnLayout {
             DelegateChoice {
                 column: 5
                 delegate: CoreLabel {
-                    leftPadding: 10
+                    leftPadding: 10                    
                     text: model.display.text
                     color: CoreSystemPalette.text
                     CoreToolTip {

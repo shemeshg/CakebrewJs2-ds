@@ -56,7 +56,7 @@ ColumnLayout {
 
         ColumnLayout {
             id: clid
-
+            anchors.margins: 30
             width: previewData.width
             height: previewData.height
             Settings {

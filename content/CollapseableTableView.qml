@@ -77,8 +77,7 @@ ColumnLayout {
     ColumnLayout {
         visible: formulaHeader.isExtended
         TableView {
-            property var calWids: [] //[0,0,0,0,0,0]
-
+            property var calWids: [] //[0,0,0,0,0,0]            
             Layout.fillWidth: true
             implicitHeight: contentHeight
             columnSpacing: 10

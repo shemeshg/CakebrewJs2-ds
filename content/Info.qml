@@ -9,6 +9,8 @@ ColumnLayout {
     property alias  cmb: cmb
     property alias  token: token
     property alias infoBtn: infoBtn
+    Layout.margins: 10
+
 
     function infoTextLookup() {
         if (!isShowBrewInfoText.checked || !token.text) {
@@ -22,6 +24,7 @@ ColumnLayout {
     }
 
     RowLayout {
+
         CoreComboBox {
             id: cmb
             model: ListModel {

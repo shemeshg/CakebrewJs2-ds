@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import Core
 
 ColumnLayout {
+    Layout.margins: 10
     function saveSettings() {
         Constants.brewData.saveNormalFontPointSize(fontSizeInput.text)
         Constants.brewData.saveBrewLocation(brewLocation.text)
