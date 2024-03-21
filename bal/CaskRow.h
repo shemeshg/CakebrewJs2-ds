@@ -68,7 +68,7 @@ public:
         caskTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
 
-    const QString getCaskroomSize();
+    const QString getCaskroomSize(QString brewLocation, QString terminalApp);
 
 private:
     QString m_caskroomSize;

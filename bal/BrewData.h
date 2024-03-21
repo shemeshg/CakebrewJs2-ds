@@ -112,10 +112,9 @@ public slots:
         }
 
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdSearch(textSearch, isCask);
-            if (s.isSuccess
-                && !s.stdOut.isEmpty()) {
+            if (s.isSuccess && !s.stdOut.isEmpty()) {
                 QVector<SearchResultRow *> parseCmdSearch = sc.parseCmdSearch(s.stdOut, isCask);
 
                 for (auto row : parseCmdSearch) {
@@ -161,7 +160,7 @@ public slots:
     {
         refreshCaskAndFormulaBeforeCallback();
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             QString cmd;
             QString cmdTemplate = "%1 %2 %3 %4";
             if (casks.size() > 0) {
@@ -199,7 +198,7 @@ public slots:
     {
         refreshCaskAndFormulaBeforeCallback();
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             QString cmd = "%1 '%2'";
             cmd = cmd.arg("/usr/local/bin/brew", "upgrade");
             sc.externalTerminalCmd(cmd);
@@ -211,7 +210,7 @@ public slots:
     void asyncBrewDoctor(const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             QString cmd = "%1 '%2'";
             cmd = cmd.arg("/usr/local/bin/brew", "doctor");
             sc.externalTerminalCmd(cmd);
@@ -223,7 +222,7 @@ public slots:
     {
         refreshServicesBeforeCallback();
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             QString cmd = "%1 services '%2' '%3'";
             cmd = cmd.arg("/usr/local/bin/brew", action, name);
             sc.externalTerminalCmd(cmd);
@@ -244,7 +243,7 @@ public slots:
     void asyncPin(QString token, const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdPin(token);
             return true;
         });
@@ -253,7 +252,7 @@ public slots:
     void asyncUnpin(QString token, const QJSValue &callback)
     {
         makeAsync<bool>(callback, [=]() {
-            ShellCmd sc;
+            ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdUnpin(token);
             return true;
         });
@@ -436,8 +435,8 @@ public slots:
     }
 
     QString getInfoText(const QString token, bool isCask)
-    {        
-        ShellCmd sc;
+    {
+        ShellCmd sc = getShellCmd();
         ProcessStatus s = sc.cmdGetInfoText(token, isCask);
         if (s.isSuccess && !s.stdOut.isEmpty()) {
             return s.stdOut;
@@ -466,7 +465,7 @@ public slots:
             if (it != caskRows.end()) {
                 setRowFromCaskRow(row, *it);
             } else {
-                ShellCmd sc;
+                ShellCmd sc = getShellCmd();
                 ProcessStatus s = sc.cmdGetInfo(token, isCask);
                 if (s.isSuccess && !s.stdOut.isEmpty()) {
                     CaskRow caskRow = sc.parseCaskList(s.stdOut).at(0);
@@ -487,7 +486,7 @@ public slots:
             if (it != formulaRows.end()) {
                 setRowFromFormulaRow(row, *it);
             } else {
-                ShellCmd sc;
+                ShellCmd sc = getShellCmd();
                 ProcessStatus s = sc.cmdGetInfo(token, isCask);
                 if (s.isSuccess && !s.stdOut.isEmpty()) {
                     FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
@@ -569,14 +568,14 @@ public slots:
 private slots:
     void parseRefreshServices(QString strResult)
     {
-        ShellCmd sc;
+        ShellCmd sc = getShellCmd();
         serviceRows = sc.parseServicesList(strResult);
         serviceSort();
     }
 
     void parseRefreshCaskAndFormula(QString strResult)
     {
-        ShellCmd sc;
+        ShellCmd sc = getShellCmd();
         caskRows = sc.parseCaskList(strResult);
         formulaRows = sc.parseFormulaList(strResult);
         caskSort();
@@ -601,8 +600,9 @@ private:
         return full_path;
     }
 
-    void loadNormalFontPointSize(){
-        QString s=settings.value("normalFontPointSize", "").toString();
+    void loadNormalFontPointSize()
+    {
+        QString s = settings.value("normalFontPointSize", "").toString();
         setNormalFontPointSize(s);
     }
 
@@ -640,7 +640,7 @@ private:
     void refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
     {
         //brew outdated --json=v2
-        ShellCmd sc;
+        ShellCmd sc = getShellCmd();
         ProcessStatus s;
         if (doBrewUpdate) {
             s = sc.cmdBrewUpdate();
@@ -677,7 +677,7 @@ private:
 
     void refreshServicesAfterCallback()
     {
-        ShellCmd sc;
+        ShellCmd sc = getShellCmd();
         ProcessStatus s = sc.cmdListServices();
 
         if (s.isSuccess && !s.stdOut.isEmpty()) {
@@ -711,7 +711,7 @@ private:
         row["ruby_source_path"] = caskRow.ruby_source_path;
         row["caskroomSize"] = "";
         if (caskRow.isInstalled) {
-            row["caskroomSize"] = caskRow.getCaskroomSize();
+            row["caskroomSize"] = caskRow.getCaskroomSize(brewLocation(), terminalApp());
         }
         row["artifacts"] = caskRow.artifacts;
         row["err"] = "";
@@ -740,8 +740,10 @@ private:
 
         row["cellarSize"] = "";
         if (formulaRow.isInstalled) {
-            row["cellarSize"] = formulaRow.getCellarSize();
+            row["cellarSize"] = formulaRow.getCellarSize(brewLocation(), terminalApp());
         }
         row["err"] = "";
     }
+
+    ShellCmd getShellCmd() { return ShellCmd(brewLocation(), terminalApp()); }
 };

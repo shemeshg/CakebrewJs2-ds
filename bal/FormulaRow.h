@@ -91,7 +91,7 @@ public:
         formulaTableBodyList.emplaceBack(QVariant::fromValue(row));
     }
 
-    const QString getCellarSize();
+    const QString getCellarSize(QString brewLocation, QString terminalApp);
 
 private:
     QString m_cellarSize;

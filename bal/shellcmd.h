@@ -21,7 +21,7 @@ struct ProcessStatus
 class ShellCmd
 {
 public:
-    ShellCmd();
+    ShellCmd(QString brewLocation, QString terminalApp);
     QVector<ServiceRow> parseServicesList(QString &strResult);
 
     QVector<FormulaRow> parseFormulaList(QString &strResult);
@@ -53,4 +53,7 @@ public:
     void externalTerminalCmd(QString cmdToRun);
 
     ProcessStatus exec(const QString program, const QStringList arguments, bool noGithubApi = true);
+
+private:
+    QString brewLocation, terminalApp;
 };

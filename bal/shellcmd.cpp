@@ -3,7 +3,10 @@
 
 using json = nlohmann::json;
 
-ShellCmd::ShellCmd() {}
+ShellCmd::ShellCmd(QString brewLocation, QString terminalApp)
+    : brewLocation{brewLocation}
+    , terminalApp{terminalApp}
+{}
 
 QVector<ServiceRow> ShellCmd::parseServicesList(QString &strResult)
 {
@@ -229,8 +232,8 @@ ProcessStatus ShellCmd::cmdSearch(QString textSearch, bool isCask)
     QTemporaryFile fTmp;
 
     QString cmd = R"(#!/bin/sh
-/usr/local/bin/brew search %1 $1|head -50|xargs /usr/local/bin/brew info %1 --json=v2)";
-    cmd = cmd.arg(caskFormulaStr);
+%1 search %2 $1|head -50|xargs %1 info %2 --json=v2)";
+    cmd = cmd.arg(brewLocation, caskFormulaStr);
     if (fTmp.open()) {
         fTmp.write(cmd.toUtf8());
         fTmp.flush();
@@ -241,25 +244,25 @@ ProcessStatus ShellCmd::cmdSearch(QString textSearch, bool isCask)
 
 ProcessStatus ShellCmd::cmdBrewUpdate()
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
     return exec(cmd, {"update"});
 }
 
 ProcessStatus ShellCmd::cmdListCaskAndFormula()
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
     return exec(cmd, {"info", "--installed", "--json=v2"});
 }
 
 ProcessStatus ShellCmd::cmdListServices()
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
     return exec(cmd, {"services", "--json"});
 }
 
 ProcessStatus ShellCmd::cmdGetInfo(QString token, bool isCask)
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
     QString type = isCask ? "--cask" : "--formula";
 
     return exec(cmd, {"info", type, "--json=v2", token});
@@ -267,7 +270,7 @@ ProcessStatus ShellCmd::cmdGetInfo(QString token, bool isCask)
 
 ProcessStatus ShellCmd::cmdPin(QString token)
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
 
     return exec(cmd,
                 {
@@ -278,7 +281,7 @@ ProcessStatus ShellCmd::cmdPin(QString token)
 
 ProcessStatus ShellCmd::cmdUnpin(QString token)
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
 
     return exec(cmd,
                 {
@@ -289,7 +292,7 @@ ProcessStatus ShellCmd::cmdUnpin(QString token)
 
 ProcessStatus ShellCmd::cmdGetInfoText(QString token, bool isCask)
 {
-    QString cmd = "/usr/local/bin/brew";
+    QString cmd = brewLocation;
     QString type = isCask ? "--cask" : "--formula";
 
     return exec(cmd, {"info", type, token}, false);
@@ -298,8 +301,9 @@ ProcessStatus ShellCmd::cmdGetInfoText(QString token, bool isCask)
 ProcessStatus ShellCmd::cmdGetcCellarSize(QString token)
 {
     QString s = R"(#!/bin/zsh
-find `/usr/local/bin/brew --cellar`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shHc|tail -n 1)";
+find `%1 --cellar`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shHc|tail -n 1)";
 
+    s = s.arg(brewLocation);
     QTemporaryFile file;
     file.open();
     file.write(s.toUtf8());
@@ -312,7 +316,8 @@ find `/usr/local/bin/brew --cellar`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*
 ProcessStatus ShellCmd::cmdGetCaskroomSize(QString token)
 {
     QString s = R"(#!/bin/zsh
-find `/usr/local/bin/brew --caskroom`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shHc|tail -n 1)";
+find `%1 --caskroom`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shHc|tail -n 1)";
+    s = s.arg(brewLocation);
 
     QTemporaryFile file;
     file.open();
@@ -335,7 +340,7 @@ void ShellCmd::externalTerminalCmd(QString cmdToRun)
         file.flush();
 
         exec("chmod", {"+x", file.fileName()});
-        exec("open", {"-a", "Terminal", file.fileName()});
+        exec("open", {"-a", terminalApp, file.fileName()});
     }
     QFileSystemWatcher watcher;
     watcher.addPath(file.fileName());
