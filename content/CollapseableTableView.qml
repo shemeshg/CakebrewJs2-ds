@@ -76,6 +76,7 @@ ColumnLayout {
 
     ColumnLayout {
         visible: formulaHeader.isExtended
+
         TableView {
             property var calWids: [] //[0,0,0,0,0,0]            
             Layout.fillWidth: true
@@ -99,7 +100,7 @@ ColumnLayout {
                             total = total + tableView.calWids[i]
                         }
                     }
-                    return tableView.width - total - 30
+                    return tableView.width - total - 50
                 }
                 return implicitColumnWidth(column)
             }
