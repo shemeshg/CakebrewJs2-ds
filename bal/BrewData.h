@@ -682,6 +682,7 @@ private:
             row["caskroomSize"] = caskRow.getCaskroomSize();
         }
         row["artifacts"] = caskRow.artifacts;
+        row["err"] = "";
     }
 
     void setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &formulaRow)

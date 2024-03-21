@@ -6,8 +6,9 @@ import Core
 import Qt.labs.qmlmodels
 
 ColumnLayout {
-    property alias ctvc: ctvc;
-    property alias ctvf: ctvf;
+    property alias ctvc: ctvc
+    property alias ctvf: ctvf
+    property alias ctvs: ctvs
 
     CoreLabel {
         text: Constants.brewData.refreshStatusCaskText

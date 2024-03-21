@@ -104,6 +104,7 @@ ColumnLayout {
         onRefreshClicked: {
             home.ctvc.filterTableByFilter()
             home.ctvf.filterTableByFilter()
+            home.ctvs.filterTableByFilter()
         }
     }
 }
