@@ -29,7 +29,14 @@ ColumnLayout {
             Layout.fillWidth: true
         }
         CoreLabel {
-            text: "Cask: " + token + " "
+            text: "Cask: "
+        }
+        HyperlinkBtnInfo {
+            isCask: false
+            leftPadding: 10
+            urlText: token
+            urlRef: token
+            rightPadding: 10
         }
     }
 

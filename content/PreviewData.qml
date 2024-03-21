@@ -10,6 +10,17 @@ ColumnLayout {
         visible: previewData.state !== "About"
     }
 
+    Component.onCompleted: {
+        Constants.caskSelected = []
+        Constants.formulaSelected = []
+        Constants.brewData.asyncRefreshServices(() => {})
+        Constants.brewData.asyncRefreshCaskAndFormula(true, () => {
+                                                          home.ctvc.filterTableByFilter()
+                                                          home.ctvf.filterTableByFilter()
+                                                          home.ctvs.filterTableByFilter()
+                                                      })
+    }
+
     states: [
         State {
             name: "Home"

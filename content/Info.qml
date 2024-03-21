@@ -6,11 +6,10 @@ import Core
 import Brew
 
 ColumnLayout {
-    property alias  cmb: cmb
-    property alias  token: token
+    property alias cmb: cmb
+    property alias token: token
     property alias infoBtn: infoBtn
     Layout.margins: 10
-
 
     function infoTextLookup() {
         if (!isShowBrewInfoText.checked || !token.text) {
@@ -43,6 +42,11 @@ ColumnLayout {
             onActiveFocusChanged: {
                 if (activeFocus) {
                     selectAll()
+                }
+            }
+            onAccepted: {
+                if (infoBtn.enabled) {
+                    infoBtn.clicked()
                 }
             }
         }
@@ -152,7 +156,9 @@ ColumnLayout {
                                                                }
                                                            })
                        }
-            enabled: Boolean(token.text.trim() && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running)
+            enabled: Boolean(
+                         token.text.trim()
+                         && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running)
         }
     }
 
@@ -187,7 +193,8 @@ ColumnLayout {
     }
     CoreTextArea {
         id: brewInfoText
-        visible: isShowBrewInfoText.checked && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running
+        visible: isShowBrewInfoText.checked
+                 && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running
         readOnly: true
     }
 }

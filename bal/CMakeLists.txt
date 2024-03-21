@@ -13,7 +13,7 @@ qt6_add_qml_module(bal
             BrewDataPrivate.h
             BrewDataPrivate.cpp        
             JsAsync.h
-            JsAsync.cpp
+            #JsAsync.cpp
             shellcmd.h shellcmd.cpp
             json/single_include/nlohmann/json.hpp
             searchresultrow.h searchresultrow.cpp
