@@ -281,6 +281,28 @@ public:
         return exec(cmd, {"info", type, "--json=v2", token});
     }
 
+    ProcessStatus cmdPin(QString token)
+    {
+        QString cmd = "/usr/local/bin/brew";
+
+        return exec(cmd,
+                    {
+                        "pin",
+                        token,
+                    });
+    }
+
+    ProcessStatus cmdUnpin(QString token)
+    {
+        QString cmd = "/usr/local/bin/brew";
+
+        return exec(cmd,
+                    {
+                        "unpin",
+                        token,
+                    });
+    }
+
     ProcessStatus cmdGetInfoText(QString token, bool isCask)
     {
         QString cmd = "/usr/local/bin/brew";

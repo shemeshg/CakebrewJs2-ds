@@ -233,6 +233,24 @@ public slots:
         });
     }
 
+    void asyncPin(QString token, const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            ShellCmd sc;
+            ProcessStatus s = sc.cmdPin(token);
+            return true;
+        });
+    }
+
+    void asyncUnpin(QString token, const QJSValue &callback)
+    {
+        makeAsync<bool>(callback, [=]() {
+            ShellCmd sc;
+            ProcessStatus s = sc.cmdUnpin(token);
+            return true;
+        });
+    }
+
     void asyncRefreshCaskAndFormula(const QJSValue &callback)
     {
         refreshCaskAndFormulaBeforeCallback();
@@ -410,7 +428,7 @@ public slots:
     }
 
     QString getInfoText(const QString token, bool isCask)
-    {
+    {        
         ShellCmd sc;
         ProcessStatus s = sc.cmdGetInfoText(token, isCask);
         if (s.isSuccess && !s.stdOut.isEmpty()) {
@@ -430,6 +448,7 @@ public slots:
 
     QVariant getInfo(const QString token, bool isCask)
     {
+        setInfoToken(token);
         QMap<QString, QVariant> row;
 
         if (isCask) {

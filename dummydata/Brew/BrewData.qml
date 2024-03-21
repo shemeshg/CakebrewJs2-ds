@@ -482,4 +482,16 @@ QtObject {
     function asyncBrewUpgradeSelected(cb, casks, formulas) {
         cb()
     }
+
+    function asyncPin(s, cb) {
+        cb()
+    }
+    function asyncUnpin(s, cb) {
+        cb()
+    }
+
+    function asyncRefreshServices(cb) {
+        cb()
+    }
+
 }

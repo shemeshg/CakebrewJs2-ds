@@ -48,6 +48,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QVariantList caskTableBodyList READ caskTableBodyList  NOTIFY caskTableBodyListChanged )
     Q_PROPERTY(QVariantList serviceTableBodyList READ serviceTableBodyList  NOTIFY serviceTableBodyListChanged )
     Q_PROPERTY(InfoStatus infoStatus READ infoStatus WRITE setInfoStatus NOTIFY infoStatusChanged )
+    Q_PROPERTY(QString infoToken READ infoToken WRITE setInfoToken NOTIFY infoTokenChanged )
     Q_PROPERTY(bool isInfoShowPin READ isInfoShowPin WRITE setIsInfoShowPin NOTIFY isInfoShowPinChanged )
     Q_PROPERTY(bool isInfoShowUnpin READ isInfoShowUnpin WRITE setIsInfoShowUnpin NOTIFY isInfoShowUnpinChanged )
     Q_PROPERTY(bool isInfoShowUpgrade READ isInfoShowUpgrade WRITE setIsInfoShowUpgrade NOTIFY isInfoShowUpgradeChanged )
@@ -386,6 +387,18 @@ void setInfoStatus(const InfoStatus &newInfoStatus)
 
 
     
+    QString infoToken() const{return m_infoToken;} 
+    
+void setInfoToken(const QString &newInfoToken)
+    {
+        if (m_infoToken == newInfoToken)
+            return;
+        m_infoToken = newInfoToken;
+        emit infoTokenChanged();
+    }
+
+
+    
     bool isInfoShowPin() const{return m_isInfoShowPin;} 
     
 void setIsInfoShowPin(const bool newIsInfoShowPin)
@@ -489,6 +502,7 @@ signals:
     void caskTableBodyListChanged();
     void serviceTableBodyListChanged();
     void infoStatusChanged();
+    void infoTokenChanged();
     void isInfoShowPinChanged();
     void isInfoShowUnpinChanged();
     void isInfoShowUpgradeChanged();
@@ -528,6 +542,7 @@ private:
     QVariantList m_caskTableBodyList;
     QVariantList m_serviceTableBodyList;
     InfoStatus m_infoStatus;
+    QString m_infoToken;
     bool m_isInfoShowPin;
     bool m_isInfoShowUnpin;
     bool m_isInfoShowUpgrade;

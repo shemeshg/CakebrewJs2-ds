@@ -159,6 +159,11 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
+p = Prpt("QString",'infoToken')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
 
 for txt in ["isInfoShowPin","isInfoShowUnpin","isInfoShowUpgrade","isInfoShowInstall",
 "isInfoShowUninstall","isInfoShowUninstallZap"]:

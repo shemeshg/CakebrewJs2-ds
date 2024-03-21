@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Core
+import Brew
 
 GroupBox {
     id: bottomBarId
@@ -83,10 +84,52 @@ GroupBox {
             CoreButton {
                 text: "Pin"
                 visible: Constants.brewData.isInfoShowPin
+                onClicked: () => {
+                               Constants.brewData.isInfoShowPin = false
+                               Constants.brewData.isInfoShowUnpin = false
+                               Constants.brewData.isInfoShowUpgrade = false
+                               Constants.brewData.isInfoShowInstall = false
+                               Constants.brewData.isInfoShowUninstall = false
+                               Constants.brewData.isInfoShowUninstallZap = false
+                               Constants.brewData.infoStatus = BrewData.InfoStatus.Running
+                               Constants.brewData.asyncPin(
+                                   Constants.brewData.infoToken, () => {
+                                       Constants.caskSelected = []
+                                       Constants.formulaSelected = []
+                                       Constants.brewData.asyncRefreshServices(
+                                           () => {})
+                                       Constants.brewData.asyncRefreshCaskAndFormula(
+                                           () => {
+                                               info.infoBtn.clicked()
+                                               bottomBarId.refreshClicked()
+                                           })
+                                   })
+                           }
             }
             CoreButton {
                 text: "Unpin"
                 visible: Constants.brewData.isInfoShowUnpin
+                onClicked: () => {
+                               Constants.brewData.isInfoShowPin = false
+                               Constants.brewData.isInfoShowUnpin = false
+                               Constants.brewData.isInfoShowUpgrade = false
+                               Constants.brewData.isInfoShowInstall = false
+                               Constants.brewData.isInfoShowUninstall = false
+                               Constants.brewData.isInfoShowUninstallZap = false
+                               Constants.brewData.infoStatus = BrewData.InfoStatus.Running
+                               Constants.brewData.asyncUnpin(
+                                   Constants.brewData.infoToken, () => {
+                                       Constants.caskSelected = []
+                                       Constants.formulaSelected = []
+                                       Constants.brewData.asyncRefreshServices(
+                                           () => {})
+                                       Constants.brewData.asyncRefreshCaskAndFormula(
+                                           () => {
+                                               info.infoBtn.clicked()
+                                               bottomBarId.refreshClicked()
+                                           })
+                                   })
+                           }
             }
             CoreButton {
                 text: "Upgrade"

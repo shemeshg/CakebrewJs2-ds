@@ -53,8 +53,9 @@ ColumnLayout {
                            Constants.brewData.isInfoShowInstall = false
                            Constants.brewData.isInfoShowUninstall = false
                            Constants.brewData.isInfoShowUninstallZap = false
-                           infoTextLookup()
                            Constants.brewData.infoStatus = BrewData.InfoStatus.Running
+                           infoTextLookup()
+
                            var isCask = cmb.currentText === "Cask"
                            Constants.brewData.asyncGetInfo(token.text, isCask,
                                                            result => {
@@ -148,7 +149,7 @@ ColumnLayout {
                                                                }
                                                            })
                        }
-            enabled: Boolean(token.text.trim())
+            enabled: Boolean(token.text.trim() && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running)
         }
     }
 
@@ -183,7 +184,7 @@ ColumnLayout {
     }
     CoreTextArea {
         id: brewInfoText
-        visible: isShowBrewInfoText.checked
+        visible: isShowBrewInfoText.checked && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running
         readOnly: true
     }
 }
