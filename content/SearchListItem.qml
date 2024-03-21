@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import Core
 
 ColumnLayout {
+    id: searchListItem
     property string itemName: ""
     property string itemTag: ""
     property string itemVer: ""
@@ -13,8 +14,9 @@ ColumnLayout {
     property string itemDesk: ""
 
     property string itemFilterBy: ""
+    property bool isCask: false
 
-    RowLayout {        
+    RowLayout {
         CoreLabel {
             text: "•"
             font.pointSize: Constants.fontSizeLarge3()
@@ -24,8 +26,10 @@ ColumnLayout {
             text: itemName + " ( "
             font.pointSize: Constants.fontSizeLarge3()
         }
-        HyperlinkBtn {
+        HyperlinkBtnInfo {
             urlText: itemTag
+            urlRef: itemTag
+            isCask: searchListItem.isCask
             font.pointSize: Constants.fontSizeLarge3()
         }
         CoreLabel {
@@ -57,6 +61,4 @@ ColumnLayout {
                              }
         }
     }
-
-
 }

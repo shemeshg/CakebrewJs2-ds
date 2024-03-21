@@ -89,6 +89,7 @@ ColumnLayout {
                         itemIsInstalled: modelData.installed
                         itemUrl: modelData.homepage
                         itemDesk: modelData.desc
+                        isCask: true
                     }
                 }
             }
@@ -122,6 +123,7 @@ ColumnLayout {
                     itemIsInstalled: modelData.installed
                     itemUrl: modelData.homepage
                     itemDesk: modelData.desc
+                    isCask: false
                 }
             }
         }
