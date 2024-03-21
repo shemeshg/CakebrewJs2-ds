@@ -398,9 +398,6 @@ QtObject {
     }
     property int infoStatus: BrewData.InfoStatus.Idile
 
-    function asyncBrewDoctor(cb) {
-        cb()
-    }
 
     function asyncGetInfo(tokent, isCask, cb) {
         //var i = isCask ? BrewData.InfoStatus.CaskFound : BrewData.InfoStatus.FormulaFound
@@ -482,7 +479,7 @@ QtObject {
         cb()
     }
 
-    function asyncBrewUpgradeAll(cb, casks, formulas) {
+    function asyncBrewUpgradeSelected(cb, casks, formulas) {
         cb()
     }
 }
