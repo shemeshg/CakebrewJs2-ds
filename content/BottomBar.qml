@@ -145,14 +145,58 @@ GroupBox {
             CoreButton {
                 text: "Install"
                 visible: Constants.brewData.isInfoShowInstall
+                onClicked: {
+                    if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewActionSelected(
+                                    [Constants.brewData.infoToken], [],
+                                    "install", () => {
+                                        afterInfoAction()
+                                    })
+                    } else if (Constants.brewData.infoStatus === BrewData.InfoStatus.FormulaFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewActionSelected(
+                                    [], [Constants.brewData.infoToken],
+                                    "install", () => {
+                                        afterInfoAction()
+                                    })
+                    }
+                }
             }
             CoreButton {
                 text: "Uninstall"
                 visible: Constants.brewData.isInfoShowUninstall
+                onClicked: {
+                    if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewActionSelected(
+                                    [Constants.brewData.infoToken], [],
+                                    "uninstall", () => {
+                                        afterInfoAction()
+                                    })
+                    } else if (Constants.brewData.infoStatus === BrewData.InfoStatus.FormulaFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewActionSelected(
+                                    [], [Constants.brewData.infoToken],
+                                    "uninstall", () => {
+                                        afterInfoAction()
+                                    })
+                    }
+                }
             }
             CoreButton {
                 text: "Uninstall zap"
                 visible: Constants.brewData.isInfoShowUninstallZap
+                onClicked: {
+                    if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        beforeInfoAction()
+                        Constants.brewData.asyncBrewActionSelected(
+                                    [Constants.brewData.infoToken], [],
+                                    "uninstall --zap", () => {
+                                        afterInfoAction()
+                                    })
+                    }
+                }
             }
         }
         RowLayout {

@@ -154,19 +154,22 @@ public slots:
         });
     }
 
-    void asyncBrewUpgradeSelected(QStringList casks, QStringList formulas, const QJSValue &callback)
+    void asyncBrewActionSelected(QStringList casks,
+                                 QStringList formulas,
+                                 QString action,
+                                 const QJSValue &callback)
     {
         refreshCaskAndFormulaBeforeCallback();
         makeAsync<bool>(callback, [=]() {
             ShellCmd sc;
             QString cmd;
-            QString cmdTemplate = "%1 '%2' %3 %4";
+            QString cmdTemplate = "%1 %2 %3 %4";
             if (casks.size() > 0) {
                 QStringList escCasks;
                 for (auto &i : casks) {
                     escCasks.push_back("'" + i + "'");
                 }
-                cmd = cmdTemplate.arg("/usr/local/bin/brew", "upgrade", "--cask", escCasks.join(" "))
+                cmd = cmdTemplate.arg("/usr/local/bin/brew", action, "--cask", escCasks.join(" "))
                       + ";";
             }
             if (formulas.size() > 0) {
@@ -176,7 +179,7 @@ public slots:
                 }
                 cmd = cmd
                       + cmdTemplate.arg("/usr/local/bin/brew",
-                                        "upgrade",
+                                        action,
                                         "--formula",
                                         escFormulas.join(" "))
                       + ";";
@@ -185,6 +188,11 @@ public slots:
             refreshCaskAndFormulaAfterCallback();
             return true;
         });
+    }
+
+    void asyncBrewUpgradeSelected(QStringList casks, QStringList formulas, const QJSValue &callback)
+    {
+        asyncBrewActionSelected(casks, formulas, "upgrade", callback);
     }
 
     void asyncBrewUpgradeAll(const QJSValue &callback)
