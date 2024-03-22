@@ -629,6 +629,10 @@ void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
     if (doBrewUpdate) {
         s = sc.cmdBrewUpdate();
     }
+    QString refreshErr;
+    if (!s.isSuccess) {
+        refreshErr = "refresh failed: " + s.stdErr;
+    }
 
     s = sc.cmdListCaskAndFormula();
 
@@ -639,8 +643,11 @@ void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
             s.stdErr = "Err" + QString::number(s.exitCode);
         }
     }
+
+    s.stdErr = refreshErr + s.stdErr;
     if (!s.stdErr.isEmpty()) {
-        setRefreshStatusFormulaText(s.stdErr);
+        //setRefreshStatusFormulaText(s.stdErr);
+        setRefreshStatusFormulaText("");
         setRefreshStatusCaskText(s.stdErr);
         setRefreshStatusFormulaVisible(true);
         setRefreshStatusCaskVisible(true);
