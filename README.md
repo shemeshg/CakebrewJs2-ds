@@ -1,4 +1,5 @@
-# Cakebrewjs
+# ![icon](https://github.com/shemeshg/CakebrewJs2-ds/assets/8200598/67e2b01a-3e36-49d3-98c9-238e0c5f3e74)  Cakebrewjs
+
 
 Homebrew GUI App written in Qt6+Qml+Js
 
