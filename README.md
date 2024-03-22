@@ -24,7 +24,7 @@ brew cask uninstall cakebrewjs
 Use `Qt creator` and `Qt Designer`
 
 
-### Compiles and minifies for production
+### Compiles for production
 
 ```bash
 /Volumes/FAST/Qt/6.6.2/macos/bin/qt-cmake  -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.  ${sourceFolder}
