@@ -84,14 +84,13 @@ void FormulaRow::addToList(QVariantList &formulaTableBodyList)
     formulaTableBodyList.emplaceBack(QVariant::fromValue(row));
 }
 
-const QString FormulaRow::getCellarSize(QString brewLocation, QString terminalApp)
+const QString FormulaRow::getCellarSize(ShellCmd &sc)
 {
     if (!isInstalled) {
         return "";
     }
 
     if (m_cellarSize.isEmpty()) {
-        ShellCmd sc{brewLocation, terminalApp};
         m_cellarSize = sc.cmdGetcCellarSize(token).stdOut.simplified();
     }
 

@@ -695,7 +695,8 @@ void BrewData::setRowFromCaskRow(QMap<QString, QVariant> &row, CaskRow &caskRow)
     row["ruby_source_path"] = caskRow.ruby_source_path;
     row["caskroomSize"] = "";
     if (caskRow.isInstalled) {
-        row["caskroomSize"] = caskRow.getCaskroomSize(brewLocation(), terminalApp());
+        ShellCmd sc = getShellCmd();
+        row["caskroomSize"] = caskRow.getCaskroomSize(sc);
     }
     row["artifacts"] = caskRow.artifacts;
     row["err"] = "";
@@ -724,7 +725,8 @@ void BrewData::setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &fo
 
     row["cellarSize"] = "";
     if (formulaRow.isInstalled) {
-        row["cellarSize"] = formulaRow.getCellarSize(brewLocation(), terminalApp());
+        ShellCmd sc = getShellCmd();
+        row["cellarSize"] = formulaRow.getCellarSize(sc);
     }
     row["err"] = "";
 }

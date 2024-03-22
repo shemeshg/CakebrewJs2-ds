@@ -1,5 +1,4 @@
 #include "CaskRow.h"
-#include "shellcmd.h"
 
 void CaskRow::addListHeader(QVariantList &formulaTableBodyList)
 {
@@ -62,14 +61,13 @@ void CaskRow::addToList(QVariantList &caskTableBodyList)
     caskTableBodyList.emplaceBack(QVariant::fromValue(row));
 }
 
-const QString CaskRow::getCaskroomSize(QString brewLocation, QString terminalApp)
+const QString CaskRow::getCaskroomSize(ShellCmd &sc)
 {
     if (!isInstalled) {
         return "";
     }
 
     if (m_caskroomSize.isEmpty()) {
-        ShellCmd sc{brewLocation, terminalApp};
         m_caskroomSize = sc.cmdGetCaskroomSize(token).stdOut.simplified();
     }
 

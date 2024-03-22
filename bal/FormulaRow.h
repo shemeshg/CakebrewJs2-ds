@@ -1,6 +1,7 @@
 #pragma once
 #include <QMap>
 #include <QVariant>
+#include "shellcmd.h"
 
 class FormulaRow
 {
@@ -12,7 +13,7 @@ public:
     void addListHeader(QVariantList &formulaTableBodyList);
     void addToList(QVariantList &formulaTableBodyList);
 
-    const QString getCellarSize(QString brewLocation, QString terminalApp);
+    const QString getCellarSize(ShellCmd &sc);
 
 private:
     QString m_cellarSize;

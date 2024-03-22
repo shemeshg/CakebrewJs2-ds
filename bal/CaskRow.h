@@ -1,5 +1,6 @@
 #pragma once
 #include <QVariant>
+#include "shellcmd.h"
 
 class CaskRow
 {
@@ -11,7 +12,7 @@ public:
 
     void addToList(QVariantList &caskTableBodyList);
 
-    const QString getCaskroomSize(QString brewLocation, QString terminalApp);
+    const QString getCaskroomSize(ShellCmd &sc);
 
 private:
     QString m_caskroomSize;
