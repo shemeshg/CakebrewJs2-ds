@@ -57,7 +57,4 @@ ColumnLayout {
         text: Constants.fontSizeNormal()
         Layout.fillWidth: true
     }
-    CoreSwitch {
-        text: "Refresh on startup"
-    }
 }
