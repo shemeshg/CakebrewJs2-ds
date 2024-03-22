@@ -7,6 +7,7 @@ project(CakebrewJs2App VERSION 2.0.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(MACOSX TRUE)
 endif()
@@ -27,9 +28,12 @@ include_directories("${CMAKE_BINARY_DIR}")
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
 
+qt_policy(SET QTP0001 NEW)
+
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
+
 
 qt_add_executable(CakebrewJs2App src/main.cpp ${APP_ICON_MACOSX})
 
