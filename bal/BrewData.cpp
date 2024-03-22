@@ -1,5 +1,5 @@
 #include "BrewData.h"
-
+#include "ParseCmd.h"
 BrewData::BrewData(QObject *parent)
     : BrewDataPrivate{parent}
 {
@@ -101,7 +101,8 @@ void BrewData::asyncSearch(const QJSValue &callback, QString textSearch, bool is
         ShellCmd sc = getShellCmd();
         ProcessStatus s = sc.cmdSearch(textSearch, isCask);
         if (s.isSuccess && !s.stdOut.isEmpty()) {
-            QVector<SearchResultRow *> parseCmdSearch = sc.parseCmdSearch(s.stdOut, isCask);
+            ParseCmd pc;
+            QVector<SearchResultRow *> parseCmdSearch = pc.parseCmdSearch(s.stdOut, isCask);
 
             for (auto row : parseCmdSearch) {
                 emit addSearchRow(row, isCask);
@@ -456,7 +457,8 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
             ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdGetInfo(token, isCask);
             if (s.isSuccess && !s.stdOut.isEmpty()) {
-                CaskRow caskRow = sc.parseCaskList(s.stdOut).at(0);
+                ParseCmd pc;
+                CaskRow caskRow = pc.parseCaskList(s.stdOut).at(0);
                 setRowFromCaskRow(row, caskRow);
             } else {
                 if (s.stdErr.isEmpty()) {
@@ -477,7 +479,8 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
             ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdGetInfo(token, isCask);
             if (s.isSuccess && !s.stdOut.isEmpty()) {
-                FormulaRow formulaRow = sc.parseFormulaList(s.stdOut).at(0);
+                ParseCmd pc;
+                FormulaRow formulaRow = pc.parseFormulaList(s.stdOut).at(0);
                 setRowFromFormulaRow(row, formulaRow);
             } else {
                 if (s.stdErr.isEmpty()) {
@@ -556,15 +559,17 @@ void BrewData::serviceSort()
 void BrewData::parseRefreshServices(QString strResult)
 {
     ShellCmd sc = getShellCmd();
-    serviceRows = sc.parseServicesList(strResult);
+    ParseCmd pc;
+    serviceRows = pc.parseServicesList(strResult);
     serviceSort();
 }
 
 void BrewData::parseRefreshCaskAndFormula(QString strResult)
 {
     ShellCmd sc = getShellCmd();
-    caskRows = sc.parseCaskList(strResult);
-    formulaRows = sc.parseFormulaList(strResult);
+    ParseCmd pc;
+    caskRows = pc.parseCaskList(strResult);
+    formulaRows = pc.parseFormulaList(strResult);
     caskSort();
     formulaSort();
 }

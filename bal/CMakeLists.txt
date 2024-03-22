@@ -20,4 +20,5 @@ qt6_add_qml_module(bal
             ServiceRow.h ServiceRow.cpp
             CaskRow.h CaskRow.cpp
             FormulaRow.h FormulaRow.cpp
+            ParseCmd.h ParseCmd.cpp
               )
