@@ -15,7 +15,7 @@ RowLayout {
             Layout.fillWidth: true
         }
         HyperlinkBtn {
-            urlRef: "https://github.com/shemeshg/cakebrewjs"
+            urlRef: "https://sourceforge.net/p/cakebrewjs"
             urlText: "cakebrewjs " + Qt.application.version
             onLinkActivated: Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
