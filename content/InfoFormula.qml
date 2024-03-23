@@ -26,7 +26,7 @@ ColumnLayout {
             font.pointSize: Constants.fontSizeLarge3()
             font.bold: true
             topPadding: 20
-            text: fullName + " " + (isPinned ? "📌 " : "") + version
+            text: fullName + " " + (isPinned ? "📌 " : "") + outdated
         }
         Item {
             Layout.fillWidth: true
@@ -56,7 +56,7 @@ ColumnLayout {
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
         CoreLabel {
-            text: outdated
+            text: version
             color: CoreSystemPalette.isDarkTheme ? "Light green" : "Dark green"
         }
         CoreLabel {
