@@ -55,6 +55,8 @@ GroupBox {
             visible: selectedPreview === "Home"
             CoreButton {
                 text: "Refresh"
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
                 onClicked: {
                     Constants.caskSelected = []
                     Constants.formulaSelected = []
