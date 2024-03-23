@@ -16,9 +16,8 @@ ColumnLayout {
         visible: Constants.brewData.refreshStatusCaskVisible
     }
 
-    CollapseableTableView {       
+    CollapseableTableView {
         id: ctvc
-        visible: !Constants.brewData.refreshCaskRunning
 
         headerText: "Cask (" + Constants.caskSelected.length + ")"
         rowsModel: Constants.brewData.caskTableBodyList
@@ -68,7 +67,7 @@ ColumnLayout {
                 delegate: HyperlinkBtnInfo {
                     isCask: true
                     leftPadding: 10
-                    urlText: model.display.text                    
+                    urlText: model.display.text
                     urlRef: model.display.text
                 }
             }
@@ -125,7 +124,6 @@ ColumnLayout {
 
     CollapseableTableView {
         id: ctvf
-        visible: !Constants.brewData.refreshFormulaRunning
 
         headerText: "Formula (" + Constants.formulaSelected.length + ")"
         rowsModel: Constants.brewData.formulaTableBodyList
@@ -215,7 +213,7 @@ ColumnLayout {
             DelegateChoice {
                 column: 5
                 delegate: CoreLabel {
-                    leftPadding: 10                    
+                    leftPadding: 10
                     text: model.display.text
                     color: CoreSystemPalette.text
                     CoreToolTip {
@@ -260,7 +258,6 @@ ColumnLayout {
     CollapseableTableView {
         id: ctvs
         autoExtendCol: 3
-        visible: !Constants.brewData.refreshServiceRunning
 
         headerText: "Service"
         rowsModel: Constants.brewData.serviceTableBodyList
