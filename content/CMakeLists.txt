@@ -26,5 +26,10 @@ qt6_add_qml_module(content
         SearchListItem.qml
         Settings.qml
         TableHeaderLabel.qml
+    RESOURCES
+        images/home_FILL0_wght400_GRAD0_opsz24.svg
+        images/info_FILL0_wght400_GRAD0_opsz24.svg
+        images/search_FILL0_wght400_GRAD0_opsz24.svg
+        images/settings_FILL0_wght400_GRAD0_opsz24.svg
 
 )

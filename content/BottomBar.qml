@@ -14,14 +14,18 @@ GroupBox {
     signal saveSettingsClicked
     property string selectedPreview: ""
 
-    readonly property int upgradableItems: {
+    readonly property int upgradableItemsCask: {
 
         return Constants.brewData.caskTableBodyList.filter(row => {
                                                                return Boolean(
                                                                    row.outdated.text)
                                                                && "tsChecked" in row.outdated
-                                                           }).length
-                + Constants.brewData.formulaTableBodyList.filter(row => {
+                                                           }).length           
+    }
+
+    readonly property int upgradableItemsFormula: {
+
+        return  Constants.brewData.formulaTableBodyList.filter(row => {
                                                                      return Boolean(
                                                                          row.outdated.text)
                                                                      && "tsChecked" in row.outdated
@@ -67,7 +71,7 @@ GroupBox {
                 }
             }
             CoreButton {
-                text: "Upgrade all (" + upgradableItems + ")"
+                text: "Upgrade all (" + Number( upgradableItemsCask + upgradableItemsFormula )+ ")"
                 onClicked: () => {
                                Constants.caskSelected = []
                                Constants.formulaSelected = []
@@ -75,6 +79,7 @@ GroupBox {
                                                                           bottomBarId.refreshClicked()
                                                                       })
                            }
+                hooverText: "<b>Cask </b>" + upgradableItemsCask + "<br/><b>Formula </b>" + upgradableItemsFormula
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
@@ -92,6 +97,8 @@ GroupBox {
                            }
                 enabled: Number(
                              Constants.caskSelected.length + Constants.formulaSelected.length) > 0
+                hooverText: "<b>Cask </b>" + Constants.caskSelected.length  + " / " + upgradableItemsCask +
+                            "<br/><b>Formula </b>" + Constants.formulaSelected.length + " / " + upgradableItemsFormula
             }
             CoreButton {
                 text: "Doctor"

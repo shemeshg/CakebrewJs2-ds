@@ -16,29 +16,59 @@ RowLayout {
     GroupBox {
 
         RowLayout {
+            Shortcut {
+                 sequence: "Ctrl+M"
+                 onActivated: {
+                     btnHomeId.checked = true
+                 }
+             }
+            Shortcut {
+                 sequence: "Ctrl+I"
+                 onActivated: {
+                     btnInfoId.checked = true
+                 }
+             }
+            Shortcut {
+                 sequence: "Ctrl+F"
+                 onActivated: {
+                     btnSearchId.checked = true
+                 }
+             }
+            Shortcut {
+                 sequence: "Ctrl+,"
+                 onActivated: {
+                     btnSettingsId.checked = true
+                 }
+             }
             CoreButton {
                 id: btnHomeId
-                text: "Home"
+                icon.source: Qt.resolvedUrl("images/home_FILL0_wght400_GRAD0_opsz24.svg")
+                hooverText: "<b>⌘M</b> Home."
                 autoExclusive: true
                 checkable: true
                 checked: true
             }
             CoreButton {
                 id: btnInfoId
-                text: "Info"
+                icon.source: Qt.resolvedUrl("images/info_FILL0_wght400_GRAD0_opsz24.svg")
+                hooverText: "<b>⌘I</b> Info."
                 autoExclusive: true
                 checkable: true
+
             }
             CoreButton {
+
                 id: btnSearchId
-                text: "Search"
+                icon.source: Qt.resolvedUrl("images/search_FILL0_wght400_GRAD0_opsz24.svg")
+                hooverText: "<b>⌘F</b> Find."
                 autoExclusive: true
                 checkable: true
             }
 
-            CoreButton {
+            CoreButton {                
                 id: btnSettingsId
-                text: "Settings"
+                icon.source: Qt.resolvedUrl("images/settings_FILL0_wght400_GRAD0_opsz24.svg")
+                hooverText: "<b>⌘,</b> Settings."
                 autoExclusive: true
                 checkable: true
             }

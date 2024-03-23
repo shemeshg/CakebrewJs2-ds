@@ -19,7 +19,7 @@ ColumnLayout {
     CollapseableTableView {
         id: ctvc
 
-        headerText: "Cask (" + Constants.caskSelected.length + ")"
+        headerText: "Cask"
         rowsModel: Constants.brewData.caskTableBodyList
         tableView.model: TableModel {
 
@@ -125,7 +125,7 @@ ColumnLayout {
     CollapseableTableView {
         id: ctvf
 
-        headerText: "Formula (" + Constants.formulaSelected.length + ")"
+        headerText: "Formula"
         rowsModel: Constants.brewData.formulaTableBodyList
         tableView.model: TableModel {
 

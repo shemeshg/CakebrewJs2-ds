@@ -298,7 +298,7 @@ QtObject {
             "filterString": "abc"
         }, {
             "name": {
-                "text": "libext"
+                "text": "libext1"
             },
             "desc": {
                 "text": "very pioutyoiuyrt Description"
@@ -320,7 +320,7 @@ QtObject {
             "filterString": "abc"
         }, {
             "name": {
-                "text": "libext"
+                "text": "libext2"
             },
             "desc": {
                 "text": "very pioutyoiuyrt Description"
@@ -342,7 +342,7 @@ QtObject {
             "filterString": "abc"
         }, {
             "name": {
-                "text": "libext"
+                "text": "libext3"
             },
             "desc": {
                 "text": "very pioutyoiuyrt Description"
@@ -364,7 +364,7 @@ QtObject {
             "filterString": "abc"
         }, {
             "name": {
-                "text": "libext"
+                "text": "libext4"
             },
             "desc": {
                 "text": "very pioutyoiuyrt Description"
