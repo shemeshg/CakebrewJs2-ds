@@ -220,7 +220,7 @@ void BrewData::asyncServiceAction(const QJSValue &callback, QString name, QStrin
     });
 }
 
-void BrewData::asyncRefreshServices(const QJSValue &callback, bool loadFromCash = false)
+void BrewData::asyncRefreshServices(const QJSValue &callback, bool loadFromCash)
 {
     refreshServicesBeforeCallback();
 
@@ -257,7 +257,7 @@ void BrewData::asyncUnpin(QString token, const QJSValue &callback)
 
 void BrewData::asyncRefreshCaskAndFormula(bool doBrewUpdate,
                                           const QJSValue &callback,
-                                          bool loadFromCash = false)
+                                          bool loadFromCash)
 {
     refreshCaskAndFormulaBeforeCallback();
 
@@ -578,7 +578,14 @@ void BrewData::parseRefreshServices(QString strResult)
 {
     ShellCmd sc = getShellCmd();
     ParseCmd pc;
-    serviceRows = pc.parseServicesList(strResult);
+
+    try {
+        serviceRows = pc.parseServicesList(strResult);
+    } catch (const std::exception &e) {
+        qDebug() << "Exception caught: " << e.what();
+    } catch (...) {
+        qDebug() << "Exception caught: ";
+    }
     serviceSort();
 }
 
@@ -586,8 +593,16 @@ void BrewData::parseRefreshCaskAndFormula(QString strResult)
 {
     ShellCmd sc = getShellCmd();
     ParseCmd pc;
-    caskRows = pc.parseCaskList(strResult);
-    formulaRows = pc.parseFormulaList(strResult);
+
+    try {
+        caskRows = pc.parseCaskList(strResult);
+        formulaRows = pc.parseFormulaList(strResult);
+    } catch (const std::exception &e) {
+        qDebug() << "Exception caught: " << e.what();
+    } catch (...) {
+        qDebug() << "Exception caught: ";
+    }
+
     caskSort();
     formulaSort();
 }

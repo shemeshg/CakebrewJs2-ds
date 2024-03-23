@@ -34,13 +34,15 @@ public slots:
 
     void asyncServiceAction(const QJSValue &callback, QString name, QString action);
 
-    void asyncRefreshServices(const QJSValue &callback, bool loadFromCash);
+    void asyncRefreshServices(const QJSValue &callback, bool loadFromCash = false);
 
     void asyncPin(QString token, const QJSValue &callback);
 
     void asyncUnpin(QString token, const QJSValue &callback);
 
-    void asyncRefreshCaskAndFormula(bool doBrewUpdate, const QJSValue &callback, bool loadFromCash);
+    void asyncRefreshCaskAndFormula(bool doBrewUpdate,
+                                    const QJSValue &callback,
+                                    bool loadFromCash = false);
 
     void saveTerminalApp(const QString s);
 
