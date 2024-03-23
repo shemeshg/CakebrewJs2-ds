@@ -10,7 +10,7 @@ Window {
     width: 1000
     height: 800
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Cakebrewjs")
 
     color: CoreSystemPalette.window
 
