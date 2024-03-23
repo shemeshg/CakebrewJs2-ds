@@ -21,7 +21,6 @@ qt6_add_qml_module(content
         Info.qml
         InfoCask.qml
         InfoFormula.qml
-        LoadingData.qml
         PreviewData.qml
         Search.qml
         SearchListItem.qml

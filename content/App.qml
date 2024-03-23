@@ -18,25 +18,6 @@ Window {
         anchors.fill: parent
         anchors.margins: 10
 
-        PreviewData {
-            visible: stateGroup.state === "Preview"
-        }
-
-        LoadingData {
-            visible: stateGroup.state === "LoadingData"
-        }
-    }
-
-    StateGroup {
-        id: stateGroup
-        state: "Preview"
-        states: [
-            State {
-                name: "Preview"
-            },
-            State {
-                name: "LoadingData"
-            }
-        ]
+        PreviewData {}
     }
 }
