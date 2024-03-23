@@ -492,4 +492,8 @@ QtObject {
     function asyncRefreshServices(cb) {
         cb()
     }
+
+    function qtVer() {
+        return "6.6.2"
+    }
 }

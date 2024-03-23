@@ -8,17 +8,20 @@ RowLayout {
     ColumnLayout {
         CoreLabel {
             text: `
-            <h2>Credits</h2>
-            <p>Icons made by Freepik from www.flaticon.com</p>
+            <h2>About</h2>
             `
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
         }
+
         HyperlinkBtn {
             urlRef: "https://sourceforge.net/p/cakebrewjs"
-            urlText: "cakebrewjs " + Qt.application.version
+            urlText: "Cakebrewjs " + Qt.application.version
             onLinkActivated: Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
+        }
+        CoreLabel {
+            text: "Qt " + Constants.brewData.qtVer()
         }
         CoreLabel {
             text: `

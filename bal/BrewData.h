@@ -19,6 +19,7 @@ signals:
     void parseRefreshCaskAndFormulaSignal(QString strResult);
 
 public slots:
+    QString qtVer() { return QT_VERSION_STR; }
     void asyncSearch(const QJSValue &callback, QString textSearch, bool isCask);
 
     void asyncBrewActionSelected(QStringList casks,
