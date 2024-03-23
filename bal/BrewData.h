@@ -34,13 +34,13 @@ public slots:
 
     void asyncServiceAction(const QJSValue &callback, QString name, QString action);
 
-    void asyncRefreshServices(const QJSValue &callback);
+    void asyncRefreshServices(const QJSValue &callback, bool loadFromCash);
 
     void asyncPin(QString token, const QJSValue &callback);
 
     void asyncUnpin(QString token, const QJSValue &callback);
 
-    void asyncRefreshCaskAndFormula(bool doBrewUpdate, const QJSValue &callback);
+    void asyncRefreshCaskAndFormula(bool doBrewUpdate, const QJSValue &callback, bool loadFromCash);
 
     void saveTerminalApp(const QString s);
 
@@ -100,5 +100,7 @@ private:
 
     void setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &formulaRow);
 
+    void cashFileWrite(const QString &fileName, QString &fileContent);
+    QString cashFileRead(const QString &fileName);
     ShellCmd getShellCmd();
 };

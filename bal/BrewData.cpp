@@ -220,9 +220,17 @@ void BrewData::asyncServiceAction(const QJSValue &callback, QString name, QStrin
     });
 }
 
-void BrewData::asyncRefreshServices(const QJSValue &callback)
+void BrewData::asyncRefreshServices(const QJSValue &callback, bool loadFromCash = false)
 {
     refreshServicesBeforeCallback();
+
+    if (loadFromCash) {
+        QString cash = cashFileRead("cmdListServices.txt");
+        if (!cash.isEmpty()) {
+            emit parseRefreshServicesSignal(cash);
+        }
+    }
+
     makeAsync<bool>(callback, [=]() {
         refreshServicesAfterCallback();
         return true;
@@ -247,9 +255,19 @@ void BrewData::asyncUnpin(QString token, const QJSValue &callback)
     });
 }
 
-void BrewData::asyncRefreshCaskAndFormula(bool doBrewUpdate, const QJSValue &callback)
+void BrewData::asyncRefreshCaskAndFormula(bool doBrewUpdate,
+                                          const QJSValue &callback,
+                                          bool loadFromCash = false)
 {
     refreshCaskAndFormulaBeforeCallback();
+
+    if (loadFromCash) {
+        QString cash = cashFileRead("cmdListCaskAndFormula.txt");
+        if (!cash.isEmpty()) {
+            emit parseRefreshCaskAndFormulaSignal(cash);
+        }
+    }
+
     makeAsync<bool>(callback, [=]() {
         refreshCaskAndFormulaAfterCallback(doBrewUpdate);
         return true;
@@ -438,7 +456,7 @@ QString BrewData::getInfoText(const QString token, bool isCask)
 }
 
 void BrewData::asyncGetInfo(QString token, bool isCask, const QJSValue &callback)
-{
+{        
     makeAsync<QVariant>(callback, [=]() { return getInfo(token, isCask); });
 }
 
@@ -622,8 +640,7 @@ void BrewData::refreshCaskAndFormulaBeforeCallback()
 }
 
 void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
-{
-    //brew outdated --json=v2
+{    
     ShellCmd sc = getShellCmd();
     ProcessStatus s;
     if (doBrewUpdate) {
@@ -637,6 +654,7 @@ void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
     s = sc.cmdListCaskAndFormula();
 
     if (s.isSuccess && !s.stdOut.isEmpty()) {
+        cashFileWrite("cmdListCaskAndFormula.txt", s.stdOut);
         emit parseRefreshCaskAndFormulaSignal(s.stdOut);
     } else {
         if (s.stdErr.isEmpty()) {
@@ -672,6 +690,7 @@ void BrewData::refreshServicesAfterCallback()
     ProcessStatus s = sc.cmdListServices();
 
     if (s.isSuccess && !s.stdOut.isEmpty()) {
+        cashFileWrite("cmdListServices.txt", s.stdOut);
         emit parseRefreshServicesSignal(s.stdOut);
     } else {
         if (s.stdErr.isEmpty()) {
@@ -736,6 +755,36 @@ void BrewData::setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &fo
         row["cellarSize"] = formulaRow.getCellarSize(sc);
     }
     row["err"] = "";
+}
+
+void BrewData::cashFileWrite(const QString &fileName, QString &fileContent)
+{
+    QString cacheFolderPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QString filePath = cacheFolderPath + QDir::separator() + fileName;
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        out << fileContent;
+        file.close();
+    }
+}
+
+QString BrewData::cashFileRead(const QString &fileName)
+{
+    QString cacheFolderPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QString filePath = cacheFolderPath + QDir::separator() + fileName;
+
+    QString fileContent;
+    // Check if the file exists
+    if (QFile::exists(filePath)) {
+        QFile file(filePath);
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream stream(&file);
+            fileContent = stream.readAll();
+            file.close();
+        }
+    }
+    return fileContent;
 }
 
 ShellCmd BrewData::getShellCmd()
