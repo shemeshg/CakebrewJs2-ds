@@ -125,6 +125,13 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         bool isOutdated = element["outdated"].template get<bool>();
         outdated = element["version"].template get<std::string>();
 
+        if (!element["auto_updates"].is_null()) {
+            if (element["auto_updates"].template get<bool>()) {
+                outdated = "🚗 " + outdated;
+                version = "🚗 " + version;
+            }
+        }
+
         std::string artifacts;
         for (auto &art : element["artifacts"].items()) {
             if (art.value().contains("app")) {
