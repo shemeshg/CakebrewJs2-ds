@@ -32,7 +32,7 @@ ColumnLayout {
             text: "Cask: "
         }
         HyperlinkBtnInfo {
-            isCask: false
+            isCask: true
             leftPadding: 10
             urlText: token
             urlRef: token
