@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.21.1)
 option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
 option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 
-project(CakebrewJs2App VERSION 2.1.0 LANGUAGES CXX)
+project(CakebrewJs2App VERSION 2.2.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
