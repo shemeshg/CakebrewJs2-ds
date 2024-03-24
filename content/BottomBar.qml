@@ -20,16 +20,16 @@ GroupBox {
                                                                return Boolean(
                                                                    row.outdated.text)
                                                                && "tsChecked" in row.outdated
-                                                           }).length           
+                                                           }).length
     }
 
     readonly property int upgradableItemsFormula: {
 
-        return  Constants.brewData.formulaTableBodyList.filter(row => {
-                                                                     return Boolean(
-                                                                         row.outdated.text)
-                                                                     && "tsChecked" in row.outdated
-                                                                 }).length
+        return Constants.brewData.formulaTableBodyList.filter(row => {
+                                                                  return Boolean(
+                                                                      row.outdated.text)
+                                                                  && "tsChecked" in row.outdated
+                                                              }).length
     }
 
     function beforeInfoAction() {
@@ -71,7 +71,8 @@ GroupBox {
                 }
             }
             CoreButton {
-                text: "Upgrade all (" + Number( upgradableItemsCask + upgradableItemsFormula )+ ")"
+                text: "Upgrade all (" + Number(
+                          upgradableItemsCask + upgradableItemsFormula) + ")"
                 onClicked: () => {
                                Constants.caskSelected = []
                                Constants.formulaSelected = []
@@ -79,7 +80,11 @@ GroupBox {
                                                                           bottomBarId.refreshClicked()
                                                                       })
                            }
-                hooverText: "<b>Cask </b>" + upgradableItemsCask + "<br/><b>Formula </b>" + upgradableItemsFormula
+                hooverText: "<b>Cask </b>" + upgradableItemsCask
+                            + "<br/><b>Formula </b>" + upgradableItemsFormula
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning && Number(
+                             upgradableItemsCask + upgradableItemsFormula) > 0
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
@@ -95,16 +100,20 @@ GroupBox {
                                        bottomBarId.refreshClicked()
                                    })
                            }
-                enabled: Number(
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning && Number(
                              Constants.caskSelected.length + Constants.formulaSelected.length) > 0
-                hooverText: "<b>Cask </b>" + Constants.caskSelected.length  + " / " + upgradableItemsCask +
-                            "<br/><b>Formula </b>" + Constants.formulaSelected.length + " / " + upgradableItemsFormula
+                hooverText: "<b>Cask </b>" + Constants.caskSelected.length + " / "
+                            + upgradableItemsCask + "<br/><b>Formula </b>"
+                            + Constants.formulaSelected.length + " / " + upgradableItemsFormula
             }
             CoreButton {
                 text: "Doctor"
                 onClicked: {
                     Constants.brewData.asyncBrewDoctor(() => {})
                 }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
         }
         RowLayout {
@@ -120,6 +129,8 @@ GroupBox {
                                        afterInfoAction()
                                    })
                            }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
             CoreButton {
                 text: "Unpin"
@@ -131,6 +142,8 @@ GroupBox {
                                        afterInfoAction()
                                    })
                            }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
             CoreButton {
                 text: "Upgrade"
@@ -150,6 +163,8 @@ GroupBox {
                                     })
                     }
                 }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
             CoreButton {
                 text: "Install"
@@ -171,6 +186,8 @@ GroupBox {
                                     })
                     }
                 }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
             CoreButton {
                 text: "Uninstall"
@@ -192,6 +209,8 @@ GroupBox {
                                     })
                     }
                 }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
             CoreButton {
                 text: "Uninstall zap"
@@ -206,6 +225,8 @@ GroupBox {
                                     })
                     }
                 }
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
             }
         }
         RowLayout {
