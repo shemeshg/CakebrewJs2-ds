@@ -658,12 +658,12 @@ void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
 {    
     ShellCmd sc = getShellCmd();
     ProcessStatus s;
+    QString refreshErr;
     if (doBrewUpdate) {
         s = sc.cmdBrewUpdate();
-    }
-    QString refreshErr;
-    if (!s.isSuccess) {
-        refreshErr = "refresh failed: " + s.stdErr;
+        if (!s.isSuccess) {
+            refreshErr = "refresh failed: " + s.stdErr;
+        }
     }
 
     s = sc.cmdListCaskAndFormula();
