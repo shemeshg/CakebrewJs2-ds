@@ -9,7 +9,8 @@ ColumnLayout {
     property alias cmb: cmb
     property alias token: token
     property alias infoBtn: infoBtn
-    Layout.margins: 10
+    Layout.leftMargin: 10
+    Layout.rightMargin: 20
 
     function infoTextLookup() {
         if (!isShowBrewInfoText.checked || !token.text) {
@@ -196,5 +197,7 @@ ColumnLayout {
         visible: isShowBrewInfoText.checked
                  && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running
         readOnly: true
+        Layout.fillWidth: true
+        wrapMode: Text.WordWrap
     }
 }

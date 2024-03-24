@@ -5,7 +5,9 @@ import QtQuick.Layouts
 import Core
 
 ColumnLayout {
-    Layout.margins: 10
+    Layout.leftMargin: 10
+    Layout.rightMargin: 20
+
     function filtredSearchedFormulaItems() {
         return Constants.brewData.searchItemsFormula.filter(r => {
 
