@@ -96,7 +96,7 @@ find `%1 --cellar`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shH
 ProcessStatus ShellCmd::cmdGetCaskroomSize(QString token)
 {
     QString s = R"(#!/bin/zsh
-find `%1 --caskroom`/$1 -mindepth 2 -maxdepth 2  -not -path '*/.*'| xargs  du -shHc|tail -n 1)";
+find `%1 --caskroom`/$1 -mindepth 2 -maxdepth 4  -not -path '*/.*'|  tr \\n \\0 |  xargs -0 du -shHc|tail -n 1)";
     s = s.arg(brewLocation);
 
     QTemporaryFile file;
