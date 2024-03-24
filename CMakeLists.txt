@@ -26,7 +26,7 @@ endif()
 configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/config.h")
 include_directories("${CMAKE_BINARY_DIR}")
 
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Svg)
 
 qt_policy(SET QTP0001 NEW)
 
@@ -50,6 +50,7 @@ target_link_libraries(CakebrewJs2App PRIVATE
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
+    Qt6::Svg
     bal
 )
 
