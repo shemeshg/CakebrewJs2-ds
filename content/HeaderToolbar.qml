@@ -17,19 +17,19 @@ RowLayout {
 
         RowLayout {
             Shortcut {
-                 sequence: "Ctrl+M"
+                 sequence: "Ctrl+1"
                  onActivated: {
                      btnHomeId.checked = true
                  }
              }
             Shortcut {
-                 sequence: "Ctrl+I"
+                 sequence: "Ctrl+2"
                  onActivated: {
                      btnInfoId.checked = true
                  }
              }
             Shortcut {
-                 sequence: "Ctrl+F"
+                 sequence: "Ctrl+3"
                  onActivated: {
                      btnSearchId.checked = true
                  }
@@ -43,24 +43,23 @@ RowLayout {
             CoreButton {
                 id: btnHomeId
                 icon.source: Qt.resolvedUrl("images/home_FILL0_wght400_GRAD0_opsz24.svg")
-                hooverText: "<b>⌘M</b> Home."
+                hooverText: "<b>⌘1</b> Home."
                 autoExclusive: true
                 checkable: true
-                checked: true
+                checked: true                
             }
             CoreButton {
                 id: btnInfoId
                 icon.source: Qt.resolvedUrl("images/info_FILL0_wght400_GRAD0_opsz24.svg")
-                hooverText: "<b>⌘I</b> Info."
+                hooverText: "<b>⌘2</b> Info."
                 autoExclusive: true
                 checkable: true
 
             }
             CoreButton {
-
                 id: btnSearchId
                 icon.source: Qt.resolvedUrl("images/search_FILL0_wght400_GRAD0_opsz24.svg")
-                hooverText: "<b>⌘F</b> Find."
+                hooverText: "<b>⌘3</b> Find."
                 autoExclusive: true
                 checkable: true
             }
@@ -70,7 +69,7 @@ RowLayout {
                 icon.source: Qt.resolvedUrl("images/settings_FILL0_wght400_GRAD0_opsz24.svg")
                 hooverText: "<b>⌘,</b> Settings."
                 autoExclusive: true
-                checkable: true
+                checkable: true                                
             }
         }
     }
