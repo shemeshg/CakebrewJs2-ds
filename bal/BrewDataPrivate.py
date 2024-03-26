@@ -18,6 +18,26 @@ p.is_writable = True
 p.is_notify = True
 ary.append(p)
 
+p = Prpt("bool",'isExtendedCask')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'isExtendedFormula')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'isExtendedService')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("bool",'isShowBrewInfoText')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
 
 p = Prpt("QVector<SearchResultRow *>",'searchItemsCask')
 p.is_bindable = False

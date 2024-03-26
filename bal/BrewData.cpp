@@ -6,6 +6,10 @@ BrewData::BrewData(QObject *parent)
     loadBrewLocation();
     loadNormalFontPointSize();
     loadTerminalApp();
+    loadIsExtendedCask();
+    loadIsExtendedFormula();
+    loadIsExtendedService();
+    loadIsShowBrewInfoText();
 
     /*
         CaskRow cr{};
@@ -290,6 +294,30 @@ void BrewData::saveBrewLocation(const QString s)
 {
     settings.setValue("brewLocation", s);
     loadBrewLocation();
+}
+
+void BrewData::saveIsExtendedCask(const bool s)
+{
+    settings.setValue("isExtendedCask", s);
+    loadIsExtendedCask();
+}
+
+void BrewData::saveIsExtendedFormula(const bool s)
+{
+    settings.setValue("isExtendedFormula", s);
+    loadIsExtendedFormula();
+}
+
+void BrewData::saveIsExtendedService(const bool s)
+{
+    settings.setValue("isExtendedService", s);
+    loadIsExtendedService();
+}
+
+void BrewData::saveIsShowBrewInfoText(const bool s)
+{
+    settings.setValue("isShowBrewInfoText", s);
+    loadIsShowBrewInfoText();
 }
 
 void BrewData::asyncFormulaSort(const QJSValue &callback)
@@ -641,6 +669,30 @@ void BrewData::loadBrewLocation()
 
     setBrewLocation(s_brewLocation);
     emit brewLocationChanged();
+}
+
+void BrewData::loadIsExtendedCask()
+{
+    bool s = settings.value("isExtendedCask", true).toBool();
+    setIsExtendedCask(s);
+}
+
+void BrewData::loadIsExtendedFormula()
+{
+    bool s = settings.value("isExtendedFormula", true).toBool();
+    setIsExtendedFormula(s);
+}
+
+void BrewData::loadIsExtendedService()
+{
+    bool s = settings.value("isExtendedService", true).toBool();
+    setIsExtendedService(s);
+}
+
+void BrewData::loadIsShowBrewInfoText()
+{
+    bool s = settings.value("isShowBrewInfoText", false).toBool();
+    setIsShowBrewInfoText(s);
 }
 
 void BrewData::refreshCaskAndFormulaBeforeCallback()

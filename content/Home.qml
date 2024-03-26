@@ -18,9 +18,14 @@ ColumnLayout {
 
     CollapseableTableView {
         id: ctvc
+        onIsExtendedChanged: {
+            Constants.brewData.saveIsExtendedCask(ctvc.isExtended)
+        }
 
         headerText: "Cask"
         rowsModel: Constants.brewData.caskTableBodyList
+        isExtended: Constants.brewData.isExtendedCask
+
         tableView.model: TableModel {
 
             TableModelColumn {
@@ -124,6 +129,10 @@ ColumnLayout {
 
     CollapseableTableView {
         id: ctvf
+        isExtended: Constants.brewData.isExtendedFormula
+        onIsExtendedChanged: {
+            Constants.brewData.saveIsExtendedFormula(ctvf.isExtended)
+        }
 
         headerText: "Formula"
         rowsModel: Constants.brewData.formulaTableBodyList
@@ -257,6 +266,11 @@ ColumnLayout {
 
     CollapseableTableView {
         id: ctvs
+        isExtended: Constants.brewData.isExtendedService
+        onIsExtendedChanged: {
+            Constants.brewData.saveIsExtendedService(ctvs.isExtended)
+        }
+
         autoExtendCol: 3
 
         headerText: "Service"

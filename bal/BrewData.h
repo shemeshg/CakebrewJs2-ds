@@ -51,6 +51,11 @@ public slots:
 
     void saveBrewLocation(const QString s);
 
+    void saveIsExtendedCask(const bool s);
+    void saveIsExtendedFormula(const bool s);
+    void saveIsExtendedService(const bool s);
+    void saveIsShowBrewInfoText(const bool s);
+
     void asyncFormulaSort(const QJSValue &callback);
 
     void formulaSort();
@@ -90,6 +95,11 @@ private:
     void loadTerminalApp();
 
     void loadBrewLocation();
+
+    void loadIsExtendedCask();
+    void loadIsExtendedFormula();
+    void loadIsExtendedService();
+    void loadIsShowBrewInfoText();
 
     void refreshCaskAndFormulaBeforeCallback();
 

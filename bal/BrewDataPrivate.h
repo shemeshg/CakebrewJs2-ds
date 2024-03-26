@@ -21,6 +21,10 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
     Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
+    Q_PROPERTY(bool isExtendedCask READ isExtendedCask WRITE setIsExtendedCask NOTIFY isExtendedCaskChanged )
+    Q_PROPERTY(bool isExtendedFormula READ isExtendedFormula WRITE setIsExtendedFormula NOTIFY isExtendedFormulaChanged )
+    Q_PROPERTY(bool isExtendedService READ isExtendedService WRITE setIsExtendedService NOTIFY isExtendedServiceChanged )
+    Q_PROPERTY(bool isShowBrewInfoText READ isShowBrewInfoText WRITE setIsShowBrewInfoText NOTIFY isShowBrewInfoTextChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsCask READ searchItemsCask  NOTIFY searchItemsCaskChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsFormula READ searchItemsFormula  NOTIFY searchItemsFormulaChanged )
     Q_PROPERTY(QString searchStatusCaskText READ searchStatusCaskText WRITE setSearchStatusCaskText NOTIFY searchStatusCaskTextChanged )
@@ -99,6 +103,54 @@ void setTerminalApp(const QString &newTerminalApp)
             return;
         m_terminalApp = newTerminalApp;
         emit terminalAppChanged();
+    }
+
+
+    
+    bool isExtendedCask() const{return m_isExtendedCask;} 
+    
+void setIsExtendedCask(const bool newIsExtendedCask)
+    {
+        if (m_isExtendedCask == newIsExtendedCask)
+            return;
+        m_isExtendedCask = newIsExtendedCask;
+        emit isExtendedCaskChanged();
+    }
+
+
+    
+    bool isExtendedFormula() const{return m_isExtendedFormula;} 
+    
+void setIsExtendedFormula(const bool newIsExtendedFormula)
+    {
+        if (m_isExtendedFormula == newIsExtendedFormula)
+            return;
+        m_isExtendedFormula = newIsExtendedFormula;
+        emit isExtendedFormulaChanged();
+    }
+
+
+    
+    bool isExtendedService() const{return m_isExtendedService;} 
+    
+void setIsExtendedService(const bool newIsExtendedService)
+    {
+        if (m_isExtendedService == newIsExtendedService)
+            return;
+        m_isExtendedService = newIsExtendedService;
+        emit isExtendedServiceChanged();
+    }
+
+
+    
+    bool isShowBrewInfoText() const{return m_isShowBrewInfoText;} 
+    
+void setIsShowBrewInfoText(const bool newIsShowBrewInfoText)
+    {
+        if (m_isShowBrewInfoText == newIsShowBrewInfoText)
+            return;
+        m_isShowBrewInfoText = newIsShowBrewInfoText;
+        emit isShowBrewInfoTextChanged();
     }
 
 
@@ -475,6 +527,10 @@ signals:
     void brewLocationChanged();
     void normalFontPointSizeChanged();
     void terminalAppChanged();
+    void isExtendedCaskChanged();
+    void isExtendedFormulaChanged();
+    void isExtendedServiceChanged();
+    void isShowBrewInfoTextChanged();
     void searchItemsCaskChanged();
     void searchItemsFormulaChanged();
     void searchStatusCaskTextChanged();
@@ -515,6 +571,10 @@ private:
     QString m_brewLocation;
     QString m_normalFontPointSize;
     QString m_terminalApp;
+    bool m_isExtendedCask;
+    bool m_isExtendedFormula;
+    bool m_isExtendedService;
+    bool m_isShowBrewInfoText;
     QVector<SearchResultRow *> m_searchItemsCask;
     QVector<SearchResultRow *> m_searchItemsFormula;
     QString m_searchStatusCaskText;

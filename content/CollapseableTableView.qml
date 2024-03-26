@@ -7,13 +7,12 @@ import Qt.labs.qmlmodels
 ColumnLayout {
     Layout.margins: 20
 
-
     id: collapseableTableView
     property int autoExtendCol: 1
     property int sortedColOrder: CollapseableTableView.SortOrder.Asc
     property int sortedColIdx: 4
     property string headerText: ""
-    property bool isExtended: true
+    property alias isExtended: extendableHeader.isExtended
     property var rowsModel: []
     property alias tableView: tableView
     property var filteredModel: rowsModel
@@ -35,7 +34,7 @@ ColumnLayout {
                                 })
     }
 
-    function filterTableByFilter(){
+    function filterTableByFilter() {
         filteredModel = []
         filteredModel = getRowsModel()
         tableView.visible = false
@@ -45,14 +44,14 @@ ColumnLayout {
     }
 
     ExtendableHeader {
-        id: formulaHeader
+        id: extendableHeader
         isExtended: collapseableTableView.isExtended
         headerText: collapseableTableView.headerText
     }
 
     CoreTextField {
         id: filterByExp
-        visible: formulaHeader.isExtended
+        visible: extendableHeader.isExtended
         text: ""
         Layout.fillWidth: true
         Layout.rightMargin: 5
@@ -75,10 +74,10 @@ ColumnLayout {
     }
 
     ColumnLayout {
-        visible: formulaHeader.isExtended
+        visible: extendableHeader.isExtended
 
         TableView {
-            property var calWids: [] //[0,0,0,0,0,0]            
+            property var calWids: [] //[0,0,0,0,0,0]
             Layout.fillWidth: true
             implicitHeight: contentHeight
             columnSpacing: 10

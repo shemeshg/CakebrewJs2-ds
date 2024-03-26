@@ -188,7 +188,10 @@ ColumnLayout {
         id: isShowBrewInfoText
         topPadding: 30
         text: "Show brew info"
+        checked: Constants.brewData.isShowBrewInfoText
         onToggled: () => {
+                       Constants.brewData.saveIsShowBrewInfoText(
+                           isShowBrewInfoText.checked)
                        infoTextLookup()
                    }
     }

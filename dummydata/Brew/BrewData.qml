@@ -92,11 +92,8 @@ QtObject {
     }
 
     property string brewLocation: "/whatever/brew"
-
     property string normalFontPointSize: "14"
-
     property string terminalApp: "iTerm"
-
     function saveNormalFontPointSize(s) {
         normalFontPointSize = s
     }
@@ -105,6 +102,22 @@ QtObject {
     }
     function saveTerminalApp(s) {
         terminalApp = s
+    }
+    property bool isExtendedCask: true
+    function saveIsExtendedCask(s) {
+        isExtendedCask = s
+    }
+    property bool isExtendedFormula: true
+    function saveIsExtendedFormula(s) {
+        isExtendedFormula = s
+    }
+    property bool isExtendedService: true
+    function saveIsExtendedService(s) {
+        isExtendedService = s
+    }
+    property bool isShowBrewInfoText: false
+    function saveIsShowBrewInfoText(s) {
+        isShowBrewInfoText = s
     }
 
     property string refreshStatusServiceText: ""
