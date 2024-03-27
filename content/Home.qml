@@ -80,6 +80,7 @@ ColumnLayout {
             DelegateChoice {
                 column: 4
                 delegate: CheckBox {
+                    enabled: !Constants.brewData.refreshFormulaRunning
                     visible: model.display.text
                     checked: {
                         return Constants.caskSelected.indexOf(
@@ -193,6 +194,7 @@ ColumnLayout {
             DelegateChoice {
                 column: 4
                 delegate: CheckBox {
+                    enabled: !Constants.brewData.refreshFormulaRunning
                     visible: model.display.text
                     checked: {
                         return Constants.formulaSelected.indexOf(
