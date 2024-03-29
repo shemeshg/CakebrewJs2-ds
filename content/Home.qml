@@ -22,7 +22,7 @@ ColumnLayout {
             Constants.brewData.saveIsExtendedCask(ctvc.isExtended)
         }
 
-        headerText: "Cask"
+        headerText: "Cask " + (Constants.upgradableItemsCask !== 0 ? "(" + Constants.upgradableItemsCask + ")" : "")
         rowsModel: Constants.brewData.caskTableBodyList
         isExtended: Constants.brewData.isExtendedCask
 
@@ -135,7 +135,7 @@ ColumnLayout {
             Constants.brewData.saveIsExtendedFormula(ctvf.isExtended)
         }
 
-        headerText: "Formula"
+        headerText: "Formula " + (Constants.upgradableItemsFormula !== 0 ? "(" + Constants.upgradableItemsFormula + ")" : "")
         rowsModel: Constants.brewData.formulaTableBodyList
         tableView.model: TableModel {
 

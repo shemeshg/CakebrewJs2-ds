@@ -50,4 +50,23 @@ QtObject {
     function fontSizeLarge3() {
         return fontSizeNormal() * 1.5
     }
+
+
+    readonly property int upgradableItemsCask: {
+
+        return Constants.brewData.caskTableBodyList.filter(row => {
+                                                               return Boolean(
+                                                                   row.outdated.text)
+                                                               && "tsChecked" in row.outdated
+                                                           }).length
+    }
+
+    readonly property int upgradableItemsFormula: {
+
+        return Constants.brewData.formulaTableBodyList.filter(row => {
+                                                                  return Boolean(
+                                                                      row.outdated.text)
+                                                                  && "tsChecked" in row.outdated
+                                                              }).length
+    }
 }
