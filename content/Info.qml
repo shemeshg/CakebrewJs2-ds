@@ -85,6 +85,8 @@ ColumnLayout {
                                                                    = result.isOutdated
                                                                    infoCask.isInstalled
                                                                    = result.isInstalled
+                                                                   infoCask.isDeprecated
+                                                                   = result.isDeprecated
                                                                    infoCask.desc = result.desc
                                                                    infoCask.homepage
                                                                    = result.homepage
@@ -121,7 +123,8 @@ ColumnLayout {
                                                                    = result.isInstalled
                                                                    infoFormula.cellarSize
                                                                    = result.cellarSize
-
+                                                                   infoFormula.isDeprecated
+                                                                   = result.isDeprecated
                                                                    infoFormula.homepage
                                                                    = result.homepage
                                                                    infoFormula.license

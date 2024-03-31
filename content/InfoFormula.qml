@@ -14,6 +14,7 @@ ColumnLayout {
     property bool isOutdated: false
     property bool isInstalled: false
     property bool isPinned: false
+    property bool isDeprecated: false
     property string homepage: ""
     property string caskRbGithub: ""
     property string license: ""
@@ -26,7 +27,7 @@ ColumnLayout {
             font.pointSize: Constants.fontSizeLarge3()
             font.bold: true
             topPadding: 20
-            text: fullName + " " + (isPinned ? "📌 " : "") + outdated
+            text: fullName + " " + (isPinned ? "📌 " : "") + (isDeprecated ? "⚠️ " : "") + outdated
         }
         Item {
             Layout.fillWidth: true

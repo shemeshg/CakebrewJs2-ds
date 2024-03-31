@@ -58,6 +58,8 @@ void CaskRow::addToList(QVariantList &caskTableBodyList)
     text["tsChecked"] = false;
     row["outdated"] = QVariant::fromValue(text);
 
+    row["isDeprecated"] = QVariant::fromValue(isDeprecated);
+
     caskTableBodyList.emplaceBack(QVariant::fromValue(row));
 }
 

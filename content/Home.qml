@@ -73,7 +73,7 @@ ColumnLayout {
                 delegate: HyperlinkBtnInfo {
                     isCask: true
                     leftPadding: 10
-                    urlText: model.display.text
+                    urlText: model.display.text + (Constants.brewData.caskTableBodyList[model.row].isDeprecated ? " ⚠️" : "")
                     urlRef: model.display.text
                 }
             }
@@ -188,7 +188,7 @@ ColumnLayout {
                 delegate: HyperlinkBtnInfo {
                     isCask: false
                     leftPadding: 10
-                    urlText: model.display.text
+                    urlText: model.display.text + (Constants.brewData.formulaTableBodyList[model.row].isDeprecated ? " ⚠️" : "")
                     urlRef: model.display.text
                 }
             }

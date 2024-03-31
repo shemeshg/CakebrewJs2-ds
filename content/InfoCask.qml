@@ -17,13 +17,14 @@ ColumnLayout {
 
     property bool isOutdated: false
     property bool isInstalled: false
+    property bool isDeprecated: false
 
     RowLayout {
         CoreLabel {
             font.pointSize: Constants.fontSizeLarge3()
             font.bold: true
             topPadding: 20
-            text: name + " " + outdated
+            text: name + " " + (isDeprecated ? "⚠️ " : "") + outdated
         }
         Item {
             Layout.fillWidth: true

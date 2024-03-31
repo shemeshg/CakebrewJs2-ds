@@ -81,6 +81,8 @@ void FormulaRow::addToList(QVariantList &formulaTableBodyList)
     text["text"] = leafText;
     text["hoverText"] = leafPopup;
     row["leaf"] = QVariant::fromValue(text);
+
+    row["isDeprecated"] = QVariant::fromValue(isDeprecated);
     formulaTableBodyList.emplaceBack(QVariant::fromValue(row));
 }
 
