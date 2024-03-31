@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import CakebrewJs2
 
 CheckBox {
     palette.alternateBase: CoreSystemPalette.alternateBase

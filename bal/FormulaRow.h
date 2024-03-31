@@ -8,7 +8,7 @@ class FormulaRow
 public:
     QString token, desc, tap, version, outdated, leafText, leafPopup, fullName, homepage,
         ruby_source_path, license;
-    bool isOutdated, isPinned, installedOnRequest, isInstalled;
+    bool isOutdated, isPinned, installedOnRequest, isInstalled, isDeprecated;
     QStringList usedIn, dependencies, buildDependencies;
     void addListHeader(QVariantList &formulaTableBodyList);
     void addToList(QVariantList &formulaTableBodyList);

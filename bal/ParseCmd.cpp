@@ -55,6 +55,7 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
         bool isOutdated = false;
         bool isPinned = false;
         bool installedOnRequest = false;
+        bool isDeprecated = element["deprecated"].template get<bool>();
         std::string installedVersion;
         if (isInstalled) {
             installedVersion = (element["installed"][0]["version"]).template get<std::string>();
@@ -78,6 +79,7 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
         row.isPinned = isPinned;
         row.installedOnRequest = installedOnRequest;
         row.isInstalled = isInstalled;
+        row.isDeprecated = isDeprecated;
 
         for (auto &dep : element["dependencies"]) {
             std::string d = dep.template get<std::string>();
@@ -123,6 +125,7 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         }
         std::string outdated;
         bool isOutdated = element["outdated"].template get<bool>();
+        bool isDeprecated = element["deprecated"].template get<bool>();
         outdated = element["version"].template get<std::string>();
 
         if (!element["auto_updates"].is_null()) {
@@ -158,6 +161,7 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         cr.outdated = QString::fromStdString(outdated);
         cr.isOutdated = isOutdated;
         cr.isInstalled = isInstalled;
+        cr.isDeprecated = isDeprecated;
         cr.name = QString::fromStdString(name);
         cr.homepage = QString::fromStdString(homepage);
         cr.ruby_source_path = QString::fromStdString(ruby_source_path);

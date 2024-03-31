@@ -11,10 +11,11 @@ CoreLabel {
     text: urlText
     color: CoreSystemPalette.isDarkTheme ? "Light blue" : "Dark blue"
 
-
     MouseArea {
-        anchors.fill: parent        
+        anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: onLinkActivated(urlRef)
+        onClicked: () => {
+                       hyperlinkBtn.linkActivated(urlRef)
+                   }
     }
 }

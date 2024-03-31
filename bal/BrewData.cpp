@@ -782,6 +782,7 @@ void BrewData::setRowFromCaskRow(QMap<QString, QVariant> &row, CaskRow &caskRow)
     row["version"] = caskRow.version;
     row["outdated"] = caskRow.outdated;
     row["isOutdated"] = caskRow.isOutdated;
+    row["isDeprecated"] = caskRow.isDeprecated;
     row["isInstalled"] = caskRow.isInstalled;
     row["name"] = caskRow.name;
     row["homepage"] = caskRow.homepage;
@@ -808,6 +809,7 @@ void BrewData::setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &fo
     row["isOutdated"] = formulaRow.isOutdated;
     row["installedOnRequest"] = formulaRow.installedOnRequest;
     row["isInstalled"] = formulaRow.isInstalled;
+    row["isDeprecated"] = formulaRow.isDeprecated;
     row["usedIn"] = formulaRow.usedIn;
     row["homepage"] = formulaRow.homepage;
     row["ruby_source_path"] = formulaRow.ruby_source_path;
