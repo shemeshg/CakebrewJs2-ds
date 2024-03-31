@@ -15,6 +15,7 @@ qt6_add_qml_module(Core
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
         CoreButton.qml
+        CoreCheckBox.qml
         CoreComboBox.qml
         CoreLabel.qml
         CoreSwitch.qml

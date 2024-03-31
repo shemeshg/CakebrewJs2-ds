@@ -79,7 +79,7 @@ ColumnLayout {
 
             DelegateChoice {
                 column: 4
-                delegate: CheckBox {
+                delegate: CoreCheckBox {
                     enabled: !Constants.brewData.refreshFormulaRunning
                     visible: model.display.text
                     checked: {
@@ -193,7 +193,7 @@ ColumnLayout {
 
             DelegateChoice {
                 column: 4
-                delegate: CheckBox {
+                delegate: CoreCheckBox {
                     enabled: !Constants.brewData.refreshFormulaRunning
                     visible: model.display.text
                     checked: {
