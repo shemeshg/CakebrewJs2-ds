@@ -25,7 +25,7 @@ ProcessStatus ShellCmd::cmdSearch(QString textSearch, bool isCask)
 ProcessStatus ShellCmd::cmdBrewUpdate()
 {
     QString cmd = brewLocation;
-    return exec(cmd, {"update"});
+    return exec(cmd, {"update"}, "-f");
 }
 
 ProcessStatus ShellCmd::cmdListCaskAndFormula()

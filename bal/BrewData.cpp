@@ -175,7 +175,7 @@ void BrewData::asyncBrewActionSelected(QStringList casks,
                   + ";";
         }
         sc.externalTerminalCmd(cmd);
-        refreshCaskAndFormulaAfterCallback(false);
+        refreshCaskAndFormulaAfterCallback(true);
         return true;
     });
 }
@@ -195,7 +195,7 @@ void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
         QString cmd = "%1 '%2'";
         cmd = cmd.arg("/usr/local/bin/brew", "upgrade");
         sc.externalTerminalCmd(cmd);
-        refreshCaskAndFormulaAfterCallback(false);
+        refreshCaskAndFormulaAfterCallback(true);
         return true;
     });
 }
