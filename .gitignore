@@ -82,3 +82,5 @@ CMakeLists.txt.user*
 **/__pycache__/
 CMakeLists.txt.user
 *.qmlproject.qtds
+
+build/
