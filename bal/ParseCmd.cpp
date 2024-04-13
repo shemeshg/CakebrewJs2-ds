@@ -55,7 +55,8 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
         bool isOutdated = false;
         bool isPinned = false;
         bool installedOnRequest = false;
-        bool isDeprecated = element["deprecated"].template get<bool>();
+        bool isDeprecated = element["deprecated"].template get<bool>()
+                            || element["disabled"].template get<bool>();
         std::string installedVersion;
         if (isInstalled) {
             installedVersion = (element["installed"][0]["version"]).template get<std::string>();
@@ -125,7 +126,8 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         }
         std::string outdated;
         bool isOutdated = element["outdated"].template get<bool>();
-        bool isDeprecated = element["deprecated"].template get<bool>();
+        bool isDeprecated = element["deprecated"].template get<bool>()
+                            || element["disabled"].template get<bool>();
         outdated = element["version"].template get<std::string>();
 
         if (!element["auto_updates"].is_null()) {
