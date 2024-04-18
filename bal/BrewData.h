@@ -82,7 +82,7 @@ private slots:
     void parseRefreshCaskAndFormula(QString strResult);
 
 private:
-    QSettings settings{"shemeshg", "Cakebrewjs2"};
+    QSettings settings;
 
     QVector<ServiceRow> serviceRows;
     QVector<CaskRow> caskRows;

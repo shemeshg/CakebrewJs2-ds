@@ -16,15 +16,21 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    app.setOrganizationName("shemeshg");
+    //app.setOrganizationDomain("somecompany.com");
+    app.setApplicationName("Cakebrewjs2");
+
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/qt/qml/Main/main.qml"_qs);
     QObject::connect(
-                &engine, &QQmlApplicationEngine::objectCreated, &app,
-                [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    },
-    Qt::QueuedConnection);
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        },
+        Qt::QueuedConnection);
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");

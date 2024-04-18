@@ -7,8 +7,17 @@ import QtQuick.Layouts
 import Core
 
 Window {
-    width: 1000
-    height: 800
+    width: Constants.settings.width
+    height: Constants.settings.height
+    x: Constants.settings.x
+    y: Constants.settings.y
+    Component.onDestruction: {
+        Constants.settings.width = width
+        Constants.settings.height = height
+        Constants.settings.x = x
+        Constants.settings.y = y
+    }
+
     visible: true
     title: qsTr("Cakebrewjs")
 

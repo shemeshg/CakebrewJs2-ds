@@ -4,10 +4,18 @@ import QtQuick 6.5
 import QtQuick.Studio.Application
 import QtQuick.Controls
 import Brew
+import QtCore
 
 QtObject {
-    readonly property int width: 800
-    readonly property int height: 400
+    property int width: 1000
+    property int height: 800
+
+    property Settings settings: Settings {
+        property int x: 0
+        property int y: 0
+        property int width: 1000
+        property int height: 800
+    }
 
     property string relativeFontDirectory: "fonts"
 
@@ -50,7 +58,6 @@ QtObject {
     function fontSizeLarge3() {
         return fontSizeNormal() * 1.5
     }
-
 
     readonly property int upgradableItemsCask: {
 
