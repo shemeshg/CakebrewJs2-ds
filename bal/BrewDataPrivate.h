@@ -21,6 +21,10 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
     Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
+    Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged )
+    Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged )
+    Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged )
+    Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged )
     Q_PROPERTY(bool isExtendedCask READ isExtendedCask WRITE setIsExtendedCask NOTIFY isExtendedCaskChanged )
     Q_PROPERTY(bool isExtendedFormula READ isExtendedFormula WRITE setIsExtendedFormula NOTIFY isExtendedFormulaChanged )
     Q_PROPERTY(bool isExtendedService READ isExtendedService WRITE setIsExtendedService NOTIFY isExtendedServiceChanged )
@@ -103,6 +107,54 @@ void setTerminalApp(const QString &newTerminalApp)
             return;
         m_terminalApp = newTerminalApp;
         emit terminalAppChanged();
+    }
+
+
+    
+    int x() const{return m_x;} 
+    
+void setX(const int newX)
+    {
+        if (m_x == newX)
+            return;
+        m_x = newX;
+        emit xChanged();
+    }
+
+
+    
+    int y() const{return m_y;} 
+    
+void setY(const int newY)
+    {
+        if (m_y == newY)
+            return;
+        m_y = newY;
+        emit yChanged();
+    }
+
+
+    
+    int width() const{return m_width;} 
+    
+void setWidth(const int newWidth)
+    {
+        if (m_width == newWidth)
+            return;
+        m_width = newWidth;
+        emit widthChanged();
+    }
+
+
+    
+    int height() const{return m_height;} 
+    
+void setHeight(const int newHeight)
+    {
+        if (m_height == newHeight)
+            return;
+        m_height = newHeight;
+        emit heightChanged();
     }
 
 
@@ -527,6 +579,10 @@ signals:
     void brewLocationChanged();
     void normalFontPointSizeChanged();
     void terminalAppChanged();
+    void xChanged();
+    void yChanged();
+    void widthChanged();
+    void heightChanged();
     void isExtendedCaskChanged();
     void isExtendedFormulaChanged();
     void isExtendedServiceChanged();
@@ -571,6 +627,10 @@ private:
     QString m_brewLocation;
     QString m_normalFontPointSize;
     QString m_terminalApp;
+    int m_x;
+    int m_y;
+    int m_width;
+    int m_height;
     bool m_isExtendedCask;
     bool m_isExtendedFormula;
     bool m_isExtendedService;

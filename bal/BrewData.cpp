@@ -11,6 +11,11 @@ BrewData::BrewData(QObject *parent)
     loadIsExtendedService();
     loadIsShowBrewInfoText();
 
+    loadX();
+    loadY();
+    loadWidth();
+    loadHeight();
+
     /*
         CaskRow cr{};
         cr.addListHeader(caskTableBodyList());
@@ -318,6 +323,30 @@ void BrewData::saveIsShowBrewInfoText(const bool s)
 {
     settings.setValue("isShowBrewInfoText", s);
     loadIsShowBrewInfoText();
+}
+
+void BrewData::saveX(const int s)
+{
+    settings.setValue("x", s);
+    loadX();
+}
+
+void BrewData::saveY(const int s)
+{
+    settings.setValue("y", s);
+    loadY();
+}
+
+void BrewData::saveWidth(const int s)
+{
+    settings.setValue("width", s);
+    loadWidth();
+}
+
+void BrewData::saveHeight(const int s)
+{
+    settings.setValue("height", s);
+    loadHeight();
 }
 
 void BrewData::asyncFormulaSort(const QJSValue &callback)
@@ -693,6 +722,30 @@ void BrewData::loadIsShowBrewInfoText()
 {
     bool s = settings.value("isShowBrewInfoText", false).toBool();
     setIsShowBrewInfoText(s);
+}
+
+void BrewData::loadX()
+{
+    int s = settings.value("x", 0).toInt();
+    setX(s);
+}
+
+void BrewData::loadY()
+{
+    int s = settings.value("y", 0).toInt();
+    setY(s);
+}
+
+void BrewData::loadWidth()
+{
+    int s = settings.value("width", 1000).toInt();
+    setWidth(s);
+}
+
+void BrewData::loadHeight()
+{
+    int s = settings.value("height", 800).toInt();
+    setHeight(s);
 }
 
 void BrewData::refreshCaskAndFormulaBeforeCallback()

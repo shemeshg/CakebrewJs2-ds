@@ -56,6 +56,11 @@ public slots:
     void saveIsExtendedService(const bool s);
     void saveIsShowBrewInfoText(const bool s);
 
+    void saveX(const int s);
+    void saveY(const int s);
+    void saveWidth(const int s);
+    void saveHeight(const int s);
+
     void asyncFormulaSort(const QJSValue &callback);
 
     void formulaSort();
@@ -100,6 +105,10 @@ private:
     void loadIsExtendedFormula();
     void loadIsExtendedService();
     void loadIsShowBrewInfoText();
+    void loadX();
+    void loadY();
+    void loadWidth();
+    void loadHeight();
 
     void refreshCaskAndFormulaBeforeCallback();
 

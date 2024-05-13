@@ -18,6 +18,27 @@ p.is_writable = True
 p.is_notify = True
 ary.append(p)
 
+p = Prpt("int",'x')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'y')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'width')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+p = Prpt("int",'height')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+
 p = Prpt("bool",'isExtendedCask')
 p.is_bindable = False
 p.is_writable = True

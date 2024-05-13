@@ -7,15 +7,15 @@ import QtQuick.Layouts
 import Core
 
 Window {
-    width: Constants.settings.width
-    height: Constants.settings.height
-    x: Constants.settings.x
-    y: Constants.settings.y
+    width: Constants.brewData.width
+    height: Constants.brewData.height
+    x: Constants.brewData.x
+    y: Constants.brewData.y
     Component.onDestruction: {
-        Constants.settings.width = width
-        Constants.settings.height = height
-        Constants.settings.x = x
-        Constants.settings.y = y
+        Constants.brewData.saveWidth(width)
+        Constants.brewData.saveHeight(height)
+        Constants.brewData.saveX(x)
+        Constants.brewData.saveY(y)
     }
 
     visible: true
