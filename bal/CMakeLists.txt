@@ -1,11 +1,11 @@
-find_package(Qt6 REQUIRED COMPONENTS Concurrent)
+find_package(Qt6  REQUIRED COMPONENTS  Concurrent)
 
 include(FetchContent)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
 link_libraries(
-     Qt6::Concurrent
+    Qt6::Concurrent
      nlohmann_json::nlohmann_json
 )
 
@@ -19,7 +19,7 @@ qt6_add_qml_module(bal
             BrewDataPrivate.h
             BrewDataPrivate.cpp        
             JsAsync.h
-            #JsAsync.cpp
+            JsAsync.cpp
             shellcmd.h shellcmd.cpp
             searchresultrow.h searchresultrow.cpp
             ServiceRow.h ServiceRow.cpp

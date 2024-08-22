@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.21.1)
 
 option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
 option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
+set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 
-project(CakebrewJs2App VERSION 2.2.6 LANGUAGES CXX)
+
+project(CakebrewJs2App VERSION 2.3 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
@@ -26,7 +28,7 @@ endif()
 configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/config.h")
 include_directories("${CMAKE_BINARY_DIR}")
 
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Svg)
+find_package(Qt6  REQUIRED COMPONENTS Core Gui Qml Quick Svg Concurrent)
 
 qt_policy(SET QTP0001 NEW)
 
@@ -51,6 +53,7 @@ target_link_libraries(CakebrewJs2App PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::Svg
+    Qt6::Concurrent
     bal
 )
 

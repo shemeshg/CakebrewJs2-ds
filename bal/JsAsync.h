@@ -7,9 +7,7 @@
 class JsAsync : public QObject
 {
 public:
-    explicit JsAsync(QObject *_parent = nullptr)
-        : QObject(_parent)
-    { }
+    explicit JsAsync(QObject *_parent = nullptr);
 
     template<typename T>
     void makeAsync(const QJSValue &callback, std::function<T()> func)
