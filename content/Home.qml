@@ -324,6 +324,8 @@ ColumnLayout {
                 column: 4
                 delegate: HyperlinkBtn {
                     leftPadding: 10
+                    enabled: !Constants.brewData.refreshServiceRunning
+                             && !Constants.brewData.refreshFormulaRunning
                     urlText: model.display.text
                              === "start" ? "⏵ " + model.display.text : "⏹ " + model.display.text
                     onLinkActivated: data => {
