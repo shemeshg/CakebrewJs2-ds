@@ -42,6 +42,7 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Home"
             CoreButton {
+
                 text: "Refresh"
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning

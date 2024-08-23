@@ -328,7 +328,12 @@ ColumnLayout {
                              === "start" ? "⏵ " + model.display.text : "⏹ " + model.display.text
                     onLinkActivated: data => {
                                          Constants.brewData.asyncServiceAction(
-                                             () => {}, model.display.name,
+                                             () => {
+                                                 Constants.brewData.asyncRefreshServices(
+                                                     () => {
+                                                         home.ctvs.filterTableByFilter()
+                                                     })
+                                             }, model.display.name,
                                              model.display.text)
                                      }
                     urlRef: model.display.text
