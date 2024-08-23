@@ -582,23 +582,23 @@ void BrewData::asyncServiceSort(const QJSValue &callback)
 void BrewData::serviceSort()
 {
     std::sort(serviceRows.begin(), serviceRows.end(), [=](ServiceRow &a, ServiceRow &b) {
-        if (serviceSortedColIdx() == 0 && serviceSortedColOrder() == 1) {
-            return a.name < b.name;
+        if (serviceSortedColIdx() == 0 && serviceSortedColOrder() == 2) {
+            return a.name > b.name;
         }
 
         if (serviceSortedColIdx() == 1) {
             if (serviceSortedColOrder() == 1) {
-                return a.status + a.name < b.status + a.name;
+                return a.status + a.name < b.status + b.name;
             } else if (serviceSortedColOrder() == 2) {
-                return a.status + a.name > b.status + a.name;
+                return a.status + a.name > b.status + b.name;
             }
         }
 
         if (serviceSortedColIdx() == 2) {
             if (serviceSortedColOrder() == 1) {
-                return a.user + a.name < b.user + a.name;
+                return a.user + a.name < b.user + b.name;
             } else if (serviceSortedColOrder() == 2) {
-                return a.user + a.name > b.user + a.name;
+                return a.user + a.name > b.user + b.name;
             }
         }
 
@@ -612,13 +612,13 @@ void BrewData::serviceSort()
 
         if (serviceSortedColIdx() == 4) {
             if (serviceSortedColOrder() == 1) {
-                return a.action + a.name < b.action + a.name;
+                return a.action + a.name < b.action + b.name;
             } else if (serviceSortedColOrder() == 2) {
-                return a.action + a.name > b.action + a.name;
+                return a.action + a.name > b.action + b.name;
             }
         }
 
-        return a.name > b.name;
+        return a.name < b.name;
     });
     serviceTableBodyList().clear();
     ServiceRow fr{};
