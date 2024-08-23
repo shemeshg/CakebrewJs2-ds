@@ -14,12 +14,12 @@ qt6_add_qml_module(bal
         URI Brew
         VERSION 1.0
         SOURCES
+            JsAsync.h
+            JsAsync.cpp
             BrewData.h
             BrewData.cpp
             BrewDataPrivate.h
             BrewDataPrivate.cpp        
-            JsAsync.h
-            JsAsync.cpp
             shellcmd.h shellcmd.cpp
             searchresultrow.h searchresultrow.cpp
             ServiceRow.h ServiceRow.cpp

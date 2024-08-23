@@ -325,6 +325,7 @@ ColumnLayout {
                 delegate: HyperlinkBtn {
                     leftPadding: 10
                     urlText: model.display.text
+                             === "start" ? "⏵ " + model.display.text : "⏹ " + model.display.text
                     onLinkActivated: data => {
                                          Constants.brewData.asyncServiceAction(
                                              () => {}, model.display.name,
