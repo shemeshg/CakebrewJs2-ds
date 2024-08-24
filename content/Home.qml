@@ -14,6 +14,7 @@ ColumnLayout {
     CoreLabel {
         text: Constants.brewData.refreshStatusCaskText
         visible: Constants.brewData.refreshStatusCaskVisible
+                 && !Constants.brewData.refreshFormulaRunning
     }
 
     CollapseableTableView {
@@ -24,6 +25,7 @@ ColumnLayout {
 
         headerText: "Cask " + (Constants.upgradableItemsCask
                                !== 0 ? "(" + Constants.upgradableItemsCask + ")" : "")
+                    + (Constants.brewData.refreshFormulaRunning ? " 🔄" : "")
         rowsModel: [...Constants.brewData.caskTableBodyList]
         isExtended: Constants.brewData.isExtendedCask
 
@@ -127,6 +129,7 @@ ColumnLayout {
     CoreLabel {
         text: Constants.brewData.refreshStatusFormulaText
         visible: Constants.brewData.refreshStatusFormulaVisible
+                 && !Constants.brewData.refreshFormulaRunning
     }
 
     CollapseableTableView {
@@ -138,6 +141,7 @@ ColumnLayout {
 
         headerText: "Formula " + (Constants.upgradableItemsFormula
                                   !== 0 ? "(" + Constants.upgradableItemsFormula + ")" : "")
+                    + (Constants.brewData.refreshFormulaRunning ? " 🔄" : "")
         rowsModel: [...Constants.brewData.formulaTableBodyList]
         tableView.model: TableModel {
 
@@ -266,6 +270,7 @@ ColumnLayout {
     CoreLabel {
         text: Constants.brewData.refreshStatusServiceText
         visible: Constants.brewData.refreshStatusServiceVisible
+                 && !Constants.brewData.refreshServiceRunning
     }
 
     CollapseableTableView {
@@ -277,7 +282,7 @@ ColumnLayout {
 
         autoExtendCol: 3
 
-        headerText: "Service"
+        headerText: "Service" + (Constants.brewData.refreshServiceRunning ? " 🔄" : "")
         rowsModel: [...Constants.brewData.serviceTableBodyList]
         tableView.model: TableModel {
 
