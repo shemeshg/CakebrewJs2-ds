@@ -1,6 +1,7 @@
 #include "CaskRow.h"
 #include "FormulaRow.h"
 #include "ServiceRow.h"
+#include "nlohmann/json.hpp"
 #include "searchresultrow.h"
 
 class ParseCmd
@@ -15,4 +16,7 @@ public:
     QVector<CaskRow> parseCaskList(QString &strResult);
 
     QVector<SearchResultRow *> parseCmdSearch(QString searchResult, bool isCask);
+
+private:
+    QString getCaveats(nlohmann::basic_json<> element);
 };

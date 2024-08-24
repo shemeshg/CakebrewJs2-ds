@@ -80,6 +80,7 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
         row.installedOnRequest = installedOnRequest;
         row.isInstalled = isInstalled;
         row.isDeprecated = isDeprecated;
+        row.caveats = getCaveats(element);
 
         for (auto &dep : element["dependencies"]) {
             std::string d = dep.template get<std::string>();
@@ -154,6 +155,10 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
             }
         }
 
+        // start getCaveats
+
+        // end getCaveats
+
         CaskRow cr{};
         cr.token = QString::fromStdString(token);
         cr.desc = QString::fromStdString(desc);
@@ -167,6 +172,7 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         cr.homepage = QString::fromStdString(homepage);
         cr.ruby_source_path = QString::fromStdString(ruby_source_path);
         cr.artifacts = QString::fromStdString(artifacts);
+        cr.caveats = getCaveats(element);
 
         rows.emplaceBack(cr);
     }
@@ -231,4 +237,38 @@ QVector<SearchResultRow *> ParseCmd::parseCmdSearch(QString searchResult, bool i
         }
     }
     return v;
+}
+
+QString ParseCmd::getCaveats(nlohmann::basic_json<> element)
+{
+    QStringList caveatsList;
+    QString disable_date, disable_reason;
+    QString deprecation_date, deprecation_reason;
+    if (element["disabled"].template get<bool>()) {
+        if (!element["disable_date"].is_null()) {
+            disable_date = QString::fromStdString(
+                element["disable_date"].template get<std::string>());
+        }
+        if (!element["disable_reason"].is_null()) {
+            disable_reason = QString::fromStdString(
+                element["disable_reason"].template get<std::string>());
+        }
+        caveatsList.push_back("disabled " + disable_date + " " + disable_reason);
+    }
+    if (element["deprecated"].template get<bool>()) {
+        if (!element["deprecation_date"].is_null()) {
+            deprecation_date = QString::fromStdString(
+                element["deprecation_date"].template get<std::string>());
+        }
+        if (!element["deprecation_reason"].is_null()) {
+            deprecation_reason = QString::fromStdString(
+                element["deprecation_reason"].template get<std::string>());
+        }
+        caveatsList.push_back("deprecated " + deprecation_date + " " + deprecation_reason);
+    }
+    if (!element["caveats"].is_null()) {
+        caveatsList.push_back(
+            QString::fromStdString(element["caveats"].template get<std::string>()));
+    }
+    return caveatsList.join("\n");
 }

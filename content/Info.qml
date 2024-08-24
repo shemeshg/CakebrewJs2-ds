@@ -96,6 +96,7 @@ ColumnLayout {
                                                                    = result.caskroomSize
                                                                    infoCask.artifacts
                                                                    = result.artifacts
+                                                                   infoCask.caveats = result.caveats
 
                                                                    if (infoCask.isInstalled
                                                                        && infoCask.isOutdated) {
@@ -137,6 +138,8 @@ ColumnLayout {
                                                                    = result.dependencies
                                                                    infoFormula.isPinned
                                                                    = result.isPinned
+                                                                   infoFormula.caveats
+                                                                   = result.caveats
 
                                                                    if (infoFormula.isInstalled
                                                                        && !infoFormula.isPinned) {

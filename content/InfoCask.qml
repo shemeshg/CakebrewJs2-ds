@@ -14,6 +14,7 @@ ColumnLayout {
     property string caskRbGithub: ""
     property string caskroomSize: ""
     property string artifacts: ""
+    property string caveats: ""
 
     property bool isOutdated: false
     property bool isInstalled: false
@@ -95,5 +96,19 @@ ColumnLayout {
     }
     CoreLabel {
         text: artifacts
+    }
+
+    CoreLabel {
+        font.pointSize: Constants.fontSizeLarge3()
+        font.bold: true
+        topPadding: 15
+        text: "Caveats"
+        visible: caveats
+    }
+    CoreTextArea {
+        visible: caveats
+        readOnly: true
+        Layout.fillWidth: true
+        text: caveats
     }
 }

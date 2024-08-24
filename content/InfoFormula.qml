@@ -18,6 +18,7 @@ ColumnLayout {
     property string homepage: ""
     property string caskRbGithub: ""
     property string license: ""
+    property string caveats: ""
     property var usedIn: []
     property var buildDependencies: []
     property var dependencies: []
@@ -152,5 +153,19 @@ ColumnLayout {
                 }
             }
         }
+    }
+
+    CoreLabel {
+        font.pointSize: Constants.fontSizeLarge3()
+        font.bold: true
+        topPadding: 15
+        text: "Caveats"
+        visible: caveats
+    }
+    CoreTextArea {
+        visible: caveats
+        readOnly: true
+        Layout.fillWidth: true
+        text: caveats
     }
 }

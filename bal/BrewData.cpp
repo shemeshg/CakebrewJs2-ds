@@ -841,6 +841,7 @@ void BrewData::setRowFromCaskRow(QMap<QString, QVariant> &row, CaskRow &caskRow)
     row["homepage"] = caskRow.homepage;
     row["ruby_source_path"] = caskRow.ruby_source_path;
     row["caskroomSize"] = "";
+    row["caveats"] = caskRow.caveats;
     if (caskRow.isInstalled) {
         ShellCmd sc = getShellCmd();
         row["caskroomSize"] = caskRow.getCaskroomSize(sc);
@@ -870,6 +871,7 @@ void BrewData::setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &fo
     row["dependencies"] = formulaRow.dependencies;
     row["buildDependencies"] = formulaRow.buildDependencies;
     row["isPinned"] = formulaRow.isPinned;
+    row["caveats"] = formulaRow.caveats;
 
     row["cellarSize"] = "";
     if (formulaRow.isInstalled) {
