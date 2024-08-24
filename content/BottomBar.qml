@@ -14,8 +14,6 @@ GroupBox {
     signal saveSettingsClicked
     property string selectedPreview: ""
 
-
-
     function beforeInfoAction() {
         Constants.brewData.isInfoShowPin = false
         Constants.brewData.isInfoShowUnpin = false
@@ -88,17 +86,10 @@ GroupBox {
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning && Number(
                              Constants.caskSelected.length + Constants.formulaSelected.length) > 0
-                hooverText: "<b>Cask </b>" + Constants.caskSelected.length + " / "
-                            + Constants.upgradableItemsCask + "<br/><b>Formula </b>"
-                            + Constants.formulaSelected.length + " / " + Constants.upgradableItemsFormula
-            }
-            CoreButton {
-                text: "Doctor"
-                onClicked: {
-                    Constants.brewData.asyncBrewDoctor(() => {})
-                }
-                enabled: !Constants.brewData.refreshServiceRunning
-                         && !Constants.brewData.refreshFormulaRunning
+                hooverText: "<b>Cask </b>" + Constants.caskSelected.length
+                            + " / " + Constants.upgradableItemsCask
+                            + "<br/><b>Formula </b>" + Constants.formulaSelected.length
+                            + " / " + Constants.upgradableItemsFormula
             }
         }
         RowLayout {
@@ -221,6 +212,35 @@ GroupBox {
                 onClicked: saveSettingsClicked()
             }
         }
+
+        CoreButton {
+            visible: selectedPreview === "back"
+            text: "://brew.sh"
+            hooverText: "https://brew.sh"
+            onClicked: () => {
+                           Qt.openUrlExternally("https://brew.sh")
+                       }
+        }
+        CoreButton {
+            text: "Doctor"
+            visible: selectedPreview === "back"
+            hooverText: "brew doctor"
+            onClicked: {
+                Constants.brewData.asyncBrewDoctor(() => {})
+            }
+            enabled: !Constants.brewData.refreshServiceRunning
+                     && !Constants.brewData.refreshFormulaRunning
+        }
+        CoreButton {
+            text: "Cleanup"
+            visible: selectedPreview === "back"
+            hooverText: "brew cleanup --prune=all"
+            onClicked: {
+                Constants.brewData.asyncBrewCleanup(() => {})
+            }
+            enabled: !Constants.brewData.refreshServiceRunning
+                     && !Constants.brewData.refreshFormulaRunning
+        }
         Item {
             Layout.fillWidth: true
         }
@@ -233,14 +253,8 @@ GroupBox {
         }
         CoreButton {
             visible: selectedPreview === "Home"
-            text: "://brew.sh"
-            onClicked: () => {
-                           Qt.openUrlExternally("https://brew.sh")
-                       }
-        }
-        CoreButton {
-            visible: selectedPreview === "Home"
-            text: "About"
+            text: "⋮"
+            hooverText: "About and brew actions"
             onClicked: {
                 aboutClicked()
             }

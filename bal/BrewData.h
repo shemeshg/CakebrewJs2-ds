@@ -33,6 +33,8 @@ public slots:
 
     void asyncBrewDoctor(const QJSValue &callback);
 
+    void asyncBrewCleanup(const QJSValue &callback);
+
     void asyncServiceAction(const QJSValue &callback, QString name, QString action);
 
     void asyncRefreshServices(const QJSValue &callback, bool loadFromCash = false);

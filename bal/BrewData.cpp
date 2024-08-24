@@ -164,19 +164,14 @@ void BrewData::asyncBrewActionSelected(QStringList casks,
             for (auto &i : casks) {
                 escCasks.push_back("'" + i + "'");
             }
-            cmd = cmdTemplate.arg("/usr/local/bin/brew", action, "--cask", escCasks.join(" "))
-                  + ";";
+            cmd = cmdTemplate.arg(brewLocation(), action, "--cask", escCasks.join(" ")) + ";";
         }
         if (formulas.size() > 0) {
             QStringList escFormulas;
             for (auto &i : formulas) {
                 escFormulas.push_back("'" + i + "'");
             }
-            cmd = cmd
-                  + cmdTemplate.arg("/usr/local/bin/brew",
-                                    action,
-                                    "--formula",
-                                    escFormulas.join(" "))
+            cmd = cmd + cmdTemplate.arg(brewLocation(), action, "--formula", escFormulas.join(" "))
                   + ";";
         }
         sc.externalTerminalCmd(cmd);
@@ -198,7 +193,7 @@ void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
     makeAsync<bool>(callback, [=]() {
         ShellCmd sc = getShellCmd();
         QString cmd = "%1 '%2'";
-        cmd = cmd.arg("/usr/local/bin/brew", "upgrade");
+        cmd = cmd.arg(brewLocation(), "upgrade");
         sc.externalTerminalCmd(cmd);
         refreshCaskAndFormulaAfterCallback(true);
         return true;
@@ -210,7 +205,18 @@ void BrewData::asyncBrewDoctor(const QJSValue &callback)
     makeAsync<bool>(callback, [=]() {
         ShellCmd sc = getShellCmd();
         QString cmd = "%1 '%2'";
-        cmd = cmd.arg("/usr/local/bin/brew", "doctor");
+        cmd = cmd.arg(brewLocation(), "doctor");
+        sc.externalTerminalCmd(cmd);
+        return true;
+    });
+}
+
+void BrewData::asyncBrewCleanup(const QJSValue &callback)
+{
+    makeAsync<bool>(callback, [=]() {
+        ShellCmd sc = getShellCmd();
+        QString cmd = "%1 '%2' %3";
+        cmd = cmd.arg(brewLocation(), "cleanup", "--prune=all");
         sc.externalTerminalCmd(cmd);
         return true;
     });
@@ -222,7 +228,7 @@ void BrewData::asyncServiceAction(const QJSValue &callback, QString name, QStrin
     makeAsync<bool>(callback, [=]() {
         ShellCmd sc = getShellCmd();
         QString cmd = "%1 services '%2' '%3'";
-        cmd = cmd.arg("/usr/local/bin/brew", action, name);
+        cmd = cmd.arg(brewLocation(), action, name);
         sc.externalTerminalCmd(cmd);
         refreshServicesAfterCallback();
         return true;
