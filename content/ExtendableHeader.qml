@@ -7,6 +7,7 @@ import Core
 RowLayout {
     property bool isExtended: true
     property string headerText: ""
+    property bool isLoading: false
 
     CoreLabel {
         id: s1
@@ -28,5 +29,10 @@ RowLayout {
             cursorShape: Qt.PointingHandCursor
             onClicked: isExtended = !isExtended
         }
+    }
+
+    BusyIndicator {
+        visible: isLoading
+        Layout.alignment: Qt.AlignTop
     }
 }

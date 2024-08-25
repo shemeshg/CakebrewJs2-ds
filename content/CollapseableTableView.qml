@@ -16,7 +16,7 @@ ColumnLayout {
     property var rowsModel: []
     property alias tableView: tableView
     property var filteredModel: rowsModel
-
+    property alias isLoading: extendableHeader.isLoading
     Layout.fillWidth: true
 
     enum SortOrder {

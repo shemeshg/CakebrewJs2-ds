@@ -25,7 +25,7 @@ ColumnLayout {
 
         headerText: "Cask " + (Constants.upgradableItemsCask
                                !== 0 ? "(" + Constants.upgradableItemsCask + ")" : "")
-                    + (Constants.brewData.refreshFormulaRunning ? " 🔄" : "")
+        isLoading: Constants.brewData.refreshFormulaRunning
         rowsModel: [...Constants.brewData.caskTableBodyList]
         isExtended: Constants.brewData.isExtendedCask
 
@@ -138,10 +138,9 @@ ColumnLayout {
         onIsExtendedChanged: {
             Constants.brewData.saveIsExtendedFormula(ctvf.isExtended)
         }
-
+        isLoading: Constants.brewData.refreshFormulaRunning
         headerText: "Formula " + (Constants.upgradableItemsFormula
                                   !== 0 ? "(" + Constants.upgradableItemsFormula + ")" : "")
-                    + (Constants.brewData.refreshFormulaRunning ? " 🔄" : "")
         rowsModel: [...Constants.brewData.formulaTableBodyList]
         tableView.model: TableModel {
 
@@ -282,7 +281,8 @@ ColumnLayout {
 
         autoExtendCol: 3
 
-        headerText: "Service" + (Constants.brewData.refreshServiceRunning ? " 🔄" : "")
+        headerText: "Service"
+        isLoading: Constants.brewData.refreshServiceRunning
         rowsModel: [...Constants.brewData.serviceTableBodyList]
         tableView.model: TableModel {
 
