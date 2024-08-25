@@ -17,9 +17,11 @@ ColumnLayout {
             return
         }
         var isCask = cmb.currentText === "Cask"
-        brewInfoText.text = "running"
+        brewInfoText.text = ""
+        busyBrewInfoText.visible = true
         Constants.brewData.asyncGetInfoText(token.text, isCask, result => {
                                                 brewInfoText.text = result
+                                                busyBrewInfoText.visible = false
                                             })
     }
 
@@ -169,8 +171,7 @@ ColumnLayout {
         }
     }
 
-    CoreLabel {
-        text: "Running"
+    BusyIndicator {
         visible: Constants.brewData.infoStatus === BrewData.InfoStatus.Running
     }
 
@@ -201,10 +202,16 @@ ColumnLayout {
                        infoTextLookup()
                    }
     }
+    BusyIndicator {
+        id: busyBrewInfoText
+        visible: false
+    }
+
     CoreTextArea {
         id: brewInfoText
         visible: isShowBrewInfoText.checked
                  && Constants.brewData.infoStatus !== BrewData.InfoStatus.Running
+                 && text
         readOnly: true
         Layout.fillWidth: true
         wrapMode: Text.WordWrap

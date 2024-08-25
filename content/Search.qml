@@ -71,12 +71,13 @@ ColumnLayout {
                 id: caskHeader
                 isExtended: true
                 headerText: "Cask"
-                visible: !Constants.brewData.searchCaskRunning
+                isLoading: Constants.brewData.searchCaskRunning
             }
 
             CoreLabel {
                 text: Constants.brewData.searchStatusCaskText
                 visible: Constants.brewData.searchStatusCaskVisible
+                         && !Constants.brewData.searchCaskRunning
             }
             ColumnLayout {
                 visible: caskHeader.isExtended && filtredSearchedCaskItems(
@@ -103,11 +104,12 @@ ColumnLayout {
             id: formulaHeader
             isExtended: true
             headerText: "Formula"
-            visible: !Constants.brewData.searchFormulaRunning
+            isLoading: Constants.brewData.searchFormulaRunning
         }
         CoreLabel {
             text: Constants.brewData.searchStatusFormulaText
             visible: Constants.brewData.searchStatusFormulaVisible
+                     && !Constants.brewData.searchFormulaRunning
         }
         ColumnLayout {
 
