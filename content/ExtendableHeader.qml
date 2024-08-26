@@ -31,7 +31,7 @@ RowLayout {
         }
     }
 
-    BusyIndicator {
+    CoreBusyIndicator {
         visible: isLoading
         Layout.alignment: Qt.AlignTop
     }

@@ -42,6 +42,7 @@ GroupBox {
             CoreButton {
 
                 text: "Refresh"
+                hooverText: "brew update"
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
                 onClicked: {
@@ -246,7 +247,8 @@ GroupBox {
         }
         CoreButton {
             visible: selectedPreview === "back"
-            text: "Back"
+            text: "←"
+            hooverText: "back"
             onClicked: {
                 backClicked()
             }

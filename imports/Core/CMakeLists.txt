@@ -23,5 +23,6 @@ qt6_add_qml_module(Core
         CoreTextArea.qml
         CoreTextField.qml
         CoreToolTip.qml
+        CoreBusyIndicator.qml
 
 )

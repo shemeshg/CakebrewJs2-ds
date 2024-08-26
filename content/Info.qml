@@ -171,7 +171,7 @@ ColumnLayout {
         }
     }
 
-    BusyIndicator {
+    CoreBusyIndicator {
         visible: Constants.brewData.infoStatus === BrewData.InfoStatus.Running
     }
 
@@ -202,7 +202,7 @@ ColumnLayout {
                        infoTextLookup()
                    }
     }
-    BusyIndicator {
+    CoreBusyIndicator {
         id: busyBrewInfoText
         visible: false
     }
