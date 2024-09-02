@@ -499,6 +499,23 @@ void BrewData::caskSort()
     emit caskTableBodyListChanged();
 }
 
+void BrewData::asyncGetBrewUses(QString token, const QJSValue &callback)
+{
+    makeAsync<QStringList>(callback, [=]() { return getBrewUses(token); });
+}
+QStringList BrewData::getBrewUses(QString token)
+{
+    ShellCmd sc = getShellCmd();
+    ProcessStatus s = sc.getBrewUses(token);
+    QStringList ret;
+    if (s.isSuccess && !s.stdOut.isEmpty()) {
+        ret = s.stdOut.trimmed().split("\n");
+        return ret;
+    } else {
+        return ret;
+    }
+}
+
 void BrewData::asyncGetInfoText(QString token, bool isCask, const QJSValue &callback)
 {
     makeAsync<QString>(callback, [=]() { return getInfoText(token, isCask); });

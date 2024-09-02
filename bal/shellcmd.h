@@ -35,6 +35,8 @@ public:
 
     ProcessStatus cmdGetInfoText(QString token, bool isCask);
 
+    ProcessStatus getBrewUses(QString token);
+
     ProcessStatus cmdGetcCellarSize(QString token);
 
     ProcessStatus cmdGetCaskroomSize(QString token);

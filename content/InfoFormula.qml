@@ -22,6 +22,8 @@ ColumnLayout {
     property var usedIn: []
     property var buildDependencies: []
     property var dependencies: []
+    property bool showBrewUses: false
+    property var brewUses: []
 
     RowLayout {
         CoreLabel {
@@ -154,7 +156,25 @@ ColumnLayout {
             }
         }
     }
+    RowLayout {
+        visible: showBrewUses
+        CoreLabel {
+            text: "Brew uses: "
+            font.bold: true
+        }
+        RowLayout {
+            Repeater {
+                model: brewUses
 
+                delegate: HyperlinkBtnInfo {
+                    isCask: false
+                    leftPadding: 10
+                    urlText: modelData
+                    urlRef: modelData
+                }
+            }
+        }
+    }
     CoreLabel {
         font.pointSize: Constants.fontSizeLarge3()
         font.bold: true

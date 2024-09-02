@@ -142,6 +142,18 @@ ColumnLayout {
                                                                    = result.isPinned
                                                                    infoFormula.caveats
                                                                    = result.caveats
+                                                                   infoFormula.brewUses = []
+                                                                   infoFormula.showBrewUses = false
+                                                                   if (infoFormula.isInstalled) {
+                                                                       Constants.brewData.asyncGetBrewUses(
+                                                                           result.token,
+                                                                           ret => {
+                                                                               infoFormula.brewUses = ret
+                                                                               if (infoFormula.brewUses.length > 0) {
+                                                                                   infoFormula.showBrewUses = true
+                                                                               }
+                                                                           })
+                                                                   }
 
                                                                    if (infoFormula.isInstalled
                                                                        && !infoFormula.isPinned) {

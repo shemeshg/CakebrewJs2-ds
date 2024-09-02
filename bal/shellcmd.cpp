@@ -78,6 +78,13 @@ ProcessStatus ShellCmd::cmdGetInfoText(QString token, bool isCask)
     return exec(cmd, {"info", type, token}, false);
 }
 
+ProcessStatus ShellCmd::getBrewUses(QString token)
+{
+    QString cmd = brewLocation;
+
+    return exec(cmd, {"uses", "--installed", token}, false);
+}
+
 ProcessStatus ShellCmd::cmdGetcCellarSize(QString token)
 {
     QString s = R"(#!/bin/zsh

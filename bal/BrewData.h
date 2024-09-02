@@ -71,6 +71,9 @@ public slots:
 
     void caskSort();
 
+    void asyncGetBrewUses(QString token, const QJSValue &callback);
+    QStringList getBrewUses(QString token);
+
     void asyncGetInfoText(QString token, bool isCask, const QJSValue &callback);
 
     QString getInfoText(const QString token, bool isCask);
