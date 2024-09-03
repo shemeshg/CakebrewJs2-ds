@@ -5,7 +5,7 @@ option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 
 
-project(CakebrewJs2App VERSION 2.63 LANGUAGES CXX)
+project(Cakebrewjs VERSION 2.63 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
@@ -37,9 +37,9 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
 endif()
 
 
-qt_add_executable(CakebrewJs2App src/main.cpp ${APP_ICON_MACOSX})
+qt_add_executable(Cakebrewjs src/main.cpp ${APP_ICON_MACOSX})
 
-qt_add_resources(CakebrewJs2App "configuration"
+qt_add_resources(Cakebrewjs "configuration"
     PREFIX "/"
     FILES
         qtquickcontrols2.conf
@@ -47,7 +47,7 @@ qt_add_resources(CakebrewJs2App "configuration"
 
 add_subdirectory(bal)
 
-target_link_libraries(CakebrewJs2App PRIVATE
+target_link_libraries(Cakebrewjs PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
@@ -74,7 +74,7 @@ if (LINK_INSIGHT)
 endif ()
 
 include(GNUInstallDirs)
-install(TARGETS CakebrewJs2App
+install(TARGETS Cakebrewjs
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -84,12 +84,12 @@ install(TARGETS CakebrewJs2App
 set(QML_IMPORT_PATH ${PROJECT_BINARY_DIR}/qml CACHE PATH
     "Path to the custom QML components defined by the project")
 
-set_target_properties(CakebrewJs2App PROPERTIES
+set_target_properties(Cakebrewjs PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
 )
 
-set_target_properties(CakebrewJs2App PROPERTIES
+set_target_properties(Cakebrewjs PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER CakebrewJs.shemeshg.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -97,7 +97,7 @@ set_target_properties(CakebrewJs2App PROPERTIES
 )
 
 qt_generate_deploy_qml_app_script(
-    TARGET CakebrewJs2App
+    TARGET Cakebrewjs
     OUTPUT_SCRIPT deploy_script
 )
 install(SCRIPT ${deploy_script})
