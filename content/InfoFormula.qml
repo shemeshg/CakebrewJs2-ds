@@ -144,14 +144,17 @@ ColumnLayout {
             font.bold: true
         }
         RowLayout {
-            Repeater {
-                model: usedIn
+            Flow {
+                Layout.fillWidth: true
+                Repeater {
+                    model: usedIn
 
-                delegate: HyperlinkBtnInfo {
-                    isCask: false
-                    leftPadding: 10
-                    urlText: modelData
-                    urlRef: modelData
+                    delegate: HyperlinkBtnInfo {
+                        isCask: false
+                        leftPadding: 10
+                        urlText: modelData
+                        urlRef: modelData
+                    }
                 }
             }
         }
@@ -163,14 +166,17 @@ ColumnLayout {
             font.bold: true
         }
         RowLayout {
-            Repeater {
-                model: brewUses
+            Flow {
+                Layout.fillWidth: true
+                Repeater {
+                    model: brewUses
 
-                delegate: HyperlinkBtnInfo {
-                    isCask: false
-                    leftPadding: 10
-                    urlText: modelData
-                    urlRef: modelData
+                    delegate: HyperlinkBtnInfo {
+                        isCask: false
+                        leftPadding: 10
+                        urlText: modelData
+                        urlRef: modelData
+                    }
                 }
             }
         }

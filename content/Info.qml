@@ -148,9 +148,17 @@ ColumnLayout {
                                                                        Constants.brewData.asyncGetBrewUses(
                                                                            result.token,
                                                                            ret => {
-                                                                               infoFormula.brewUses = ret
-                                                                               if (infoFormula.brewUses.length > 0) {
+                                                                               let t = []
+                                                                               for (let i in ret) {
+                                                                                   if (infoFormula.usedIn.indexOf(ret[i]) === -1) {
+                                                                                       t.push(
+                                                                                           ret[i])
+                                                                                   }
+                                                                               }
+
+                                                                               if (t.length > 0) {
                                                                                    infoFormula.showBrewUses = true
+                                                                                   infoFormula.brewUses = t
                                                                                }
                                                                            })
                                                                    }
