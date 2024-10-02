@@ -6,6 +6,8 @@ BrewData::BrewData(QObject *parent)
     loadBrewLocation();
     loadNormalFontPointSize();
     loadTerminalApp();
+    loadUpdateForce();
+
     loadIsExtendedCask();
     loadIsExtendedFormula();
     loadIsExtendedService();
@@ -293,6 +295,12 @@ void BrewData::saveTerminalApp(const QString s)
 {
     settings.setValue("terminalApp", s);
     loadTerminalApp();
+}
+
+void BrewData::saveUpdateForce(const bool s)
+{
+    settings.setValue("updateForce", s);
+    loadUpdateForce();
 }
 
 void BrewData::saveNormalFontPointSize(const QString s)
@@ -709,6 +717,12 @@ void BrewData::loadTerminalApp()
     setTerminalApp(s);
 }
 
+void BrewData::loadUpdateForce()
+{
+    bool s = settings.value("updateForce", true).toBool();
+    setUpdateForce(s);
+}
+
 void BrewData::loadBrewLocation()
 {
     QString s_brewLocation = settings.value("brewLocation", "").toString();
@@ -788,7 +802,7 @@ void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
     ProcessStatus s;
     QString refreshErr;
     if (doBrewUpdate) {
-        s = sc.cmdBrewUpdate();
+        s = sc.cmdBrewUpdate(updateForce());
         if (!s.isSuccess) {
             refreshErr = "refresh failed: " + s.stdErr;
         }

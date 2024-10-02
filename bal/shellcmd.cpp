@@ -22,10 +22,14 @@ ProcessStatus ShellCmd::cmdSearch(QString textSearch, bool isCask)
     return exec(fTmp.fileName(), {textSearch});
 }
 
-ProcessStatus ShellCmd::cmdBrewUpdate()
+ProcessStatus ShellCmd::cmdBrewUpdate(bool isUpdateForce)
 {
     QString cmd = brewLocation;
-    return exec(cmd, {"update"}, "-f");
+    if (isUpdateForce) {
+        return exec(cmd, {"update"}, "-f");
+    } else {
+        return exec(cmd, {"update"});
+    }
 }
 
 ProcessStatus ShellCmd::cmdListCaskAndFormula()
@@ -146,7 +150,7 @@ ProcessStatus ShellCmd::exec(const QString program, const QStringList arguments,
     pingProcess.setProcessEnvironment(env);
 
     pingProcess.start(program, {arguments});
-    pingProcess.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
+    pingProcess.waitForFinished(-1); // sets current thread to sleep and waits for pingProcess end
 
     QString stdOut(pingProcess.readAllStandardOutput()), stdErr{pingProcess.readAllStandardError()};
     pingProcess.close();

@@ -21,7 +21,7 @@ public:
 
     ProcessStatus cmdSearch(QString textSearch, bool isCask);
 
-    ProcessStatus cmdBrewUpdate();
+    ProcessStatus cmdBrewUpdate(bool isUpdateForce);
 
     ProcessStatus cmdListCaskAndFormula();
 

@@ -94,6 +94,7 @@ QtObject {
     property string brewLocation: "/whatever/brew"
     property string normalFontPointSize: "14"
     property string terminalApp: "iTerm"
+    property bool updateForce: true
     function saveNormalFontPointSize(s) {
         normalFontPointSize = s
     }
@@ -487,10 +488,10 @@ QtObject {
     property int y: 0
     property int width: 1000
     property int height: 800
-    function saveWidth(s){}
-    function saveHeight(s){}
-    function saveX(s){}
-    function saveY(s){}
+    function saveWidth(s) {}
+    function saveHeight(s) {}
+    function saveX(s) {}
+    function saveY(s) {}
 
     function asyncBrewDoctor(cb) {
         cb()

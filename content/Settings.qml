@@ -12,6 +12,7 @@ ColumnLayout {
         Constants.brewData.saveNormalFontPointSize(fontSizeInput.text)
         Constants.brewData.saveBrewLocation(brewLocation.text)
         Constants.brewData.saveTerminalApp(terminalApp.currentText)
+        Constants.brewData.saveUpdateForce(updateForce.checked)
     }
 
     CoreLabel {
@@ -58,5 +59,12 @@ ColumnLayout {
         id: fontSizeInput
         text: Constants.fontSizeNormal()
         Layout.fillWidth: true
+    }
+
+    CoreSwitch {
+        id: updateForce
+        text: "Always do a slower, full update check (even
+if unnecessary)"
+        checked: Constants.brewData.updateForce
     }
 }

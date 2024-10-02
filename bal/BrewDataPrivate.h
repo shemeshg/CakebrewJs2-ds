@@ -21,6 +21,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QString brewLocation READ brewLocation WRITE setBrewLocation NOTIFY brewLocationChanged )
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
     Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
+    Q_PROPERTY(bool updateForce READ updateForce WRITE setUpdateForce NOTIFY updateForceChanged )
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged )
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged )
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged )
@@ -107,6 +108,18 @@ void setTerminalApp(const QString &newTerminalApp)
             return;
         m_terminalApp = newTerminalApp;
         emit terminalAppChanged();
+    }
+
+
+    
+    bool updateForce() const{return m_updateForce;} 
+    
+void setUpdateForce(const bool newUpdateForce)
+    {
+        if (m_updateForce == newUpdateForce)
+            return;
+        m_updateForce = newUpdateForce;
+        emit updateForceChanged();
     }
 
 
@@ -579,6 +592,7 @@ signals:
     void brewLocationChanged();
     void normalFontPointSizeChanged();
     void terminalAppChanged();
+    void updateForceChanged();
     void xChanged();
     void yChanged();
     void widthChanged();
@@ -627,6 +641,7 @@ private:
     QString m_brewLocation;
     QString m_normalFontPointSize;
     QString m_terminalApp;
+    bool m_updateForce;
     int m_x;
     int m_y;
     int m_width;
