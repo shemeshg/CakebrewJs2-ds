@@ -75,7 +75,8 @@ ColumnLayout {
                 delegate: HyperlinkBtnInfo {
                     isCask: true
                     leftPadding: 10
-                    urlText: model.display.text + (Constants.brewData.caskTableBodyList[model.row].isDeprecated ? " ⚠️" : "")
+                    urlText: model.display.text
+                             + (ctvc.filteredModel[model.row].isDeprecated ? " ⚠️" : "")
                     urlRef: model.display.text
                 }
             }
@@ -86,8 +87,11 @@ ColumnLayout {
                     enabled: !Constants.brewData.refreshFormulaRunning
                     visible: model.display.text
                     checked: {
-                        return Constants.caskSelected.indexOf(
-                                    Constants.brewData.caskTableBodyList[model.row].token.text) > -1
+                        if (ctvc.filteredModel[model.row]) {
+                            return Constants.caskSelected.indexOf(
+                                        ctvc.filteredModel[model.row].token.text) > -1
+                        }
+                        return false
                     }
 
                     leftPadding: 10
@@ -96,10 +100,10 @@ ColumnLayout {
                         model.display.tsChecked = checked
                         if (checked) {
                             Constants.caskSelected.push(
-                                        Constants.brewData.caskTableBodyList[model.row].token.text)
+                                        ctvc.filteredModel[model.row].token.text)
                         } else {
                             const indexToRemove = Constants.caskSelected.indexOf(
-                                                    Constants.brewData.caskTableBodyList[model.row].token.text)
+                                                    ctvc.filteredModel[model.row].token.text)
                             if (indexToRemove !== -1) {
                                 Constants.caskSelected.splice(indexToRemove, 1)
                             }
@@ -191,7 +195,8 @@ ColumnLayout {
                 delegate: HyperlinkBtnInfo {
                     isCask: false
                     leftPadding: 10
-                    urlText: model.display.text + (Constants.brewData.formulaTableBodyList[model.row].isDeprecated ? " ⚠️" : "")
+                    urlText: model.display.text
+                             + (ctvf.filteredModel[model.row].isDeprecated ? " ⚠️" : "")
                     urlRef: model.display.text
                 }
             }
@@ -202,9 +207,11 @@ ColumnLayout {
                     enabled: !Constants.brewData.refreshFormulaRunning
                     visible: model.display.text
                     checked: {
-                        return Constants.formulaSelected.indexOf(
-                                    Constants.brewData.formulaTableBodyList[model.row].name.text)
-                                > -1
+                        if (ctvf.filteredModel[model.row]) {
+                            return Constants.formulaSelected.indexOf(
+                                        ctvf.filteredModel[model.row].name.text) > -1
+                        }
+                        return false
                     }
                     leftPadding: 10
                     text: model.display.text
@@ -212,10 +219,10 @@ ColumnLayout {
                         model.display.tsChecked = checked
                         if (checked) {
                             Constants.formulaSelected.push(
-                                        Constants.brewData.formulaTableBodyList[model.row].name.text)
+                                        ctvf.filteredModel[model.row].name.text)
                         } else {
                             const indexToRemove = Constants.formulaSelected.indexOf(
-                                                    Constants.brewData.formulaTableBodyList[model.row].name.text)
+                                                    ctvf.filteredModel[model.row].name.text)
                             if (indexToRemove !== -1) {
                                 Constants.formulaSelected.splice(indexToRemove,
                                                                  1)
