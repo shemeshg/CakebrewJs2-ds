@@ -5,7 +5,7 @@ option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 
 
-project(Cakebrewjs VERSION 2.66 LANGUAGES CXX)
+project(Cakebrewjs VERSION 2.67 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 
