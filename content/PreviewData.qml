@@ -13,12 +13,15 @@ ColumnLayout {
     Component.onCompleted: {
         Constants.caskSelected = []
         Constants.formulaSelected = []
+
         Constants.brewData.asyncRefreshServices(() => {}, true)
+
         Constants.brewData.asyncRefreshCaskAndFormula(true, () => {
                                                           home.ctvc.filterTableByFilter()
                                                           home.ctvf.filterTableByFilter()
                                                           home.ctvs.filterTableByFilter()
                                                       }, true)
+
     }
 
     states: [

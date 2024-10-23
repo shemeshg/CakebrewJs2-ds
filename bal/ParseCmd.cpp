@@ -1,6 +1,8 @@
 #include "ParseCmd.h"
 #include <nlohmann/json.hpp>
 
+#define MAX_VER_LEN 20
+
 using json = nlohmann::json;
 
 QVector<ServiceRow> ParseCmd::parseServicesList(QString &strResult)
@@ -70,8 +72,8 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
         row.fullName = QString::fromStdString(fullName);
         row.desc = QString::fromStdString(desc);
         row.tap = QString::fromStdString(tap);
-        row.version = QString::fromStdString(installedVersion);
-        row.outdated = QString::fromStdString(updatedVersion);
+        row.version = QString::fromStdString(installedVersion).left(MAX_VER_LEN).simplified();
+        row.outdated = QString::fromStdString(updatedVersion).left(MAX_VER_LEN).simplified();
         row.ruby_source_path = QString::fromStdString(ruby_source_path);
         row.homepage = QString::fromStdString(homepage);
         row.license = QString::fromStdString(license);
@@ -161,10 +163,13 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
 
         CaskRow cr{};
         cr.token = QString::fromStdString(token);
+
         cr.desc = QString::fromStdString(desc);
+
         cr.tap = QString::fromStdString(tap);
-        cr.version = QString::fromStdString(version);
-        cr.outdated = QString::fromStdString(outdated);
+
+        cr.version = QString::fromStdString(version).left(MAX_VER_LEN).simplified();
+        cr.outdated = QString::fromStdString(outdated).left(MAX_VER_LEN).simplified();
         cr.isOutdated = isOutdated;
         cr.isInstalled = isInstalled;
         cr.isDeprecated = isDeprecated;
