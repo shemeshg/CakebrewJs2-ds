@@ -1,6 +1,7 @@
 pragma Singleton
 
 import QtQuick
+import Design
 
 SystemPalette {
     id: systemPalette
@@ -23,6 +24,6 @@ SystemPalette {
 
         property font font: Qt.font({
                                                  "family": Qt.application.font.family,
-                                                 "pixelSize": Qt.application.font.pixelSize
+                                                 "pixelSize": Constants.fontSizeNormal() //Qt.application.font.pixelSize
                                              })
     }

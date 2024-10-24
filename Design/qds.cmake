@@ -3,12 +3,12 @@
 
 add_subdirectory(DesignContent)
 add_subdirectory(Core)
-add_subdirectory(Bal)
 add_subdirectory(Design)
+add_subdirectory(Bal)
 add_subdirectory(App)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     DesignContentplugin
     Coreplugin
-    Balplugin
-    Designplugin)
+    Designplugin
+    Balplugin)
