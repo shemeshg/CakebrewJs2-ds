@@ -1,0 +1,13 @@
+Module Core
+singleton CoreSystemPalette 1.0 CoreSystemPalette.qml
+CoreLabel 1.0 CoreLabel.qml
+CoreButton 1.0 CoreButton.qml
+CoreToolTip 1.0 CoreToolTip.qml
+CoreTextField 1.0 CoreTextField.qml
+CoreComboBox 1.0 CoreComboBox.qml
+CoreTextArea 1.0 CoreTextArea.qml
+CoreSwitch 1.0 CoreSwitch.qml
+CoreCheckBox 1.0 CoreCheckBox.qml
+CoreGroupBox 1.0 CoreGroupBox.qml
+CoreLabelSelect 1.0 CoreLabelSelect.qml
+CoreBusyIndicator 1.0 CoreBusyIndicator.qml

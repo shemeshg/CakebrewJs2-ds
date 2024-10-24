@@ -10,8 +10,8 @@ link_libraries(
 )
 
 
-qt6_add_qml_module(bal
-        URI Brew
+qt6_add_qml_module(Bal
+        URI Bal
         VERSION 1.0
         SOURCES
             JsAsync.h

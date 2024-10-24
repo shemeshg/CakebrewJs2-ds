@@ -1,13 +1,6 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
-# auto generate files
-config.h
-
-# ???
-node_modules/
-
-# ???
 *~
 *.autosave
 *.a
@@ -79,8 +72,5 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
-**/__pycache__/
-CMakeLists.txt.user
-*.qmlproject.qtds
-
+# build folder
 build/

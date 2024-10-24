@@ -1,15 +1,14 @@
-cmake_minimum_required(VERSION 3.21.1)
+cmake_minimum_required(VERSION 3.16)
 
-option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
-option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
+project(Cakebrewjs VERSION 2.70 LANGUAGES CXX)
 set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
-project(Cakebrewjs VERSION 2.67 LANGUAGES CXX)
+qt_standard_project_setup(REQUIRES 6.5)
 
-set(CMAKE_AUTOMOC ON)
-
-
+## start custom
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(MACOSX TRUE)
 endif()
@@ -25,65 +24,64 @@ if(MACOSX)
     include(CPack)
 endif()
 
-configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/config.h")
-include_directories("${CMAKE_BINARY_DIR}")
-
-find_package(Qt6  REQUIRED COMPONENTS Core Gui Qml Quick Svg Concurrent)
-
-qt_policy(SET QTP0001 NEW)
-
-if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
-    qt_standard_project_setup()
-endif()
 
 
-qt_add_executable(Cakebrewjs src/main.cpp ${APP_ICON_MACOSX})
+## end custom
 
-qt_add_resources(Cakebrewjs "configuration"
-    PREFIX "/"
-    FILES
-        qtquickcontrols2.conf
+
+list(APPEND QML_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/Design/)
+set(QML_IMPORT_PATH "${QML_DIRS}" CACHE STRING "Import paths for Qt Creator's code model" FORCE)
+
+
+
+qt_add_executable(${CMAKE_PROJECT_NAME}
+    main.cpp
 )
 
-add_subdirectory(bal)
 
-target_link_libraries(Cakebrewjs PRIVATE
-    Qt6::Core
-    Qt6::Gui
-    Qt6::Qml
-    Qt6::Quick
-    Qt6::Svg
-    Qt6::Concurrent
-    bal
+qt_add_qml_module(${CMAKE_PROJECT_NAME}
+    URI shalom
+    VERSION 1.0
+    QML_FILES
+        Main.qml
 )
 
-set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
-set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
-    CACHE STRING "Import paths for Qt Creator's code model"
-    FORCE
+# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
+# If you are developing for iOS or macOS you should consider setting an
+# explicit, fixed bundle identifier manually though.
+##
+# set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
+#     MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appshalom
+#     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+#     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+#     MACOSX_BUNDLE TRUE
+#     WIN32_EXECUTABLE TRUE
+# )
+##
+
+add_subdirectory(design/Design)
+add_subdirectory(design/DesignContent)
+add_subdirectory(design/Core)
+add_subdirectory(Bal)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    PRIVATE Qt6::Quick
+    Bal
+    Coreplugin
+    Designplugin
+    DesignContentplugin
 )
-
-if (BUILD_QDS_COMPONENTS)
-    include(${CMAKE_CURRENT_SOURCE_DIR}/qmlcomponents)
-endif()
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/qmlmodules)
-
-if (LINK_INSIGHT)
-    include(${CMAKE_CURRENT_SOURCE_DIR}/insight)
-endif ()
 
 include(GNUInstallDirs)
-install(TARGETS Cakebrewjs
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+#
+# install(TARGETS ${CMAKE_PROJECT_NAME}
+#     BUNDLE DESTINATION .
+#     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+# )
+#
 
-# make IDEs aware of the QML import path
-set(QML_IMPORT_PATH ${PROJECT_BINARY_DIR}/qml CACHE PATH
-    "Path to the custom QML components defined by the project")
-
+# Custom ADded
 set_target_properties(Cakebrewjs PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
@@ -101,3 +99,4 @@ qt_generate_deploy_qml_app_script(
     OUTPUT_SCRIPT deploy_script
 )
 install(SCRIPT ${deploy_script})
+# End custom Added

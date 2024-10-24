@@ -1,0 +1,118 @@
+// prop: json-converted
+// prop: auto-generated
+
+import QmlProject
+
+Project {
+    mainFile: "DesignContent/App.qml"
+    mainUiFile: "DesignContent/Screen01.qml"
+    targetDirectory: "/opt/Design"
+    enableCMakeGeneration: true
+    enablePythonGeneration: false
+    widgetApp: true
+    importPaths: [ "." ]
+
+    qdsVersion: "4.6"
+    quickVersion: "6.8"
+    qt6Project: true
+    qtForMCUs: false
+
+    multilanguageSupport: true
+    primaryLanguage: "en"
+    supportedLanguages: [ "en" ]
+
+    Environment {
+        QML_COMPAT_RESOLVE_URLS_ON_ASSIGNMENT: "1"
+        QT_AUTO_SCREEN_SCALE_FACTOR: "1"
+        QT_ENABLE_HIGHDPI_SCALING: "0"
+        QT_LOGGING_RULES: "qt.qml.connections=false"
+        QT_QUICK_CONTROLS_CONF: "qtquickcontrols2.conf"
+    }
+
+    ShaderTool {
+        args: "-s --glsl \"100 es,120,150\" --hlsl 50 --msl 12"
+        files: [ "DesignContent/shaders/*" ]
+    }
+
+    QmlFiles {
+        directory: "Design"
+    }
+
+    QmlFiles {
+        directory: "DesignContent"
+    }
+
+    QmlFiles {
+        directory: "Bal"
+    }
+
+    QmlFiles {
+        directory: "Core"
+    }
+
+    QmlFiles {
+        directory: "Generated"
+    }
+
+    JavaScriptFiles {
+        directory: "Design"
+    }
+
+    JavaScriptFiles {
+        directory: "Design"
+    }
+
+    ImageFiles {
+        directory: "DesignContent"
+    }
+
+    ImageFiles {
+        directory: "Generated"
+    }
+
+    Files {
+        filter: "*.conf"
+        files: [
+            "qtquickcontrols2.conf"
+        ]
+    }
+
+    Files {
+        directory: "."
+        filter: "qmldir"
+    }
+
+    Files {
+        filter: "*.ttf;*.otf"
+    }
+
+    Files {
+        filter: "*.wav;*.mp3"
+    }
+
+    Files {
+        filter: "*.mp4"
+    }
+
+    Files {
+        filter: "*.glsl;*.glslv;*.glslf;*.vsh;*.fsh;*.vert;*.frag"
+    }
+
+    Files {
+        filter: "*.qsb"
+    }
+
+    Files {
+        filter: "*.json"
+    }
+
+    Files {
+        directory: "Generated"
+        filter: "*.mesh"
+    }
+
+    Files {
+        directory: "Generated"
+        filter: "*.qad"
+    }
+}
