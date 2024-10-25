@@ -1,3 +1,0 @@
-MainQmlType is neither a default constructible QObject, nor a default- and copy-constructible Q_GADGET, nor marked as uncreatable.
-You should not use it as a QML type.
-2024-10-15 10:55:58.056 pass-simple[13061:362938] +[IMKClient subclass]: chose IMKClient_Legacy
