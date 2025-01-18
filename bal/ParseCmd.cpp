@@ -116,7 +116,10 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
     for (auto &element : data["casks"]) {
         std::string token = element["token"].template get<std::string>();
         std::string name = (element["name"][0]).template get<std::string>();
-        std::string desc = (element["desc"]).template get<std::string>();
+        std::string desc;
+        if (!element["desc"].is_null()){
+            desc = (element["desc"]).template get<std::string>();
+        }
         std::string tap = element["tap"].template get<std::string>();
         std::string homepage = element["homepage"].template get<std::string>();
         std::string ruby_source_path = element["ruby_source_path"].template get<std::string>();
