@@ -14,6 +14,19 @@ Homebrew GUI App written in Qt6+Qml+Js
 brew install --cask cakebrewjs
 ```
 
+* install using:
+```bash
+brew install --cask cakebrewjs
+```
+
+* *Must* fix signature:
+```bash
+codesign --force --deep --sign - /Applications/cakebrewjs.app/
+```
+
+* *Must* fix authorizations:
+`xattr -c /Applications/cakebrewjs.app/`
+
 ## Uninstall
 
 ```bash
