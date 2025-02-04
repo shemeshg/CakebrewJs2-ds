@@ -15,11 +15,13 @@ brew install --cask cakebrewjs
 ```
 
 * install using:
+  
 ```bash
 brew install --cask cakebrewjs
 ```
 
 * *Must* fix signature:
+  
 ```bash
 codesign --force --deep --sign - /Applications/cakebrewjs.app/
 ```
