@@ -29,6 +29,8 @@ public:
 
     ProcessStatus cmdGetInfo(QString token, bool isCask);
 
+    ProcessStatus cmdGetBrewVersion();
+
     ProcessStatus cmdPin(QString token);
 
     ProcessStatus cmdUnpin(QString token);

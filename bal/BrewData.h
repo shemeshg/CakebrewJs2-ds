@@ -43,6 +43,8 @@ public slots:
 
     void asyncUnpin(QString token, const QJSValue &callback);
 
+    void asyncGetBrewVersion(const QJSValue &callback);
+
     void asyncRefreshCaskAndFormula(bool doBrewUpdate,
                                     const QJSValue &callback,
                                     bool loadFromCash = false);

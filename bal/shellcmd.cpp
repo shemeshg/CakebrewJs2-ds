@@ -52,6 +52,14 @@ ProcessStatus ShellCmd::cmdGetInfo(QString token, bool isCask)
     return exec(cmd, {"info", type, "--json=v2", token});
 }
 
+ProcessStatus ShellCmd::cmdGetBrewVersion()
+{
+    QString cmd = brewLocation;
+
+
+    return exec(cmd, {"--version"});
+}
+
 ProcessStatus ShellCmd::cmdPin(QString token)
 {
     QString cmd = brewLocation;

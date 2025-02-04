@@ -83,6 +83,7 @@ ColumnLayout {
             }
 
             About {
+                id: aboutScreenId
                 visible: previewData.state === "About"
             }
             Info {
@@ -114,6 +115,10 @@ ColumnLayout {
 
         onAboutClicked: {
             previewData.state = "About"
+            Constants.brewData.asyncGetBrewVersion((txt)=>{
+                                                    aboutScreenId.homebrewVersion = txt
+                                                   })
+
         }
 
         onRefreshClicked: {

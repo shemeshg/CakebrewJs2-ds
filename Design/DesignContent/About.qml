@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import Core
 
 RowLayout {
+    property string homebrewVersion: ""
     ColumnLayout {
         CoreLabel {
             text: `
@@ -23,6 +24,10 @@ RowLayout {
         CoreLabel {
             text: "Qt " + Constants.brewData.qtVer()
         }
+        CoreLabel {
+            text: homebrewVersion
+        }
+
         CoreLabel {
             text: `
             <h2>License</h2>

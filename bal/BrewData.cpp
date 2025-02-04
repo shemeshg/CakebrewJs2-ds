@@ -272,6 +272,22 @@ void BrewData::asyncUnpin(QString token, const QJSValue &callback)
     });
 }
 
+void BrewData::asyncGetBrewVersion(const QJSValue &callback)
+{
+    makeAsync<QString>(callback, [=]() {
+        ShellCmd sc = getShellCmd();
+        ProcessStatus s = sc.cmdGetBrewVersion();
+        if (s.isSuccess && !s.stdOut.isEmpty()) {
+            return s.stdOut;
+        } else {
+            if (s.stdErr.isEmpty()) {
+                s.stdErr = "Err" + QString::number(s.exitCode);
+            }
+            return s.stdErr;
+        }
+    });
+}
+
 void BrewData::asyncRefreshCaskAndFormula(bool doBrewUpdate,
                                           const QJSValue &callback,
                                           bool loadFromCash)
