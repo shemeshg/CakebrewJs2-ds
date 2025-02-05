@@ -10,10 +10,6 @@ Homebrew GUI App written in Qt6+Qml+Js
 
 ## Install
 
-```bash
-brew install --cask cakebrewjs
-```
-
 * install using:
   
 ```bash
