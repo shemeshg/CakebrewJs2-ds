@@ -131,21 +131,32 @@ void ShellCmd::externalTerminalCmd(QString cmdToRun)
 {
     QString s = R"(trap "rm %1" EXIT;%2)";
 
-    QTemporaryFile file;
+    QTemporaryFile file;    
     file.setAutoRemove(false);
     if (file.open()) {
-        s = s.arg(file.fileName(), cmdToRun);
+        QString fileName = file.fileName();
+        s = s.arg(fileName, cmdToRun);
         file.write(s.toUtf8());
         file.flush();
 
-        exec("chmod", {"+x", file.fileName()});
-        exec("open", {"-a", terminalApp, file.fileName()});
+        exec("chmod", {"+x", fileName});
+        exec("open", {"-a", terminalApp, fileName});
+
+        QFileSystemWatcher watcher;
+        watcher.addPath(fileName);
+        QEventLoop loop;
+        QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, [&loop, &fileName](const QString &path) {
+            if (path == fileName) {
+                QFile file(fileName);
+                if (!file.exists()) {
+                    loop.quit();
+                }
+            }
+        });
+        QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, &loop, &QEventLoop::quit);
+        loop.exec();
     }
-    QFileSystemWatcher watcher;
-    watcher.addPath(file.fileName());
-    QEventLoop loop;
-    QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, &loop, &QEventLoop::quit);
-    loop.exec();
+
 }
 
 ProcessStatus ShellCmd::exec(const QString program, const QStringList arguments, bool noGithubApi)
