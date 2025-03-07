@@ -618,6 +618,37 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
     return row;
 }
 
+void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
+{
+
+    auto row = getInfo(token, true);
+    QMap<QString, QVariant> map = row.toMap();
+    QString artifacts = map["artifacts"].toString();
+    artifacts.replace(" (app)\n", "\n");
+    QStringList list = artifacts.split("\n");
+    QStringList cmds;
+    for (const auto &s :list){
+        auto art = s.trimmed();
+        if (art.isEmpty()){
+            continue;
+        }
+        QString codeSignCmd="codesign --force --deep --sign - /Applications/%0;";
+        codeSignCmd = codeSignCmd.arg(art);
+        cmds.append(codeSignCmd);
+    }
+    QString runningCmd = cmds.join("\n");
+
+
+    makeAsync<bool>(callback, [=]() {
+        ShellCmd sc = getShellCmd();
+
+
+        sc.externalTerminalCmd(runningCmd);
+        return true;
+    });
+
+}
+
 void BrewData::asyncServiceSort(const QJSValue &callback)
 {
     makeAsync<bool>(callback, [=]() {

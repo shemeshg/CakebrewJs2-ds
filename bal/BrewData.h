@@ -86,6 +86,8 @@ public slots:
 
     QVariant getInfo(const QString token, bool isCask);
 
+    void selfSignCasks(const QString token, const QJSValue &callback);
+
     void asyncServiceSort(const QJSValue &callback);
 
     void serviceSort();

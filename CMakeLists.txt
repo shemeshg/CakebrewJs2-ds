@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Cakebrewjs VERSION 2.74 LANGUAGES CXX)
+project(Cakebrewjs VERSION 2.75 LANGUAGES CXX)
 set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
