@@ -625,6 +625,7 @@ void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
     QMap<QString, QVariant> map = row.toMap();
     QString artifacts = map["artifacts"].toString();
     artifacts.replace(" (app)\n", "\n");
+    artifacts.replace(" (bin)\n", "\n");
     QStringList list = artifacts.split("\n");
     QStringList cmds;
     for (const auto &s :list){
@@ -632,7 +633,10 @@ void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
         if (art.isEmpty()){
             continue;
         }
-        QString codeSignCmd="codesign --force --deep --sign - /Applications/%0;";
+        if (!art.startsWith("/")){
+            art = "/Applications/" + art;
+        }
+        QString codeSignCmd="codesign --force --deep --sign - %0;";
         codeSignCmd = codeSignCmd.arg(art);
         cmds.append(codeSignCmd);
     }
