@@ -636,7 +636,7 @@ void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
         if (!art.startsWith("/")){
             art = "/Applications/" + art;
         }
-        QString codeSignCmd="codesign --force --deep --sign - %0;";
+        QString codeSignCmd="codesign --force --deep --sign - '%0';";
         codeSignCmd = codeSignCmd.arg(art);
         cmds.append(codeSignCmd);
     }
