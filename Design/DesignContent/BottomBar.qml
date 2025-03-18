@@ -204,24 +204,25 @@ GroupBox {
                 }
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
-            }
-        }
-        CoreButton {
-            text: "SelfSign"
-            visible: Constants.brewData.isInfoShowUninstallZap
-            enabled: !Constants.brewData.refreshServiceRunning
-                     && !Constants.brewData.refreshFormulaRunning
-            onClicked: {
-                if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
-                    beforeInfoAction()
-                    Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
-                                                          afterInfoAction()
-                                                     })
+            }            
+            CoreButton {
+                text: "SelfSign"
+                visible: Constants.brewData.isInfoShowUninstallZap
+                enabled: !Constants.brewData.refreshServiceRunning
+                         && !Constants.brewData.refreshFormulaRunning
+                onClicked: {
+                    if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        beforeInfoAction()
+                        Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
+                                                              afterInfoAction()
+                                                         })
+
+                    }
 
                 }
-
             }
         }
+
 
         RowLayout {
             visible: selectedPreview === "Settings"
