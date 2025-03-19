@@ -1,4 +1,5 @@
 #include "shellcmd.h"
+#include <QTimer>
 
 ShellCmd::ShellCmd(QString brewLocation, QString terminalApp)
     : brewLocation{brewLocation}
@@ -140,20 +141,20 @@ void ShellCmd::externalTerminalCmd(QString cmdToRun)
         file.flush();
 
         exec("chmod", {"+x", fileName});
+        
         exec("open", {"-a", terminalApp, fileName});
 
-        QFileSystemWatcher watcher;
-        watcher.addPath(fileName);
+
+        
         QEventLoop loop;
-        QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, [&loop, &fileName](const QString &path) {
-            if (path == fileName) {
-                QFile file(fileName);
-                if (!file.exists()) {
-                    loop.quit();
-                }
+        QTimer timer;
+
+        QObject::connect(&timer, &QTimer::timeout, [&loop, &fileName]() {
+            if (!QFile::exists(fileName)) {
+                loop.quit();
             }
         });
-        QObject::connect(&watcher, &QFileSystemWatcher::fileChanged, &loop, &QEventLoop::quit);
+        timer.start(500); 
         loop.exec();
     }
 
