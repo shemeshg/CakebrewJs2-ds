@@ -285,8 +285,8 @@ ColumnLayout {
         onIsExtendedChanged: {
             Constants.brewData.saveIsExtendedService(ctvs.isExtended)
         }
-
-        autoExtendCol: 3
+        sortedColIdx:  0
+        autoExtendCol: 4
 
         headerText: "Service"
         isLoading: Constants.brewData.refreshServiceRunning

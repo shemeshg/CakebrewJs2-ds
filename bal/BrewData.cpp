@@ -670,13 +670,21 @@ void BrewData::serviceSort()
 
         if (serviceSortedColIdx() == 1) {
             if (serviceSortedColOrder() == 1) {
+                return a.action + a.name < b.action + b.name;
+            } else if (serviceSortedColOrder() == 2) {
+                return a.action + a.name > b.action + b.name;
+            }
+        }
+
+        if (serviceSortedColIdx() == 2) {
+            if (serviceSortedColOrder() == 1) {
                 return a.status + a.name < b.status + b.name;
             } else if (serviceSortedColOrder() == 2) {
                 return a.status + a.name > b.status + b.name;
             }
         }
 
-        if (serviceSortedColIdx() == 2) {
+        if (serviceSortedColIdx() == 3) {
             if (serviceSortedColOrder() == 1) {
                 return a.user + a.name < b.user + b.name;
             } else if (serviceSortedColOrder() == 2) {
@@ -684,7 +692,7 @@ void BrewData::serviceSort()
             }
         }
 
-        if (serviceSortedColIdx() == 3) {
+        if (serviceSortedColIdx() == 4) {
             if (serviceSortedColOrder() == 1) {
                 return a.plist < b.plist;
             } else if (serviceSortedColOrder() == 2) {
@@ -692,13 +700,7 @@ void BrewData::serviceSort()
             }
         }
 
-        if (serviceSortedColIdx() == 4) {
-            if (serviceSortedColOrder() == 1) {
-                return a.action + a.name < b.action + b.name;
-            } else if (serviceSortedColOrder() == 2) {
-                return a.action + a.name > b.action + b.name;
-            }
-        }
+
 
         return a.name < b.name;
     });
