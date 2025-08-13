@@ -297,6 +297,9 @@ ColumnLayout {
                 display: "name"
             }
             TableModelColumn {
+                display: "action"
+            }
+            TableModelColumn {
                 display: "status"
             }
             TableModelColumn {
@@ -305,9 +308,7 @@ ColumnLayout {
             TableModelColumn {
                 display: "plist"
             }
-            TableModelColumn {
-                display: "action"
-            }
+
 
             // Each row is one type of fruit that can be ordered
             rows: ctvs.filteredModel
@@ -333,7 +334,7 @@ ColumnLayout {
             }
 
             DelegateChoice {
-                column: 4
+                column: 1
                 delegate: HyperlinkBtn {
                     leftPadding: 10
                     enabled: !Constants.brewData.refreshServiceRunning
