@@ -91,12 +91,23 @@ set_target_properties(Cakebrewjs PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER CakebrewJs.shemeshg.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    OUTPUT_NAME "CakebrewJs"
+    OUTPUT_NAME "Cakebrewjs"
 )
+
+
+include(GNUInstallDirs)
+install(TARGETS ${CMAKE_PROJECT_NAME}
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+qt_finalize_executable(Cakebrewjs)
 
 qt_generate_deploy_qml_app_script(
     TARGET Cakebrewjs
     OUTPUT_SCRIPT deploy_script
+
 )
 install(SCRIPT ${deploy_script})
 # End custom Added
