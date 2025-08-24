@@ -18,6 +18,14 @@ This project includes the following third-party components:
   License: MIT License
 
 ```SPDX
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: MyProject-SBOM
+DocumentNamespace: http://spdx.org/spdxdocs/myproject-sbom-2025-08-24
+Creator: Tool: Microsoft Copilot
+Created: 2025-08-24T16:30:00Z
+
 PackageName: Qt Quick and Qt 6
 PackageDownloadLocation: https://www.qt.io/
 PackageLicenseDeclared: LGPL-3.0
