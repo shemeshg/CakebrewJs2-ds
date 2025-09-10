@@ -1,0 +1,34 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+name: ' Cakebrewjs'
+url: 'https://github.com/shemeshg/CakebrewJs2-ds/'
+landingURL: 'https://sourceforge.net/projects/cakebrewjs/'
+releaseDate: '2025-08-14'
+softwareVersion: '2.82'
+developmentStatus: stable
+platforms:
+  - mac
+softwareType: standalone/desktop
+localisation:
+  localisationReady: false
+description:
+  en:
+    genericName: ' Cakebrewjs'
+    shortDescription: Cakebrewjs
+    longDescription: >
+      **Homebrew GUI App**
+
+
+      **"                                                                                                                                                                               
+      "**
+
+
+      **"                                                                                                                                                                               
+      "**
+
+
+      **"                                                                                                                                                                               
+      "**
