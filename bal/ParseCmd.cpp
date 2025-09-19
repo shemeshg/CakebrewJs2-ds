@@ -51,7 +51,11 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
             license = element["license"].template get<std::string>();
         }
         std::string ruby_source_path = element["ruby_source_path"].template get<std::string>();
-        std::string updatedVersion = (element["versions"]["stable"]).template get<std::string>();
+        std::string updatedVersion = "HEAD";
+        if (!element["versions"]["stable"].is_null()){
+            updatedVersion = (element["versions"]["stable"]).template get<std::string>();
+        }
+
         bool isInstalled = element["installed"].size() != 0;
         bool isOutdated = false;
         bool isPinned = false;

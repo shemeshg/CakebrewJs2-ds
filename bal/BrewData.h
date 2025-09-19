@@ -100,9 +100,9 @@ private slots:
 private:
     QSettings settings;
 
-    QVector<ServiceRow> serviceRows;
-    QVector<CaskRow> caskRows;
-    QVector<FormulaRow> formulaRows;
+    QVector<ServiceRow> serviceRows = {};
+    QVector<CaskRow> caskRows ={};
+    QVector<FormulaRow> formulaRows = {};
 
     const QString getFindExecutable(const QString &exec) const;
 
