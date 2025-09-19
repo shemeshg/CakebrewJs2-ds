@@ -25,7 +25,7 @@ Button {
 
 
 
-    palette.alternateBase: CoreSystemPalette.alternateBase 
+    palette.alternateBase: CoreSystemPalette.alternateBase
     palette.base: CoreSystemPalette.base
     palette.button: CoreSystemPalette.button
     palette.buttonText: CoreSystemPalette.buttonText
@@ -40,6 +40,7 @@ Button {
     palette.text: CoreSystemPalette.text
     palette.window: CoreSystemPalette.window
     palette.windowText: CoreSystemPalette.windowText
+    icon.color: CoreSystemPalette.buttonText
 
     font: CoreSystemPalette.font
 }

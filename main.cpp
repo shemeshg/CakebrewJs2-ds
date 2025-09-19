@@ -5,6 +5,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
     app.setOrganizationName("shemeshg");
     //app.setOrganizationDomain("somecompany.com");
     app.setApplicationName("Cakebrewjs2");
