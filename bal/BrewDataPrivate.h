@@ -30,6 +30,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(bool isExtendedFormula READ isExtendedFormula WRITE setIsExtendedFormula NOTIFY isExtendedFormulaChanged )
     Q_PROPERTY(bool isExtendedService READ isExtendedService WRITE setIsExtendedService NOTIFY isExtendedServiceChanged )
     Q_PROPERTY(bool isShowBrewInfoText READ isShowBrewInfoText WRITE setIsShowBrewInfoText NOTIFY isShowBrewInfoTextChanged )
+    Q_PROPERTY(QStringList selfSignList READ selfSignList WRITE setSelfSignList NOTIFY selfSignListChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsCask READ searchItemsCask  NOTIFY searchItemsCaskChanged )
     Q_PROPERTY(QVector<SearchResultRow *> searchItemsFormula READ searchItemsFormula  NOTIFY searchItemsFormulaChanged )
     Q_PROPERTY(QString searchStatusCaskText READ searchStatusCaskText WRITE setSearchStatusCaskText NOTIFY searchStatusCaskTextChanged )
@@ -216,6 +217,18 @@ void setIsShowBrewInfoText(const bool newIsShowBrewInfoText)
             return;
         m_isShowBrewInfoText = newIsShowBrewInfoText;
         emit isShowBrewInfoTextChanged();
+    }
+
+
+    
+    QStringList selfSignList() const{return m_selfSignList;} 
+    
+void setSelfSignList(const QStringList &newSelfSignList)
+    {
+        if (m_selfSignList == newSelfSignList)
+            return;
+        m_selfSignList = newSelfSignList;
+        emit selfSignListChanged();
     }
 
 
@@ -601,6 +614,7 @@ signals:
     void isExtendedFormulaChanged();
     void isExtendedServiceChanged();
     void isShowBrewInfoTextChanged();
+    void selfSignListChanged();
     void searchItemsCaskChanged();
     void searchItemsFormulaChanged();
     void searchStatusCaskTextChanged();
@@ -650,6 +664,7 @@ private:
     bool m_isExtendedFormula;
     bool m_isExtendedService;
     bool m_isShowBrewInfoText;
+    QStringList m_selfSignList;
     QVector<SearchResultRow *> m_searchItemsCask;
     QVector<SearchResultRow *> m_searchItemsFormula;
     QString m_searchStatusCaskText;

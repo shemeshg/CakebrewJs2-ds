@@ -12,6 +12,7 @@ BrewData::BrewData(QObject *parent)
     loadIsExtendedFormula();
     loadIsExtendedService();
     loadIsShowBrewInfoText();
+    loadSelfSignList();
 
     loadX();
     loadY();
@@ -353,6 +354,12 @@ void BrewData::saveIsShowBrewInfoText(const bool s)
 {
     settings.setValue("isShowBrewInfoText", s);
     loadIsShowBrewInfoText();
+}
+
+void BrewData::saveSelfSignList(const QStringList s)
+{
+    settings.setValue("selfSignList", s);
+    loadSelfSignList();
 }
 
 void BrewData::saveX(const int s)
@@ -788,6 +795,12 @@ void BrewData::loadBrewLocation()
 
     setBrewLocation(s_brewLocation);
     emit brewLocationChanged();
+}
+
+void BrewData::loadSelfSignList()
+{
+    QStringList s = settings.value("selfSignList", {}).toStringList();
+    setSelfSignList(s);
 }
 
 void BrewData::loadIsExtendedCask()

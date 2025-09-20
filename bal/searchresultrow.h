@@ -26,9 +26,11 @@ class SearchResultRow : public QObject
 public:
     SearchResultRow(QObject *parent = nullptr);
 
-    QString token() const { return m_token; }
-
-    void setToken(const QString &newToken)
+    
+    
+    QString token() const{return m_token;} 
+    
+void setToken(const QString &newToken)
     {
         if (m_token == newToken)
             return;

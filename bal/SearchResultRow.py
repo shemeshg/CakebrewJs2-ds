@@ -33,7 +33,7 @@ p.is_writable = True
 p.is_notify = True
 ary.append(p)
 
-classSearchResultRow = PrptClass("SearchResultRow", ary)
+classSearchResultRow = PrptClass("SearchResultRow", ary,[])
 
 
 

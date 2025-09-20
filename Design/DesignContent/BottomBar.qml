@@ -204,21 +204,34 @@ GroupBox {
                 }
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
-            }            
-            CoreButton {
+            }
+            CoreSwitch {
                 text: "SelfSign"
                 visible: Constants.brewData.isInfoShowUninstallZap
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
-                onClicked: {
-                    if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
-                        beforeInfoAction()
-                        Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
-                                                              afterInfoAction()
-                                                         })
+                checked:  Constants.brewData.selfSignList.indexOf(Constants.brewData.infoToken) !== -1
+                onToggled:  {
+                    let a = Constants.brewData.selfSignList;
+                    if(checked) {
+                        if (a.indexOf(Constants.brewData.infoToken) === -1) {
+                            a.push(Constants.brewData.infoToken);
+                            Constants.brewData.saveSelfSignList(a);
 
+                            if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                                beforeInfoAction()
+                                Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
+                                                                      afterInfoAction()
+                                                                 })
+                            }
+                        }
+                    } else {
+                        let i = a.indexOf(Constants.brewData.infoToken);
+                        if (i !== -1) {
+                            a.splice(i, 1);  // Remove the item at index i
+                            Constants.brewData.saveSelfSignList(a);
+                        }
                     }
-
                 }
             }
         }

@@ -67,4 +67,31 @@ ColumnLayout {
 if unnecessary)"
         checked: Constants.brewData.updateForce
     }
+
+    CoreLabel {
+        text: "SelfSigned Casks:"
+        color: CoreSystemPalette.text
+    }
+
+    Repeater {
+            model: Constants.brewData.selfSignList
+            RowLayout {
+                HyperlinkBtnInfo {
+                    isCask: true
+                    leftPadding: 10
+                    urlText: modelData
+                    urlRef: modelData
+                }
+                CoreButton {
+                    text: "del"
+                    onClicked: {
+                        let a = Constants.brewData.selfSignList;
+                        a.splice(index, 1);
+                        Constants.brewData.saveSelfSignList( a)
+                    }
+                }
+            }
+
+    }
+
 }

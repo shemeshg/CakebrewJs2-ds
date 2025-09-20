@@ -61,6 +61,7 @@ public slots:
     void saveIsExtendedFormula(const bool s);
     void saveIsExtendedService(const bool s);
     void saveIsShowBrewInfoText(const bool s);
+    void saveSelfSignList(const QStringList s);
 
     void saveX(const int s);
     void saveY(const int s);
@@ -117,6 +118,7 @@ private:
     void loadIsExtendedFormula();
     void loadIsExtendedService();
     void loadIsShowBrewInfoText();
+    void loadSelfSignList();
     void loadX();
     void loadY();
     void loadWidth();
