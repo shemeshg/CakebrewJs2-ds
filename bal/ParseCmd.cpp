@@ -76,6 +76,7 @@ QVector<FormulaRow> ParseCmd::parseFormulaList(QString &strResult)
         row.fullName = QString::fromStdString(fullName);
         row.desc = QString::fromStdString(desc);
         row.tap = QString::fromStdString(tap);
+        row.tapToken = QString("%1/%2").arg(row.tap, row.token);
         row.version = QString::fromStdString(installedVersion).left(MAX_VER_LEN).simplified();
         row.outdated = QString::fromStdString(updatedVersion).left(MAX_VER_LEN).simplified();
         row.ruby_source_path = QString::fromStdString(ruby_source_path);
@@ -174,7 +175,7 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         cr.desc = QString::fromStdString(desc);
 
         cr.tap = QString::fromStdString(tap);
-
+        cr.tapToken = QString("%1/%2").arg(cr.tap, cr.token);
         cr.version = QString::fromStdString(version).left(MAX_VER_LEN).simplified();
         cr.outdated = QString::fromStdString(outdated).left(MAX_VER_LEN).simplified();
         cr.isOutdated = isOutdated;

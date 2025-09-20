@@ -76,8 +76,8 @@ ColumnLayout {
                     isCask: true
                     leftPadding: 10
                     urlText: model.display.text
-                             + (ctvc.filteredModel[model.row].isDeprecated ? " ⚠️" : "")
-                    urlRef: model.display.text
+                             + (ctvc.filteredModel[model.row].isDeprecated ? " ⚠️" : "")                            
+                    urlRef: ctvc.filteredModel[model.row].tapToken
                 }
             }
 
@@ -197,7 +197,7 @@ ColumnLayout {
                     leftPadding: 10
                     urlText: model.display.text
                              + (ctvf.filteredModel[model.row].isDeprecated ? " ⚠️" : "")
-                    urlRef: model.display.text
+                    urlRef: ctvf.filteredModel[model.row].tapToken
                 }
             }
 

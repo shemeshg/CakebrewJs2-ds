@@ -6,7 +6,7 @@
 class FormulaRow
 {
 public:
-    QString token, desc, tap, version, outdated, leafText, leafPopup, fullName, homepage,
+    QString token, desc, tap, tapToken, version, outdated, leafText, leafPopup, fullName, homepage,
         ruby_source_path, license, caveats;
     bool isOutdated, isPinned, installedOnRequest, isInstalled, isDeprecated;
     QStringList usedIn, dependencies, buildDependencies;

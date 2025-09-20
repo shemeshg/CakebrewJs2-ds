@@ -59,6 +59,7 @@ void CaskRow::addToList(QVariantList &caskTableBodyList)
     row["outdated"] = QVariant::fromValue(text);
 
     row["isDeprecated"] = QVariant::fromValue(isDeprecated);
+    row["tapToken"] = QVariant::fromValue(tapToken);
 
     caskTableBodyList.emplaceBack(QVariant::fromValue(row));
 }

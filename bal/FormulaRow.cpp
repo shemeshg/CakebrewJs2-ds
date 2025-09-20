@@ -83,6 +83,7 @@ void FormulaRow::addToList(QVariantList &formulaTableBodyList)
     row["leaf"] = QVariant::fromValue(text);
 
     row["isDeprecated"] = QVariant::fromValue(isDeprecated);
+    row["tapToken"] = QVariant::fromValue(tapToken);
     formulaTableBodyList.emplaceBack(QVariant::fromValue(row));
 }
 

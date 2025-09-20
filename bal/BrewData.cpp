@@ -571,7 +571,7 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
 
     if (isCask) {
         auto it = std::find_if(caskRows.begin(), caskRows.end(), [=](auto &row) {
-            return row.token == token;
+            return row.token == token || row.tapToken == token;
         });
         if (it != caskRows.end()) {
             setRowFromCaskRow(row, *it);
@@ -593,7 +593,7 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
         }
     } else {
         auto it = std::find_if(formulaRows.begin(), formulaRows.end(), [=](auto &row) {
-            return row.token == token;
+            return row.token == token || row.tapToken == token;
         });
         if (it != formulaRows.end()) {
             setRowFromFormulaRow(row, *it);
@@ -920,6 +920,7 @@ void BrewData::setRowFromCaskRow(QMap<QString, QVariant> &row, CaskRow &caskRow)
 {
     row["infoStatus"] = (int) InfoStatus::CaskFound;
     row["token"] = caskRow.token;
+    row["tapToken"] = QString("%1/%2").arg(caskRow.tap, caskRow.token);
     row["desc"] = caskRow.desc;
     row["tap"] = caskRow.tap;
     row["version"] = caskRow.version;
@@ -947,6 +948,7 @@ void BrewData::setRowFromFormulaRow(QMap<QString, QVariant> &row, FormulaRow &fo
     row["fullName"] = formulaRow.fullName;
     row["desc"] = formulaRow.desc;
     row["tap"] = formulaRow.tap;
+    row["tapToken"] = QString("%1/%2").arg(formulaRow.tap, formulaRow.token);
     row["version"] = formulaRow.version;
     row["outdated"] = formulaRow.outdated;
     row["leafText"] = formulaRow.leafText;
