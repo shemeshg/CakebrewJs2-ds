@@ -206,11 +206,20 @@ GroupBox {
                          && !Constants.brewData.refreshFormulaRunning
             }
             CoreSwitch {
+                function foundSelfSign(){
+                    let list = Constants.brewData.selfSignList.map(item => {
+                                                                          let parts = item.split("/");
+                                                                          return parts.slice(-1)[0];
+                                                                      });
+                    let target = Constants.brewData.infoToken.split("/").slice(-1)[0];
+                    return list.indexOf(target) !== -1
+                }
+
                 text: "SelfSign"
                 visible: Constants.brewData.isInfoShowUninstallZap
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
-                checked:  Constants.brewData.selfSignList.indexOf(Constants.brewData.infoToken) !== -1
+                checked:  foundSelfSign()
                 onToggled:  {
                     let a = Constants.brewData.selfSignList;
                     if(checked) {
