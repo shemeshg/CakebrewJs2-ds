@@ -167,7 +167,7 @@ void BrewData::asyncBrewActionSelected(QStringList casks,
             for (auto &i : casks) {
                 escCasks.push_back("'" + i + "'");
             }
-            cmd = cmdTemplate.arg(brewLocation(), action, "--cask", escCasks.join(" ")) + ";";
+            cmd = cmdTemplate.arg(brewLocation(), action, "--cask", escCasks.join(" ")) + ";\n";
         }
         if (formulas.size() > 0) {
             QStringList escFormulas;
@@ -175,8 +175,11 @@ void BrewData::asyncBrewActionSelected(QStringList casks,
                 escFormulas.push_back("'" + i + "'");
             }
             cmd = cmd + cmdTemplate.arg(brewLocation(), action, "--formula", escFormulas.join(" "))
-                  + ";";
+                  + ";\n";
         }
+
+        cmd += getSelfSignCaskForPotentialItems(casks);
+
         sc.externalTerminalCmd(cmd);
         refreshCaskAndFormulaAfterCallback(true);
         return true;
@@ -625,9 +628,30 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
     return row;
 }
 
-void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
-{
+const QString BrewData::getSelfSignCaskForPotentialItems(QStringList casks){
+    QString cmd;
+    QSet<QString> selfSignTokens;
+    for (const QString &item : selfSignList()) {
+        QString lastPart = item.section('/', -1);  // Gets last segment
+        selfSignTokens.insert(lastPart);
+    }
 
+    // Step 2: Filter casks based on matching last segment
+    QStringList matchingCasks;
+    for (const QString &cask : casks) {
+        QString lastPart = cask.section('/', -1);
+        if (selfSignTokens.contains(lastPart)) {
+            matchingCasks.append(cask);
+        }
+    }
+    for (const QString &cask : matchingCasks) {
+        cmd += getSelfSignCaskCmdStr(cask) + "\n";
+    }
+    return cmd;
+}
+
+const QString BrewData::getSelfSignCaskCmdStr(const QString token)
+{
     auto row = getInfo(token, true);
     QMap<QString, QVariant> map = row.toMap();
     QString artifacts = map["artifacts"].toString();
@@ -648,6 +672,14 @@ void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
         cmds.append(codeSignCmd);
     }
     QString runningCmd = cmds.join("\n");
+    return runningCmd;
+}
+
+void BrewData::selfSignCasks(const QString token,const QJSValue &callback)
+{
+
+
+    QString runningCmd = getSelfSignCaskCmdStr(token);
 
 
     makeAsync<bool>(callback, [=]() {

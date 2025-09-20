@@ -139,4 +139,6 @@ private:
     void cashFileWrite(const QString &fileName, QString &fileContent);
     QString cashFileRead(const QString &fileName);
     ShellCmd getShellCmd();
+    const QString getSelfSignCaskCmdStr(const QString token);
+    const QString getSelfSignCaskForPotentialItems(QStringList casks);
 };
