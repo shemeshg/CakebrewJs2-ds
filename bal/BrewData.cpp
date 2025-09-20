@@ -198,8 +198,17 @@ void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
     refreshCaskAndFormulaBeforeCallback();
     makeAsync<bool>(callback, [=]() {
         ShellCmd sc = getShellCmd();
-        QString cmd = "%1 '%2'";
+        QString cmd = "%1 '%2';\n";
         cmd = cmd.arg(brewLocation(), "upgrade");
+
+
+        QStringList outdatedTokens;
+        for (auto it = caskRows.begin(); it != caskRows.end(); ++it) {
+            if (it->isOutdated) {
+                outdatedTokens << it->token;
+            }
+        }
+        cmd += getSelfSignCaskForPotentialItems(outdatedTokens);
         sc.externalTerminalCmd(cmd);
         refreshCaskAndFormulaAfterCallback(true);
         return true;
