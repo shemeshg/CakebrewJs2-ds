@@ -370,7 +370,9 @@ void BrewData::saveIsShowBrewInfoText(const bool s)
 
 void BrewData::saveSelfSignList(const QStringList s)
 {
-    settings.setValue("selfSignList", s);
+    QStringList s1 = s;
+    s1.sort();
+    settings.setValue("selfSignList", s1);
     loadSelfSignList();
 }
 

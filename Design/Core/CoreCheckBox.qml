@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
+import Design
 
 CheckBox {
     id: control
@@ -41,8 +41,8 @@ CheckBox {
             }
         }
 
-        implicitWidth: 20
-        implicitHeight: 20
+        implicitWidth: Constants.fontSizeNormal()
+        implicitHeight: Constants.fontSizeNormal()
         radius: 4
         color: getColor(control.checked, control.enabled)
         border.color: getBorderColor(control.enabled)  // Removes black border
