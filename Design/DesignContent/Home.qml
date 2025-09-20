@@ -89,7 +89,7 @@ ColumnLayout {
                     checked: {
                         if (ctvc.filteredModel[model.row]) {
                             return Constants.caskSelected.indexOf(
-                                        ctvc.filteredModel[model.row].token.text) > -1
+                                        ctvc.filteredModel[model.row].tapToken) > -1
                         }
                         return false
                     }
@@ -100,10 +100,10 @@ ColumnLayout {
                         model.display.tsChecked = checked
                         if (checked) {
                             Constants.caskSelected.push(
-                                        ctvc.filteredModel[model.row].token.text)
+                                        ctvc.filteredModel[model.row].tapToken)
                         } else {
                             const indexToRemove = Constants.caskSelected.indexOf(
-                                                    ctvc.filteredModel[model.row].token.text)
+                                                    ctvc.filteredModel[model.row].tapToken)
                             if (indexToRemove !== -1) {
                                 Constants.caskSelected.splice(indexToRemove, 1)
                             }
@@ -209,7 +209,7 @@ ColumnLayout {
                     checked: {
                         if (ctvf.filteredModel[model.row]) {
                             return Constants.formulaSelected.indexOf(
-                                        ctvf.filteredModel[model.row].name.text) > -1
+                                        ctvf.filteredModel[model.row].tapToken) > -1
                         }
                         return false
                     }
@@ -219,10 +219,10 @@ ColumnLayout {
                         model.display.tsChecked = checked
                         if (checked) {
                             Constants.formulaSelected.push(
-                                        ctvf.filteredModel[model.row].name.text)
+                                        ctvf.filteredModel[model.row].tapToken)
                         } else {
                             const indexToRemove = Constants.formulaSelected.indexOf(
-                                                    ctvf.filteredModel[model.row].name.text)
+                                                    ctvf.filteredModel[model.row].tapToken)
                             if (indexToRemove !== -1) {
                                 Constants.formulaSelected.splice(indexToRemove,
                                                                  1)
