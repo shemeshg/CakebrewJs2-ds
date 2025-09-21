@@ -596,6 +596,7 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
         });
         if (it != caskRows.end()) {
             setRowFromCaskRow(row, *it);
+            setInfoToken(it->tapToken);
         } else {
             ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdGetInfo(token, isCask);
@@ -603,6 +604,7 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
                 ParseCmd pc;
                 CaskRow caskRow = pc.parseCaskList(s.stdOut).at(0);
                 setRowFromCaskRow(row, caskRow);
+                setInfoToken(caskRow.tapToken);
             } else {
                 if (s.stdErr.isEmpty()) {
                     s.stdErr = "Err" + QString::number(s.exitCode);
@@ -618,6 +620,7 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
         });
         if (it != formulaRows.end()) {
             setRowFromFormulaRow(row, *it);
+            setInfoToken(it->tapToken);
         } else {
             ShellCmd sc = getShellCmd();
             ProcessStatus s = sc.cmdGetInfo(token, isCask);
@@ -625,6 +628,7 @@ QVariant BrewData::getInfo(const QString token, bool isCask)
                 ParseCmd pc;
                 FormulaRow formulaRow = pc.parseFormulaList(s.stdOut).at(0);
                 setRowFromFormulaRow(row, formulaRow);
+                setInfoToken(formulaRow.tapToken);
             } else {
                 if (s.stdErr.isEmpty()) {
                     s.stdErr = "Err" + QString::number(s.exitCode);
