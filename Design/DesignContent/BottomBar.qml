@@ -33,6 +33,30 @@ GroupBox {
                                                       })
     }
 
+    function addSelfSignList() {
+        let a = Constants.brewData.selfSignList;
+        if (a.indexOf(Constants.brewData.infoToken) === -1) {
+            a.push(Constants.brewData.infoToken);
+            Constants.brewData.saveSelfSignList(a);
+
+            if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                beforeInfoAction()
+                Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
+                                                      afterInfoAction()
+                                                 })
+            }
+        }
+    }
+
+    function removeSelfSignList() {
+        let a = Constants.brewData.selfSignList;
+        let i = a.indexOf(Constants.brewData.infoToken);
+        if (i !== -1) {
+            a.splice(i, 1);  // Remove the item at index i
+            Constants.brewData.saveSelfSignList(a);
+        }
+    }
+
     RowLayout {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -171,6 +195,7 @@ GroupBox {
                 visible: Constants.brewData.isInfoShowUninstall
                 onClicked: {
                     if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        removeSelfSignList()
                         beforeInfoAction()
                         Constants.brewData.asyncBrewActionSelected(
                                     [Constants.brewData.infoToken], [],
@@ -194,6 +219,7 @@ GroupBox {
                 visible: Constants.brewData.isInfoShowUninstallZap
                 onClicked: {
                     if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
+                        removeSelfSignList()
                         beforeInfoAction()
                         Constants.brewData.asyncBrewActionSelected(
                                     [Constants.brewData.infoToken], [],
@@ -221,25 +247,10 @@ GroupBox {
                          && !Constants.brewData.refreshFormulaRunning
                 checked:  foundSelfSign()
                 onToggled:  {
-                    let a = Constants.brewData.selfSignList;
                     if(checked) {
-                        if (a.indexOf(Constants.brewData.infoToken) === -1) {
-                            a.push(Constants.brewData.infoToken);
-                            Constants.brewData.saveSelfSignList(a);
-
-                            if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
-                                beforeInfoAction()
-                                Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
-                                                                      afterInfoAction()
-                                                                 })
-                            }
-                        }
+                        addSelfSignList()
                     } else {
-                        let i = a.indexOf(Constants.brewData.infoToken);
-                        if (i !== -1) {
-                            a.splice(i, 1);  // Remove the item at index i
-                            Constants.brewData.saveSelfSignList(a);
-                        }
+                        removeSelfSignList()
                     }
                 }
             }
