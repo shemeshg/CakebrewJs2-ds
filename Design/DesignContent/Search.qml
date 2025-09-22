@@ -52,6 +52,7 @@ ColumnLayout {
             Layout.fillWidth: true
             onAccepted: {
                 if (searchEnabled) {
+                    textSearch.text = textSearch.text.trim().replace(/\s+/g, ' ');
                     doSearchAction()
                 }
             }
