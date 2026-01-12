@@ -15,6 +15,7 @@ cog.outl(classBrewDataPrivate.getClassHeader(),
         dedent=True, trimblanklines=True)
 
 ]]] */
+//-only-file header
 class BrewDataPrivate : public JsAsync
 {
     Q_OBJECT
@@ -68,7 +69,12 @@ class BrewDataPrivate : public JsAsync
     
     QML_ELEMENT
 public:
-    BrewDataPrivate(QObject *parent = nullptr);
+    
+    BrewDataPrivate(QObject *parent):JsAsync(parent){}
+
+    virtual ~BrewDataPrivate() {
+        
+    }
 
     
 enum class InfoStatus {
@@ -600,7 +606,9 @@ void setIsInfoShowUninstallZap(const bool newIsInfoShowUninstallZap)
     }
 
 
-
+    
+    
+    
 signals:
     void brewLocationChanged();
     void normalFontPointSizeChanged();
@@ -651,57 +659,60 @@ signals:
     void isInfoShowUninstallZapChanged();
     
 
-private:
-    QString m_brewLocation;
-    QString m_normalFontPointSize;
-    QString m_terminalApp;
-    bool m_updateForce;
-    int m_x;
-    int m_y;
-    int m_width;
-    int m_height;
-    bool m_isExtendedCask;
-    bool m_isExtendedFormula;
-    bool m_isExtendedService;
-    bool m_isShowBrewInfoText;
-    QStringList m_selfSignList;
-    QVector<SearchResultRow *> m_searchItemsCask;
-    QVector<SearchResultRow *> m_searchItemsFormula;
-    QString m_searchStatusCaskText;
-    QString m_searchStatusFormulaText;
-    bool m_searchStatusCaskVisible;
-    bool m_searchStatusFormulaVisible;
-    bool m_searchCaskRunning;
-    bool m_searchFormulaRunning;
-    QString m_refreshStatusCaskText;
-    QString m_refreshStatusFormulaText;
-    QString m_refreshStatusServiceText;
-    bool m_refreshStatusServiceVisible;
-    bool m_refreshStatusFormulaVisible;
-    bool m_refreshStatusCaskVisible;
-    bool m_refreshServiceRunning;
-    bool m_refreshFormulaRunning;
-    bool m_refreshCaskRunning;
-    int m_serviceSortedColIdx;
-    int m_serviceSortedColOrder;
-    int m_caskSortedColIdx;
-    int m_caskSortedColOrder;
-    int m_formulaSortedColIdx;
-    int m_formulaSortedColOrder;
-    QVariantList m_formulaTableBodyList;
-    QVariantList m_caskTableBodyList;
-    QVariantList m_serviceTableBodyList;
-    InfoStatus m_infoStatus;
-    QString m_infoToken;
-    bool m_isInfoShowPin;
-    bool m_isInfoShowUnpin;
-    bool m_isInfoShowUpgrade;
-    bool m_isInfoShowInstall;
-    bool m_isInfoShowUninstall;
-    bool m_isInfoShowUninstallZap;
+protected:
+    QVector<SearchResultRow *> m_searchItemsCask ;
+    QVector<SearchResultRow *> m_searchItemsFormula ;
+    QVariantList m_formulaTableBodyList ;
+    QVariantList m_caskTableBodyList ;
+    QVariantList m_serviceTableBodyList ;
     
-    void ctorClass();
+
+private:
+    QString m_brewLocation ;
+    QString m_normalFontPointSize ;
+    QString m_terminalApp ;
+    bool m_updateForce = false;
+    int m_x = 0;
+    int m_y = 0;
+    int m_width = 0;
+    int m_height = 0;
+    bool m_isExtendedCask = false;
+    bool m_isExtendedFormula = false;
+    bool m_isExtendedService = false;
+    bool m_isShowBrewInfoText = false;
+    QStringList m_selfSignList ;
+    QString m_searchStatusCaskText ;
+    QString m_searchStatusFormulaText ;
+    bool m_searchStatusCaskVisible = false;
+    bool m_searchStatusFormulaVisible = false;
+    bool m_searchCaskRunning = false;
+    bool m_searchFormulaRunning = false;
+    QString m_refreshStatusCaskText ;
+    QString m_refreshStatusFormulaText ;
+    QString m_refreshStatusServiceText ;
+    bool m_refreshStatusServiceVisible = false;
+    bool m_refreshStatusFormulaVisible = false;
+    bool m_refreshStatusCaskVisible = false;
+    bool m_refreshServiceRunning = false;
+    bool m_refreshFormulaRunning = false;
+    bool m_refreshCaskRunning = false;
+    int m_serviceSortedColIdx = 0;
+    int m_serviceSortedColOrder = 0;
+    int m_caskSortedColIdx = 0;
+    int m_caskSortedColOrder = 0;
+    int m_formulaSortedColIdx = 0;
+    int m_formulaSortedColOrder = 0;
+    InfoStatus m_infoStatus ;
+    QString m_infoToken ;
+    bool m_isInfoShowPin = false;
+    bool m_isInfoShowUnpin = false;
+    bool m_isInfoShowUpgrade = false;
+    bool m_isInfoShowInstall = false;
+    bool m_isInfoShowUninstall = false;
+    bool m_isInfoShowUninstallZap = false;
+    
 };
+//-only-file null
 
 //[[[end]]]
 

@@ -3,6 +3,8 @@
 BrewData::BrewData(QObject *parent)
     : BrewDataPrivate{parent}
 {
+    setServiceSortedColIdx(0);
+    setServiceSortedColOrder(1);
     loadBrewLocation();
     loadNormalFontPointSize();
     loadTerminalApp();

@@ -11,6 +11,9 @@ else
     source .venv/bin/activate
 fi
 
+cd "$script_dir/.."
+cd Bal
+cog -r BrewDataPrivate.h BrewDataPrivate.cpp
 
 cd "$script_dir/.."
 cog -r CMakeLists.txt
