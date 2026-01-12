@@ -11,7 +11,12 @@ ColumnLayout {
     function saveSettings() {
         Constants.brewData.saveNormalFontPointSize(fontSizeInput.text)
         Constants.brewData.saveBrewLocation(brewLocation.text)
-        Constants.brewData.saveTerminalApp(terminalApp.currentText)
+        if (Qt.platform.os === "osx") {
+            Constants.brewData.saveTerminalApp(terminalApp.currentText)
+        } else {
+            Constants.brewData.saveTerminalApp(terminalAppLinux.text)
+        }
+
         Constants.brewData.saveUpdateForce(updateForce.checked)
     }
 
@@ -35,6 +40,7 @@ ColumnLayout {
     }
     CoreComboBox {
         id: terminalApp
+        visible: Qt.platform.os === "osx"
         Layout.fillWidth: true
         textRole: "text"
         valueRole: "value"
@@ -51,6 +57,12 @@ ColumnLayout {
         Component.onCompleted: currentIndex = indexOfValue(
                                    Constants.brewData.terminalApp)
     }
+    CoreTextField {
+        id: terminalAppLinux
+        visible: Qt.platform.os !== "osx"
+        text: Constants.brewData.terminalApp
+    }
+
     CoreLabel {
         text: "Font size"
         color: CoreSystemPalette.text

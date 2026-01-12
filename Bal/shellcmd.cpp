@@ -142,8 +142,15 @@ void ShellCmd::externalTerminalCmd(QString cmdToRun)
 
         exec("chmod", {"+x", fileName});
         
-        exec("open", {"-a", terminalApp, fileName});
 
+        #ifdef __APPLE__
+                exec("open", {"-a", terminalApp, fileName});
+        #else
+                QStringList terminalAppBinList = terminalApp.split(" ");
+                QStringList args = terminalAppBinList.mid(1);
+                args << fileName;
+                exec(terminalAppBinList[0], args);
+        #endif
 
         
         QEventLoop loop;

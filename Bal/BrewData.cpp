@@ -820,7 +820,12 @@ void BrewData::loadNormalFontPointSize()
 
 void BrewData::loadTerminalApp()
 {
-    QString s = settings.value("terminalApp", "iTerm").toString();
+    #ifdef __APPLE__
+    QString defaultTerminal = "iTerm";
+    #else
+    QString defaultTerminal = "gnome-terminal -- bash -c";
+    #endif
+    QString s = settings.value("terminalApp", defaultTerminal).toString();
     setTerminalApp(s);
 }
 
