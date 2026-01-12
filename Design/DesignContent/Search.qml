@@ -79,6 +79,7 @@ ColumnLayout {
                 text: Constants.brewData.searchStatusCaskText
                 visible: Constants.brewData.searchStatusCaskVisible
                          && !Constants.brewData.searchCaskRunning
+                        && caskHeader.isExtended
             }
             ColumnLayout {
                 visible: caskHeader.isExtended && filtredSearchedCaskItems(
@@ -111,6 +112,7 @@ ColumnLayout {
             text: Constants.brewData.searchStatusFormulaText
             visible: Constants.brewData.searchStatusFormulaVisible
                      && !Constants.brewData.searchFormulaRunning
+                    && formulaHeader.isExtended
         }
         ColumnLayout {
 
