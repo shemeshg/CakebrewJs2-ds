@@ -59,9 +59,9 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
 # )
 ##
 
-add_subdirectory(design/Design)
-add_subdirectory(design/DesignContent)
-add_subdirectory(design/Core)
+add_subdirectory(Design/Design)
+add_subdirectory(Design/DesignContent)
+add_subdirectory(Design/Core)
 add_subdirectory(Bal)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
