@@ -8,20 +8,38 @@
 ShellCmd::ShellCmd(QString brewLocation, QString terminalApp)
     : brewLocation{brewLocation}, terminalApp{terminalApp} {}
 
+std::string ShellCmd::randomTempScriptName() {
+    namespace fs = std::filesystem;
+
+    // Where to put the file
+    fs::path dir = fs::temp_directory_path();
+
+    // Random generator
+    static std::mt19937_64 rng{std::random_device{}()};
+    static std::uniform_int_distribution<uint64_t> dist;
+
+    // Create a random hex string
+    uint64_t r = dist(rng);
+    std::string name = "Cakebrewjs2_" + std::to_string(r) + ".sh";
+
+    return (dir / name).string();
+}
+
 ProcessStatus ShellCmd::cmdSearch(QString textSearch, bool isCask) {
     QString caskFormulaStr = isCask ? "--cask" : "--formula";
 
-    QTemporaryFile fTmp;
+    QString fileName = QString::fromStdString(randomTempScriptName());
 
     QString cmd = R"(#!/bin/sh
 %1 search %2 $1|head -50|xargs %1 info %2 --json=v2)";
     cmd = cmd.arg(brewLocation, caskFormulaStr);
-    if (fTmp.open()) {
-        fTmp.write(cmd.toUtf8());
-        fTmp.flush();
+    {
+        std::ofstream out(fileName.toStdString(), std::ios::out | std::ios::trunc);
+        out << cmd.toUtf8().toStdString(); // your trap + command
     }
-    exec("chmod", {"+x", fTmp.fileName()});
-    return exec(fTmp.fileName(), {textSearch});
+
+    exec("chmod", {"+x", fileName});
+    return exec(fileName, {textSearch});
 }
 
 ProcessStatus ShellCmd::cmdBrewUpdate(bool isUpdateForce) {
@@ -115,29 +133,11 @@ find `%1 --caskroom`/$1 -mindepth 2 -maxdepth 4  -not -path '*/.*'|  tr \\n \\0 
     return exec(file.fileName(), {token});
 }
 
-std::string randomTempScriptName() {
-    namespace fs = std::filesystem;
-
-    // Where to put the file
-    fs::path dir = fs::temp_directory_path();
-
-    // Random generator
-    static std::mt19937_64 rng{std::random_device{}()};
-    static std::uniform_int_distribution<uint64_t> dist;
-
-    // Create a random hex string
-    uint64_t r = dist(rng);
-    std::string name = "Cakebrewjs2_" + std::to_string(r) + ".sh";
-
-    return (dir / name).string();
-}
-
 void ShellCmd::externalTerminalCmd(QString cmdToRun) {
     QString s = R"(trap "rm %1" EXIT;
 %2;
 read -p "Press ENTER to close..."
 )";
-
 
     QString fileName = QString::fromStdString(randomTempScriptName());
     s = s.arg(fileName, cmdToRun);

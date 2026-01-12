@@ -49,4 +49,5 @@ public:
 
 private:
     QString brewLocation, terminalApp;
+    std::string randomTempScriptName();
 };
