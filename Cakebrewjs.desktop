@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Cakebrewjs
+Version=1.0
+GenericName=Cakebrewjs
+Comment=Cakebrewjs
+Exec=/opt/Cakebrewjs/bin/Cakebrewjs.sh
+Icon=/usr/share/icons/hicolor/256x256/apps/Cakebrewjs.png
+Terminal=false
+Categories=Utility;
+Keywords=homebrew;

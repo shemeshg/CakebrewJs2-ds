@@ -1,0 +1,4 @@
+#!/bin/bash
+cp /opt/Cakebrewjs/share/applications/Cakebrewjs.desktop /usr/share/applications/Cakebrewjs.desktop
+cp /opt/Cakebrewjs/share/icons/hicolor/256x256/apps/Cakebrewjs.png /usr/share/icons/hicolor/256x256/apps/Cakebrewjs.png
+chmod 777 /opt/Cakebrewjs/bin/Cakebrewjs.sh
