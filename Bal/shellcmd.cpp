@@ -135,7 +135,7 @@ find `%1 --caskroom`/$1 -mindepth 2 -maxdepth 4  -not -path '*/.*'|  tr \\n \\0 
 
 void ShellCmd::externalTerminalCmd(QString cmdToRun) {
     QString s = R"(trap "rm %1" EXIT;
-%2;
+%2
 read -p "Press ENTER to close..."
 )";
 

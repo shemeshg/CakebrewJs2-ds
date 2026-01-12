@@ -5,7 +5,7 @@
 # ]]]
 cmake_minimum_required(VERSION 3.16)
 
-project(Cakebrewjs VERSION 2.90 LANGUAGES CXX)
+project(Cakebrewjs VERSION 2.91 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(QT_QML_GENERATE_QMLLS_INI ON)
