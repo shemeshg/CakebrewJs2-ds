@@ -24,7 +24,7 @@ ColumnLayout {
 
 
                                                                  const searchRegExp = new RegExp(a.replace(/^\/+|\/+$/g, ""),"i");
-                                                                return searchRegExp.test(r.name + r.token + r.version + r.homepage + r.desc);
+                                                                return searchRegExp.test(r.name + " " + r.token + " " + r.version + r.homepage + r.desc);
                                                             })
     }
 
@@ -32,7 +32,7 @@ ColumnLayout {
         let a = textsearchWithoutRubyRegex()
         return Constants.brewData.searchItemsCask.filter(r => {
                                                             const searchRegExp = new RegExp(a.replace(/^\/+|\/+$/g, ""),"i");
-                                                             return searchRegExp.test(r.name + r.token + r.version + r.homepage + r.desc)
+                                                             return searchRegExp.test(r.name + " " + r.token + " " + r.version + r.homepage + r.desc)
                                                          })
     }
 
