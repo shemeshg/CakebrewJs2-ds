@@ -26,11 +26,10 @@ ColumnLayout {
     }
 
     function getRowsModel() {
-        return rowsModel.filter(row => {
-                                    return row.filterString.toLowerCase(
-                                        ).includes(
-                                        filterByExp.text.toLowerCase())
-                                    || row.filterString === ""
+        const searchRegExp = new RegExp(filterByExp.text,"i");
+        return rowsModel.filter((row, index) => {
+                                    if (index === 0) return true;
+                                     return searchRegExp.test(row.filterString);
                                 })
     }
 
