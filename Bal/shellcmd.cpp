@@ -31,7 +31,7 @@ ProcessStatus ShellCmd::cmdSearch(QString textSearch, bool isCask) {
     QString fileName = QString::fromStdString(randomTempScriptName());
 
     QString cmd = R"(#!/bin/sh
-%1 search %2 $1|head -50|xargs %1 info %2 --json=v2)";
+%1 search %2 $1|head -50|xargs -r %1 info %2 --json=v2)";
     cmd = cmd.arg(brewLocation, caskFormulaStr);
     {
         std::ofstream out(fileName.toStdString(), std::ios::out | std::ios::trunc);
