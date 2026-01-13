@@ -242,7 +242,7 @@ GroupBox {
                 }
 
                 text: "SelfSign"
-                visible: Constants.brewData.isInfoShowUninstallZap
+                visible: Constants.brewData.isInfoShowUninstallZap && Qt.platform.os === "osx"
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
                 checked:  foundSelfSign()
