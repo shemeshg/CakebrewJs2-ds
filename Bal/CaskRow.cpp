@@ -33,7 +33,7 @@ void CaskRow::addToList(QVariantList &caskTableBodyList)
 {
     QMap<QString, QVariant> row;
     QMap<QString, QVariant> text;
-    row["filterString"] = token + " " + desc + " " + tap;
+    row["filterString"] = token + "|" + desc + "|" + tap;
     text["text"] = token;
     row["token"] = QVariant::fromValue(text);
 

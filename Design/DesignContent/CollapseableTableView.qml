@@ -28,8 +28,8 @@ ColumnLayout {
     function getRowsModel() {
         const searchRegExp = new RegExp(filterByExp.text,"i");
         return rowsModel.filter((row, index) => {
-                                    if (index === 0) return true;
-                                     return searchRegExp.test(row.filterString);
+                                    if (index === 0) return true; //is header
+                                    return row.filterString.split("|").some((col)=>{return searchRegExp.test(col);});
                                 })
     }
 
