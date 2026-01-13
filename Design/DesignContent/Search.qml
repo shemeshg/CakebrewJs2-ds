@@ -8,23 +8,31 @@ ColumnLayout {
     Layout.leftMargin: 10
     Layout.rightMargin: 20
 
+    function textsearchWithoutRubyRegex(){
+        let a = textSearch.text;
+        // remove leading slashes
+        a = a.replace(/^\/+/, "");
+        // remove trailing slash
+        a = a.replace(/\/+$/, "");
+        // remove trailing "$" if it exists
+        return a.replace(/\$$/, "");
+    }
+
     function filtredSearchedFormulaItems() {
+        let a = textsearchWithoutRubyRegex()
         return Constants.brewData.searchItemsFormula.filter(r => {
 
-                                                                return (r.name + r.token + r.version + r.homepage + r.desc).toLowerCase(
-                                                                    ).includes(
-                                                                    textSearch.text.toLowerCase(
-                                                                        ))
+
+                                                                 const searchRegExp = new RegExp(a.replace(/^\/+|\/+$/g, ""),"i");
+                                                                return searchRegExp.test(r.name + r.token + r.version + r.homepage + r.desc);
                                                             })
     }
 
     function filtredSearchedCaskItems() {
+        let a = textsearchWithoutRubyRegex()
         return Constants.brewData.searchItemsCask.filter(r => {
-
-                                                             return (r.name + r.token + r.version + r.homepage + r.desc).toLowerCase(
-                                                                 ).includes(
-                                                                 textSearch.text.toLowerCase(
-                                                                     ))
+                                                            const searchRegExp = new RegExp(a.replace(/^\/+|\/+$/g, ""),"i");
+                                                             return searchRegExp.test(r.name + r.token + r.version + r.homepage + r.desc)
                                                          })
     }
 
