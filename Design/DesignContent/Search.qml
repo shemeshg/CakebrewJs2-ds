@@ -13,9 +13,7 @@ ColumnLayout {
         // remove leading slashes
         a = a.replace(/^\/+/, "");
         // remove trailing slash
-        a = a.replace(/\/+$/, "");
-        // remove trailing "$" if it exists
-        return a.replace(/\$$/, "");
+        return a.replace(/\/+$/, "");
     }
 
     function filtredSearchedFormulaItems() {
@@ -23,16 +21,24 @@ ColumnLayout {
         return Constants.brewData.searchItemsFormula.filter(r => {
 
 
-                                                                 const searchRegExp = new RegExp(a.replace(/^\/+|\/+$/g, ""),"i");
-                                                                return searchRegExp.test(r.name + " " + r.token + " " + r.version + r.homepage + r.desc);
+                                                                 const searchRegExp = new RegExp(a,"i");
+                                                                return searchRegExp.test(r.name) ||
+                                                                searchRegExp.test(r.token) ||
+                                                                searchRegExp.test(r.version) ||
+                                                                searchRegExp.test(r.homepage) ||
+                                                                searchRegExp.test(r.desc);
                                                             })
     }
 
     function filtredSearchedCaskItems() {
         let a = textsearchWithoutRubyRegex()
         return Constants.brewData.searchItemsCask.filter(r => {
-                                                            const searchRegExp = new RegExp(a.replace(/^\/+|\/+$/g, ""),"i");
-                                                             return searchRegExp.test(r.name + " " + r.token + " " + r.version + r.homepage + r.desc)
+                                                            const searchRegExp = new RegExp(a,"i");
+                                                             return searchRegExp.test(r.name) ||
+                                                             searchRegExp.test(r.token) ||
+                                                             searchRegExp.test(r.version) ||
+                                                             searchRegExp.test(r.homepage) ||
+                                                             searchRegExp.test(r.desc)
                                                          })
     }
 
