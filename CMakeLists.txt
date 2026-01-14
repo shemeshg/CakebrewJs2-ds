@@ -55,9 +55,11 @@ set(QML_IMPORT_PATH "${QML_DIRS}" CACHE STRING "Import paths for Qt Creator's co
 
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
+   config.h
     main.cpp
     MANUAL_FINALIZATION
     ${APP_ICON_MACOSX}
+
 )
 
 
@@ -181,5 +183,5 @@ qt_generate_deploy_qml_app_script(
 # Call the deployment script on "cmake --install".
 install(SCRIPT ${deploy_script})
 
-configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/config.h")
+configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${PROJECT_SOURCE_DIR}/config.h")
 # [[[end]]]

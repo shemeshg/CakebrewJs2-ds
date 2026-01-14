@@ -53,6 +53,7 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     main.cpp
     MANUAL_FINALIZATION
     ${APP_ICON_MACOSX}
+    ${CMAKE_CURRENT_BINARY_DIR}/config.h
 )
 
 
@@ -183,4 +184,4 @@ qt_generate_deploy_qml_app_script(
 # Call the deployment script on "cmake --install".
 install(SCRIPT ${deploy_script})
 
-configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/config.h")
+configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${PROJECT_SOURCE_DIR}/config.h")
