@@ -58,7 +58,7 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
     main.cpp
     MANUAL_FINALIZATION
     ${APP_ICON_MACOSX}
-    ${CMAKE_CURRENT_BINARY_DIR}/config.h
+    config.h
 )
 
 

@@ -76,3 +76,4 @@ CMakeLists.txt.user*
 build/
 *.qmlproject.qtds
 .qmlls.ini
+.venv/
