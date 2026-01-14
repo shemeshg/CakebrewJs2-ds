@@ -808,7 +808,7 @@ const QString BrewData::getFindExecutable(const QString &exec) const
 {
     auto full_path = QStandardPaths::findExecutable(exec);
     if (full_path.isEmpty()) {
-        full_path = QStandardPaths::findExecutable(exec, {"/usr/local/bin", "/opt/homebrew/bin"});
+        full_path = QStandardPaths::findExecutable(exec, {"/usr/local/bin", "/opt/homebrew/bin","/home/linuxbrew/.linuxbrew/bin"});
     }
 
     return full_path;
