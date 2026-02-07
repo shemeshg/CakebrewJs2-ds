@@ -17,7 +17,7 @@ struct ProcessStatus
 class ShellCmd
 {
 public:
-    ShellCmd(QString brewLocation, QString terminalApp);
+    ShellCmd(QString brewLocation, QString terminalApp, bool pauseTerminalClose);
 
     ProcessStatus cmdSearch(QString textSearch, bool isCask);
 
@@ -49,5 +49,6 @@ public:
 
 private:
     QString brewLocation, terminalApp;
+    bool pauseTerminalClose;
     std::string randomTempScriptName();
 };

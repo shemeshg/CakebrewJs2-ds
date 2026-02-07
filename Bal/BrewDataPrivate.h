@@ -23,6 +23,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QString normalFontPointSize READ normalFontPointSize WRITE setNormalFontPointSize NOTIFY normalFontPointSizeChanged )
     Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
     Q_PROPERTY(bool updateForce READ updateForce WRITE setUpdateForce NOTIFY updateForceChanged )
+    Q_PROPERTY(bool pauseTerminalClose READ pauseTerminalClose WRITE setPauseTerminalClose NOTIFY pauseTerminalCloseChanged )
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged )
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged )
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged )
@@ -127,6 +128,18 @@ void setUpdateForce(const bool newUpdateForce)
             return;
         m_updateForce = newUpdateForce;
         emit updateForceChanged();
+    }
+
+
+    
+    bool pauseTerminalClose() const{return m_pauseTerminalClose;} 
+    
+void setPauseTerminalClose(const bool newPauseTerminalClose)
+    {
+        if (m_pauseTerminalClose == newPauseTerminalClose)
+            return;
+        m_pauseTerminalClose = newPauseTerminalClose;
+        emit pauseTerminalCloseChanged();
     }
 
 
@@ -614,6 +627,7 @@ signals:
     void normalFontPointSizeChanged();
     void terminalAppChanged();
     void updateForceChanged();
+    void pauseTerminalCloseChanged();
     void xChanged();
     void yChanged();
     void widthChanged();
@@ -672,6 +686,7 @@ private:
     QString m_normalFontPointSize ;
     QString m_terminalApp ;
     bool m_updateForce = false;
+    bool m_pauseTerminalClose = false;
     int m_x = 0;
     int m_y = 0;
     int m_width = 0;

@@ -52,6 +52,8 @@ public slots:
     void saveTerminalApp(const QString s);
 
     void saveUpdateForce(const bool s);
+    void savePauseTerminalClose(const bool s);
+    
 
     void saveNormalFontPointSize(const QString s);
 
@@ -111,6 +113,8 @@ private:
 
     void loadTerminalApp();
     void loadUpdateForce();
+    void loadPauseTerminalClose();
+        
 
     void loadBrewLocation();
 

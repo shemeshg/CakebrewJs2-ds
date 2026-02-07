@@ -9,6 +9,7 @@ BrewData::BrewData(QObject *parent)
     loadNormalFontPointSize();
     loadTerminalApp();
     loadUpdateForce();
+    loadPauseTerminalClose();
 
     loadIsExtendedCask();
     loadIsExtendedFormula();
@@ -326,6 +327,13 @@ void BrewData::saveTerminalApp(const QString s)
 {
     settings.setValue("terminalApp", s);
     loadTerminalApp();
+}
+
+
+void BrewData::savePauseTerminalClose(const bool s)
+{
+    settings.setValue("pauseTerminalClose", s);
+    loadPauseTerminalClose();
 }
 
 void BrewData::saveUpdateForce(const bool s)
@@ -831,6 +839,13 @@ void BrewData::loadTerminalApp()
     setTerminalApp(s);
 }
 
+
+void BrewData::loadPauseTerminalClose()
+{
+    bool s = settings.value("pauseTerminalClose", false).toBool();
+    setPauseTerminalClose(s);
+}
+
 void BrewData::loadUpdateForce()
 {
     bool s = settings.value("updateForce", true).toBool();
@@ -1072,5 +1087,5 @@ QString BrewData::cashFileRead(const QString &fileName)
 
 ShellCmd BrewData::getShellCmd()
 {
-    return ShellCmd(brewLocation(), terminalApp());
+    return ShellCmd(brewLocation(), terminalApp(), pauseTerminalClose());
 }

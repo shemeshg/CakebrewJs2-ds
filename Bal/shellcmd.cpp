@@ -5,8 +5,8 @@
 #include <random>
 #include <string>
 
-ShellCmd::ShellCmd(QString brewLocation, QString terminalApp)
-    : brewLocation{brewLocation}, terminalApp{terminalApp} {}
+ShellCmd::ShellCmd(QString brewLocation, QString terminalApp, bool pauseTerminalClose)
+    : brewLocation{brewLocation}, terminalApp{terminalApp}, pauseTerminalClose{pauseTerminalClose} {}
 
 std::string ShellCmd::randomTempScriptName() {
     namespace fs = std::filesystem;
@@ -134,13 +134,20 @@ find `%1 --caskroom`/$1 -mindepth 2 -maxdepth 4  -not -path '*/.*'|  tr \\n \\0 
 }
 
 void ShellCmd::externalTerminalCmd(QString cmdToRun) {
-    QString s = R"(trap "rm %1" EXIT;
+    QString pauseTerm = pauseTerminalClose
+                            ? R"(printf "Press ENTER to close..."; read dummy)"
+                            : "";
+
+
+    QString s = R"( (
+trap "rm %1" EXIT;
 %2
-read -p "Press ENTER to close..."
+)
+%3
 )";
 
     QString fileName = QString::fromStdString(randomTempScriptName());
-    s = s.arg(fileName, cmdToRun);
+    s = s.arg(fileName, cmdToRun, pauseTerm);
     {
         std::ofstream out(fileName.toStdString(), std::ios::out | std::ios::trunc);
         out << s.toUtf8().toStdString(); // your trap + command

@@ -4,7 +4,7 @@ import os
 max_score = 100
 test_name = "Python Challenge"
 template_dict = {
-           "APP_VER": "2.93",
+           "APP_VER": "2.94",
            "APP_NAME": "Cakebrewjs",
            "APP_DESCRIPTION": "Homebrew GUI App",
            "APP_VENDOR": "shemeshg",

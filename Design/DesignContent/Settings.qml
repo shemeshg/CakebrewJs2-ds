@@ -18,6 +18,8 @@ ColumnLayout {
         }
 
         Constants.brewData.saveUpdateForce(updateForce.checked)
+        Constants.brewData.savePauseTerminalClose(pauseTerminalClose.checked)
+        
     }
 
     CoreLabel {
@@ -71,6 +73,13 @@ ColumnLayout {
         id: fontSizeInput
         text: Constants.fontSizeNormal()
         Layout.fillWidth: true
+    }
+
+    
+    CoreSwitch {
+        id: pauseTerminalClose
+        text: "Pause on terminal close"
+        checked: Constants.brewData.pauseTerminalClose
     }
 
     CoreSwitch {
