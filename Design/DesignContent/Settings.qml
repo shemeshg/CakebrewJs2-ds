@@ -19,7 +19,7 @@ ColumnLayout {
 
         Constants.brewData.saveUpdateForce(updateForce.checked)
         Constants.brewData.savePauseTerminalClose(pauseTerminalClose.checked)
-        
+        Constants.brewData.saveRefreshOnStartup(refreshOnStartup.checked)
     }
 
     CoreLabel {
@@ -80,6 +80,12 @@ ColumnLayout {
         id: pauseTerminalClose
         text: "Pause on terminal close"
         checked: Constants.brewData.pauseTerminalClose
+    }
+
+    CoreSwitch {
+        id: refreshOnStartup
+        text: "Refresh on app startup"
+        checked: Constants.brewData.refreshOnStartup
     }
 
     CoreSwitch {

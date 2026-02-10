@@ -52,7 +52,7 @@ public slots:
     void saveTerminalApp(const QString s);
 
     void saveUpdateForce(const bool s);
-    void savePauseTerminalClose(const bool s);
+
     
 
     void saveNormalFontPointSize(const QString s);
@@ -94,11 +94,14 @@ public slots:
     void asyncServiceSort(const QJSValue &callback);
 
     void serviceSort();
+    void savePauseTerminalClose(const bool s);
+    void saveRefreshOnStartup(const bool s);
 
 private slots:
     void parseRefreshServices(QString strResult);
 
     void parseRefreshCaskAndFormula(QString strResult);
+
 
 private:
     QSettings settings;
@@ -114,7 +117,10 @@ private:
     void loadTerminalApp();
     void loadUpdateForce();
     void loadPauseTerminalClose();
-        
+
+
+    void loadRefreshOnStartup();
+
 
     void loadBrewLocation();
 

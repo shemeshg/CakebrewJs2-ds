@@ -10,6 +10,7 @@ BrewData::BrewData(QObject *parent)
     loadTerminalApp();
     loadUpdateForce();
     loadPauseTerminalClose();
+    loadRefreshOnStartup();
 
     loadIsExtendedCask();
     loadIsExtendedFormula();
@@ -334,6 +335,12 @@ void BrewData::savePauseTerminalClose(const bool s)
 {
     settings.setValue("pauseTerminalClose", s);
     loadPauseTerminalClose();
+}
+
+void BrewData::saveRefreshOnStartup(const bool s)
+{
+    settings.setValue("refreshOnStartup", s);
+    loadRefreshOnStartup();
 }
 
 void BrewData::saveUpdateForce(const bool s)
@@ -839,6 +846,12 @@ void BrewData::loadTerminalApp()
     setTerminalApp(s);
 }
 
+void BrewData::loadRefreshOnStartup()
+{
+    bool s = settings.value("refreshOnStartup", true).toBool();
+    setRefreshOnStartup(s);
+}
+
 
 void BrewData::loadPauseTerminalClose()
 {
@@ -941,30 +954,32 @@ void BrewData::refreshCaskAndFormulaAfterCallback(bool doBrewUpdate)
         if (!s.isSuccess) {
             refreshErr = "refresh failed: " + s.stdErr;
         }
-    }
 
-    s = sc.cmdListCaskAndFormula();
+        s = sc.cmdListCaskAndFormula();
 
-    if (s.isSuccess && !s.stdOut.isEmpty()) {
-        cashFileWrite("cmdListCaskAndFormula.txt", s.stdOut);
-        emit parseRefreshCaskAndFormulaSignal(s.stdOut);
-    } else {
-        if (s.stdErr.isEmpty()) {
-            s.stdErr = "Err" + QString::number(s.exitCode);
+        if (s.isSuccess && !s.stdOut.isEmpty()) {
+            cashFileWrite("cmdListCaskAndFormula.txt", s.stdOut);
+            emit parseRefreshCaskAndFormulaSignal(s.stdOut);
+        } else {
+            if (s.stdErr.isEmpty()) {
+                s.stdErr = "Err" + QString::number(s.exitCode);
+            }
+        }
+
+        s.stdErr = refreshErr + s.stdErr;
+        if (!s.stdErr.isEmpty()) {
+            //setRefreshStatusFormulaText(s.stdErr);
+            setRefreshStatusFormulaText("");
+            setRefreshStatusCaskText(s.stdErr);
+            setRefreshStatusFormulaVisible(true);
+            setRefreshStatusCaskVisible(true);
+        } else {
+            setRefreshStatusFormulaVisible(false);
+            setRefreshStatusCaskVisible(false);
         }
     }
 
-    s.stdErr = refreshErr + s.stdErr;
-    if (!s.stdErr.isEmpty()) {
-        //setRefreshStatusFormulaText(s.stdErr);
-        setRefreshStatusFormulaText("");
-        setRefreshStatusCaskText(s.stdErr);
-        setRefreshStatusFormulaVisible(true);
-        setRefreshStatusCaskVisible(true);
-    } else {
-        setRefreshStatusFormulaVisible(false);
-        setRefreshStatusCaskVisible(false);
-    }
+
     setRefreshFormulaRunning(false);
     setRefreshCaskRunning(false);
 }

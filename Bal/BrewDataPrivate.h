@@ -24,6 +24,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(QString terminalApp READ terminalApp WRITE setTerminalApp NOTIFY terminalAppChanged )
     Q_PROPERTY(bool updateForce READ updateForce WRITE setUpdateForce NOTIFY updateForceChanged )
     Q_PROPERTY(bool pauseTerminalClose READ pauseTerminalClose WRITE setPauseTerminalClose NOTIFY pauseTerminalCloseChanged )
+    Q_PROPERTY(bool refreshOnStartup READ refreshOnStartup WRITE setRefreshOnStartup NOTIFY refreshOnStartupChanged )
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged )
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged )
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged )
@@ -140,6 +141,18 @@ void setPauseTerminalClose(const bool newPauseTerminalClose)
             return;
         m_pauseTerminalClose = newPauseTerminalClose;
         emit pauseTerminalCloseChanged();
+    }
+
+
+    
+    bool refreshOnStartup() const{return m_refreshOnStartup;} 
+    
+void setRefreshOnStartup(const bool newRefreshOnStartup)
+    {
+        if (m_refreshOnStartup == newRefreshOnStartup)
+            return;
+        m_refreshOnStartup = newRefreshOnStartup;
+        emit refreshOnStartupChanged();
     }
 
 
@@ -628,6 +641,7 @@ signals:
     void terminalAppChanged();
     void updateForceChanged();
     void pauseTerminalCloseChanged();
+    void refreshOnStartupChanged();
     void xChanged();
     void yChanged();
     void widthChanged();
@@ -687,6 +701,7 @@ private:
     QString m_terminalApp ;
     bool m_updateForce = false;
     bool m_pauseTerminalClose = false;
+    bool m_refreshOnStartup = false;
     int m_x = 0;
     int m_y = 0;
     int m_width = 0;

@@ -27,6 +27,12 @@ p.is_bindable = False
 p.is_writable = True
 p.is_notify = True
 ary.append(p)
+p = Prpt("bool",'refreshOnStartup')
+p.is_bindable = False
+p.is_writable = True
+p.is_notify = True
+ary.append(p)
+
 
 p = Prpt("int",'x')
 p.is_bindable = False

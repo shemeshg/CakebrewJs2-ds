@@ -16,7 +16,7 @@ ColumnLayout {
 
         Constants.brewData.asyncRefreshServices(() => {}, true)
 
-        Constants.brewData.asyncRefreshCaskAndFormula(true, () => {
+        Constants.brewData.asyncRefreshCaskAndFormula(Constants.brewData.refreshOnStartup, () => {
                                                           home.ctvc.filterTableByFilter()
                                                           home.ctvf.filterTableByFilter()
                                                           home.ctvs.filterTableByFilter()
