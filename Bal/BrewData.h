@@ -151,4 +151,6 @@ private:
     ShellCmd getShellCmd();
     const QString getSelfSignCaskCmdStr(const QString token);
     const QString getSelfSignCaskForPotentialItems(QStringList casks);
+    void cleanupSelfSignedList();
+
 };

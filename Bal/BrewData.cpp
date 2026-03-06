@@ -233,6 +233,7 @@ void BrewData::asyncBrewDoctor(const QJSValue &callback)
 void BrewData::asyncBrewCleanup(const QJSValue &callback)
 {
     makeAsync<bool>(callback, [=]() {
+        cleanupSelfSignedList();
         ShellCmd sc = getShellCmd();
         QString cmd = "%1 '%2' %3";
         cmd = cmd.arg(brewLocation(), "cleanup", "--prune=all");
@@ -680,6 +681,20 @@ const QString BrewData::getSelfSignCaskForPotentialItems(QStringList casks){
         cmd += getSelfSignCaskCmdStr(cask) + "\n";
     }
     return cmd;
+}
+
+void BrewData::cleanupSelfSignedList()
+{
+    QStringList s;
+    for (const QString &token : selfSignList()) {
+        auto it = std::find_if(caskRows.begin(), caskRows.end(), [=](auto &row) {
+            return row.token == token || row.tapToken == token;
+        });
+        if (it != caskRows.end()) {
+            s.append(token);
+        }
+    }
+    saveSelfSignList(s);
 }
 
 const QString BrewData::getSelfSignCaskCmdStr(const QString token)
