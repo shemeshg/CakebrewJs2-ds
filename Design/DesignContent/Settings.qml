@@ -91,7 +91,7 @@ ColumnLayout {
 
     CoreSwitch {
         id: homebrewNoUpgradeAutoUpdatesCasks
-        text: "HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS on `brew upgrade` for all casks"
+        text: "HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS on `brew upgrade` for none specific casks"
         checked: Constants.brewData.homebrewNoUpgradeAutoUpdatesCasks
     }
 
