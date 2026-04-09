@@ -53,6 +53,17 @@ QtObject {
         return fontSizeNormal() * 1.5
     }
 
+
+    readonly property int upgradableAutoUpdateItemsCask: {
+
+        return Constants.brewData.caskTableBodyList.filter(row => {
+                                                               return Boolean(
+                                                                   row.outdated.text)
+                                                               && "tsChecked" in row.outdated 
+                                                               && row.isAutoUpdate
+                                                           }).length
+    }
+
     readonly property int upgradableItemsCask: {
 
         return Constants.brewData.caskTableBodyList.filter(row => {

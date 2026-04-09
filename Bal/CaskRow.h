@@ -7,7 +7,7 @@ class CaskRow
 public:
     QString token, name, desc, tap, tapToken, version, outdated, homepage, ruby_source_path, artifacts,
         caveats;
-    bool isOutdated, isInstalled, isDeprecated;
+    bool isOutdated, isInstalled, isDeprecated, isAutoUpdate;
 
     void addListHeader(QVariantList &formulaTableBodyList);
 

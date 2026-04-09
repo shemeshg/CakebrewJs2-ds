@@ -42,7 +42,7 @@ GroupBox {
             if (Constants.brewData.infoStatus === BrewData.InfoStatus.CaskFound) {
                 beforeInfoAction()
                 Constants.brewData.selfSignCasks(Constants.brewData.infoToken,() => {
-                                                      afterInfoAction()
+                                                     afterInfoAction()
                                                  })
             }
         }
@@ -80,7 +80,12 @@ GroupBox {
             }
             CoreButton {
                 text: "Upgrade all (" + Number(
-                          Constants.upgradableItemsCask + Constants.upgradableItemsFormula) + ")"
+                          Constants.upgradableItemsCask
+                          + Constants.upgradableItemsFormula
+                          - (Constants.brewData.homebrewNoUpgradeAutoUpdatesCasks
+                             ? Constants.upgradableAutoUpdateItemsCask
+                             : 0)
+                          ) + ")"
                 onClicked: () => {
                                Constants.caskSelected = []
                                Constants.formulaSelected = []
@@ -91,8 +96,16 @@ GroupBox {
                 hooverText: "<b>Cask </b>" + Constants.upgradableItemsCask
                             + "<br/><b>Formula </b>" + Constants.upgradableItemsFormula
                 enabled: !Constants.brewData.refreshServiceRunning
-                         && !Constants.brewData.refreshFormulaRunning && Number(
-                             Constants.upgradableItemsCask + Constants.upgradableItemsFormula) > 0
+                         && !Constants.brewData.refreshFormulaRunning &&
+                         
+                         Number(
+                             Constants.upgradableItemsCask
+                             + Constants.upgradableItemsFormula
+                             - (Constants.brewData.homebrewNoUpgradeAutoUpdatesCasks
+                                ? Constants.upgradableAutoUpdateItemsCask
+                                : 0)
+                             )
+                         > 0
             }
             CoreButton {
                 text: "Upgrade selected (" + Number(
@@ -234,9 +247,9 @@ GroupBox {
             CoreSwitch {
                 function foundSelfSign(){
                     let list = Constants.brewData.selfSignList.map(item => {
-                                                                          let parts = item.split("/");
-                                                                          return parts.slice(-1)[0];
-                                                                      });
+                                                                       let parts = item.split("/");
+                                                                       return parts.slice(-1)[0];
+                                                                   });
                     let target = Constants.brewData.infoToken.split("/").slice(-1)[0];
                     return list.indexOf(target) !== -1
                 }

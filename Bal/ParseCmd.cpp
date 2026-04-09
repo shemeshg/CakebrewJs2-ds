@@ -140,8 +140,10 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
                             || element["disabled"].template get<bool>();
         outdated = element["version"].template get<std::string>();
 
+        bool isAutoUpdate = false;
         if (!element["auto_updates"].is_null()) {
             if (element["auto_updates"].template get<bool>()) {
+                isAutoUpdate = true;
                 outdated = "🚗 " + outdated;
                 version = "🚗 " + version;
             }
@@ -186,6 +188,7 @@ QVector<CaskRow> ParseCmd::parseCaskList(QString &strResult)
         cr.ruby_source_path = QString::fromStdString(ruby_source_path);
         cr.artifacts = QString::fromStdString(artifacts);
         cr.caveats = getCaveats(element);
+        cr.isAutoUpdate = isAutoUpdate;
 
         rows.emplaceBack(cr);
     }
