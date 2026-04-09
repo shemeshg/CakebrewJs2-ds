@@ -25,6 +25,7 @@ class BrewDataPrivate : public JsAsync
     Q_PROPERTY(bool updateForce READ updateForce WRITE setUpdateForce NOTIFY updateForceChanged )
     Q_PROPERTY(bool pauseTerminalClose READ pauseTerminalClose WRITE setPauseTerminalClose NOTIFY pauseTerminalCloseChanged )
     Q_PROPERTY(bool refreshOnStartup READ refreshOnStartup WRITE setRefreshOnStartup NOTIFY refreshOnStartupChanged )
+    Q_PROPERTY(bool homebrewNoUpgradeAutoUpdatesCasks READ homebrewNoUpgradeAutoUpdatesCasks WRITE setHomebrewNoUpgradeAutoUpdatesCasks NOTIFY homebrewNoUpgradeAutoUpdatesCasksChanged )
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged )
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged )
     Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged )
@@ -153,6 +154,18 @@ void setRefreshOnStartup(const bool newRefreshOnStartup)
             return;
         m_refreshOnStartup = newRefreshOnStartup;
         emit refreshOnStartupChanged();
+    }
+
+
+    
+    bool homebrewNoUpgradeAutoUpdatesCasks() const{return m_homebrewNoUpgradeAutoUpdatesCasks;} 
+    
+void setHomebrewNoUpgradeAutoUpdatesCasks(const bool newHomebrewNoUpgradeAutoUpdatesCasks)
+    {
+        if (m_homebrewNoUpgradeAutoUpdatesCasks == newHomebrewNoUpgradeAutoUpdatesCasks)
+            return;
+        m_homebrewNoUpgradeAutoUpdatesCasks = newHomebrewNoUpgradeAutoUpdatesCasks;
+        emit homebrewNoUpgradeAutoUpdatesCasksChanged();
     }
 
 
@@ -642,6 +655,7 @@ signals:
     void updateForceChanged();
     void pauseTerminalCloseChanged();
     void refreshOnStartupChanged();
+    void homebrewNoUpgradeAutoUpdatesCasksChanged();
     void xChanged();
     void yChanged();
     void widthChanged();
@@ -702,6 +716,7 @@ private:
     bool m_updateForce = false;
     bool m_pauseTerminalClose = false;
     bool m_refreshOnStartup = false;
+    bool m_homebrewNoUpgradeAutoUpdatesCasks = false;
     int m_x = 0;
     int m_y = 0;
     int m_width = 0;

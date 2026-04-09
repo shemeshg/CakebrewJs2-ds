@@ -96,6 +96,7 @@ public slots:
     void serviceSort();
     void savePauseTerminalClose(const bool s);
     void saveRefreshOnStartup(const bool s);
+    void saveHomebrewNoUpgradeAutoUpdatesCasks(const bool s);
 
 private slots:
     void parseRefreshServices(QString strResult);
@@ -120,7 +121,7 @@ private:
 
 
     void loadRefreshOnStartup();
-
+    void loadHomebrewNoUpgradeAutoUpdatesCasks();
 
     void loadBrewLocation();
 

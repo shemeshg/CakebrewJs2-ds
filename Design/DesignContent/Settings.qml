@@ -20,6 +20,7 @@ ColumnLayout {
         Constants.brewData.saveUpdateForce(updateForce.checked)
         Constants.brewData.savePauseTerminalClose(pauseTerminalClose.checked)
         Constants.brewData.saveRefreshOnStartup(refreshOnStartup.checked)
+        Constants.brewData.saveHomebrewNoUpgradeAutoUpdatesCasks(homebrewNoUpgradeAutoUpdatesCasks.checked)
     }
 
     CoreLabel {
@@ -86,6 +87,12 @@ ColumnLayout {
         id: refreshOnStartup
         text: "Refresh on app startup"
         checked: Constants.brewData.refreshOnStartup
+    }
+
+    CoreSwitch {
+        id: homebrewNoUpgradeAutoUpdatesCasks
+        text: "HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS on `brew upgrade` for all casks"
+        checked: Constants.brewData.homebrewNoUpgradeAutoUpdatesCasks
     }
 
     CoreSwitch {

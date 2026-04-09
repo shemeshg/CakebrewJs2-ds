@@ -11,6 +11,7 @@ BrewData::BrewData(QObject *parent)
     loadUpdateForce();
     loadPauseTerminalClose();
     loadRefreshOnStartup();
+    loadHomebrewNoUpgradeAutoUpdatesCasks();
 
     loadIsExtendedCask();
     loadIsExtendedFormula();
@@ -203,6 +204,9 @@ void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
     makeAsync<bool>(callback, [=]() {
         ShellCmd sc = getShellCmd();
         QString cmd = "%1 '%2';\n";
+        if (homebrewNoUpgradeAutoUpdatesCasks()){
+            cmd = "export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1 ;" + cmd;
+        }
         cmd = cmd.arg(brewLocation(), "upgrade");
 
 
@@ -342,6 +346,12 @@ void BrewData::saveRefreshOnStartup(const bool s)
 {
     settings.setValue("refreshOnStartup", s);
     loadRefreshOnStartup();
+}
+
+void BrewData::saveHomebrewNoUpgradeAutoUpdatesCasks(const bool s)
+{
+    settings.setValue("homebrewNoUpgradeAutoUpdatesCasks", s);
+    loadHomebrewNoUpgradeAutoUpdatesCasks();
 }
 
 void BrewData::saveUpdateForce(const bool s)
@@ -865,6 +875,12 @@ void BrewData::loadRefreshOnStartup()
 {
     bool s = settings.value("refreshOnStartup", true).toBool();
     setRefreshOnStartup(s);
+}
+
+void BrewData::loadHomebrewNoUpgradeAutoUpdatesCasks()
+{
+    bool s = settings.value("homebrewNoUpgradeAutoUpdatesCasks", true).toBool();
+    setHomebrewNoUpgradeAutoUpdatesCasks(s);
 }
 
 
