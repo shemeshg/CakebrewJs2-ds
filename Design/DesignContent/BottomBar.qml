@@ -64,9 +64,16 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Home"
             CoreButton {
-
+                id: refreshBtn
                 text: "Refresh"
-                hooverText: "brew update"
+                hooverText: "<b>⌘R</b> brew update"
+                Shortcut {
+                    enabled: selectedPreview === "Home"
+                    sequence: "Ctrl+R"
+                    onActivated: {
+                       refreshBtn.click()
+                    }
+                 }
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning
                 onClicked: {
@@ -273,8 +280,14 @@ GroupBox {
         RowLayout {
             visible: selectedPreview === "Settings"
             CoreButton {
+                id: saveSettingsBtn
+                hooverText: "<b>⌘⏎</b> Save Settings"
                 text: "Save Settings"
                 onClicked: saveSettingsClicked()
+                Shortcut {
+                    sequences: ["Ctrl+Return", "Ctrl+Enter"]
+                    onActivated: saveSettingsBtn.click()
+                }
             }
         }
 
@@ -312,7 +325,15 @@ GroupBox {
         CoreButton {
             visible: selectedPreview === "back"
             text: "←"
-            hooverText: "back"
+            hooverText: "<b>⎋</b> back"
+            id: backBtn
+            Shortcut {
+                enabled: selectedPreview === "back"
+                sequences: [StandardKey.Cancel]
+                onActivated: {
+                    backBtn.click()
+                }
+            }
             onClicked: {
                 backClicked()
             }
