@@ -195,7 +195,7 @@ void BrewData::asyncBrewUpgradeSelected(QStringList casks,
                                         QStringList formulas,
                                         const QJSValue &callback)
 {
-    asyncBrewActionSelected(casks, formulas, "upgrade", callback);
+    asyncBrewActionSelected(casks, formulas, "upgrade --no-ask", callback);
 }
 
 void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
@@ -207,7 +207,7 @@ void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
         if (homebrewNoUpgradeAutoUpdatesCasks()){
             cmd = "export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1 ;" + cmd;
         }
-        cmd = cmd.arg(brewLocation(), "upgrade");
+        cmd = cmd.arg(brewLocation(), "upgrade --no-ask");
 
 
         QStringList outdatedTokens;
