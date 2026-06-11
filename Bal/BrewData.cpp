@@ -203,11 +203,11 @@ void BrewData::asyncBrewUpgradeAll(const QJSValue &callback)
     refreshCaskAndFormulaBeforeCallback();
     makeAsync<bool>(callback, [=]() {
         ShellCmd sc = getShellCmd();
-        QString cmd = "%1 '%2';\n";
+        QString cmd = "%1 '%2' %3;\n";
         if (homebrewNoUpgradeAutoUpdatesCasks()){
             cmd = "export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1 ;" + cmd;
         }
-        cmd = cmd.arg(brewLocation(), "upgrade --no-ask");
+        cmd = cmd.arg(brewLocation(), "upgrade","--no-ask");
 
 
         QStringList outdatedTokens;

@@ -1,10 +1,8 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 
-max_score = 100
-test_name = "Python Challenge"
 template_dict = {
-           "APP_VER": "2.100",
+           "APP_VER": "2.101",
            "APP_NAME": "Cakebrewjs",
            "APP_DESCRIPTION": "Homebrew GUI App",
            "APP_VENDOR": "shemeshg",
@@ -30,8 +28,6 @@ template = environment.get_template("CMakeCogMain.j2")
 
 content = template.render(
     template_dict,
-    max_score=max_score,
-    test_name=test_name
 )
 
 def getCmake():   
