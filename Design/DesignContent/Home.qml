@@ -23,8 +23,13 @@ ColumnLayout {
             Constants.brewData.saveIsExtendedCask(ctvc.isExtended)
         }
 
-        headerText: "Cask " + (Constants.upgradableItemsCask
-                               !== 0 ? "(" + Constants.upgradableItemsCask + ")" : "")
+        headerText: "Cask " + (Constants.upgradableItemsCask !== 0 ? "(" +
+                                    ( Constants.upgradableItemsCask - Constants.upgradableAutoUpdateItemsCask ) +
+                                    (Constants.upgradableAutoUpdateItemsCask ?
+                                         " , auto " + Constants.upgradableAutoUpdateItemsCask :
+                                         "")
+                                                                     +
+                                       ")" : "")
         isLoading: Constants.brewData.refreshFormulaRunning
         rowsModel: [...Constants.brewData.caskTableBodyList]
         isExtended: Constants.brewData.isExtendedCask

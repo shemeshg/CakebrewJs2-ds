@@ -54,8 +54,7 @@ QtObject {
     }
 
 
-    readonly property int upgradableAutoUpdateItemsCask: {
-
+    readonly property int upgradableAutoUpdateItemsCask: {        
         return Constants.brewData.caskTableBodyList.filter(row => {
                                                                return Boolean(
                                                                    row.outdated.text)

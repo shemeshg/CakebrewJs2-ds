@@ -55,6 +55,9 @@ void CaskRow::addToList(QVariantList &caskTableBodyList)
     } else {
         text["text"] = "";
     }
+
+    row["isAutoUpdate"] = QVariant::fromValue(isAutoUpdate);
+
     text["tsChecked"] = false;
     row["outdated"] = QVariant::fromValue(text);
 
