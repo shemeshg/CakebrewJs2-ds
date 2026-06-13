@@ -2,7 +2,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 
 template_dict = {
-           "APP_VER": "2.101",
+           "APP_VER": "2.102",
            "APP_NAME": "Cakebrewjs",
            "APP_DESCRIPTION": "Homebrew GUI App",
            "APP_VENDOR": "shemeshg",

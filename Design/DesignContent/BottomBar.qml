@@ -100,7 +100,11 @@ GroupBox {
                                                                           bottomBarId.refreshClicked()
                                                                       })
                            }
-                hooverText: "<b>Cask </b>" + Constants.upgradableItemsCask
+                hooverText: "<b>Cask </b>" + (
+                                Constants.upgradableItemsCask - (Constants.brewData.homebrewNoUpgradeAutoUpdatesCasks
+                                                                                                        ? Constants.upgradableAutoUpdateItemsCask
+                                                                                                        : 0)
+                                              )
                             + "<br/><b>Formula </b>" + Constants.upgradableItemsFormula
                 enabled: !Constants.brewData.refreshServiceRunning
                          && !Constants.brewData.refreshFormulaRunning &&
