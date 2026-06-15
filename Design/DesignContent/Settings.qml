@@ -64,6 +64,7 @@ ColumnLayout {
         id: terminalAppLinux
         visible: Qt.platform.os !== "osx"
         text: Constants.brewData.terminalApp
+        Layout.fillWidth: true
     }
 
     CoreLabel {
